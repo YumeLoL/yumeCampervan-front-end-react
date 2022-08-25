@@ -4,6 +4,7 @@ import tw from "twin.macro";
 import orangeVan from "../../../assets/images/orange-camper-van.png";
 import { SCREENS } from "../../libs/responsive";
 import Text from "../../ui/atoms/Text";
+import LargeTitle from "../../ui/atoms/LargeTitle"
 
 const AboutUsContainer = styled.div`
   ${tw`
@@ -38,21 +39,11 @@ const CarContainer = styled.div`
 `;
 const InfoContainer = styled.div`
   ${tw`
-  md:w-1/2
-  flex
-  flex-col
-  md:ml-6
-  2xl:ml-16
-    `}
-`;
-const Title = styled.h1`
-  ${tw`
-  text-black
-  text-2xl
-  md:text-5xl
-  font-extrabold
-  md:font-black
-  md:leading-normal
+    md:w-1/2
+    flex
+    flex-col
+    md:ml-6
+    2xl:ml-16
     `}
 `;
 
@@ -63,7 +54,7 @@ const AboutUs = () => {
         <img src={orangeVan} alt="" />
       </CarContainer>
       <InfoContainer>
-        <Title>Feel The Best Experience With Our Rental Deals</Title>
+        <LargeTitle title="Feel The Best Experience With Our Rental Deals" />
         <Text
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

@@ -8,6 +8,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Text from "../../ui/atoms/Text";
+import LargeTitle from "../../ui/atoms/LargeTitle";
 
 const Container = styled.div`
   ${tw`
@@ -19,16 +20,6 @@ const Container = styled.div`
       pb-3
       lg:pt-6
       lg:pb-6
-    `};
-`;
-
-const Title = styled.h2`
-  ${tw`
-      text-3xl
-      md:text-5xl
-      lg:text-6xl
-      text-black
-      font-extrabold
     `};
 `;
 
@@ -90,7 +81,7 @@ const StepIcon = styled.span`
 const BookingStep = () => {
   return (
     <Container>
-      <Title>Our Working Steps</Title>
+      <LargeTitle title="Our Working Steps" />
       <StepsContainer>
         <StepContainer>
           <Step>
