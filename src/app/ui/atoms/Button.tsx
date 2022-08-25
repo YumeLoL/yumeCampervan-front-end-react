@@ -66,7 +66,7 @@ const TextButton = styled(BaseButton)`
   `}
 `;
 
-const Button = ({ theme, text, className, style }: ButtonType) => {
+const Button = ({ theme, text, className }: ButtonType) => {
   switch (theme) {
     case "filled":
       return <FilledButton className={className}>{text}</FilledButton>;

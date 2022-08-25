@@ -1,7 +1,50 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import CarCard from "../../ui/molecules/CarCard";
+import Carousel, { Dots } from "@brainhubeu/react-carousel"
+import '@brainhubeu/react-carousel/lib/style.css';
+import CarCard, { ICarType } from "../../ui/molecules/CarCard";
+import img1 from "../../../assets/campervan/pop-top.jpg"
+import img2 from "../../../assets/campervan/camper-trailer.jpg"
+import img3 from "../../../assets/campervan/campervan-1.jpg"
+import img4 from "../../../assets/campervan/motorhome.jpeg"
+
+const testCampervan1:ICarType = {
+  thumbnailSrc: img1,
+  name: "Pop Top Trailer",
+  mileage:"10k",
+  gearType:"Auto",
+  dailyPrice:100,
+  monthlyPrice:1700,
+  gas:"Petrol",
+}
+const testCampervan2:ICarType  = {
+  thumbnailSrc: img2,
+  name: "Camper Trailer",
+  mileage:"10k",
+  gearType:"Auto",
+  dailyPrice:100,
+  monthlyPrice:1700,
+  gas:"Petrol",
+}
+const testCampervan3:ICarType  = {
+  thumbnailSrc: img3,
+  name: "Campervan",
+  mileage:"10k",
+  gearType:"Auto",
+  dailyPrice:100,
+  monthlyPrice:1700,
+  gas:"Petrol",
+}
+const testCampervan4:ICarType  = {
+  thumbnailSrc: img4,
+  name: "Motorhome",
+  mileage:"10k",
+  gearType:"Auto",
+  dailyPrice:100,
+  monthlyPrice:1700,
+  gas:"Petrol",
+}
 
 const TopCarsContainer = styled.div`
   ${tw`
@@ -10,7 +53,7 @@ const TopCarsContainer = styled.div`
     w-full
     // 
     flex
-    flex-col
+    flex-row
     items-center
     justify-center
     pr-4
@@ -24,9 +67,11 @@ const TopCarsContainer = styled.div`
 const CarsCarousel = () => {
   return (
     <TopCarsContainer>
-      <CarCard />
-      <CarCard />
-      <CarCard />
+      <CarCard {...testCampervan1} />
+      <CarCard {...testCampervan2} />
+      <CarCard {...testCampervan3} />
+      <CarCard {...testCampervan4} />
+     
     </TopCarsContainer>
   );
 };

@@ -10,7 +10,7 @@ import tw from "twin.macro";
 import Button from "../../atoms/Button";
 import popTop from "../../../../assets/campervan/pop-top.jpg";
 
-interface CarType {
+export interface ICarType {
   thumbnailSrc: string;
   name: string;
   mileage: string;
@@ -134,20 +134,29 @@ const Seperator = styled.div`
   `};
 `;
 
-const CarCard = () => {
+
+const CarCard = ({
+  thumbnailSrc,
+  name,
+  mileage,
+  gearType,
+  dailyPrice,
+  monthlyPrice,
+  gas,
+}: ICarType) => {
   return (
     <CarContainer>
       <CarThumbnail>
-        <img src={popTop} alt="" />
+        <img src={thumbnailSrc} alt="" />
       </CarThumbnail>
-      <CarName>Audi S3 Car</CarName>
+      <CarName>{name}</CarName>
       <PricesContainer>
         <DailyPrice>
-          $250
+          ${dailyPrice}
           <SmallText>/Day</SmallText>
         </DailyPrice>
         <MonthlyPrice>
-          $1600
+          ${monthlyPrice}
           <SmallText>/Month</SmallText>
         </MonthlyPrice>
       </PricesContainer>
@@ -158,22 +167,22 @@ const CarCard = () => {
           <SmallIcon>
             <FontAwesomeIcon icon={faTachometerAlt} />
           </SmallIcon>
-          <CarInfo>10k</CarInfo>
+          <CarInfo>{mileage}</CarInfo>
         </CarDetail>
         <CarDetail>
           <SmallIcon>
             <FontAwesomeIcon icon={faEllipsisH} />
           </SmallIcon>
-          <CarInfo>Auto</CarInfo>
+          <CarInfo>{gearType}</CarInfo>
         </CarDetail>
         <CarDetail>
           <SmallIcon>
             <FontAwesomeIcon icon={faFillDrip} />
           </SmallIcon>
-          <CarInfo>Petrol</CarInfo>
+          <CarInfo>{gas}</CarInfo>
         </CarDetail>
       </CarDetailsContainer>
-      <Button text="Rent Now" theme={"text"} />
+      <Button  text="Rent Now" theme={"text"} />
     </CarContainer>
   );
 };

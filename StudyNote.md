@@ -5,6 +5,8 @@
   To make sure the positioned image to be full hight:
   <code>html, body, #root {width: 100%; height: 100%;</code>
 
+- tw style stock components must has "className", otherwise it wont be able to overwrite to the actual components.
+
 ### Knowledge Points
 
 - Redux Toolkit
@@ -15,6 +17,7 @@
 - react-responsive
 - fontawesome icon
 - react-calendar
+- Carousel: @brainhubeu/react-carousel
 - (reusable) marginer component of vertical and horizontal distance
 
 ### Issues fix
