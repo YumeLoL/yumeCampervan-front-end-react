@@ -1,42 +1,31 @@
 import React from "react";
-import {
-  faEllipsisH,
-  faFillDrip,
-  faTachometerAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../atoms/Button";
-import popTop from "../../../../assets/campervan/pop-top.jpg";
 
 export interface ICarType {
   thumbnailSrc: string;
-  name: string;
-  mileage: string;
-  gearType: string;
+  name: string ;
+  vanType: string;
+  sleep: number;
   dailyPrice: number;
-  monthlyPrice: number;
-  gas: string;
 }
 
 const CarContainer = styled.div`
-  width: 16.5em;
-  min-height: 23em;
-  max-height: 23em;
+  max-width: 22em;
+  max-height: 100%;
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
     flex
     flex-col
     items-center
-    p-3
-    pb-4
-    bg-white
     rounded-md
-    m-1
-    sm:m-3
-    md:m-6
+    pb-8
+    sm:m-2
+    md:m-4
   `};
+
+  p{padding-right:15px}
 `;
 
 const CarThumbnail = styled.div`
@@ -48,56 +37,12 @@ const CarThumbnail = styled.div`
   }
 `;
 
-const CarName = styled.h3`
+const LinkButton = styled(Button)`
   ${tw`
-    text-base
+    text-2xl
     font-bold
-    text-black
-    mt-1
-    mb-1
-  `};
-`;
-
-const PricesContainer = styled.div`
-  ${tw`
-    w-full
-    flex
-    justify-start
-    mt-3
-  `};
-`;
-
-const SmallText = styled.p`
-  color: inherit;
-  ${tw`
-    inline-flex
-    text-xs
-    font-thin
-  `};
-`;
-
-const DailyPrice = styled.h5`
-  ${tw`
-    text-red-500
-    font-bold
-    text-sm
-    mr-3
-  `};
-`;
-
-const MonthlyPrice = styled.h5`
-  ${tw`
-    text-gray-500
-    font-bold
-    text-sm
-  `};
-`;
-
-const SmallIcon = styled.span`
-  ${tw`
-    text-gray-400
-    text-sm
-    mr-1
+    text-primary
+    my-3
   `};
 `;
 
@@ -105,84 +50,47 @@ const CarDetailsContainer = styled.div`
   ${tw`
     flex
     w-full
-    justify-between
+    justify-start
+    px-5
+    my-2
   `};
 `;
 
-const CarDetail = styled.span`
+const BoldText = styled.span`
   ${tw`
-    flex
-    items-center
-  `};
-`;
-
-const CarInfo = styled.h6`
-  ${tw`
-    text-gray-400
-    text-xs
-  `};
-`;
-
-const Seperator = styled.div`
-  min-width: 100%;
-  min-height: 1px;
-  ${tw`
-    flex
-    bg-gray-300
-    mt-2
-    mb-2
-  `};
-`;
+   text-xl
+   font-bold
+  `}
+`
 
 
 const CarCard = ({
   thumbnailSrc,
   name,
-  mileage,
-  gearType,
+  vanType,
+  sleep,
   dailyPrice,
-  monthlyPrice,
-  gas,
 }: ICarType) => {
   return (
     <CarContainer>
       <CarThumbnail>
         <img src={thumbnailSrc} alt="" />
       </CarThumbnail>
-      <CarName>{name}</CarName>
-      <PricesContainer>
-        <DailyPrice>
-          ${dailyPrice}
-          <SmallText>/Day</SmallText>
-        </DailyPrice>
-        <MonthlyPrice>
-          ${monthlyPrice}
-          <SmallText>/Month</SmallText>
-        </MonthlyPrice>
-      </PricesContainer>
-      <Seperator />
+      <LinkButton text={name} theme={"text"} />
+     
 
       <CarDetailsContainer>
-        <CarDetail>
-          <SmallIcon>
-            <FontAwesomeIcon icon={faTachometerAlt} />
-          </SmallIcon>
-          <CarInfo>{mileage}</CarInfo>
-        </CarDetail>
-        <CarDetail>
-          <SmallIcon>
-            <FontAwesomeIcon icon={faEllipsisH} />
-          </SmallIcon>
-          <CarInfo>{gearType}</CarInfo>
-        </CarDetail>
-        <CarDetail>
-          <SmallIcon>
-            <FontAwesomeIcon icon={faFillDrip} />
-          </SmallIcon>
-          <CarInfo>{gas}</CarInfo>
-        </CarDetail>
+        <p>{vanType}</p>
+        <p>Sleeps {sleep}</p>
       </CarDetailsContainer>
-      <Button  text="Rent Now" theme={"text"} />
+
+      <CarDetailsContainer>
+        <BoldText>Melbourne</BoldText>
+      </CarDetailsContainer>
+
+      <CarDetailsContainer>
+        <p>From <BoldText>${dailyPrice}</BoldText> AUD/day</p>
+      </CarDetailsContainer>
     </CarContainer>
   );
 };

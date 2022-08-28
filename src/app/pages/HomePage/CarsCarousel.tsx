@@ -12,50 +12,42 @@ import img4 from "../../../assets/campervan/motorhome.jpeg"
 const testCampervan1:ICarType = {
   thumbnailSrc: img1,
   name: "Pop Top Trailer",
-  mileage:"10k",
-  gearType:"Auto",
+  vanType:"Caravan",
+  sleep: 4,
   dailyPrice:100,
-  monthlyPrice:1700,
-  gas:"Petrol",
 }
 const testCampervan2:ICarType  = {
   thumbnailSrc: img2,
   name: "Camper Trailer",
-  mileage:"10k",
-  gearType:"Auto",
+  vanType:"Caravan",
+  sleep: 3,
   dailyPrice:100,
-  monthlyPrice:1700,
-  gas:"Petrol",
 }
 const testCampervan3:ICarType  = {
   thumbnailSrc: img3,
   name: "Campervan",
-  mileage:"10k",
-  gearType:"Auto",
+  vanType:"Campervan",
+  sleep: 4,
   dailyPrice:100,
-  monthlyPrice:1700,
-  gas:"Petrol",
 }
 const testCampervan4:ICarType  = {
   thumbnailSrc: img4,
   name: "Motorhome",
-  mileage:"10k",
-  gearType:"Auto",
+  vanType:"Motorhome",
+  sleep: 4,
   dailyPrice:100,
-  monthlyPrice:1700,
-  gas:"Petrol",
 }
 
 const TopCarsContainer = styled.div`
   ${tw`
     // set 1024px screen width and make it full width
-    max-w-screen-lg
+    max-w-screen-2xl
     w-full
     // 
     flex
-    flex-row
+    flex-wrap
     items-center
-    justify-center
+    justify-evenly
     pr-4
     pl-4
     md:pl-0
@@ -71,6 +63,10 @@ const CarsCarousel = () => {
       <CarCard {...testCampervan2} />
       <CarCard {...testCampervan3} />
       <CarCard {...testCampervan4} />
+      <CarCard {...testCampervan4} />
+      <CarCard {...testCampervan4} />
+      <CarCard {...testCampervan4} />
+    
      
     </TopCarsContainer>
   );
