@@ -11,6 +11,7 @@ import driveVan from "../../../assets/images/drive-all-van.svg";
 import deliverBush from "../../../assets/images/deliver-caravan-bush.svg";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
+import Footer from "../../ui/molecules/Footer";
 
 
 // Use Twin’s tw import to create and style new components with Tailwind classes
@@ -37,8 +38,10 @@ function HomePage() {
       <Marginer direction="vertical" margin="8em" />
       <ImageSeperator src={deliverBush} direction={"right"} />
       <AboutUs />
-      <Marginer direction="vertical" margin="8em" />
+      <Marginer direction="vertical" margin="14em" />
       <CarsCarousel />
+      <Marginer direction="vertical" margin="14em" />
+      <Footer />
     </PageContainer>
   );
 }

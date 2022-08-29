@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
@@ -10,6 +10,8 @@ import img3 from "../../../assets/campervan/campervan-1.jpg";
 import img4 from "../../../assets/campervan/motorhome.jpeg";
 import LargeTitle from "../../ui/atoms/LargeTitle";
 import Text from "../../ui/atoms/Text";
+import { SCREENS } from "../../libs/responsive";
+import { useMediaQuery } from "react-responsive";
 
 const testCampervan1: ICarType = {
   thumbnailSrc: img1,
@@ -40,8 +42,12 @@ const testCampervan4: ICarType = {
   dailyPrice: 100,
 };
 
-const PromoteVan = [
+// fake data
+const PromoteVans = [
   <CarCard {...testCampervan1} />,
+  <CarCard {...testCampervan2} />,
+  <CarCard {...testCampervan2} />,
+  <CarCard {...testCampervan2} />,
   <CarCard {...testCampervan2} />,
   <CarCard {...testCampervan3} />,
   <CarCard {...testCampervan4} />,
@@ -83,15 +89,18 @@ const ShortText = styled(Text)`
 
 const CarsCarousel = () => {
   const [curent, setCurent] = useState(0);
+  const isMobile = useMediaQuery({maxWidth: SCREENS.sm})
+  const isPad = useMediaQuery({maxWidth: SCREENS.md})
 
   const onChange = (curent: number) => {
     setCurent(curent);
   };
 
+
   return (
     <CarouselContainer>
       <CarouselDescription>
-        <LargeTitle title={"Find your perfect van"} />
+        <LargeTitle title={"Find Your Perfect Van"} />
         <ShortText
           text={
             "Camplify is proud to be Australia’s largest and fastest-growing campervan, motorhome and caravan sharing community. We’re safely connecting holidaymakers with thousands of unique neighbourhood vans that are available to hire for their next outdoor adventure. Explore some of our featured campervans, motorhomes and caravans available for hire below."
@@ -101,7 +110,7 @@ const CarsCarousel = () => {
       <Carousel
         value={curent}
         onChange={onChange}
-        slides={PromoteVan}
+        slides={PromoteVans}
         plugins={[
           "infinite",
           "arrows",
@@ -115,6 +124,7 @@ const CarsCarousel = () => {
         breakpoints={{
           640: {
             plugins: [
+              "infinite",
               {
                 resolve: slidesToShowPlugin,
                 options: {
@@ -123,8 +133,9 @@ const CarsCarousel = () => {
               },
             ],
           },
-          900: {
+          768: {
             plugins: [
+              "infinite",
               {
                 resolve: slidesToShowPlugin,
                 options: {
@@ -133,8 +144,10 @@ const CarsCarousel = () => {
               },
             ],
           },
-          1200: {
+          1280: {
             plugins: [
+              "infinite",
+              "arrows",
               {
                 resolve: slidesToShowPlugin,
                 options: {
@@ -146,7 +159,11 @@ const CarsCarousel = () => {
         }}
       />
 
-      <Dots value={curent} onChange={onChange} number={5} />
+      <Dots
+        value={curent}
+        onChange={onChange}
+        number={ isMobile ? PromoteVans.length : isPad? PromoteVans.length : 0}
+      />
     </CarouselContainer>
   );
 };
