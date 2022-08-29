@@ -37,6 +37,7 @@ function HomePage() {
       <Marginer direction="vertical" margin="8em" />
       <ImageSeperator src={deliverBush} direction={"right"} />
       <AboutUs />
+      <Marginer direction="vertical" margin="8em" />
       <CarsCarousel />
     </PageContainer>
   );

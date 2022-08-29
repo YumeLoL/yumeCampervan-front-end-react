@@ -4,6 +4,7 @@ import tw from "twin.macro";
 
 interface TitleType {
   title: string;
+  className?: string;
 }
 
 const Heading = styled.h1`
@@ -18,8 +19,8 @@ const Heading = styled.h1`
   `}
 `;
 
-const LargeTitle = ({ title }: TitleType) => {
-  return <Heading>{title}</Heading>;
+const LargeTitle = ({ title, className }: TitleType) => {
+  return <Heading className={className}>{title}</Heading>;
 };
 
 export default LargeTitle;

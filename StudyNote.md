@@ -17,7 +17,9 @@
 - react-responsive
 - fontawesome icon
 - react-calendar
-- Carousel: @brainhubeu/react-carousel
+- Carousel: @brainhubeu/react-carousel  
+https://github.com/brainhubeu/react-carousel   
+Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples/multipleSlides
 - (reusable) marginer component of vertical and horizontal distance
 
 ### Issues fix
