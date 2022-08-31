@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import BookCard from "../../ui/molecules/BookCard"
+import BookCard from "../../ui/molecules/BookCard";
 import Navbar from "../../ui/molecules/Navbar";
 import HeroSession from "./HeroSession";
 import BookingStep from "./BookingStep";
@@ -13,7 +13,14 @@ import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
 import Footer from "../../ui/molecules/Footer";
 
-
+const AppContainer = styled.div`
+  ${tw`
+    flex
+    flex-col
+    w-full
+    h-full
+  `}
+`;
 // Use Twin’s tw import to create and style new components with Tailwind classes
 const PageContainer = styled.div`
   ${tw` 
@@ -27,22 +34,24 @@ const PageContainer = styled.div`
 
 function HomePage() {
   return (
-    <PageContainer>
-      <Navbar />
-      <HeroSession />
-      <ImageSeperator src={driveVan} direction={"left"} />
-      <Marginer direction="vertical" margin="8em" />
-      <BookCard />
-      <Marginer direction="vertical" margin="8em" />
-      <BookingStep />
-      <Marginer direction="vertical" margin="8em" />
-      <ImageSeperator src={deliverBush} direction={"right"} />
-      <AboutUs />
-      <Marginer direction="vertical" margin="10em" />
-      <CarsCarousel />
-      <Marginer direction="vertical" margin="10em" />
-      <Footer />
-    </PageContainer>
+    <AppContainer>
+      <PageContainer>
+        <Navbar />
+        <HeroSession />
+        <ImageSeperator src={driveVan} direction={"left"} />
+        <Marginer direction="vertical" margin="8em" />
+        <BookCard />
+        <Marginer direction="vertical" margin="8em" />
+        <BookingStep />
+        <Marginer direction="vertical" margin="8em" />
+        <ImageSeperator src={deliverBush} direction={"right"} />
+        <AboutUs />
+        <Marginer direction="vertical" margin="10em" />
+        <CarsCarousel />
+        <Marginer direction="vertical" margin="10em" />
+        <Footer />
+      </PageContainer>
+    </AppContainer>
   );
 }
 
