@@ -1,17 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import CarCard, { ICarType } from "../../ui/molecules/CarCard";
-import img1 from "../../../assets/campervan/pop-top.jpg";
-import img2 from "../../../assets/campervan/camper-trailer.jpg";
-import img3 from "../../../assets/campervan/campervan-1.jpg";
-import img4 from "../../../assets/campervan/motorhome.jpeg";
-import LargeTitle from "../../ui/atoms/LargeTitle";
-import Text from "../../ui/atoms/Text";
-import { SCREENS } from "../../libs/responsive";
-import { useMediaQuery } from "react-responsive";
+import CarCard, { ICarType } from "../../../ui/molecules/CarCard";
+import LargeTitle from "../../../ui/atoms/LargeTitle";
+import Text from "../../../ui/atoms/Text";
+import { SCREENS } from "../../../libs/responsive";
+import img1 from "../../../../assets/campervan/pop-top.jpg"
+import img2 from "../../../../assets/campervan/camper-trailer.jpg"
+import img3 from "../../../../assets/campervan/campervan-1.jpg"
+import img4 from "../../../../assets/campervan/motorhome.jpeg"
 
 const testCampervan1: ICarType = {
   thumbnailSrc: img1,

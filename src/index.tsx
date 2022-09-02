@@ -5,6 +5,10 @@ import reportWebVitals from "./reportWebVitals";
 import HomePage from "./app/pages/HomePage";
 import AdminLoginPage from "./app/pages/AdminLoginPage";
 import "./index.css";
+import CampervansPage from "./app/pages/CampervansPage";
+import PopularRoutesPage from "./app/pages/CampervansPage/PopularRoutesPage";
+import BlogPage from "./app/pages/CampervansPage/Blog";
+import ContactPage from "./app/pages/CantactPage";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -14,6 +18,13 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
+        <Route path="/campervans" element={<CampervansPage />} />
+        <Route
+          path="/get-inspired/popular-routes"
+          element={<PopularRoutesPage />}
+        />
+        <Route path="/get-inspired/blog" element={<BlogPage />} />
+        <Route path="/contact" element={<ContactPage />} />
         <Route path="/admin" element={<AdminLoginPage />} />
       </Routes>
     </Router>

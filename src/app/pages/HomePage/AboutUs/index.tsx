@@ -1,10 +1,10 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import orangeVan from "../../../assets/images/orange-camper-van.png";
-import { SCREENS } from "../../libs/responsive";
-import Text from "../../ui/atoms/Text";
-import LargeTitle from "../../ui/atoms/LargeTitle"
+import orangeVan from "../../../../assets/images/orange-camper-van.png";
+import { SCREENS } from "../../../libs/responsive";
+import Text from "../../../ui/atoms/Text";
+import LargeTitle from "../../../ui/atoms/LargeTitle"
 
 const AboutUsContainer = styled.div`
   ${tw`

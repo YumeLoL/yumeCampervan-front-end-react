@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../../libs/responsive";
 import { push as Menu } from "react-burger-menu";
@@ -23,14 +25,37 @@ const NavItem = styled.li`
         transition
         duration-300
         ease-in-out
-        hover:text-gray-700
+        hover:border-b-4 border-secondary
     `}
 `;
+const DropdownNavItem = styled(NavItem)` 
+  ${tw`  
+  cursor-pointer
+  relative
+`}
+`
+const SubNavContainer = styled.div`
+  ${tw` 
+    w-[250px]
+    bg-secondary
+    absolute
+    top-10
+  `}
+  a {
+    ${tw` text-lg  `}
+  }
+`;
+const SubNavItem = styled.li`
+  ${tw` 
+  
+  `}
+`
 
 const NavItems = () => {
   const isMobile = useMediaQuery({
     maxWidth: SCREENS.sm,
   });
+  const [clicked, setClicked] = useState(false);
 
   if (isMobile)
     return (
@@ -43,7 +68,9 @@ const NavItems = () => {
             <a href="/">Cars</a>
           </NavItem>
           <NavItem>
-            <a href="/">Services</a>
+            <a href="/">Get Inspired</a>
+            <FontAwesomeIcon icon={faChevronUp} />
+            <FontAwesomeIcon icon={faChevronDown} />
           </NavItem>
           <NavItem>
             <a href="/">Contact</a>
@@ -60,9 +87,32 @@ const NavItems = () => {
       <NavItem>
         <a href="/">Cars</a>
       </NavItem>
-      <NavItem>
-        <a href="/">Services</a>
-      </NavItem>
+
+      <DropdownNavItem >
+        <span onClick={() => setClicked(!clicked)}>
+          Get Inspired
+          {clicked ? (
+            <FontAwesomeIcon icon={faChevronDown} />
+          ) : (
+            <FontAwesomeIcon icon={faChevronUp} />
+          )}
+        </span>
+        {clicked ? (
+          <>
+            <SubNavContainer>
+              <SubNavItem>
+                <a href="/">Popular Routes</a>
+              </SubNavItem>
+              <SubNavItem>
+                <a href="/">Blog</a>
+              </SubNavItem>
+            </SubNavContainer>
+          </>
+        ) : (
+          ""
+        )}
+      </DropdownNavItem>
+
       <NavItem>
         <a href="/">Contact</a>
       </NavItem>

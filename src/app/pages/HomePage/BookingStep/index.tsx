@@ -7,15 +7,15 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Text from "../../ui/atoms/Text";
-import LargeTitle from "../../ui/atoms/LargeTitle";
+import Text from "../../../ui/atoms/Text";
+import LargeTitle from "../../../ui/atoms/LargeTitle";
 
 const Container = styled.div`
   ${tw`
       w-full
       flex
       flex-col
-       items-center
+      items-center
       pt-3
       pb-3
       lg:pt-6

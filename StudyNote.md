@@ -29,7 +29,7 @@ Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples
 
 <strong>To Fix: add a new declaration (.d.ts) file (src/typings/react-burger-menu.d.ts)
 <code>declare module 'react-burger-menu';</code>
-
+<code>declare module "*.jpg" </code> as well
 ### Install
 
 - <code>yarn create-react-app my-app --template redux-typescript</code>
