@@ -1,10 +1,12 @@
 import React from 'react'
 import MainLayout from '../../ui/organisms/MainLayout'
 
-const CampervanPage = () => {
+const CampervansPage = () => {
   return (
-    <MainLayout>CampervanPage</MainLayout>
+    <MainLayout>
+        
+    </MainLayout>
   )
 }
 
-export default CampervanPage
+export default CampervansPage
