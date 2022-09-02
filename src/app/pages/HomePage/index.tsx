@@ -1,6 +1,4 @@
 import React from "react";
-
-
 import driveVan from "../../../assets/images/drive-all-van.svg";
 import deliverBush from "../../../assets/images/deliver-caravan-bush.svg";
 import MainLayout from "../../ui/organisms/MainLayout";
@@ -11,9 +9,6 @@ import BookCard from "../../ui/molecules/BookCard";
 import BookingStep from "./BookingStep";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
-
-
-
 
 function HomePage() {
   return (

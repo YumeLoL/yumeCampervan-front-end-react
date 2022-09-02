@@ -1,8 +1,9 @@
 import React from 'react'
+import MainLayout from '../../ui/organisms/MainLayout'
 
 const ContactPage = () => {
   return (
-    <div>ContactPage</div>
+    <MainLayout>ContactPage</MainLayout>
   )
 }
 

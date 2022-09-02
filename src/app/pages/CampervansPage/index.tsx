@@ -1,8 +1,9 @@
 import React from 'react'
+import MainLayout from '../../ui/organisms/MainLayout'
 
 const CampervanPage = () => {
   return (
-    <div>CampervanPage</div>
+    <MainLayout>CampervanPage</MainLayout>
   )
 }
 

@@ -1,10 +1,10 @@
 import React from 'react'
 import MainLayout from '../../../ui/organisms/MainLayout'
 
-const PopularRoutesPage = () => {
+const RecipesPage = () => {
   return (
     <MainLayout>PopularRoutesPage</MainLayout>
   )
 }
 
-export default PopularRoutesPage
+export default RecipesPage

@@ -1,8 +1,9 @@
 import React from 'react'
+import MainLayout from '../../../ui/organisms/MainLayout'
 
 const BlogPage = () => {
   return (
-    <div>Blog</div>
+    <MainLayout>Blog</MainLayout>
   )
 }
 

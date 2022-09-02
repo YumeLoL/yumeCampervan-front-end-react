@@ -81,7 +81,7 @@ const StepIcon = styled.span`
 const BookingStep = () => {
   return (
     <Container>
-      <LargeTitle title="Our Working Steps" />
+      <LargeTitle title="Our Booking Steps" />
       <StepsContainer>
         <StepContainer>
           <Step>
