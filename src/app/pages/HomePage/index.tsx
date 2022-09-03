@@ -10,8 +10,10 @@ import BookingStep from "./BookingStep";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
 import Banner from "../../ui/molecules/Banner";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
+  const navigate = useNavigate();
   return (
     <MainLayout>
       <HeroSession />
@@ -26,7 +28,7 @@ function HomePage() {
       <Marginer direction="vertical" margin="10em" />
       <CarsCarousel />
       <Marginer direction="vertical" margin="10em" />
-      <Banner title={"Can't find what you're looking for?"} text={"View all vans"} theme={"outlined"}/>
+      <Banner title={"Can't find what you're looking for?"} text={"View all vans"} theme={"outlined"} onClick={() => navigate('/campervans') }/>
       <Marginer direction="vertical" margin="10em" />
     </MainLayout>
   );

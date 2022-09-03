@@ -23,12 +23,12 @@ const BannerContent = styled.div`
     `}
 `;
 
-const Banner = ({text, theme, title , className}:IBanner) => {
+const Banner = ({text, theme, title, onClick , className}:IBanner) => {
   return (
     <BannerContainer className={className}>
       <BannerContent>
         <LargeTitle title={title} />
-        <Button text={text} theme={theme} />
+        <Button text={text} theme={theme} onClick={onClick}/>
       </BannerContent>
     </BannerContainer>
   );

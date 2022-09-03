@@ -7,7 +7,7 @@ export interface ButtonType {
   text: string;
   style?: React.CSSProperties;
   theme: "filled" | "outlined" | "text" | "base";
-  // onClick: (event: MouseEvent) => void,
+  onClick?: () => void;
 }
 
 const BaseButton = styled.button`
@@ -66,20 +66,23 @@ const TextButton = styled(BaseButton)`
   `}
 `;
 
-const Button = ({ theme, text, className }: ButtonType) => {
+const Button = ({ theme, text, className, onClick }: ButtonType) => {
   switch (theme) {
     case "filled":
-      return <FilledButton className={className}>{text}</FilledButton>;
+      return <FilledButton className={className} onClick={onClick}>{text}</FilledButton>;
 
     case "outlined":
-      return <OutlinedButton className={className}>{text}</OutlinedButton>;
+      return <OutlinedButton className={className} onClick= {onClick}>{text}</OutlinedButton>;
 
     case "text":
-      return <TextButton className={className}>{text}</TextButton>;
+      return <TextButton className={className} onClick={onClick}>{text}</TextButton>;
 
     default:
-      return <BaseButton className={className}>{text}</BaseButton>;
+      return <BaseButton className={className} onClick={onClick}>{text}</BaseButton>;
   }
 };
 
-export default Button;
+export default Button
+
+
+
