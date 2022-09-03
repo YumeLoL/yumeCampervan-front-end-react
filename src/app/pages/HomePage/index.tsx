@@ -9,6 +9,7 @@ import BookCard from "../../ui/molecules/BookCard";
 import BookingStep from "./BookingStep";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
+import Banner from "../../ui/molecules/Banner";
 
 function HomePage() {
   return (
@@ -24,6 +25,8 @@ function HomePage() {
       <AboutUs />
       <Marginer direction="vertical" margin="10em" />
       <CarsCarousel />
+      <Marginer direction="vertical" margin="10em" />
+      <Banner title={"Can't find what you're looking for?"} text={"View all vans"} theme={"outlined"}/>
       <Marginer direction="vertical" margin="10em" />
     </MainLayout>
   );

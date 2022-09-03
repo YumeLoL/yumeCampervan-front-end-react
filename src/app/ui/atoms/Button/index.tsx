@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-interface ButtonType {
+export interface ButtonType {
   className?: string;
   text: string;
   style?: React.CSSProperties;

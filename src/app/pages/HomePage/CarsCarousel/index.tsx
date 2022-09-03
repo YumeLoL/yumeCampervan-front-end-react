@@ -18,28 +18,32 @@ const testCampervan1: ICarType = {
   name: "Pop Top Trailer",
   vanType: "Caravan",
   sleep: 4,
-  dailyPrice: 100,
+  originalPrice: 120,
+  currentPrice: 100,
 };
 const testCampervan2: ICarType = {
   thumbnailSrc: img2,
   name: "Camper Trailer",
   vanType: "Caravan",
   sleep: 3,
-  dailyPrice: 100,
+  originalPrice: 150,
+  currentPrice: 100,
 };
 const testCampervan3: ICarType = {
   thumbnailSrc: img3,
   name: "Campervan",
   vanType: "Campervan",
   sleep: 4,
-  dailyPrice: 100,
+  originalPrice: 123,
+  currentPrice: 100,
 };
 const testCampervan4: ICarType = {
   thumbnailSrc: img4,
   name: "Motorhome",
   vanType: "Motorhome",
   sleep: 4,
-  dailyPrice: 100,
+  originalPrice: 109,
+  currentPrice: 100,
 };
 
 // fake data
@@ -88,12 +92,12 @@ const ShortText = styled(Text)`
 `;
 
 const CarsCarousel = () => {
-  const [curent, setCurent] = useState(0);
+  const [current, setCurrent] = useState(0);
   const isMobile = useMediaQuery({maxWidth: SCREENS.sm})
   const isPad = useMediaQuery({maxWidth: SCREENS.md})
 
   const onChange = (curent: number) => {
-    setCurent(curent);
+    setCurrent(curent);
   };
 
 
@@ -108,7 +112,7 @@ const CarsCarousel = () => {
         />
       </CarouselDescription>
       <Carousel
-        value={curent}
+        value={current}
         onChange={onChange}
         slides={PromoteVans}
         plugins={[
@@ -160,7 +164,7 @@ const CarsCarousel = () => {
       />
 
       <Dots
-        value={curent}
+        value={current}
         onChange={onChange}
         number={ isMobile ? PromoteVans.length : isPad? PromoteVans.length : 0}
       />

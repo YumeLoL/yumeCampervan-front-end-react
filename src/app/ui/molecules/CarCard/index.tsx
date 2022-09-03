@@ -5,10 +5,11 @@ import Button from "../../atoms/Button";
 
 export interface ICarType {
   thumbnailSrc: string;
-  name: string ;
+  name: string;
   vanType: string;
   sleep: number;
-  dailyPrice: number;
+  originalPrice?: number;
+  currentPrice: number;
 }
 
 const CarContainer = styled.div`
@@ -25,7 +26,9 @@ const CarContainer = styled.div`
     md:m-4
   `};
 
-  p{padding-right:15px}
+  p {
+    padding-right: 15px;
+  }
 `;
 
 const CarThumbnail = styled.div`
@@ -61,15 +64,22 @@ const BoldText = styled.span`
    text-xl
    font-bold
   `}
-`
-
+`;
+const LineThroughText = styled.span`
+  ${tw`
+   line-through
+   font-bold
+   text-gray-500
+  `}
+`;
 
 const CarCard = ({
   thumbnailSrc,
   name,
   vanType,
   sleep,
-  dailyPrice,
+  originalPrice,
+  currentPrice,
 }: ICarType) => {
   return (
     <CarContainer>
@@ -77,7 +87,6 @@ const CarCard = ({
         <img src={thumbnailSrc} alt="" />
       </CarThumbnail>
       <LinkButton text={name} theme={"text"} />
-     
 
       <CarDetailsContainer>
         <p>{vanType}</p>
@@ -89,7 +98,10 @@ const CarCard = ({
       </CarDetailsContainer>
 
       <CarDetailsContainer>
-        <p>From <BoldText>${dailyPrice}</BoldText> AUD/day</p>
+        <p>
+          <LineThroughText>${originalPrice}</LineThroughText> From{" "}
+          <BoldText className="text-red-700">${currentPrice}</BoldText> AUD/day
+        </p>
       </CarDetailsContainer>
     </CarContainer>
   );
