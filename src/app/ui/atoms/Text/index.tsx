@@ -9,6 +9,7 @@ interface TextType {
 
 const TextStyle = styled.p`
   ${tw`
+  max-w-7xl
   text-sm
   md:text-lg
   lg:text-xl

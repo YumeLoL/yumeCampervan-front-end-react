@@ -11,16 +11,17 @@ export interface IBanner extends ButtonType, TitleType {
 
 const BannerContainer = styled.div`
   ${tw`
-    w-full
-    text-center
-    bg-secondary
-    `}
+  w-full
+  text-center
+  bg-secondary
+  `}
 `;
 const BannerContent = styled.div`
   ${tw`
-    px-10
-    py-14
-    `}
+  w-full
+  px-10
+  py-14
+  `}
 `;
 
 const Banner = ({text, theme, title, onClick , className}:IBanner) => {

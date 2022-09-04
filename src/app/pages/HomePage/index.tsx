@@ -28,7 +28,12 @@ function HomePage() {
       <Marginer direction="vertical" margin="10em" />
       <CarsCarousel />
       <Marginer direction="vertical" margin="10em" />
-      <Banner title={"Can't find what you're looking for?"} text={"View all vans"} theme={"outlined"} onClick={() => navigate('/campervans') }/>
+      <Banner
+        title={"Can't find what you're looking for?"}
+        text={"View all vans"}
+        theme={"outlined"}
+        onClick={() => navigate("/campervans")}
+      />
       <Marginer direction="vertical" margin="10em" />
     </MainLayout>
   );

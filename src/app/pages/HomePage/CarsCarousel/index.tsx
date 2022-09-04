@@ -60,6 +60,7 @@ const PromoteVans = [
   <CarCard {...testCampervan4} />,
 ];
 
+
 const CarouselContainer = styled.div`
   ${tw`
   // set 1024px screen width and make it full width
@@ -88,7 +89,7 @@ const CarouselDescription = styled.div`
 `;
 
 const ShortText = styled(Text)`
-  ${tw`w-full px-10`}
+  ${tw`w-full m-auto px-10`}
 `;
 
 const CarsCarousel = () => {
