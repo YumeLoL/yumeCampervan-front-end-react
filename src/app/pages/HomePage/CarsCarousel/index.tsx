@@ -14,6 +14,7 @@ import img3 from "../../../../assets/campervan/campervan-1.jpg"
 import img4 from "../../../../assets/campervan/motorhome.jpeg"
 
 const testCampervan1: ICarType = {
+  id: 1,
   thumbnailSrc: img1,
   name: "Pop Top Trailer",
   vanType: "Caravan",
@@ -22,6 +23,7 @@ const testCampervan1: ICarType = {
   currentPrice: 100,
 };
 const testCampervan2: ICarType = {
+  id: 2,
   thumbnailSrc: img2,
   name: "Camper Trailer",
   vanType: "Caravan",
@@ -30,6 +32,7 @@ const testCampervan2: ICarType = {
   currentPrice: 100,
 };
 const testCampervan3: ICarType = {
+  id: 3,
   thumbnailSrc: img3,
   name: "Campervan",
   vanType: "Campervan",
@@ -38,6 +41,7 @@ const testCampervan3: ICarType = {
   currentPrice: 100,
 };
 const testCampervan4: ICarType = {
+  id: 4,
   thumbnailSrc: img4,
   name: "Motorhome",
   vanType: "Motorhome",

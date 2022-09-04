@@ -4,12 +4,14 @@ import tw from "twin.macro";
 import Button from "../../atoms/Button";
 
 export interface ICarType {
+  id?:number;
   thumbnailSrc: string;
   name: string;
   vanType: string;
   sleep: number;
   originalPrice?: number;
   currentPrice: number;
+  onClick?: () => void;
 }
 
 const CarContainer = styled.div`
@@ -74,19 +76,21 @@ const LineThroughText = styled.span`
 `;
 
 const CarCard = ({
+  id,
   thumbnailSrc,
   name,
   vanType,
   sleep,
   originalPrice,
   currentPrice,
+  onClick,
 }: ICarType) => {
   return (
     <CarContainer>
       <CarThumbnail>
         <img src={thumbnailSrc} alt="" />
       </CarThumbnail>
-      <LinkButton text={name} theme={"text"} />
+      <LinkButton text={name} theme={"text"} onClick={onClick} />
 
       <CarDetailsContainer>
         <p>{vanType}</p>

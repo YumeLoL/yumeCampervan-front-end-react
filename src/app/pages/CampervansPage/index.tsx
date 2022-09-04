@@ -13,10 +13,13 @@ import img4 from "../../../assets/campervan/motorhome.jpeg";
 import { Marginer } from "../../ui/atoms/Marginer";
 import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
+import { useNavigate } from "react-router-dom";
+
 
 // fake data
 const PromoteVans: ICarType[] = [
   {
+    id: 1,
     thumbnailSrc: img1,
     name: "Pop Top Trailer",
     vanType: "Caravan",
@@ -25,6 +28,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 2,
     thumbnailSrc: img2,
     name: "Camper Trailer",
     vanType: "Caravan",
@@ -33,6 +37,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 3,
     thumbnailSrc: img3,
     name: "Campervan",
     vanType: "Campervan",
@@ -41,6 +46,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 4,
     thumbnailSrc: img4,
     name: "Motorhome",
     vanType: "Motorhome",
@@ -49,6 +55,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 1,
     thumbnailSrc: img1,
     name: "Pop Top Trailer",
     vanType: "Caravan",
@@ -57,6 +64,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 2,
     thumbnailSrc: img2,
     name: "Camper Trailer",
     vanType: "Caravan",
@@ -65,6 +73,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 3,
     thumbnailSrc: img3,
     name: "Campervan",
     vanType: "Campervan",
@@ -73,6 +82,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 4,
     thumbnailSrc: img4,
     name: "Motorhome",
     vanType: "Motorhome",
@@ -81,6 +91,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 1,
     thumbnailSrc: img1,
     name: "Pop Top Trailer",
     vanType: "Caravan",
@@ -89,6 +100,7 @@ const PromoteVans: ICarType[] = [
     currentPrice: 100,
   },
   {
+    id: 2,
     thumbnailSrc: img2,
     name: "Camper Trailer",
     vanType: "Caravan",
@@ -114,6 +126,7 @@ const StyledBanner = styled(Banner)`
     `}
 `
 const CampervansPage = () => {
+    const navigate = useNavigate()
   return (
     <MainLayout>
       <Marginer direction="vertical" margin="10em" />
@@ -127,14 +140,15 @@ const CampervansPage = () => {
         {PromoteVans.map((van: ICarType) => {
           return (
             <CarCard
-              key={van.name}
-              thumbnailSrc={van.thumbnailSrc}
-              name={van.name}
-              vanType={van.vanType}
-              sleep={van.sleep}
-              originalPrice={van.originalPrice}
-              currentPrice={van.currentPrice}
-            />
+                  key={van.id}
+                  thumbnailSrc={van.thumbnailSrc}
+                  name={van.name}
+                  vanType={van.vanType}
+                  sleep={van.sleep}
+                  originalPrice={van.originalPrice}
+                  currentPrice={van.currentPrice}           
+                  onClick={() => navigate(`/campervans/${van.id}`) }
+                  />
           );
         })}
       </VansContainer>

@@ -9,6 +9,8 @@ import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
 import BlogPage from "./app/pages/GetInspiredPage/Blog";
 import ContactPage from "./app/pages/CantactPage";
 import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
+
+import VanDetailPage from "./app/pages/CampervansPage/VanDetailPage";
 import CampervansPage from "./app/pages/CampervansPage";
 
 const container = document.getElementById("root")!;
@@ -19,7 +21,12 @@ root.render(
     <Router>
       <Routes>
         <Route path="/home" element={<HomePage />} />
-        <Route path="/campervans" element={<CampervansPage />} />
+
+        <Route path="/campervans">
+          <Route index element={<CampervansPage />}/>
+          <Route path=":id" element={<VanDetailPage />} />
+        </Route>
+        
         <Route
           path="/get-inspired/popular-routes"
           element={<PopularRoutesPage />}
