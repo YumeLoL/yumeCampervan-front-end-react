@@ -4,7 +4,6 @@ import styled from "styled-components";
 import CarCard, { ICarType } from "../../ui/molecules/CarCard";
 import MainLayout from "../../ui/organisms/MainLayout";
 import LargeTitle from "../../ui/atoms/LargeTitle";
-
 import Text from "../../ui/atoms/Text";
 import img1 from "../../../assets/campervan/popTop/pop-top.jpg";
 import img2 from "../../../assets/campervan/camper-trailer.jpg";

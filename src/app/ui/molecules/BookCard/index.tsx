@@ -1,14 +1,12 @@
 import React, { useState } from "react";
-import {
-  faCalendarAlt,
-  faCaretDown,
-  faCaretUp,
-} from "@fortawesome/free-solid-svg-icons";
+import { faCalendarAlt, faBed } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import Calendar from 'react-calendar';
-import "react-calendar/dist/Calendar.css";
-import styled, { css } from "styled-components";
+import { DateRange } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main style file
+import "react-date-range/dist/theme/default.css"; // theme css file
+import styled from "styled-components";
 import tw from "twin.macro";
+import { format } from "date-fns";
 import { Marginer } from "../../atoms/Marginer";
 import Button from "../../atoms/Button";
 import { SCREENS } from "../../../libs/responsive";
@@ -17,7 +15,7 @@ const CardContainer = styled.div`
   min-height: 4.3em;
   box-shadow: 0 1.3px 12px -3px rgba(0, 0, 0, 0.4);
   ${tw`
-    max-w-3xl
+    max-w-5xl
     lg:w-2/3
     flex
     justify-center
@@ -77,46 +75,20 @@ const LineSeperator = styled.span`
     md:mx-5
   `};
 `;
-const DateCalendar = styled(Calendar)`
-  position: absolute;
-  max-width: none;
-  width: 300px;
-  top: 4em;
-  left: -0.5em;
-  user-select: none;
-
-  ${({ offset }:any) =>
-    {
-    return offset &&
-      css`
-      left: -5.5em;
-    `;
-  }};
-
-  @media (min-width: ${SCREENS.sm}) {
-    top: 5em;
-    left: -1em;
-  }
-`;
 
 const BookCard = () => {
-  const [startDate, setStartDate] = useState<Date>(new Date());
-  const [isStartCalendarOpen, setStartCalendarOpen] = useState(false);
-  const [returnDate, setReturnDate] = useState<Date>(new Date());
-  const [isReturnCalendarOpen, setReturnCalendarOpen] = useState(false);
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [location, setLocation] = useState("");
+  const [sleep, setSleep] = useState("");
+  const searchedData = {location: location, date: date, sleep:sleep}
 
-  // console.log("startDate:", startDate)
-  // console.log("returnDate:", returnDate)
-
-  const handleStartCalender = () => {
-    setStartCalendarOpen(!isStartCalendarOpen);
-    if (isReturnCalendarOpen) setReturnCalendarOpen(false);
-  };
-
-  const handleReturnCalender = () => {
-    setReturnCalendarOpen(!isReturnCalendarOpen);
-    if (isStartCalendarOpen) setStartCalendarOpen(false);
-  };
 
   return (
     <CardContainer>
@@ -124,16 +96,15 @@ const BookCard = () => {
         <Icon>
           <FontAwesomeIcon icon={faCalendarAlt} />
         </Icon>
-        <Name onClick={handleStartCalender}>Pick Up</Name>
-        <SmallIcon>
-          <FontAwesomeIcon
-            icon={isStartCalendarOpen ? faCaretUp : faCaretDown}
-          />
-        </SmallIcon>
-
-        {isStartCalendarOpen && (
-          <DateCalendar onChange={setStartDate} value={startDate} />
-        )}
+        <select
+          id="location"
+          name="location"
+          onChange={(e) => setLocation(e.target.value)}
+        >
+          <option value="melbourne">Melbourne</option>
+          <option value="adelaide">Adelaide</option>
+          <option value="sydney">Sydney</option>
+        </select>
       </ItemContainer>
 
       <LineSeperator />
@@ -142,16 +113,47 @@ const BookCard = () => {
         <Icon>
           <FontAwesomeIcon icon={faCalendarAlt} />
         </Icon>
-        <Name onClick={handleReturnCalender}>Return</Name>
-        <SmallIcon>
-          <FontAwesomeIcon
-            icon={isReturnCalendarOpen ? faCaretUp : faCaretDown}
-          />
-        </SmallIcon>
+        <span onClick={() => 
+        {setIsCalendarOpen(!isCalendarOpen)
+         
+        }}>
+          {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+            date[0].endDate,
+            "MM/dd/yyyy"
+          )}`}
+        </span>
 
-        {isReturnCalendarOpen && (
-          <DateCalendar offset onChange={setReturnDate} value={returnDate} />
+        {isCalendarOpen && (
+          <DateRange
+            editableDateInputs={true}
+            onChange={(item: any) => {
+              setDate([item.selection]);
+            }}
+            moveRangeOnFirstSelection={false}
+            ranges={date}
+            className="absolute top-12 left-0"
+          />
         )}
+      </ItemContainer>
+
+      <LineSeperator />
+
+      <ItemContainer>
+        <Icon>
+          <FontAwesomeIcon icon={faBed} />
+        </Icon>
+        <select
+          id="sleep"
+          name="sleep"
+          onChange={(e) => setSleep(e.target.value)}
+        >
+          <option value="1">Adult 1</option>
+          <option value="2">Adult 2</option>
+          <option value="3">Adult 3</option>
+          <option value="4">Adult 4</option>
+          <option value="5">Adult 5</option>
+          <option value="6">Adult 6</option>
+        </select>
       </ItemContainer>
 
       <Marginer direction="horizontal" margin="2em" />
@@ -160,11 +162,12 @@ const BookCard = () => {
         hover:bg-transparent
         hover:text-primary
         hover:border-primary"
-        text="Book Your Ride"
+        text="Search Vans"
         theme={"base"}
+        onClick={() => console.log("searchedData:", searchedData)}
       />
     </CardContainer>
   );
 };
 
-export default BookCard
+export default BookCard;

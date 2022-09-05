@@ -185,9 +185,6 @@ const VanDetailPage = () => {
             air-conditioning/heating and microwave (only with 240 volt power), 4
             burner cook-top and grill and large 3 way fridge with freezer.
             Pantry basics included. This van is also equipped with solar.`}/>
-            
-
-
 
           <FeaturedList></FeaturedList>
         </VanDetailContainer>

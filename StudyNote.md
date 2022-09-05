@@ -17,6 +17,7 @@
 - react-responsive
 - fontawesome icon
 - react-calendar
+  <strong>Update:</strong> remove react-calendar, install react-date-range instead.
 - Carousel: @brainhubeu/react-carousel  
 https://github.com/brainhubeu/react-carousel   
 Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples/multipleSlides
