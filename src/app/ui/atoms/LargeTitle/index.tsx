@@ -9,7 +9,6 @@ export interface TitleType {
 
 const Heading = styled.h1`
   ${tw`
-  text-black
   text-2xl
   md:text-5xl
   font-extrabold
