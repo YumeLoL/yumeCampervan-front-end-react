@@ -8,7 +8,7 @@ import CarCard, { ICarType } from "../../../ui/molecules/CarCard";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
 import { SCREENS } from "../../../libs/responsive";
-import img1 from "../../../../assets/campervan/pop-top.jpg"
+import img1 from "../../../../assets/campervan/popTop/pop-top.jpg"
 import img2 from "../../../../assets/campervan/camper-trailer.jpg"
 import img3 from "../../../../assets/campervan/campervan-1.jpg"
 import img4 from "../../../../assets/campervan/motorhome.jpeg"
