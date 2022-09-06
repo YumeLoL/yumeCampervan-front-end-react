@@ -1,3 +1,10 @@
+### How to use useNavigate() to pass parameters 
+- <code>const navigate = useNavigate()</code>
+  <code>onClick={() => navigate("/campervans", { state:{ location, date, sleep}})}</code>
+- <code> const location = useLocation()</code>
+  <code> console.log(location.state)</code> // params passed from 'navigate' stored in 'location.state'
+
+
 ### Styling Hint
 
 - <strong>overflow-hidden</strong>
@@ -31,6 +38,7 @@ Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples
 <strong>To Fix: add a new declaration (.d.ts) file (src/typings/react-burger-menu.d.ts)
 <code>declare module 'react-burger-menu';</code>
 <code>declare module "*.jpg" </code> as well
+
 ### Install
 
 - <code>yarn create-react-app my-app --template redux-typescript</code>

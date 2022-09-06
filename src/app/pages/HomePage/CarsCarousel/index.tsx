@@ -4,7 +4,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import CarCard, { ICarType } from "../../../ui/molecules/CarCard";
+import CarCard from "../../../ui/molecules/CarCard";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
 import { SCREENS } from "../../../libs/responsive";
@@ -12,6 +12,7 @@ import img1 from "../../../../assets/campervan/popTop/pop-top.jpg"
 import img2 from "../../../../assets/campervan/camper-trailer.jpg"
 import img3 from "../../../../assets/campervan/campervan-1.jpg"
 import img4 from "../../../../assets/campervan/motorhome.jpeg"
+import { ICarType } from "../../../libs/interface";
 
 const testCampervan1: ICarType = {
   id: 1,

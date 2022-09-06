@@ -1,18 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
+import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../atoms/Button";
+import { ICarType } from "../../../libs/interface";
 
-export interface ICarType {
-  id?:number;
-  thumbnailSrc: string;
-  name: string;
-  vanType: string;
-  sleep: number;
-  originalPrice?: number;
-  currentPrice: number;
-  onClick?: () => void;
-}
+
 
 const CarContainer = styled.div`
   max-width: 22em;
@@ -85,11 +79,31 @@ const CarCard = ({
   currentPrice,
   onClick,
 }: ICarType) => {
+  const [current, setCurrent] = useState(0);
+  const onChange = (curent: number) => {
+    setCurrent(curent);
+  };
+
   return (
     <CarContainer>
       <CarThumbnail>
-        <img src={thumbnailSrc} alt="" />
+        <Carousel
+          value={current}
+          onChange={onChange}
+          slides={thumbnailSrc}
+          plugins={[
+            "infinite",
+            "arrows",
+            {
+              resolve: slidesToShowPlugin,
+              options: {
+                numberOfSlides: 1,
+              },
+            },
+          ]}
+        />
       </CarThumbnail>
+
       <LinkButton text={name} theme={"text"} onClick={onClick} />
 
       <CarDetailsContainer>

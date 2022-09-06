@@ -1,113 +1,18 @@
 import React from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
-import CarCard, { ICarType } from "../../ui/molecules/CarCard";
+import CarCard from "../../ui/molecules/CarCard";
 import MainLayout from "../../ui/organisms/MainLayout";
 import LargeTitle from "../../ui/atoms/LargeTitle";
 import Text from "../../ui/atoms/Text";
-import img1 from "../../../assets/campervan/popTop/pop-top.jpg";
-import img2 from "../../../assets/campervan/camper-trailer.jpg";
-import img3 from "../../../assets/campervan/campervan-1.jpg";
-import img4 from "../../../assets/campervan/motorhome.jpeg";
 import { Marginer } from "../../ui/atoms/Marginer";
 import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
+import FilterCard from "../../ui/molecules/SearchCard/FilterCard";
+import PromoteVans from "../../libs/fakeData";
+import { ICarType } from "../../libs/interface";
 
-
-// fake data
-const PromoteVans: ICarType[] = [
-  {
-    id: 1,
-    thumbnailSrc: img1,
-    name: "Pop Top Trailer",
-    vanType: "Caravan",
-    sleep: 4,
-    originalPrice: 120,
-    currentPrice: 100,
-  },
-  {
-    id: 2,
-    thumbnailSrc: img2,
-    name: "Camper Trailer",
-    vanType: "Caravan",
-    sleep: 3,
-    originalPrice: 150,
-    currentPrice: 100,
-  },
-  {
-    id: 3,
-    thumbnailSrc: img3,
-    name: "Campervan",
-    vanType: "Campervan",
-    sleep: 4,
-    originalPrice: 123,
-    currentPrice: 100,
-  },
-  {
-    id: 4,
-    thumbnailSrc: img4,
-    name: "Motorhome",
-    vanType: "Motorhome",
-    sleep: 4,
-    originalPrice: 109,
-    currentPrice: 100,
-  },
-  {
-    id: 1,
-    thumbnailSrc: img1,
-    name: "Pop Top Trailer",
-    vanType: "Caravan",
-    sleep: 4,
-    originalPrice: 120,
-    currentPrice: 100,
-  },
-  {
-    id: 2,
-    thumbnailSrc: img2,
-    name: "Camper Trailer",
-    vanType: "Caravan",
-    sleep: 3,
-    originalPrice: 150,
-    currentPrice: 100,
-  },
-  {
-    id: 3,
-    thumbnailSrc: img3,
-    name: "Campervan",
-    vanType: "Campervan",
-    sleep: 4,
-    originalPrice: 123,
-    currentPrice: 100,
-  },
-  {
-    id: 4,
-    thumbnailSrc: img4,
-    name: "Motorhome",
-    vanType: "Motorhome",
-    sleep: 4,
-    originalPrice: 109,
-    currentPrice: 100,
-  },
-  {
-    id: 1,
-    thumbnailSrc: img1,
-    name: "Pop Top Trailer",
-    vanType: "Caravan",
-    sleep: 4,
-    originalPrice: 120,
-    currentPrice: 100,
-  },
-  {
-    id: 2,
-    thumbnailSrc: img2,
-    name: "Camper Trailer",
-    vanType: "Caravan",
-    sleep: 3,
-    originalPrice: 150,
-    currentPrice: 100,
-  },
-];
 
 const VansContainer = styled.div`
   ${tw` 
@@ -120,15 +25,20 @@ const VansContainer = styled.div`
   `}
 `;
 const StyledBanner = styled(Banner)`
-    ${tw` 
+  ${tw` 
     bg-transparent 
     `}
-`
+`;
 const CampervansPage = () => {
-    const navigate = useNavigate()
+  const navigate = useNavigate();
+  const locationData = useLocation();
+  const searchedData = locationData.state
+  console.log(searchedData)
+
   return (
     <MainLayout>
       <Marginer direction="vertical" margin="10em" />
+      <FilterCard />
       <LargeTitle title={"Looking for a van ?"} />
       <Text
         text={
@@ -139,20 +49,24 @@ const CampervansPage = () => {
         {PromoteVans.map((van: ICarType) => {
           return (
             <CarCard
-                  key={van.id}
-                  thumbnailSrc={van.thumbnailSrc}
-                  name={van.name}
-                  vanType={van.vanType}
-                  sleep={van.sleep}
-                  originalPrice={van.originalPrice}
-                  currentPrice={van.currentPrice}           
-                  onClick={() => navigate(`/campervans/${van.id}`) }
-                  />
+              key={van.id}
+              thumbnailSrc={van.thumbnailSrc}
+              name={van.name}
+              vanType={van.vanType}
+              sleep={van.sleep}
+              originalPrice={van.originalPrice}
+              currentPrice={van.currentPrice}
+              onClick={() => navigate(`/campervans/${van.id}`)}
+            />
           );
         })}
       </VansContainer>
       <Button text={"Show more"} theme={"filled"} />
-      <StyledBanner text={"View all vans"} theme={"outlined"} title={"Can't find what you're looking for?"} />
+      <StyledBanner
+        text={"View all vans"}
+        theme={"outlined"}
+        title={"Can't find what you're looking for?"}
+      />
     </MainLayout>
   );
 };

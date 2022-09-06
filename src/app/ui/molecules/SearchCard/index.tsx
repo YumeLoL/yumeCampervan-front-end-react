@@ -9,7 +9,7 @@ import tw from "twin.macro";
 import { format } from "date-fns";
 import { Marginer } from "../../atoms/Marginer";
 import Button from "../../atoms/Button";
-import { SCREENS } from "../../../libs/responsive";
+import { useNavigate } from "react-router-dom";
 
 const CardContainer = styled.div`
   min-height: 4.3em;
@@ -46,26 +46,6 @@ const Icon = styled.span`
   `};
 `;
 
-const SmallIcon = styled.span`
-  ${tw`
-    text-gray-500
-    fill-current
-    text-xs
-    md:text-base
-    ml-1
-  `};
-`;
-
-const Name = styled.span`
-  ${tw`
-    text-gray-600
-    text-xs
-    md:text-base
-    cursor-pointer
-    select-none
-  `};
-`;
-
 const LineSeperator = styled.span`
   width: 2px;
   height: 45%;
@@ -76,7 +56,8 @@ const LineSeperator = styled.span`
   `};
 `;
 
-const BookCard = () => {
+const SearchCard = () => {
+  const navigate = useNavigate()
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -85,9 +66,8 @@ const BookCard = () => {
     },
   ]);
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [location, setLocation] = useState("");
-  const [sleep, setSleep] = useState("");
-  const searchedData = {location: location, date: date, sleep:sleep}
+  const [location, setLocation] = useState("melbourne");
+  const [sleep, setSleep] = useState("2");
 
 
   return (
@@ -145,6 +125,7 @@ const BookCard = () => {
         <select
           id="sleep"
           name="sleep"
+          value= "2"
           onChange={(e) => setSleep(e.target.value)}
         >
           <option value="1">Adult 1</option>
@@ -164,10 +145,10 @@ const BookCard = () => {
         hover:border-primary"
         text="Search Vans"
         theme={"base"}
-        onClick={() => console.log("searchedData:", searchedData)}
+        onClick={() => navigate("/campervans", { state:{ location, date, sleep}})}
       />
     </CardContainer>
   );
 };
 
-export default BookCard;
+export default SearchCard;
