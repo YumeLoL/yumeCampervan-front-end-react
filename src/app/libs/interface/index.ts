@@ -6,5 +6,6 @@ export interface ICarType {
     sleep: number;
     originalPrice?: number;
     currentPrice: number;
+    discount?: boolean;
     onClick?: () => void;
   }

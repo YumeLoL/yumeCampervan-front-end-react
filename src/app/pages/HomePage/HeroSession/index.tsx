@@ -4,8 +4,8 @@ import tw from "twin.macro";
 import { SCREENS } from "../../../libs/responsive";
 import Button from "../../../ui/atoms/Button";
 import Text from "../../../ui/atoms/Text";
-import BlobImg from "../../../../assets/images/blob.svg";
-import BlueCampervan from "../../../../assets/images/blue-camper-van.png";
+import BlobImg from "../../../../images/blob.svg";
+import BlueCampervan from "../../../../images/blue-camper-van.png";
 
 const HeroContainer = styled.div`
   min-height: 400px;

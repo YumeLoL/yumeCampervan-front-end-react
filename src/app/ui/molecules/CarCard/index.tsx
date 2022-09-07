@@ -1,18 +1,22 @@
 import React, { useState } from "react";
-import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import Carousel, { arrowsPlugin } from "@brainhubeu/react-carousel";
+import {
+  faCircleChevronRight,
+  faCircleChevronLeft,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@brainhubeu/react-carousel/lib/style.css";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../atoms/Button";
 import { ICarType } from "../../../libs/interface";
 
-
-
 const CarContainer = styled.div`
-  max-width: 22em;
-  max-height: 100%;
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
+    max-w-[22em]
+    max-h-full
+    w-full
     flex
     flex-col
     items-center
@@ -28,12 +32,11 @@ const CarContainer = styled.div`
 `;
 
 const CarThumbnail = styled.div`
-  width: 100%;
-  height: auto;
-  img {
-    width: 100%;
-    height: 100%;
-  }
+  ${tw`
+  w-full
+  h-auto
+  relative
+  `}
 `;
 
 const LinkButton = styled(Button)`
@@ -68,6 +71,28 @@ const LineThroughText = styled.span`
    text-gray-500
   `}
 `;
+const ArrowLeftButton = styled.button`
+  ${tw`
+  absolute 
+  top-[42%] 
+  left-[5px]
+  text-gray-50
+  hover:(text-gray-200 transition ease-in-out duration-150)
+  text-3xl
+  z-10
+  `}
+`
+const ArrowRightButton = styled.button`
+  ${tw`
+  absolute 
+  top-[42%] 
+  right-[5px]
+  text-3xl
+  text-gray-50
+  hover:(text-gray-200 transition ease-in-out duration-150)
+  z-10
+  `}
+`
 
 const CarCard = ({
   id,
@@ -92,12 +117,30 @@ const CarCard = ({
           onChange={onChange}
           slides={thumbnailSrc}
           plugins={[
-            "infinite",
-            "arrows",
             {
-              resolve: slidesToShowPlugin,
+              resolve: arrowsPlugin,
               options: {
-                numberOfSlides: 1,
+                arrowLeft: (
+                  <ArrowLeftButton>
+                    <FontAwesomeIcon icon={faCircleChevronLeft} />
+                  </ArrowLeftButton>
+                ),
+                arrowLeftDisabled: (
+                  <ArrowLeftButton>
+                    <FontAwesomeIcon icon={faCircleChevronLeft} />
+                  </ArrowLeftButton>
+                ),
+                arrowRight: (
+                  <ArrowRightButton>
+                    <FontAwesomeIcon icon={faCircleChevronRight} />
+                  </ArrowRightButton>
+                ),
+                arrowRightDisabled: (
+                  <ArrowRightButton>
+                    <FontAwesomeIcon icon={faCircleChevronRight} />
+                  </ArrowRightButton>
+                ),
+                addArrowClickHandler: true,
               },
             },
           ]}

@@ -10,7 +10,6 @@ import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
 import { useLocation, useNavigate } from "react-router-dom";
 import FilterCard from "../../ui/molecules/SearchCard/FilterCard";
-import PromoteVans from "../../libs/fakeData";
 import { ICarType } from "../../libs/interface";
 
 
@@ -46,7 +45,7 @@ const CampervansPage = () => {
         }
       />
       <VansContainer>
-        {PromoteVans.map((van: ICarType) => {
+        {/* {PromoteVans.map((van: ICarType) => {
           return (
             <CarCard
               key={van.id}
@@ -59,7 +58,7 @@ const CampervansPage = () => {
               onClick={() => navigate(`/campervans/${van.id}`)}
             />
           );
-        })}
+        })} */}
       </VansContainer>
       <Button text={"Show more"} theme={"filled"} />
       <StyledBanner

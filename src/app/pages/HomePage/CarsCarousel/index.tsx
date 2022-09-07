@@ -1,70 +1,14 @@
 import React, { useState } from "react";
-import { useMediaQuery } from "react-responsive";
+// import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import CarCard from "../../../ui/molecules/CarCard";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
-import { SCREENS } from "../../../libs/responsive";
-import img1 from "../../../../assets/campervan/popTop/pop-top.jpg"
-import img2 from "../../../../assets/campervan/camper-trailer.jpg"
-import img3 from "../../../../assets/campervan/campervan-1.jpg"
-import img4 from "../../../../assets/campervan/motorhome.jpeg"
-import { ICarType } from "../../../libs/interface";
+// import { SCREENS } from "../../../libs/responsive";
 
-const testCampervan1: ICarType = {
-  id: 1,
-  thumbnailSrc: img1,
-  name: "Pop Top Trailer",
-  vanType: "Caravan",
-  sleep: 4,
-  originalPrice: 120,
-  currentPrice: 100,
-};
-const testCampervan2: ICarType = {
-  id: 2,
-  thumbnailSrc: img2,
-  name: "Camper Trailer",
-  vanType: "Caravan",
-  sleep: 3,
-  originalPrice: 150,
-  currentPrice: 100,
-};
-const testCampervan3: ICarType = {
-  id: 3,
-  thumbnailSrc: img3,
-  name: "Campervan",
-  vanType: "Campervan",
-  sleep: 4,
-  originalPrice: 123,
-  currentPrice: 100,
-};
-const testCampervan4: ICarType = {
-  id: 4,
-  thumbnailSrc: img4,
-  name: "Motorhome",
-  vanType: "Motorhome",
-  sleep: 4,
-  originalPrice: 109,
-  currentPrice: 100,
-};
-
-// fake data
-const PromoteVans = [
-  <CarCard {...testCampervan1} />,
-  <CarCard {...testCampervan2} />,
-  <CarCard {...testCampervan2} />,
-  <CarCard {...testCampervan2} />,
-  <CarCard {...testCampervan2} />,
-  <CarCard {...testCampervan3} />,
-  <CarCard {...testCampervan4} />,
-  <CarCard {...testCampervan4} />,
-  <CarCard {...testCampervan4} />,
-  <CarCard {...testCampervan4} />,
-];
-
+import axios from "axios";
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -99,16 +43,26 @@ const ShortText = styled(Text)`
 
 const CarsCarousel = () => {
   const [current, setCurrent] = useState(0);
-  const isMobile = useMediaQuery({maxWidth: SCREENS.sm})
-  const isPad = useMediaQuery({maxWidth: SCREENS.md})
+  const onChange = (curent: number) => setCurrent(curent);
+  // const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
+  // const isPad = useMediaQuery({ maxWidth: SCREENS.md });
 
-  const onChange = (curent: number) => {
-    setCurrent(curent);
+  const [test, setTest] = useState<any>();
+
+  const handle = async () => {
+    await axios.get("http://localhost:3000/vanProfile/1").then((res) => {
+      setTest(res.data);
+      console.log(test);
+    });
   };
-
 
   return (
     <CarouselContainer>
+      <button onClick={handle}>test</button>
+      <div className="bg-red-500 w-full h-full">
+      {test && <img className="w-full h-full" src={test.thumbnailSrc[0]} alt="" />}
+      </div>
+
       <CarouselDescription>
         <LargeTitle title={"Find Your Perfect Van"} />
         <ShortText
@@ -117,10 +71,11 @@ const CarsCarousel = () => {
           }
         />
       </CarouselDescription>
-      <Carousel
+      
+      {/* <Carousel
         value={current}
         onChange={onChange}
-        slides={PromoteVans}
+        // slides={}
         plugins={[
           "infinite",
           "arrows",
@@ -167,13 +122,13 @@ const CarsCarousel = () => {
             ],
           },
         }}
-      />
-
+      /> */}
+      {/* 
       <Dots
         value={current}
         onChange={onChange}
-        number={ isMobile ? PromoteVans.length : isPad? PromoteVans.length : 0}
-      />
+        // number={ isMobile ? promoteVans.length : isPad? promoteVans.length : 0}
+      /> */}
     </CarouselContainer>
   );
 };

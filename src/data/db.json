@@ -1,0 +1,73 @@
+{
+  "vanProfile": [
+    {
+      "id": 1,
+      "thumbnailSrc":[ 
+        "/assets/campervan/popTop/1.jpeg",
+        "/assets/campervan/popTop/2.jpeg",
+        "/assets/campervan/popTop/3.jpeg",
+        "/assets/campervan/popTop/pop-top.jpg"
+      ],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 2,
+      "thumbnailSrc": [{}],
+      "name": "Campervan",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 3,
+      "thumbnailSrc": [{}],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": "true"
+    },
+    {
+      "id": 4,
+      "thumbnailSrc": [{}],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 5,
+      "thumbnailSrc": [{}],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 6,
+      "thumbnailSrc": [{}],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": "true"
+    },
+    {
+      "id": 7,
+      "thumbnailSrc": [{}],
+      "name": "Pop Top Trailer",
+      "vanType": "Caravan",
+      "sleep": 1,
+      "currentPrice": 100,
+      "discount": true
+    }
+  ]
+
+}
