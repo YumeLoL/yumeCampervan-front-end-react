@@ -1,6 +1,7 @@
+
 export interface ICarType {
     id?: number;
-    thumbnailSrc: JSX.Element[];
+    thumbnailSrc?: any[];
     name: string;
     vanType: string;
     sleep: number;

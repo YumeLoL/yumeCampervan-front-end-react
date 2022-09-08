@@ -2,72 +2,126 @@
   "vanProfile": [
     {
       "id": 1,
-      "thumbnailSrc":[ 
-        "/assets/campervan/popTop/1.jpeg",
-        "/assets/campervan/popTop/2.jpeg",
-        "/assets/campervan/popTop/3.jpeg",
-        "/assets/campervan/popTop/pop-top.jpg"
+      "thumbnailSrc": [
+        "/assets/campervan/1/1.jpeg",
+        "/assets/campervan/1/2.jpeg",
+        "/assets/campervan/1/3.jpeg",
+        "/assets/campervan/1/pop-top.jpg"
       ],
       "name": "Pop Top Trailer",
-      "vanType": "Caravan",
-      "sleep": 1,
+      "vanType": "Pop Top",
+      "sleep": 2,
       "currentPrice": 100,
       "discount": true
     },
     {
       "id": 2,
-      "thumbnailSrc": [{}],
-      "name": "Campervan",
-      "vanType": "Caravan",
-      "sleep": 1,
+      "thumbnailSrc": [
+        "/assets/campervan/2/camper-trailer.jpg",
+        "/assets/campervan/2/trailer-1.jpg",
+        "/assets/campervan/2/trailer-2.jpg",
+        "/assets/campervan/2/trailer-3.jpg"
+      ],
+      "name": "Camper Trailer",
+      "vanType": "Trailer",
+      "sleep": 3,
       "currentPrice": 100,
-      "discount": true
+      "discount": false
     },
     {
       "id": 3,
-      "thumbnailSrc": [{}],
-      "name": "Pop Top Trailer",
-      "vanType": "Caravan",
-      "sleep": 1,
-      "currentPrice": 100,
-      "discount": "true"
-    },
-    {
-      "id": 4,
-      "thumbnailSrc": [{}],
-      "name": "Pop Top Trailer",
-      "vanType": "Caravan",
-      "sleep": 1,
+      "thumbnailSrc": [
+        "/assets/campervan/3/campervan-1.jpg",
+        "/assets/campervan/3/campervan-2.jpeg",
+        "/assets/campervan/3/campervan-3.jpeg"
+      ],
+      "name": "Campervanr",
+      "vanType": "Campervan",
+      "sleep": 4,
       "currentPrice": 100,
       "discount": true
     },
     {
+      "id": 4,
+      "thumbnailSrc": [
+        "/assets/campervan/4/motorhome.jpg",
+        "/assets/campervan/4/motorhome-1.jpg",
+        "/assets/campervan/4/motorhome-2.jpg"
+      ],
+      "name": "Easy drive",
+      "vanType": "Motorhome",
+      "sleep": 6,
+      "currentPrice": 100,
+      "discount": false
+    },
+    {
       "id": 5,
-      "thumbnailSrc": [{}],
-      "name": "Pop Top Trailer",
-      "vanType": "Caravan",
-      "sleep": 1,
+      "thumbnailSrc": [
+        "/assets/campervan/5/motorhome-1.jpg",
+        "/assets/campervan/5/motorhome-2.jpg",
+        "/assets/campervan/5/motorhome-3.jpg",
+        "/assets/campervan/5/motorhome-4.jpg"
+      ],
+      "name": "Retro RV Great Ocean Road",
+      "vanType": "Motorhome",
+      "sleep": 2,
       "currentPrice": 100,
       "discount": true
     },
     {
       "id": 6,
-      "thumbnailSrc": [{}],
-      "name": "Pop Top Trailer",
+      "thumbnailSrc": [
+        "/assets/campervan/6/caravan-1.jpeg",
+        "/assets/campervan/6/caravan-2.jpg",
+        "/assets/campervan/6/caravan-3.jpg"
+      ],
+      "name": "Caravan",
       "vanType": "Caravan",
-      "sleep": 1,
+      "sleep": 6,
       "currentPrice": 100,
-      "discount": "true"
+      "discount": true
     },
     {
       "id": 7,
-      "thumbnailSrc": [{}],
-      "name": "Pop Top Trailer",
+      "thumbnailSrc": ["/assets/campervan/5/motorhome-2.jpg"],
+      "name": "XXX",
       "vanType": "Caravan",
-      "sleep": 1,
+      "sleep": 3,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 8,
+      "thumbnailSrc": ["/assets/campervan/4/motorhome-1.jpg"],
+      "name": "SSSS",
+      "vanType": "Caravan",
+      "sleep": 3,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 9,
+      "thumbnailSrc": [
+        "/assets/campervan/3/campervan-2.jpeg",
+        "/assets/campervan/3/campervan-3.jpeg"
+      ],
+      "name": "TWEWEF",
+      "vanType": "Caravan",
+      "sleep": 3,
+      "currentPrice": 100,
+      "discount": true
+    },
+    {
+      "id": 10,
+      "thumbnailSrc": [
+        "/assets/campervan/2/camper-trailer.jpg",
+        "/assets/campervan/2/trailer-1.jpg"
+      ],
+      "name": "HHHHH",
+      "vanType": "Caravan",
+      "sleep": 3,
       "currentPrice": 100,
       "discount": true
     }
   ]
-
 }

@@ -47,3 +47,4 @@ Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples
   <code>styled-components twin.macro react-responsive</code>
 - Burger Memu
   <code>yarn add react-burger-menu</code>
+- install json.server 

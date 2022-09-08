@@ -10,30 +10,6 @@ import MainLayout from "../../../ui/organisms/MainLayout";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
 
-// // fake data
-// const VanImages = [
-//   <img
-//     className="w-full h-full"
-//     src={require("../../../../assets/campervan/popTop/pop-top.jpg")}
-//     alt=""
-//   />,
-//   <img
-//     className="w-full h-full"
-//     src={require("../../../../assets/campervan/popTop/1.jpeg")}
-//     alt=""
-//   />,
-//   <img
-//     className="w-full h-full"
-//     src={require("../../../../assets/campervan/popTop/2.jpeg")}
-//     alt=""
-//   />,
-//   <img
-//     className="w-full h-full"
-//     src={require("../../../../assets/campervan/popTop/3.jpeg")}
-//     alt=""
-//   />,
-// ];
-
 const CarouselContainer = styled.div`
   ${tw`
     w-full

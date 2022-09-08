@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import CarCard from "../../ui/molecules/CarCard";
@@ -33,6 +33,8 @@ const CampervansPage = () => {
   const locationData = useLocation();
   const searchedData = locationData.state
   console.log(searchedData)
+
+  useEffect(() => {},[])
 
   return (
     <MainLayout>

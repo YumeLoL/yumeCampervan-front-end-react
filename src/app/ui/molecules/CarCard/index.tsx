@@ -22,7 +22,7 @@ const CarContainer = styled.div`
     items-center
     rounded-md
     pb-8
-    sm:m-2
+    m-2
     md:m-4
   `};
 
@@ -34,7 +34,7 @@ const CarContainer = styled.div`
 const CarThumbnail = styled.div`
   ${tw`
   w-full
-  h-auto
+  h-[246px]
   relative
   `}
 `;

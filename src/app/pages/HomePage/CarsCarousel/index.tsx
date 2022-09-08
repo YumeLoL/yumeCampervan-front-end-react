@@ -1,14 +1,16 @@
-import React, { useState } from "react";
-// import { useMediaQuery } from "react-responsive";
+import React, { useEffect, useState } from "react";
+import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
-// import { SCREENS } from "../../../libs/responsive";
+import { SCREENS } from "../../../libs/responsive";
 
 import axios from "axios";
+import { ICarType } from "../../../libs/interface";
+import CarCard from "../../../ui/molecules/CarCard";
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -44,25 +46,38 @@ const ShortText = styled(Text)`
 const CarsCarousel = () => {
   const [current, setCurrent] = useState(0);
   const onChange = (curent: number) => setCurrent(curent);
-  // const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-  // const isPad = useMediaQuery({ maxWidth: SCREENS.md });
+  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
+  const isPad = useMediaQuery({ maxWidth: SCREENS.md });
+  const [promoteVans, setPromoteVans] = useState([]);
+  // console.log(promoteVans);
 
-  const [test, setTest] = useState<any>();
+  useEffect(() => {
+    const filterPromotionVans = async () => {
+      await axios.get("http://localhost:3000/vanProfile").then((res) => {
+        // filter vans on discount promotion 
+        const result = res.data.filter((vanObj: ICarType) => vanObj.discount);
+        // 
+        const promoteVans = result.map((van: ICarType) => (
+          <CarCard
+            key={van.id}
+            thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
+                <img className="w-full h-[246px] object-cover" src={imgUrl} alt="" />
+            ))}
+            name={van.name}
+            vanType={van.vanType}
+            sleep={van.sleep}
+            currentPrice={van.currentPrice}
+          />
+      ))
+        setPromoteVans(promoteVans);
+      });
+    };
 
-  const handle = async () => {
-    await axios.get("http://localhost:3000/vanProfile/1").then((res) => {
-      setTest(res.data);
-      console.log(test);
-    });
-  };
+    filterPromotionVans();
+  }, []);
 
   return (
     <CarouselContainer>
-      <button onClick={handle}>test</button>
-      <div className="bg-red-500 w-full h-full">
-      {test && <img className="w-full h-full" src={test.thumbnailSrc[0]} alt="" />}
-      </div>
-
       <CarouselDescription>
         <LargeTitle title={"Find Your Perfect Van"} />
         <ShortText
@@ -71,14 +86,12 @@ const CarsCarousel = () => {
           }
         />
       </CarouselDescription>
-      
-      {/* <Carousel
+      <Carousel
         value={current}
         onChange={onChange}
-        // slides={}
+        slides={promoteVans}
         plugins={[
           "infinite",
-          "arrows",
           {
             resolve: slidesToShowPlugin,
             options: {
@@ -98,7 +111,7 @@ const CarsCarousel = () => {
               },
             ],
           },
-          768: {
+          1024: {
             plugins: [
               "infinite",
               {
@@ -112,7 +125,6 @@ const CarsCarousel = () => {
           1280: {
             plugins: [
               "infinite",
-              "arrows",
               {
                 resolve: slidesToShowPlugin,
                 options: {
@@ -122,13 +134,13 @@ const CarsCarousel = () => {
             ],
           },
         }}
-      /> */}
-      {/* 
-      <Dots
+      />
+       <Dots
         value={current}
         onChange={onChange}
-        // number={ isMobile ? promoteVans.length : isPad? promoteVans.length : 0}
-      /> */}
+        number={ isMobile ? promoteVans.length : isPad? promoteVans.length : promoteVans.length/2}
+      /> 
+     
     </CarouselContainer>
   );
 };
