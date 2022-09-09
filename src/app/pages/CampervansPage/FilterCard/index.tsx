@@ -26,6 +26,31 @@ const ItemContainer = styled.div`
   mr-5
   `}
 `;
+const FilterButton = styled.span`
+  ${tw`
+  relative
+  text-2xl
+  text-gray-600
+  border-primary 
+  border-[3px] 
+  rounded-md
+  px-4
+  py-2
+  `}
+`;
+const DropdownBox = styled.div`
+  ${tw`
+  w-[200px] 
+  absolute 
+  top-20 
+  left-0
+  border-primary 
+  border-2 
+  text-xl
+  text-primary
+  `}
+`;
+
 const FilterCard = () => {
   const [date, setDate] = useState([
     {
@@ -39,20 +64,23 @@ const FilterCard = () => {
   return (
     <FilterContainer>
       <ItemContainer>
-        <select
-          className='px-2 py-2 border-primary border-2'
-          id="location"
-          name="location"
-          // onChange={(e) => setLocation(e.target.value)}
+        <FilterButton
+          onClick={(e: any) => {
+            console.log(e.target.value);
+          }}
         >
-          <option  value="melbourne">Melbourne</option>
-          <option value="adelaide">Adelaide</option>
-          <option value="sydney">Sydney</option>
-     
-        </select>
+          {" "}
+          Location
+          <DropdownBox>
+            <option value="melbourne">Melbourne</option>
+            <option value="adelaide">Adelaide</option>
+            <option value="sydney">Sydney</option>
+          </DropdownBox>
+        </FilterButton>
       </ItemContainer>
+
       <ItemContainer>
-        <span
+        <FilterButton
           onClick={() => {
             setIsCalendarOpen(!isCalendarOpen);
           }}
@@ -61,7 +89,7 @@ const FilterCard = () => {
             date[0].endDate,
             "MM/dd/yyyy"
           )}`}
-        </span>
+        </FilterButton>
 
         {isCalendarOpen && (
           <DateRange
@@ -75,33 +103,40 @@ const FilterCard = () => {
           />
         )}
       </ItemContainer>
+
       <ItemContainer>
-      <select
-          id="sleep"
-          name="sleep"
-          value= "2"
-          // onChange={(e) => setSleep(e.target.value)}
+        <FilterButton
+          onClick={(e: any) => {
+            console.log(e.target.value);
+          }}
         >
-          <option value="1">Adult 1</option>
-          <option value="2">Adult 2</option>
-          <option value="3">Adult 3</option>
-          <option value="4">Adult 4</option>
-          <option value="5">Adult 5</option>
-          <option value="6">Adult 6</option>
-        </select>
+          Guests
+          <DropdownBox>
+            <option value="1">Adult 1</option>
+            <option value="2">Adult 2</option>
+            <option value="3">Adult 3</option>
+            <option value="4">Adult 4</option>
+            <option value="5">Adult 5</option>
+            <option value="6">Adult 6</option>
+          </DropdownBox>
+        </FilterButton>
       </ItemContainer>
+      
       <ItemContainer>
-        <select
-          id="location"
-          name="location"
-          // onChange={(e) => setLocation(e.target.value)}
+        <FilterButton
+          onClick={(e: any) => {
+            console.log(e.target.value);
+          }}
         >
-          <option value="pop-top">Pop Top</option>
-          <option value="trailer">Trailer</option>
-          <option value="campervan">Campervan</option>
-          <option value="motorhome">Motorhome</option>
-          <option value="caravan">Caravan</option>
-        </select>
+          Van type
+          <DropdownBox>
+            <option value="pop-top">Pop Top</option>
+            <option value="trailer">Trailer</option>
+            <option value="campervan">Campervan</option>
+            <option value="motorhome">Motorhome</option>
+            <option value="caravan">Caravan</option>
+          </DropdownBox>
+        </FilterButton>
       </ItemContainer>
     </FilterContainer>
   );
