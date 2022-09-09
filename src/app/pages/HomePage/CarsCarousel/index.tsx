@@ -1,14 +1,11 @@
 import React, { useEffect, useState } from "react";
-import { useMediaQuery } from "react-responsive";
 import styled from "styled-components";
 import tw from "twin.macro";
+import axios from "axios";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import LargeTitle from "../../../ui/atoms/LargeTitle";
 import Text from "../../../ui/atoms/Text";
-import { SCREENS } from "../../../libs/responsive";
-
-import axios from "axios";
 import { ICarType } from "../../../libs/interface";
 import CarCard from "../../../ui/molecules/CarCard";
 
@@ -46,35 +43,36 @@ const ShortText = styled(Text)`
 const CarsCarousel = () => {
   const [current, setCurrent] = useState(0);
   const onChange = (curent: number) => setCurrent(curent);
-  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
-  const isPad = useMediaQuery({ maxWidth: SCREENS.md });
   const [promoteVans, setPromoteVans] = useState([]);
-  // console.log(promoteVans);
 
   useEffect(() => {
     const filterPromotionVans = async () => {
-      await axios.get("http://localhost:3000/vanProfile").then((res) => {
-        // filter vans on discount promotion 
-        const result = res.data.filter((vanObj: ICarType) => vanObj.discount);
-        // 
-        const promoteVans = result.map((van: ICarType) => (
-          <CarCard
-            key={van.id}
-            thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
-                <img className="w-full h-[246px] object-cover" src={imgUrl} alt="" />
-            ))}
-            name={van.name}
-            vanType={van.vanType}
-            sleep={van.sleep}
-            currentPrice={van.currentPrice}
-          />
-      ))
-        setPromoteVans(promoteVans);
-      });
+      await axios
+        .get("http://localhost:3000/vanProfile")
+        .then((res) => {
+          const promoteVans = res.data.filter(
+            (vanObj: ICarType) => vanObj.discount
+          );
+          setPromoteVans(promoteVans);
+        })
+        .catch((err) => console.log(err));
     };
 
     filterPromotionVans();
   }, []);
+
+  const vans = promoteVans.map((van: ICarType) => (
+    <CarCard
+      key={van.id}
+      thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
+        <img className="w-full h-[246px] object-cover" src={imgUrl} alt="" />
+      ))}
+      name={van.name}
+      vanType={van.vanType}
+      sleep={van.sleep}
+      currentPrice={van.currentPrice}
+    />
+  ));
 
   return (
     <CarouselContainer>
@@ -89,7 +87,7 @@ const CarsCarousel = () => {
       <Carousel
         value={current}
         onChange={onChange}
-        slides={promoteVans}
+        slides={vans}
         plugins={[
           "infinite",
           {
@@ -135,12 +133,7 @@ const CarsCarousel = () => {
           },
         }}
       />
-       <Dots
-        value={current}
-        onChange={onChange}
-        number={ isMobile ? promoteVans.length : isPad? promoteVans.length : promoteVans.length/2}
-      /> 
-     
+      <Dots value={current} onChange={onChange} number={promoteVans.length} />
     </CarouselContainer>
   );
 };

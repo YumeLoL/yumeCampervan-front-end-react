@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import tw from "twin.macro";
 import styled from "styled-components";
 import CarCard from "../../ui/molecules/CarCard";
@@ -8,10 +8,10 @@ import Text from "../../ui/atoms/Text";
 import { Marginer } from "../../ui/atoms/Marginer";
 import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
-import { useLocation, useNavigate } from "react-router-dom";
-import FilterCard from "../../ui/molecules/SearchCard/FilterCard";
+import { useNavigate } from "react-router-dom";
+import FilterCard from "./FilterCard";
 import { ICarType } from "../../libs/interface";
-
+import axios from "axios";
 
 const VansContainer = styled.div`
   ${tw` 
@@ -26,20 +26,26 @@ const VansContainer = styled.div`
 const StyledBanner = styled(Banner)`
   ${tw` 
     bg-transparent 
-    `}
+  `}
 `;
 const CampervansPage = () => {
   const navigate = useNavigate();
-  const locationData = useLocation();
-  const searchedData = locationData.state
-  console.log(searchedData)
+  const [allVans, setAllVans] = useState<ICarType[]>([]);
 
-  useEffect(() => {},[])
+  useEffect(() => {
+    const getAllVans = async () => {
+      await axios.get("http://localhost:3000/vanProfile").then((res) => {
+        setAllVans(res.data);
+      });
+    };
+
+    getAllVans();
+  }, []);
 
   return (
     <MainLayout>
-      <Marginer direction="vertical" margin="10em" />
       <FilterCard />
+      <Marginer direction="vertical" margin="5em" />
       <LargeTitle title={"Looking for a van ?"} />
       <Text
         text={
@@ -47,11 +53,17 @@ const CampervansPage = () => {
         }
       />
       <VansContainer>
-        {/* {PromoteVans.map((van: ICarType) => {
+        {allVans.map((van: ICarType) => {
           return (
             <CarCard
               key={van.id}
-              thumbnailSrc={van.thumbnailSrc}
+              thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
+                <img
+                  className="w-full h-[246px] object-cover"
+                  src={imgUrl}
+                  alt=""
+                />
+              ))}
               name={van.name}
               vanType={van.vanType}
               sleep={van.sleep}
@@ -60,7 +72,7 @@ const CampervansPage = () => {
               onClick={() => navigate(`/campervans/${van.id}`)}
             />
           );
-        })} */}
+        })}
       </VansContainer>
       <Button text={"Show more"} theme={"filled"} />
       <StyledBanner

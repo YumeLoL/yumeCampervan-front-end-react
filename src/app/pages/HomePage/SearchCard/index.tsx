@@ -1,15 +1,15 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
 import { faCalendarAlt, faBed } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { DateRange } from "react-date-range";
+import { format } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import styled from "styled-components";
-import tw from "twin.macro";
-import { format } from "date-fns";
-import { Marginer } from "../../atoms/Marginer";
-import Button from "../../atoms/Button";
-import { useNavigate } from "react-router-dom";
+import { Marginer } from "../../../ui/atoms/Marginer";
+import Button from "../../../ui/atoms/Button";
 
 const CardContainer = styled.div`
   min-height: 4.3em;

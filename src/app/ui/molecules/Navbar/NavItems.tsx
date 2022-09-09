@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
@@ -74,7 +74,21 @@ const NavItems = () => {
   const goToRoute = (route: string) => {
     navigate(route);
   };
-  const [clicked, setClicked] = useState(false);
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    let handle = (e: any) =>{
+      if(!menuRef.current?.contains(e.target)){
+        setOpen(false)
+        console.log(menuRef.current)
+      }
+    }
+
+    document.addEventListener("mousedown", handle)
+
+    return()=> document.removeEventListener("mousedown", handle)
+  },[])
 
   if (isMobile)
     return (
@@ -112,21 +126,21 @@ const NavItems = () => {
     <ListContainer>
       {menu.map((menu) =>
         menu.submenu ? (
-          <DropdownNavItem>
+          <DropdownNavItem ref={menuRef}>
             <span
               onClick={() => {
-                setClicked(!clicked);
+                setOpen(!open);
               }}
             >
               {menu.label}
-              {clicked ? (
+              {open ? (
                 <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
               ) : (
                 <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
               )}
             </span>
 
-            {clicked ? (
+            {open ? (
               <SubNavContainer>
                 {menu.submenu.map((submenu) => (
                   <SubNavItem>

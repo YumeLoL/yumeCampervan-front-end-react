@@ -6,9 +6,9 @@ import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import MainLayout from "../../../ui/organisms/MainLayout";
-import LargeTitle from "../../../ui/atoms/LargeTitle";
-import Text from "../../../ui/atoms/Text";
+import MainLayout from "../../ui/organisms/MainLayout";
+import LargeTitle from "../../ui/atoms/LargeTitle";
+import Text from "../../ui/atoms/Text";
 
 const CarouselContainer = styled.div`
   ${tw`
