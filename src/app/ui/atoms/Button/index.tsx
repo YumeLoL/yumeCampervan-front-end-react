@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -6,8 +6,10 @@ export interface ButtonType {
   className?: string;
   text: string;
   style?: React.CSSProperties;
-  theme: "filled" | "outlined" | "text" | "base";
-  onClick?: () => void;
+  theme: "filled" | "outlined" | "text" | "base" | "filter";
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
+  children?: React.ReactNode;
+  value?: string
 }
 
 const BaseButton = styled.button`
@@ -65,24 +67,57 @@ const TextButton = styled(BaseButton)`
   m-4
   `}
 `;
+const FilterButton = styled(BaseButton)`
+  ${tw` 
+    text-gray-700
+    border-gray-300 
+    mr-2
+    sm:mr-8
+    mb-4
+  `}
+`;
 
-const Button = ({ theme, text, className, onClick }: ButtonType) => {
+
+const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
     case "filled":
-      return <FilledButton className={className} onClick={onClick}>{text}</FilledButton>;
+      return (
+        <FilledButton className={className} onClick={onClick}>
+          {text}
+        </FilledButton>
+      );
 
     case "outlined":
-      return <OutlinedButton className={className} onClick= {onClick}>{text}</OutlinedButton>;
+      return (
+        <OutlinedButton className={className} onClick={onClick}>
+          {text}
+        </OutlinedButton>
+      );
 
     case "text":
-      return <TextButton className={className} onClick={onClick}>{text}</TextButton>;
+      return (
+        <TextButton className={className} onClick={onClick}>
+          {text}
+        </TextButton>
+      );
+
+    case "filter":
+      return (
+        <FilterButton className={className} onClick={onClick} value={text}>
+          {text}
+          {children}
+        </FilterButton>
+      );
 
     default:
-      return <BaseButton className={className} onClick={onClick}>{text}</BaseButton>;
+      return (
+        <BaseButton className={className} onClick={onClick}>
+          {text}
+        </BaseButton>
+      );
   }
 };
 
-export default Button
-
+export default Button;
 
 
