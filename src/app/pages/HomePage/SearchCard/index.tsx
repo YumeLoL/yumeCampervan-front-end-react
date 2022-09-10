@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -10,6 +10,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { Marginer } from "../../../ui/atoms/Marginer";
 import Button from "../../../ui/atoms/Button";
+import Calender from "../../../ui/molecules/Calendar";
 
 const CardContainer = styled.div`
   min-height: 4.3em;
@@ -55,9 +56,15 @@ const LineSeperator = styled.span`
     md:mx-5
   `};
 `;
+const StyledCalendar = styled(Calender)`
+  ${tw`
+  mr-0
+
+  `}
+`;
 
 const SearchCard = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -68,7 +75,19 @@ const SearchCard = () => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const [location, setLocation] = useState("melbourne");
   const [sleep, setSleep] = useState("2");
+  const menuRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    let handle = (e: any) => {
+      if (!menuRef.current?.contains(e.target)) {
+        setIsCalendarOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handle);
+
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
 
   return (
     <CardContainer>
@@ -93,10 +112,11 @@ const SearchCard = () => {
         <Icon>
           <FontAwesomeIcon icon={faCalendarAlt} />
         </Icon>
-        <span onClick={() => 
-        {setIsCalendarOpen(!isCalendarOpen)
-         
-        }}>
+        <span
+          onClick={() => {
+            setIsCalendarOpen(!isCalendarOpen);
+          }}
+        >
           {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
             date[0].endDate,
             "MM/dd/yyyy"
@@ -125,7 +145,7 @@ const SearchCard = () => {
         <select
           id="sleep"
           name="sleep"
-          value= "2"
+          value="2"
           onChange={(e) => setSleep(e.target.value)}
         >
           <option value="1">Adult 1</option>
@@ -145,7 +165,9 @@ const SearchCard = () => {
         hover:border-primary"
         text="Search Vans"
         theme={"base"}
-        onClick={() => navigate("/campervans", { state:{ location, date, sleep}})}
+        onClick={() =>
+          navigate("/campervans", { state: { location, date, sleep } })
+        }
       />
     </CardContainer>
   );

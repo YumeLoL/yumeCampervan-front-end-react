@@ -9,7 +9,7 @@ export interface ButtonType {
   theme: "filled" | "outlined" | "text" | "base" | "filter";
   onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
   children?: React.ReactNode;
-  value?: string
+  value?: string;
 }
 
 const BaseButton = styled.button`
@@ -71,12 +71,8 @@ const FilterButton = styled(BaseButton)`
   ${tw` 
     text-gray-700
     border-gray-300 
-    mr-2
-    sm:mr-8
-    mb-4
   `}
 `;
-
 
 const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
@@ -119,5 +115,3 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
 };
 
 export default Button;
-
-
