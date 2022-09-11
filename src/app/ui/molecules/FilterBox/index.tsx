@@ -40,7 +40,7 @@ const StyleOption = styled.option`
   `}
 `
 
-const FilterBox = ({ text, optionCollection, className }: IFilterBox) => {
+const FilterBox = ({ text, optionCollection, className}: IFilterBox) => {
   const [selectedValue, setSelectedValue] = useState();
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -56,8 +56,6 @@ const FilterBox = ({ text, optionCollection, className }: IFilterBox) => {
 
     return () => document.removeEventListener("mousedown", handle);
   }, []);
-
-  
 
   return (
     <ItemContainer ref={menuRef} className={className}>
@@ -75,10 +73,10 @@ const FilterBox = ({ text, optionCollection, className }: IFilterBox) => {
           {optionCollection.map((option: string, index: number) => (
             <StyleOption
               onClick={(e: any) => {
-                setSelectedValue(e.target.value);
+                setSelectedValue(e.target.value)
               }}
-              value={option}
               key={index}
+             
             >
               {option}
             </StyleOption>

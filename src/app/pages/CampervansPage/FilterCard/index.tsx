@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../../ui/atoms/Button";
@@ -34,10 +34,21 @@ const StyledButton = styled(Button)`
 `
 
 const FilterCard = () => {
+
+// get selected filter value
+const handleFilter = ()=>{
+ const location = ( document.getElementsByClassName("location")[0] as HTMLElement).innerText;
+ const sleep = ( document.getElementsByClassName("sleep")[0] as HTMLElement).innerText;
+ const type = ( document.getElementsByClassName("type")[0] as HTMLElement).innerText;
+
+ console.log("location:" + location, "sleep:" + sleep, "type:" + type);
+}
+
   return (
     <FilterContainer>
       <FilterItems>
         <FilterBox
+          className="location"
           text={"Location"}
           optionCollection={["Melbourne", "Adelaide", "Sydney"]}
         />
@@ -45,6 +56,7 @@ const FilterCard = () => {
         <Calendar />
 
         <FilterBox
+        className="sleep"
           text={"Guests"}
           optionCollection={[
             "Adult 1",
@@ -57,6 +69,7 @@ const FilterCard = () => {
         />
 
         <FilterBox
+        className="type"
           text={"Van Type"}
           optionCollection={[
             "Pop top",
@@ -71,6 +84,7 @@ const FilterCard = () => {
           className=""
           text={"Search vans"}
           theme={"outlined"}
+          onClick={handleFilter}
         />
       </FilterItems>
     </FilterContainer>
