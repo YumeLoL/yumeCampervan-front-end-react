@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../../ui/atoms/Button";
@@ -41,21 +41,14 @@ const StyledButton = styled(Button)`
 `;
 
 const FilterCard = () => {
-  const stateData = useLocation().state as IStateData;
-  const { location, date, sleep } = stateData;
-  console.log(sleep);
-
-  const [dateValue, setDateValue] = useState(
-    date
-      ? date
-      : [
-          {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: "selection",
-          },
-        ]
-  );
+  // const locationData = useLocation() as any;
+const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
 
   // get selected filter value
   const handleFilter = () => {
@@ -83,22 +76,27 @@ const FilterCard = () => {
       <FilterItems>
         <FilterBox
           className="location"
-          text={location ? location : "location"}
+          // text={location ? location : "location"}
+          text={"Location"}
           optionCollection={["Melbourne", "Adelaide", "Sydney"]}
         />
 
-        <Calendar date={dateValue} setDate={setDateValue} />
+        <Calendar
+          date={date}
+          setDate={setDate}
+        />
 
         <FilterBox
           className="sleep"
-          text={sleep ? `Guests ${sleep}` : "Guests"}
+          // text={sleep ? `Guests ${sleep}` : "Guests"}
+          text={"Guests"}
           optionCollection={[
-            "Adult 1",
-            "Adult 2",
-            "Adult 3",
-            "Adult 4",
-            "Adult 5",
-            "Adult 6",
+            "Guest 1",
+            "Guests 2",
+            "Guests 3",
+            "Guests 4",
+            "Guests 5",
+            "Guests 6",
           ]}
         />
 

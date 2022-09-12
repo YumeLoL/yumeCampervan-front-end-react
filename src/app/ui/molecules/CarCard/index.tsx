@@ -100,6 +100,7 @@ const CarCard = ({
   name,
   vanType,
   sleep,
+  location,
   originalPrice,
   currentPrice,
   onClick,
@@ -155,7 +156,7 @@ const CarCard = ({
       </CarDetailsContainer>
 
       <CarDetailsContainer>
-        <BoldText>Melbourne</BoldText>
+        <BoldText>{location}</BoldText>
       </CarDetailsContainer>
 
       <CarDetailsContainer>

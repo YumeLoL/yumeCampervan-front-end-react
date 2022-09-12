@@ -113,12 +113,12 @@ const SearchCard = () => {
           name="sleep"
           onChange={(e) => setSleep(e.target.value)}
         >
-          <option value={1}>Adult 1</option>
-          <option value={2}>Adult 3</option>
-          <option value={3}>Adult 2</option>
-          <option value={4}>Adult 4</option>
-          <option value={5}>Adult 5</option>
-          <option value={6}>Adult 6</option>
+          <option value={1}>Guest 1</option>
+          <option value={2}>Guests 2</option>
+          <option value={3}>Guests 3</option>
+          <option value={4}>Guests 4</option>
+          <option value={5}>Guests 5</option>
+          <option value={6}>Guests 6</option>
         </select>
       </ItemContainer>
 
@@ -131,7 +131,7 @@ const SearchCard = () => {
         text="Search Vans"
         theme={"base"}
         onClick={
-          () => navigate("/campervans", { state: { location, date, sleep } })
+          () => navigate("/campervans", { state: { location:location, date:date, sleep:sleep } })
         }
       />
     </CardContainer>

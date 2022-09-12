@@ -70,6 +70,7 @@ const CarsCarousel = () => {
       name={van.name}
       vanType={van.vanType}
       sleep={van.sleep}
+      location={van.location}
       currentPrice={van.currentPrice}
     />
   ));

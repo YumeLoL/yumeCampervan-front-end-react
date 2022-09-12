@@ -12,6 +12,7 @@
       "name": "Pop Top Trailer",
       "vanType": "Pop Top",
       "sleep": 2,
+      "location": "Melbourne",
       "currentPrice": 100,
       "discount": true
     },
@@ -26,6 +27,7 @@
       "name": "Camper Trailer",
       "vanType": "Trailer",
       "sleep": 3,
+      "location": "Melbourne",
       "currentPrice": 100,
       "discount": false
     },
@@ -39,6 +41,7 @@
       "name": "Campervanr",
       "vanType": "Campervan",
       "sleep": 4,
+      "location": "Sydney",
       "currentPrice": 100,
       "discount": true
     },
@@ -52,6 +55,7 @@
       "name": "Easy drive",
       "vanType": "Motorhome",
       "sleep": 6,
+      "location": "Sydney",
       "currentPrice": 100,
       "discount": false
     },
@@ -66,6 +70,7 @@
       "name": "Retro RV Great Ocean Road",
       "vanType": "Motorhome",
       "sleep": 2,
+      "location": "Sydney",
       "currentPrice": 100,
       "discount": true
     },
@@ -79,6 +84,7 @@
       "name": "Caravan",
       "vanType": "Caravan",
       "sleep": 6,
+      "location": "Adelaide",
       "currentPrice": 100,
       "discount": true
     },
@@ -88,6 +94,7 @@
       "name": "XXX",
       "vanType": "Caravan",
       "sleep": 3,
+      "location": "Adelaide",
       "currentPrice": 100,
       "discount": true
     },
@@ -97,6 +104,7 @@
       "name": "SSSS",
       "vanType": "Caravan",
       "sleep": 3,
+      "location": "Adelaide",
       "currentPrice": 100,
       "discount": true
     },
@@ -109,6 +117,7 @@
       "name": "TWEWEF",
       "vanType": "Caravan",
       "sleep": 3,
+      "location": "Melbourne",
       "currentPrice": 100,
       "discount": true
     },
@@ -121,6 +130,7 @@
       "name": "HHHHH",
       "vanType": "Caravan",
       "sleep": 3,
+      "location": "Sydney",
       "currentPrice": 100,
       "discount": true
     }

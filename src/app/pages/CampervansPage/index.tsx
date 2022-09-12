@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
+import useFetch from "../../hooks/useFetch";
 import tw from "twin.macro";
 import styled from "styled-components";
 import CarCard from "../../ui/molecules/CarCard";
@@ -11,7 +12,6 @@ import Banner from "../../ui/molecules/Banner";
 import { useNavigate } from "react-router-dom";
 import FilterCard from "./FilterCard";
 import { ICarType } from "../../libs/interface";
-import axios from "axios";
 
 const VansContainer = styled.div`
   ${tw` 
@@ -30,17 +30,7 @@ const StyledBanner = styled(Banner)`
 `;
 const CampervansPage = () => {
   const navigate = useNavigate();
-  const [allVans, setAllVans] = useState<ICarType[]>([]);
-
-  useEffect(() => {
-    const getAllVans = async () => {
-      await axios.get("http://localhost:3000/vanProfile").then((res) => {
-        setAllVans(res.data);
-      });
-    };
-
-    getAllVans();
-  }, []);
+  const { data, loading } = useFetch("http://localhost:3000/vanProfile");
 
   return (
     <MainLayout>
@@ -53,26 +43,29 @@ const CampervansPage = () => {
         }
       />
       <VansContainer>
-        {allVans.map((van: ICarType) => {
-          return (
-            <CarCard
-              key={van.id}
-              thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
-                <img
-                  className="w-full h-[246px] object-cover"
-                  src={imgUrl}
-                  alt=""
+        {loading
+          ? "Loading please wait"
+          : data.map((van: ICarType) => {
+              return (
+                <CarCard
+                  key={van.id}
+                  thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
+                    <img
+                      className="w-full h-[246px] object-cover"
+                      src={imgUrl}
+                      alt=""
+                    />
+                  ))}
+                  name={van.name}
+                  vanType={van.vanType}
+                  sleep={van.sleep}
+                  location={van.location}
+                  originalPrice={van.originalPrice}
+                  currentPrice={van.currentPrice}
+                  onClick={() => navigate(`/campervans/${van.id}`)}
                 />
-              ))}
-              name={van.name}
-              vanType={van.vanType}
-              sleep={van.sleep}
-              originalPrice={van.originalPrice}
-              currentPrice={van.currentPrice}
-              onClick={() => navigate(`/campervans/${van.id}`)}
-            />
-          );
-        })}
+              );
+            })}
       </VansContainer>
       <Button text={"Show more"} theme={"filled"} />
       <StyledBanner
