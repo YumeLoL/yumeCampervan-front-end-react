@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import Button from "../../atoms/Button";
 
 interface IFilterBox {
-  text: string;
+  text: string | number;
   optionCollection: string[];
   className?: string;
 }
@@ -57,16 +57,18 @@ const FilterBox = ({ text, optionCollection, className}: IFilterBox) => {
     return () => document.removeEventListener("mousedown", handle);
   }, []);
 
+
+
   return (
     <ItemContainer ref={menuRef} className={className}>
       <Button
         onClick={() => {
           setIsFilterOpen(!isFilterOpen);
-        }}
-        theme="filter"
-        text={""}
+        } }
+        theme="filter" text={''}  
       >
-        {selectedValue ? selectedValue : text}
+        { selectedValue ? selectedValue : text}
+       
       </Button>
       {isFilterOpen && (
         <DropdownBox>

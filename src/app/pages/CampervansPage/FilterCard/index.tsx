@@ -6,6 +6,13 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import FilterBox from "../../../ui/molecules/FilterBox";
 import Calendar from "../../../ui/molecules/Calendar";
+import { useLocation } from "react-router-dom";
+
+interface IStateData {
+  location: string;
+  date: any;
+  sleep: number | string;
+}
 
 const FilterContainer = styled.div`
   ${tw`
@@ -31,33 +38,60 @@ const FilterItems = styled.div`
 `;
 const StyledButton = styled(Button)`
   ${tw`mb-0`}
-`
+`;
 
 const FilterCard = () => {
+  const stateData = useLocation().state as IStateData;
+  const { location, date, sleep } = stateData;
+  console.log(sleep);
 
-// get selected filter value
-const handleFilter = ()=>{
- const location = ( document.getElementsByClassName("location")[0] as HTMLElement).innerText;
- const sleep = ( document.getElementsByClassName("sleep")[0] as HTMLElement).innerText;
- const type = ( document.getElementsByClassName("type")[0] as HTMLElement).innerText;
+  const [dateValue, setDateValue] = useState(
+    date
+      ? date
+      : [
+          {
+            startDate: new Date(),
+            endDate: new Date(),
+            key: "selection",
+          },
+        ]
+  );
 
- console.log("location:" + location, "sleep:" + sleep, "type:" + type);
-}
+  // get selected filter value
+  const handleFilter = () => {
+    const location = (
+      document.getElementsByClassName("location")[0] as HTMLElement
+    ).innerText;
+    const sleep = (document.getElementsByClassName("sleep")[0] as HTMLElement)
+      .innerText;
+    const type = (document.getElementsByClassName("type")[0] as HTMLElement)
+      .innerText;
+    const duration = (
+      document.getElementsByClassName("duration")[0] as HTMLElement
+    ).innerText;
+
+    console.log(
+      "location:" + location,
+      "sleep:" + sleep,
+      "type:" + type,
+      "duration:" + duration
+    );
+  };
 
   return (
     <FilterContainer>
       <FilterItems>
         <FilterBox
           className="location"
-          text={"Location"}
+          text={location ? location : "location"}
           optionCollection={["Melbourne", "Adelaide", "Sydney"]}
         />
 
-        <Calendar />
+        <Calendar date={dateValue} setDate={setDateValue} />
 
         <FilterBox
-        className="sleep"
-          text={"Guests"}
+          className="sleep"
+          text={sleep ? `Guests ${sleep}` : "Guests"}
           optionCollection={[
             "Adult 1",
             "Adult 2",
@@ -69,7 +103,7 @@ const handleFilter = ()=>{
         />
 
         <FilterBox
-        className="type"
+          className="type"
           text={"Van Type"}
           optionCollection={[
             "Pop top",

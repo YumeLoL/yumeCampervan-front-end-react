@@ -14,14 +14,7 @@ const ItemContainer = styled.div`
   `}
 `;
 
-const Calendar = () => {
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+const Calendar = ({date, setDate}: any) => {
   const [isCalendarOpen, setIsCalendarOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -38,7 +31,7 @@ const Calendar = () => {
   }, []);
 
   return (
-    <ItemContainer>
+    <ItemContainer ref={menuRef} className="duration">
       <Button
         onClick={() => {
           setIsCalendarOpen(!isCalendarOpen);
@@ -46,7 +39,7 @@ const Calendar = () => {
         theme="filter"
         text={""}
       >
-        {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
+        { `${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
           date[0].endDate,
           "MM/dd/yyyy"
         )}`}
@@ -59,7 +52,7 @@ const Calendar = () => {
             setDate([item.selection]);
           }}
           moveRangeOnFirstSelection={false}
-          ranges={date}
+          ranges={ date }
           className="absolute top-12 left-0"
         />
       )}

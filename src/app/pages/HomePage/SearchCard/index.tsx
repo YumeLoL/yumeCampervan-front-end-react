@@ -1,16 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { faCalendarAlt, faBed } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { DateRange } from "react-date-range";
-import { format } from "date-fns";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { Marginer } from "../../../ui/atoms/Marginer";
 import Button from "../../../ui/atoms/Button";
-import Calender from "../../../ui/molecules/Calendar";
+import Calendar from "../../../ui/molecules/Calendar";
 
 const CardContainer = styled.div`
   min-height: 4.3em;
@@ -56,15 +54,16 @@ const LineSeperator = styled.span`
     md:mx-5
   `};
 `;
-const StyledCalendar = styled(Calender)`
-  ${tw`
-  mr-0
 
-  `}
-`;
+// export interface IDate {
+//   startDate: any;
+//   endDate: any;
+//   key: string;
+// }
 
 const SearchCard = () => {
   const navigate = useNavigate();
+  const [location, setLocation] = useState("melbourne");
   const [date, setDate] = useState([
     {
       startDate: new Date(),
@@ -72,22 +71,8 @@ const SearchCard = () => {
       key: "selection",
     },
   ]);
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const [location, setLocation] = useState("melbourne");
   const [sleep, setSleep] = useState("2");
-  const menuRef = useRef<HTMLDivElement>(null);
 
-  useEffect(() => {
-    let handle = (e: any) => {
-      if (!menuRef.current?.contains(e.target)) {
-        setIsCalendarOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handle);
-
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
 
   return (
     <CardContainer>
@@ -112,28 +97,9 @@ const SearchCard = () => {
         <Icon>
           <FontAwesomeIcon icon={faCalendarAlt} />
         </Icon>
-        <span
-          onClick={() => {
-            setIsCalendarOpen(!isCalendarOpen);
-          }}
-        >
-          {`${format(date[0].startDate, "MM/dd/yyyy")} to ${format(
-            date[0].endDate,
-            "MM/dd/yyyy"
-          )}`}
-        </span>
-
-        {isCalendarOpen && (
-          <DateRange
-            editableDateInputs={true}
-            onChange={(item: any) => {
-              setDate([item.selection]);
-            }}
-            moveRangeOnFirstSelection={false}
-            ranges={date}
-            className="absolute top-12 left-0"
-          />
-        )}
+        <Calendar 
+        date={date} setDate={setDate} 
+        />
       </ItemContainer>
 
       <LineSeperator />
@@ -145,15 +111,14 @@ const SearchCard = () => {
         <select
           id="sleep"
           name="sleep"
-          value="2"
           onChange={(e) => setSleep(e.target.value)}
         >
-          <option value="1">Adult 1</option>
-          <option value="2">Adult 2</option>
-          <option value="3">Adult 3</option>
-          <option value="4">Adult 4</option>
-          <option value="5">Adult 5</option>
-          <option value="6">Adult 6</option>
+          <option value={1}>Adult 1</option>
+          <option value={2}>Adult 3</option>
+          <option value={3}>Adult 2</option>
+          <option value={4}>Adult 4</option>
+          <option value={5}>Adult 5</option>
+          <option value={6}>Adult 6</option>
         </select>
       </ItemContainer>
 
@@ -165,8 +130,8 @@ const SearchCard = () => {
         hover:border-primary"
         text="Search Vans"
         theme={"base"}
-        onClick={() =>
-          navigate("/campervans", { state: { location, date, sleep } })
+        onClick={
+          () => navigate("/campervans", { state: { location, date, sleep } })
         }
       />
     </CardContainer>
