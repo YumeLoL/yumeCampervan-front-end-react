@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import tw from "twin.macro";
 import styled from "styled-components";
@@ -9,9 +10,10 @@ import Text from "../../ui/atoms/Text";
 import { Marginer } from "../../ui/atoms/Marginer";
 import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
-import { useNavigate } from "react-router-dom";
 import FilterCard from "./FilterCard";
 import { ICarType } from "../../libs/interface";
+import FilterBox from "../../ui/molecules/FilterBox";
+import Calendar from "../../ui/molecules/Calendar";
 
 const VansContainer = styled.div`
   ${tw` 
@@ -28,13 +30,119 @@ const StyledBanner = styled(Banner)`
     bg-transparent 
   `}
 `;
+
+const FilterContainer = styled.div`
+  ${tw`
+    w-full
+    h-auto
+    flex
+    justify-start
+    px-2 py-2
+    border-t-[1px]
+    border-b-[1px]
+    border-gray-300
+  `}
+`;
+const FilterItems = styled.div`
+  ${tw`
+    w-full
+    max-w-screen-2xl
+    h-auto
+    m-auto
+    flex
+    items-center
+  `}
+`;
+const StyledButton = styled(Button)`
+  ${tw`mb-0`}
+`;
+
 const CampervansPage = () => {
   const navigate = useNavigate();
-  const { data, loading } = useFetch("http://localhost:3000/vanProfile");
+  const [location, setLocation] = useState("");
+  const [sleep, setSleep] = useState();
+  const [vanType, setVanType] = useState("");
+  const [url, setUrl] = useState(`http://localhost:3000/vanProfile?`);
+
+  const { data, loading, reFetch } = useFetch(url);
+
+  const onClick = () => {
+    console.log(
+      "location: " + location,
+      "sleep: " + sleep,
+      "vanType: " + vanType,
+      "date:" + date
+    );
+
+    if (location)
+      setUrl(
+        `http://localhost:3000/vanProfile?location=${location}&sleep_lte=${
+          sleep || 6
+        }`
+      );
+    else if (sleep)
+      setUrl(`http://localhost:3000/vanProfile?sleep_lte=${sleep || 6}`);
+
+    console.log("url:", url);
+
+    reFetch();
+  };
+
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
 
   return (
     <MainLayout>
-      <FilterCard />
+      <FilterContainer>
+        <FilterItems>
+          <FilterBox
+            className="location"
+            text={"location"}
+            optionCollection={["melbourne", "adelaide", "sydney"]}
+            selectedValue={location}
+            setSelectedValue={setLocation}
+          />
+
+          <Calendar date={date} setDate={setDate} />
+
+          <FilterBox
+            className="sleep"
+            text={sleep ? `${sleep}` : `Guests`}
+            optionCollection={[`1`, "2", "3", "4", "5", "6"]}
+            selectedValue={sleep}
+            setSelectedValue={setSleep}
+          />
+
+          <FilterBox
+            className="type"
+            text={"Van Type"}
+            optionCollection={[
+              "Pop top",
+              "Trailer",
+              "Campervan",
+              "Motorhome",
+              "Caravan",
+            ]}
+            selectedValue={vanType}
+            setSelectedValue={setVanType}
+          />
+
+          <StyledButton
+            className=""
+            text={"Search vans"}
+            theme={"outlined"}
+            onClick={onClick}
+          />
+        </FilterItems>
+      </FilterContainer>
+
+      {/* <FilterCard /> */}
+
       <Marginer direction="vertical" margin="5em" />
       <LargeTitle title={"Looking for a van ?"} />
       <Text
