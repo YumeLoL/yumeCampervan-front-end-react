@@ -22,7 +22,6 @@ root.render(
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>
-          {/* <Route path=":" element={<CampervansPage />}/> */}
           <Route path=":id" element={<VanDetailPage />} />
         </Route>
         

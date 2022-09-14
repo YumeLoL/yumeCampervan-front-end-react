@@ -4,6 +4,14 @@ import tw from "twin.macro";
 import Logo from "../../atoms/Logo";
 import NavItems from "./NavItems";
 
+const MainNavContainer = styled.div`
+  ${tw`
+    w-full
+    flex
+    justify-center
+    bg-white
+    `}
+`;
 const NavbarContainer = styled.div`
   ${tw`
     w-full
@@ -14,6 +22,7 @@ const NavbarContainer = styled.div`
     lg:px-8
     flex
     justify-between
+    bg-white
     `}
 `;
 const LogoContainer = styled.div`
@@ -22,12 +31,14 @@ const LogoContainer = styled.div`
 
 const Navbar = () => {
   return (
-    <NavbarContainer>
-      <LogoContainer>
-        <Logo />
-      </LogoContainer>
-      <NavItems />
-    </NavbarContainer>
+    <MainNavContainer>
+      <NavbarContainer>
+        <LogoContainer>
+          <Logo />
+        </LogoContainer>
+        <NavItems />
+      </NavbarContainer>
+    </MainNavContainer>
   );
 };
 

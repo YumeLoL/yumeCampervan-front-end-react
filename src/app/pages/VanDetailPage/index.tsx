@@ -7,7 +7,7 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import MainLayout from "../../ui/organisms/MainLayout";
-import LargeTitle from "../../ui/atoms/LargeTitle";
+import Title from "../../ui/atoms/Title";
 import Text from "../../ui/atoms/Text";
 
 const CarouselContainer = styled.div`
@@ -135,10 +135,9 @@ const VanDetailPage = () => {
       <VanProfileContainer>
         <VanDetailContainer>
           <VanTitleAvatar>
-            <LargeTitle
+            <Title
               className="text-secondary flex items-center"
-              title={"Pop Top Trailer"}
-            />
+              title={"Pop Top Trailer"} size={"large"}            />
             <Avatar>
               <AvatarIcon>
                 <FontAwesomeIcon icon={faUser} />

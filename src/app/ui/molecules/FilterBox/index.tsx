@@ -7,6 +7,8 @@ interface IFilterBox {
   text: string | number;
   optionCollection: string[];
   className?: string;
+  selectedValue?: string;
+  setSelectedValue?: any;
 }
 
 const ItemContainer = styled.div`
@@ -40,8 +42,7 @@ const StyleOption = styled.option`
   `}
 `;
 
-const FilterBox = ({ text, optionCollection, className }: IFilterBox) => {
-  const [selectedValue, setSelectedValue] = useState();
+const FilterBox = ({ text, optionCollection, className, selectedValue,setSelectedValue }: IFilterBox) => {
   const [isFilterOpen, setIsFilterOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -68,6 +69,7 @@ const FilterBox = ({ text, optionCollection, className }: IFilterBox) => {
       >
         {selectedValue ? selectedValue : text}
       </Button>
+
       {isFilterOpen && (
         <DropdownBox>
           {optionCollection.map((option: string, index: number) => (

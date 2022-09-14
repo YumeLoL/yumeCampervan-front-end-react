@@ -71,7 +71,7 @@ const BlobContainer = styled.div`
   position: absolute;
   right: -7em;
   top: -7em;
-  z-index: -1;
+  z-index: 2;
   transform: rotate(-30deg);
   img {
     width: 100%;
@@ -106,6 +106,8 @@ const StandaloneCar = styled.div`
   right: -6em;
   top: 0;
   position: absolute;
+  z-index: 5;
+  
   img {
     width: auto;
     height: 100%;

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { SCREENS } from "../../../libs/responsive";
 import Text from "../../../ui/atoms/Text";
-import LargeTitle from "../../../ui/atoms/LargeTitle"
+import Title from "../../../ui/atoms/Title"
 import orangeVan from "../../../../images/orange-camper-van.png";
 
 const AboutUsContainer = styled.div`
@@ -54,7 +54,7 @@ const AboutUs = () => {
         <img src={orangeVan} alt="" />
       </CarContainer>
       <InfoContainer>
-        <LargeTitle title="Feel The Best Experience With Our Rental Deals" />
+        <Title title="Feel The Best Experience With Our Rental Deals" size={"large"} />
         <Text
           text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad

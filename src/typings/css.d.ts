@@ -15,3 +15,8 @@ declare module "*.jpeg" {
   const jpeg: any;
   export default jpeg;
 }
+
+declare module "*.mp4" {
+  const mp4: any;
+  export default mp4;
+}

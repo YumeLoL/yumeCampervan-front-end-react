@@ -5,12 +5,11 @@ import tw from "twin.macro";
 import styled from "styled-components";
 import CarCard from "../../ui/molecules/CarCard";
 import MainLayout from "../../ui/organisms/MainLayout";
-import LargeTitle from "../../ui/atoms/LargeTitle";
+import Title from "../../ui/atoms/Title";
 import Text from "../../ui/atoms/Text";
 import { Marginer } from "../../ui/atoms/Marginer";
 import Button from "../../ui/atoms/Button";
 import Banner from "../../ui/molecules/Banner";
-import FilterCard from "./FilterCard";
 import { ICarType } from "../../libs/interface";
 import FilterBox from "../../ui/molecules/FilterBox";
 import Calendar from "../../ui/molecules/Calendar";
@@ -144,7 +143,7 @@ const CampervansPage = () => {
       {/* <FilterCard /> */}
 
       <Marginer direction="vertical" margin="5em" />
-      <LargeTitle title={"Looking for a van ?"} />
+      <Title title={"Looking for a van ?"} size={"large"} />
       <Text
         text={
           "Here's some of our favourites for Melbourne, Tasmania, and Sydney. If you can’t find something below go to view all vans and find the perfect caravan or motorhome for your holiday."
@@ -180,6 +179,7 @@ const CampervansPage = () => {
         text={"View all vans"}
         theme={"outlined"}
         title={"Can't find what you're looking for?"}
+        size={"large"}
       />
     </MainLayout>
   );

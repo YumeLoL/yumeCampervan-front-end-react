@@ -32,6 +32,7 @@ function HomePage() {
         title={"Can't find what you're looking for?"}
         text={"View all vans"}
         theme={"outlined"}
+        size="large"
         onClick={() => navigate("/campervans")}
       />
       <Marginer direction="vertical" margin="10em" />

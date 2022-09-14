@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import axios from "axios";
 import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
-import LargeTitle from "../../../ui/atoms/LargeTitle";
+import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
 import { ICarType } from "../../../libs/interface";
 import CarCard from "../../../ui/molecules/CarCard";
@@ -78,7 +78,7 @@ const CarsCarousel = () => {
   return (
     <CarouselContainer>
       <CarouselDescription>
-        <LargeTitle title={"Find Your Perfect Van"} />
+        <Title title={"Find Your Perfect Van"} size={"large"} />
         <ShortText
           text={
             "Camplify is proud to be Australia’s largest and fastest-growing campervan, motorhome and caravan sharing community. We’re safely connecting holidaymakers with thousands of unique neighbourhood vans that are available to hire for their next outdoor adventure. Explore some of our featured campervans, motorhomes and caravans available for hire below."
