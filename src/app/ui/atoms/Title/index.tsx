@@ -22,8 +22,7 @@ const MediumHeading = styled.span`
   ${tw`
   text-2xl
   md:text-4xl
-  font-light
-  md:font-light
+  font-medium
   md:leading-normal
   mb-4
   `}
