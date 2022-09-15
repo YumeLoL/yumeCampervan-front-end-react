@@ -3,7 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import useFetch from "../../hooks/useFetch";
 import tw from "twin.macro";
 import styled from "styled-components";
-import CarCard from "../../ui/molecules/CarCard";
+import CarCard from "../../ui/molecules/Card/CarCard";
 import MainLayout from "../../ui/organisms/MainLayout";
 import Title from "../../ui/atoms/Title";
 import Text from "../../ui/atoms/Text";
@@ -61,7 +61,7 @@ const CampervansPage = () => {
   const [location, setLocation] = useState("");
   const [sleep, setSleep] = useState();
   const [vanType, setVanType] = useState("");
-  const [url, setUrl] = useState(`http://localhost:3000/vanProfile?`);
+  const [url, setUrl] = useState(`http://localhost:4000/vanProfile?`);
 
   const { data, loading, reFetch } = useFetch(url);
 
@@ -75,12 +75,12 @@ const CampervansPage = () => {
 
     if (location)
       setUrl(
-        `http://localhost:3000/vanProfile?location=${location}&sleep_lte=${
+        `http://localhost:4000/vanProfile?location=${location}&sleep_lte=${
           sleep || 6
         }`
       );
     else if (sleep)
-      setUrl(`http://localhost:3000/vanProfile?sleep_lte=${sleep || 6}`);
+      setUrl(`http://localhost:4000/vanProfile?sleep_lte=${sleep || 6}`);
 
     console.log("url:", url);
 

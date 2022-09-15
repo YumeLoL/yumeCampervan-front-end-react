@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import MainLayout from "../../../ui/organisms/MainLayout";
@@ -7,30 +7,32 @@ import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
 import Button from "../../../ui/atoms/Button";
 import { Link } from "react-router-dom";
-import { Marginer } from "../../../ui/atoms/Marginer";
+import useFetch from "../../../hooks/useFetch";
+import Banner from "../../../ui/molecules/Banner";
 
 const HeroContainer = styled.div`
   ${tw`
-  relative
   w-full
-  min-h-[220px]
-  sm:h-[100px]
-  md:h-[300px]
-  lg:h-[450px]
+  h-[200px]
+  sm:h-[300px]
+  md:h-[400px]
+  lg:h-[500px]
+  xl:h-[750px]
   overflow-hidden
   flex
+  flex-col
   justify-center
-  align-bottom
+  items-center
+  relative
   `}
 `;
-const Video = styled.div`
+const Video = styled.video`
   ${tw`
   w-full
-  h-auto
   absolute
   top-0
   sm:top-[-100px]
-  lg:top-[-200px]
+  xl:top-[-250px]
   left-0
   z-[-1]
   `}
@@ -42,7 +44,7 @@ const HeroContent = styled.div`
   flex
   flex-col
   justify-end
-  px-4
+  px-8
   `}
 `;
 const BriefContent = styled(Text)`
@@ -51,27 +53,21 @@ const BriefContent = styled(Text)`
   font-light
   `}
 `;
-
-//
 const CardContainer = styled.div`
   ${tw` 
   max-w-screen-2xl
-  flex 
-  flex-wrap 
-  align-middle 
-  justify-center
+  grid grid-cols-3 gap-4
   my-8
   `}
 `;
 const Content = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
-    max-w-[22em]
+    max-w-[26em]
     max-h-full
     w-full
     flex
     flex-col
-    items-center
     rounded-md
     m-2
     md:m-4
@@ -81,6 +77,11 @@ const Content = styled.div`
     padding-right: 15px;
   }
 `;
+const ImgContainer = styled.div`
+  ${tw`
+  w-full  
+  `}
+`
 const LinkButton = styled(Button)`
   ${tw`
     w-full
@@ -103,15 +104,14 @@ const BriefInfoContainer = styled.div`
   `};
 `;
 
-
 const PopularRoutesPage = () => {
+  const { data, loading } = useFetch(`http://localhost:4000/highlights`);
+
   return (
     <MainLayout>
       <HeroContainer>
-        <Video>
-          <video autoPlay loop>
-            <source src={bgVideo} type="video/mp4" />
-          </video>
+        <Video autoPlay loop>
+          <source src={bgVideo} type="video/mp4" />
         </Video>
         <HeroContent>
           <Title
@@ -129,36 +129,41 @@ const PopularRoutesPage = () => {
       </HeroContainer>
 
       <CardContainer>
-        <Content>
-          <Link to={"/home"}>
-            <img
-              src="https://thl.widen.net/content/yaanagffhm/jpeg/maui%20beach%20DEC%202014%20AU%20Australia%20North%20QLD%20Queensland%20Andrew%20Wation%20Image%20Driving%20Beachfront%20Exterior.jpg?crop=true&keep=c&q=80&color=ffffffff&u=gvvvh2&w=360&h=193"
-              alt="pic"
-            />
-            <div className="p-5">
-              <Title title={"Great Tropical Drive"} size={"medium"} />
+        {loading
+          ? "loading ........"
+          : data.map((highlight: any) => (
+              <Content key={highlight.id}>
+                <Link to={"/home"}>
+                  <ImgContainer>
+                    <img className="w-full" src={highlight.img} alt="pic" />
+                  </ImgContainer>
 
-              <Title title={"3 DAYS"} size={"large"} className="text-red-700 mt-4"/>
+                  <div className="p-5">
+                    <Title title={highlight.title} size={"medium"} />
 
-              <BriefInfoContainer>
-                <div className="grid grid-cols-2 gap-4">
-                  <span>{"Great Barrier"}</span>
-                  <span>{"greate ocean road"}</span>
-                  <span>{"Wet Tropics"}</span>
-                  <span>{"Eungella"}</span>
-                </div>
-              </BriefInfoContainer>
+                    <Title
+                      title={highlight.durations}
+                      size={"medium"}
+                      className="text-red-700 mt-4 block"
+                    />
 
-              <hr className="w-full h-[1.1px] bg-gray-300 my-4" />
+                    <BriefInfoContainer>
+                      <div className=" grid grid-cols-2 gap-4">
+                        {highlight.highlights.map((obj: any, index: number) => (
+                          <span key={obj.index}>{obj}</span>
+                        ))}
+                      </div>
+                    </BriefInfoContainer>
 
-              <LinkButton
-                text={"View Details"}
-                theme={"outlined"}
-              />
-            </div>
-          </Link>
-        </Content>
+                    <hr className="w-full h-[1.1px] bg-gray-300 my-4" />
+
+                    <LinkButton text={"View Details"} theme={"outlined"} />
+                  </div>
+                </Link>
+              </Content>
+            ))}
       </CardContainer>
+      <Banner text={"Contact Us"} theme={"outlined"} title={"If you have any questions or feedback you can contact us 24 hours a day / 7 days a week."} size={"medium"} />
     </MainLayout>
   );
 };

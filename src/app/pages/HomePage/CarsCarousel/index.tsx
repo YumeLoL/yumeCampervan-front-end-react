@@ -7,7 +7,7 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
 import { ICarType } from "../../../libs/interface";
-import CarCard from "../../../ui/molecules/CarCard";
+import CarCard from "../../../ui/molecules/Card/CarCard";
 
 const CarouselContainer = styled.div`
   ${tw`
