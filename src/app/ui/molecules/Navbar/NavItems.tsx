@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from "react";
+import useMenu from "../../../hooks/useMenu";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { push as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../../libs/responsive";
-import { push as Menu } from "react-burger-menu";
 import "./index.css";
-import useMenu from "./useMenu";
-import { useNavigate } from "react-router-dom";
 
 const ListContainer = styled.div`
   ${tw` 
@@ -66,42 +66,40 @@ const SubNavItem = styled.div`
 `;
 
 const NavItems = () => {
-  const isMobile = useMediaQuery({
-    maxWidth: SCREENS.sm,
-  });
+  const isMobile = useMediaQuery({ maxWidth: SCREENS.sm });
   const menu = useMenu();
   const navigate = useNavigate();
-  const goToRoute = (route: string) => {
-    navigate(route);
-  };
+  const goToRoute = (route: string) => navigate(route);
   const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null)
+  const menuRef = useRef<HTMLDivElement>(null);
 
+  // handle close box when clicked outside of the menu
   useEffect(() => {
-    let handle = (e: any) =>{
-      if(!menuRef.current?.contains(e.target)){
-        setOpen(false)
+    let handle = (e: any) => {
+      if (!menuRef.current?.contains(e.target)) {
+        setOpen(false);
       }
-    }
+    };
 
-    document.addEventListener("mousedown", handle)
+    document.addEventListener("mousedown", handle);
 
-    return()=> document.removeEventListener("mousedown", handle)
-  },[])
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
 
+  // handle burger-menu
   if (isMobile)
     return (
       <ListContainer>
         <Menu right>
-          {menu.map((menu) =>
+          {menu.map((menu, i) =>
             menu.submenu ? (
-              <div className="m-2 font-bold text-base self-center">
+              <div key={i} className="m-2 font-bold text-base self-center">
                 <span>{menu.label}</span>
                 <div className={"pl-4"}>
                   {menu.submenu.map((submenu) => (
                     <span
-                      className="block"
                       key={submenu.route}
+                      className="block"
                       onClick={() => goToRoute(submenu.route)}
                     >
                       {submenu.label}
@@ -111,7 +109,9 @@ const NavItems = () => {
               </div>
             ) : (
               <NavItem>
-                <span key={menu.route} onClick={() => goToRoute(menu.route)}>
+                <span 
+                key={menu.route} 
+                onClick={() => goToRoute(menu.route)}>
                   {menu.label}
                 </span>
               </NavItem>
@@ -123,10 +123,11 @@ const NavItems = () => {
 
   return (
     <ListContainer>
-      {menu.map((menu) =>
+      {menu.map((menu, i) =>
         menu.submenu ? (
           <DropdownNavItem ref={menuRef}>
             <span
+              key={i}
               onClick={() => {
                 setOpen(!open);
               }}
@@ -144,8 +145,8 @@ const NavItems = () => {
                 {menu.submenu.map((submenu) => (
                   <SubNavItem>
                     <span
-                      className={`block ${submenu.active ? "active" : ""}`}
                       key={submenu.route}
+                      className={`block ${submenu.active ? "active" : ""}`}
                       onClick={() => goToRoute(submenu.route)}
                     >
                       {submenu.label}
@@ -160,8 +161,8 @@ const NavItems = () => {
         ) : (
           <NavItem>
             <span
+              key={i}
               className={`${menu.active ? "active" : ""}`}
-              key={menu.route}
               onClick={() => goToRoute(menu.route)}
             >
               {menu.label}

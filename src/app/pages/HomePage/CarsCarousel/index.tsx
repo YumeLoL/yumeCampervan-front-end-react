@@ -6,8 +6,9 @@ import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
-import { ICarType } from "../../../libs/interface";
+import { IVan } from "../../../libs/interface";
 import CarCard from "../../../ui/molecules/Card/CarCard";
+import { useNavigate } from "react-router-dom";
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -41,37 +42,52 @@ const ShortText = styled(Text)`
 `;
 
 const CarsCarousel = () => {
+  const navigate = useNavigate();
+
+  const url = `http://localhost:4000/vanProfile`;
+  const [data, setData] = useState<IVan[]>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<any>("");
+
   const [current, setCurrent] = useState(0);
-  const onChange = (curent: number) => setCurrent(curent);
-  const [promoteVans, setPromoteVans] = useState([]);
+  const onChange = (curent: number) => {
+    setCurrent(curent);
+  };
 
   useEffect(() => {
-    const filterPromotionVans = async () => {
-      await axios
-        .get("http://localhost:3000/vanProfile")
-        .then((res) => {
-          const promoteVans = res.data.filter(
-            (vanObj: ICarType) => vanObj.discount
-          );
-          setPromoteVans(promoteVans);
-        })
-        .catch((err) => console.log(err));
+    const fetchData = async () => {
+      setLoading(true);
+
+      try {
+        const res = await axios.get(url);
+        const promoteVans = res.data.filter((vanObj: IVan) => vanObj.discount);
+        setData(promoteVans);
+      } catch (err) {
+        setError(err);
+      }
+
+      setLoading(false);
     };
 
-    filterPromotionVans();
-  }, []);
+    fetchData();
+  }, [url]);
 
-  const vans = promoteVans.map((van: ICarType) => (
+  const vans = data?.map((van: IVan) => (
     <CarCard
       key={van.id}
-      thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
-        <img className="w-full h-[246px] object-cover" src={imgUrl} alt="" />
-      ))}
       name={van.name}
       vanType={van.vanType}
       sleep={van.sleep}
       location={van.location}
       currentPrice={van.currentPrice}
+      onClick={() => navigate(`/campervans/${van.id}`)}
+      thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
+        <img 
+        key={i} 
+        className="w-full h-[246px] object-cover" 
+        src={imgUrl} 
+        alt="" />
+      ))}
     />
   ));
 
@@ -85,56 +101,62 @@ const CarsCarousel = () => {
           }
         />
       </CarouselDescription>
-      <Carousel
-        value={current}
-        onChange={onChange}
-        slides={vans}
-        plugins={[
-          "infinite",
-          {
-            resolve: slidesToShowPlugin,
-            options: {
-              numberOfSlides: 4,
-            },
-          },
-        ]}
-        breakpoints={{
-          640: {
-            plugins: [
+      {loading ? (
+        "on loading ......"
+      ) : (
+        <>
+          <Carousel
+            value={current}
+            onChange={onChange}
+            slides={vans}
+            plugins={[
               "infinite",
               {
                 resolve: slidesToShowPlugin,
                 options: {
-                  numberOfSlides: 1,
+                  numberOfSlides: 4,
                 },
               },
-            ],
-          },
-          1024: {
-            plugins: [
-              "infinite",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 2,
-                },
+            ]}
+            breakpoints={{
+              640: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                    },
+                  },
+                ],
               },
-            ],
-          },
-          1280: {
-            plugins: [
-              "infinite",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 3,
-                },
+              1024: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 2,
+                    },
+                  },
+                ],
               },
-            ],
-          },
-        }}
-      />
-      <Dots value={current} onChange={onChange} number={promoteVans.length} />
+              1280: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 3,
+                    },
+                  },
+                ],
+              },
+            }}
+          />
+          <Dots value={current} onChange={onChange} number={data?.length} />
+        </>
+      )}
     </CarouselContainer>
   );
 };

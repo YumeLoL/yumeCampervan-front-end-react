@@ -1,18 +1,18 @@
-import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import useFetch from "../../hooks/useFetch";
-import tw from "twin.macro";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
-import CarCard from "../../ui/molecules/Card/CarCard";
-import MainLayout from "../../ui/organisms/MainLayout";
-import Title from "../../ui/atoms/Title";
-import Text from "../../ui/atoms/Text";
-import { Marginer } from "../../ui/atoms/Marginer";
+import tw from "twin.macro";
+import useFetch from "../../hooks/useFetch";
+import { IVan } from "../../libs/interface";
 import Button from "../../ui/atoms/Button";
+import { Marginer } from "../../ui/atoms/Marginer";
+import Text from "../../ui/atoms/Text";
+import Title from "../../ui/atoms/Title";
 import Banner from "../../ui/molecules/Banner";
-import { ICarType } from "../../libs/interface";
-import FilterBox from "../../ui/molecules/FilterBox";
 import Calendar from "../../ui/molecules/Calendar";
+import CarCard from "../../ui/molecules/Card/CarCard";
+import FilterBox from "../../ui/molecules/FilterBox";
+import MainLayout from "../../ui/organisms/MainLayout";
 
 const VansContainer = styled.div`
   ${tw` 
@@ -57,13 +57,13 @@ const StyledButton = styled(Button)`
 `;
 
 const CampervansPage = () => {
+  const [url, setUrl] = useState(`http://localhost:4000/vanProfile`);
+  const { data, loading, reFetch } = useFetch(url);
+
   const navigate = useNavigate();
   const [location, setLocation] = useState("");
   const [sleep, setSleep] = useState();
   const [vanType, setVanType] = useState("");
-  const [url, setUrl] = useState(`http://localhost:4000/vanProfile?`);
-
-  const { data, loading, reFetch } = useFetch(url);
 
   const onClick = () => {
     console.log(
@@ -152,17 +152,10 @@ const CampervansPage = () => {
       <VansContainer>
         {loading
           ? "Loading please wait"
-          : data.map((van: ICarType) => {
+          : data?.map((van: IVan) => {
               return (
                 <CarCard
                   key={van.id}
-                  thumbnailSrc={van.thumbnailSrc?.map((imgUrl) => (
-                    <img
-                      className="w-full h-[246px] object-cover"
-                      src={imgUrl}
-                      alt=""
-                    />
-                  ))}
                   name={van.name}
                   vanType={van.vanType}
                   sleep={van.sleep}
@@ -170,6 +163,14 @@ const CampervansPage = () => {
                   originalPrice={van.originalPrice}
                   currentPrice={van.currentPrice}
                   onClick={() => navigate(`/campervans/${van.id}`)}
+                  thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
+                    <img
+                      key={i}
+                      className="w-full h-[246px] object-cover"
+                      src={imgUrl}
+                      alt=""
+                    />
+                  ))}
                 />
               );
             })}

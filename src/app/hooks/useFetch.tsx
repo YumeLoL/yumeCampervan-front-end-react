@@ -2,9 +2,9 @@ import { useEffect, useState } from "react"
 import axios from "axios"
 
 const useFetch = (url: string) => {
-    const [data,setDate] = useState([])
+    const [data,setData] = useState<any[] | any>()
     const [loading,setLoading] = useState(false)
-    const [error,setError] = useState()
+    const [error,setError] = useState<any>('')
     
     useEffect(() => {
         const fetchData = async () => {
@@ -12,9 +12,9 @@ const useFetch = (url: string) => {
             
             try {
                 const res = await axios.get(url)
-                setDate(res.data)
+                setData( res.data)
             } catch (err) {
-                setError(err as any)
+                setError(err)
             }
 
             setLoading(false)
@@ -28,9 +28,9 @@ const useFetch = (url: string) => {
         
         try {
             const res = await axios.get(url)
-            setDate(res.data)
+            setData(res.data)
         } catch (err) {
-            setError(err as any)
+            setError(err)
         }
 
         setLoading(false)

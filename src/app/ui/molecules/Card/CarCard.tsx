@@ -9,7 +9,7 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../../atoms/Button";
-import { ICarType } from "../../../libs/interface";
+import { IVan } from "../../../libs/interface";
 
 const CarContainer = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
@@ -95,7 +95,7 @@ const ArrowRightButton = styled.button`
 `
 
 const CarCard = ({
-  id,
+
   thumbnailSrc,
   name,
   vanType,
@@ -104,7 +104,7 @@ const CarCard = ({
   originalPrice,
   currentPrice,
   onClick,
-}: ICarType) => {
+}: IVan) => {
   const [current, setCurrent] = useState(0);
   const onChange = (curent: number) => {
     setCurrent(curent);

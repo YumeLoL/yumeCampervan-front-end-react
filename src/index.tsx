@@ -7,8 +7,9 @@ import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
 import BlogPage from "./app/pages/GetInspiredPage/Blog";
 import ContactPage from "./app/pages/CantactPage";
 import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
-import VanDetailPage from "./app/pages/VanDetailPage";
+import VanDetailPage from "./app/pages/CampervansPage/VanDetailPage";
 import CampervansPage from "./app/pages/CampervansPage";
+import PostDetailPage from "./app/pages/GetInspiredPage/PopularRoutesPage/PostDetailPage";
 import "./index.css";
 
 const container = document.getElementById("root")!;
@@ -22,15 +23,22 @@ root.render(
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>
-          <Route path=":id" element={<VanDetailPage />} />
+          <Route path=":vanId" element={<VanDetailPage />} />
         </Route>
         
-        <Route
-          path="/get-inspired/popular-routes"
-          element={<PopularRoutesPage />}
-        />
-        <Route path="/get-inspired/blog" element={<BlogPage />} />
+    
+        <Route path="/get-inspired/popular-routes">
+          <Route index  element={<PopularRoutesPage />} />
+          <Route path=":postId" element={<PostDetailPage />} />
+        </Route>
+
+        <Route path="/get-inspired/blog" >
+          <Route index element={<BlogPage />}/>
+          <Route path=":blogId" element={<PostDetailPage />} />
+        </Route>
+
         <Route path="/get-inspired/recipes" element={<RecipesPage />} />
+        
         <Route path="/contact" element={<ContactPage />} />
         
         <Route path="/admin" element={<AdminLoginPage />} />

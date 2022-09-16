@@ -1,5 +1,5 @@
 
-export interface ICarType {
+export interface IVan {
     id?: number;
     thumbnailSrc?: any[];
     name: string;
@@ -11,3 +11,4 @@ export interface ICarType {
     discount?: boolean;
     onClick?: () => void;
   }
+

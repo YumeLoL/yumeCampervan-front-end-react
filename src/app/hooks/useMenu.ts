@@ -8,7 +8,10 @@ const isRouteActive = (route: string) => {
 
 const useMenu = () => {
   const menu = [
-    { label: "Home", route: "/home", active: isRouteActive("/home") },
+    { label: "Home",
+      route: "/home",
+      active: isRouteActive("/home") 
+    },
     {
       label: "Campervans",
       route: "/campervans",
@@ -16,7 +19,8 @@ const useMenu = () => {
     },
     {
       label: "Get Inspired",
-      submenu: [{
+      submenu: [
+      {
         label: "Popular Routes",
         route: "/get-inspired/popular-routes",
         active: isRouteActive("/get-inspired/popular-routes"),
@@ -31,8 +35,7 @@ const useMenu = () => {
         route: "/get-inspired/recipes",
         active: isRouteActive("/get-inspired/recipes"),
       }
-    ]
-    },
+    ]},
     {
       label: "Contact",
       route: "/contact",

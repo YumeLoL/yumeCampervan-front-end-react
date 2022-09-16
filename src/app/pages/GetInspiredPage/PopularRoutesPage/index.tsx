@@ -10,6 +10,15 @@ import { Link } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
 import Banner from "../../../ui/molecules/Banner";
 
+export interface IPost {
+  id: number;
+  title: string;
+  img: string;
+  durations: string;
+  highlights: string[];
+  content: string;
+}
+
 const HeroContainer = styled.div`
   ${tw`
   w-full
@@ -17,7 +26,7 @@ const HeroContainer = styled.div`
   sm:h-[300px]
   md:h-[400px]
   lg:h-[500px]
-  xl:h-[750px]
+  xl:h-[600px]
   overflow-hidden
   flex
   flex-col
@@ -81,7 +90,7 @@ const ImgContainer = styled.div`
   ${tw`
   w-full  
   `}
-`
+`;
 const LinkButton = styled(Button)`
   ${tw`
     w-full
@@ -105,7 +114,8 @@ const BriefInfoContainer = styled.div`
 `;
 
 const PopularRoutesPage = () => {
-  const { data, loading } = useFetch(`http://localhost:4000/highlights`);
+  const url = `http://localhost:4000/highlights`
+  const { data, loading } = useFetch(url);
 
   return (
     <MainLayout>
@@ -131,39 +141,50 @@ const PopularRoutesPage = () => {
       <CardContainer>
         {loading
           ? "loading ........"
-          : data.map((highlight: any) => (
-              <Content key={highlight.id}>
-                <Link to={"/home"}>
-                  <ImgContainer>
-                    <img className="w-full" src={highlight.img} alt="pic" />
-                  </ImgContainer>
+          : data?.map((highlight: IPost) => {
+              return (
+                <Content key={highlight.id}>
+                  <Link to={`/get-inspired/popular-routes/${highlight.id}`}>
+                    <ImgContainer>
+                      <img className="w-full" src={highlight.img} alt="pic" />
+                    </ImgContainer>
 
-                  <div className="p-5">
-                    <Title title={highlight.title} size={"medium"} />
+                    <div className="p-5">
+                      <Title title={highlight.title} size={"medium"} />
 
-                    <Title
-                      title={highlight.durations}
-                      size={"medium"}
-                      className="text-red-700 mt-4 block"
-                    />
+                      <Title
+                        title={highlight.durations}
+                        size={"medium"}
+                        className="text-red-700 mt-4 block"
+                      />
 
-                    <BriefInfoContainer>
-                      <div className=" grid grid-cols-2 gap-4">
-                        {highlight.highlights.map((obj: any, index: number) => (
-                          <span key={obj.index}>{obj}</span>
-                        ))}
-                      </div>
-                    </BriefInfoContainer>
+                      <BriefInfoContainer>
+                        <div className=" grid grid-cols-2 gap-4">
+                          {highlight.highlights.map(
+                            (obj: any, index: number) => (
+                              <span key={obj.index}>{obj}</span>
+                            )
+                          )}
+                        </div>
+                      </BriefInfoContainer>
 
-                    <hr className="w-full h-[1.1px] bg-gray-300 my-4" />
+                      <hr className="w-full h-[1.1px] bg-gray-300 my-4" />
 
-                    <LinkButton text={"View Details"} theme={"outlined"} />
-                  </div>
-                </Link>
-              </Content>
-            ))}
+                      <LinkButton text={"View Details"} theme={"outlined"} />
+                    </div>
+                  </Link>
+                </Content>
+              );
+            })}
       </CardContainer>
-      <Banner text={"Contact Us"} theme={"outlined"} title={"If you have any questions or feedback you can contact us 24 hours a day / 7 days a week."} size={"medium"} />
+      <Banner
+        text={"Contact Us"}
+        theme={"outlined"}
+        title={
+          "If you have any questions or feedback you can contact us 24 hours a day / 7 days a week."
+        }
+        size={"medium"}
+      />
     </MainLayout>
   );
 };
