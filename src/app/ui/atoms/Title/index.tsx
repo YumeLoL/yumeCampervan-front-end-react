@@ -11,7 +11,7 @@ export interface TitleType {
 const LargeHeading = styled.h1`
   ${tw`
   text-2xl
-  md:text-5xl
+  md:text-4xl
   font-extrabold
   md:font-black
   md:leading-normal
@@ -20,8 +20,8 @@ const LargeHeading = styled.h1`
 `;
 const MediumHeading = styled.span`
   ${tw`
-  text-2xl
-  md:text-4xl
+  text-xl
+  md:text-3xl
   font-medium
   md:leading-normal
   mb-4

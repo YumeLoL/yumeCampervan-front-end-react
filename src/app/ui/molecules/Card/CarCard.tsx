@@ -95,7 +95,6 @@ const ArrowRightButton = styled.button`
 `
 
 const CarCard = ({
-
   thumbnailSrc,
   name,
   vanType,

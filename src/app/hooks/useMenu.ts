@@ -9,8 +9,8 @@ const isRouteActive = (route: string) => {
 const useMenu = () => {
   const menu = [
     { label: "Home",
-      route: "/home",
-      active: isRouteActive("/home") 
+      route: "/",
+      active: isRouteActive("/") 
     },
     {
       label: "Campervans",

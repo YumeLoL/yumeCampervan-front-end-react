@@ -19,7 +19,7 @@ const ListContainer = styled.div`
 `;
 const NavItem = styled.div`
   ${tw` 
-    md:text-xl
+    md:text-lg
     m-2
     md:m-4
     font-bold

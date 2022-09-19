@@ -11,9 +11,9 @@ const TextStyle = styled.p`
   ${tw`
   max-w-7xl
   text-sm
-  md:text-lg
-  lg:text-xl
-  xl:text-2xl
+  md:text-base
+  lg:text-lg
+  xl:text-xl
   sm:max-h-full
   text-gray-800
   mb-4

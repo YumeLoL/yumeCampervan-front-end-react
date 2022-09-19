@@ -10,14 +10,14 @@ const LogoContainer = styled.div`
   `}
 `;
 const Image = styled.div`
-  ${tw` h-12 md:h-16 items-center `}
+  ${tw` h-8 md:h-12 items-center `}
   img {
     width: auto;
     height: 100%;
   }
 `;
 const TextLogo = styled.div`
-  ${tw`  hidden sm:contents sm:text-xl md:text-2xl font-bold m-2`}
+  ${tw`  hidden sm:contents sm:text-lg md:text-xl font-bold m-2`}
 `;
 
 const Logo = () => {

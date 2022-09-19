@@ -6,25 +6,37 @@ import Button from "../../../ui/atoms/Button";
 import Text from "../../../ui/atoms/Text";
 import BlobImg from "../../../../images/blob.svg";
 import BlueCampervan from "../../../../images/blue-camper-van.png";
+import Title from "../../../ui/atoms/Title";
 
 const HeroContainer = styled.div`
   min-height: 400px;
   @media (min-width: ${SCREENS.md}) {
-    height: 800px;
+    height: 600px;
   }
   ${tw`
     w-full
     max-w-screen-2xl
     flex
-    justify-between
+    flex-col
+    justify-center
+    items-center
     `}
 `;
+const TopMain = styled.div`
+  ${tw`
+    w-full
+    max-w-screen-2xl
+    flex
+    justify-between
+  `}
+`
 const LeftContainer = styled.div`
   ${tw`
     w-1/2
+    h-auto
     flex
     flex-col
-    justify-center
+    justify-end
     items-start
     m-4
     relative
@@ -39,38 +51,22 @@ const RightContainer = styled.div`
     relative
     `}
 `;
-const Slogan = styled.div`
+const SearchContainer = styled.div`
   ${tw`
-    font-bold
-    text-black
-    md:font-extrabold
-    text-2xl
-    sm:text-4xl
-    md:text-5xl
-    xl:text-6xl
-    lg:font-black
-    sm:leading-snug
-    lg:leading-normal
-    xl:leading-relaxed
-    mb-4
-    `}
-`;
-const ButtonContainer = styled.div`
-  ${tw`
-        flex
-        flex-row
-        sm:flex-col
-        md:flex-row
-        lg:flex-row
-        xl:flex-row
-    `}
+  w-full
+  flex
+  sm:flex-row
+  md:flex-row
+  lg:flex-row
+  xl:flex-row
+  `}
 `;
 const BlobContainer = styled.div`
   width: 25em;
   height: 10em;
   position: absolute;
   right: -7em;
-  top: -7em;
+  top: -10em;
   z-index: 2;
   transform: rotate(-30deg);
   img {
@@ -89,14 +85,14 @@ const BlobContainer = styled.div`
     width: 65em;
     max-height: 30em;
     right: 2em;
-    top: -15em;
+    top: -17em;
     transform: rotate(-60deg);
   }
   @media (min-width: ${SCREENS.xl}) {
     width: 90em;
     max-height: 40em;
     right: 0em;
-    top: -15em;
+    top: -20em;
     transform: rotate(-65deg);
   }
 `;
@@ -104,10 +100,10 @@ const StandaloneCar = styled.div`
   width: auto;
   height: 10em;
   right: -6em;
-  top: 0;
+  top: -2em;
   position: absolute;
   z-index: 5;
-  
+
   img {
     width: auto;
     height: 100%;
@@ -116,35 +112,36 @@ const StandaloneCar = styled.div`
   @media (min-width: ${SCREENS.sm}) {
     height: 16em;
     right: -6em;
-    top: 0;
+    top: -3em;
   }
   @media (min-width: ${SCREENS.lg}) {
     height: 21em;
     right: -8em;
-    top: 0;
+    top: -5em;
   }
   @media (min-width: ${SCREENS.xl}) {
     height: 30em;
     right: -13em;
-    top: 0;
+    top: -7em;
   }
 `;
 
 const HeroSession = () => {
   return (
     <HeroContainer>
+      <TopMain>
       <LeftContainer>
-        <Slogan>Rent The Best Car Lorem ipsum dolor sit amet.</Slogan>
+        <Title
+          title={"Rent The Best Car Lorem ipsum dolor sit amet."}
+          size={"large"}
+        />
         <Text
           text={
             "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem, sint dicta sequi ratione facere ipsum fugiat qui, impedit molestias, doloremque soluta at. Minus labore a aut hic nisi, autem laudantium voluptas ratione corporis ipsam."
           }
         />
-        <ButtonContainer>
-          <Button text={"Book Your Car"} theme={"outlined"} />
-          <Button text={"Check Our Services"} theme={"filled"} />
-        </ButtonContainer>
       </LeftContainer>
+
       <RightContainer>
         <BlobContainer>
           <img src={BlobImg} alt="blobImg" />
@@ -153,6 +150,11 @@ const HeroSession = () => {
           <img src={BlueCampervan} alt="blueCampervan" />
         </StandaloneCar>
       </RightContainer>
+      </TopMain>
+      <SearchContainer>
+        <input type="text" placeholder="My adventure starts in..." autoComplete="off"/>
+        <Button text={"Find a van"} theme={"filled"} />
+      </SearchContainer>
     </HeroContainer>
   );
 };

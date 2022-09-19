@@ -16,14 +16,14 @@ const BaseButton = styled.button`
   ${tw`
     px-1
     py-1.5
-    sm:px-5
-    sm:py-3
+    sm:px-4
+    sm:py-2
     outline-none
     rounded-md
     text-white
     text-sm
-    md:text-lg
-    lg:text-xl
+    md:text-base
+    lg:text-lg
     font-semibold
     border-transparent
     border-2
@@ -36,27 +36,29 @@ const BaseButton = styled.button`
 `;
 const OutlinedButton = styled(BaseButton)`
   ${tw`
-    bg-primary
-    hover:bg-transparent
-    hover:text-primary
-    hover:border-primary
-    mr-2
-    sm:mr-8
-    mb-4
+  border-primary
+  text-primary
+  bg-transparent
+  hover:bg-primary
+  hover:text-white
+  hover:border-transparent
+  mr-2
+  sm:mr-8
+  mb-4
+  z-50
 `};
 `;
 
 const FilledButton = styled(BaseButton)`
   ${tw`
-    border-secondary
-    text-secondary
-    bg-transparent
-    hover:bg-secondary
-    hover:text-white
-    hover:border-transparent
+    bg-secondary
+    hover:bg-transparent
+    hover:text-secondary
+    hover:border-secondary
     mr-2
     sm:mr-8
     mb-4
+    z-50
   `};
 `;
 
@@ -76,18 +78,18 @@ const FilterButton = styled(BaseButton)`
 
 const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
-    case "filled":
-      return (
-        <FilledButton className={className} onClick={onClick}>
-          {text}
-        </FilledButton>
-      );
-
     case "outlined":
       return (
         <OutlinedButton className={className} onClick={onClick}>
           {text}
         </OutlinedButton>
+      );
+
+    case "filled":
+      return (
+        <FilledButton className={className} onClick={onClick}>
+          {text}
+        </FilledButton>
       );
 
     case "text":

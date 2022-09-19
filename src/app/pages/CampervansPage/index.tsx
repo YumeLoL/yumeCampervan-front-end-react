@@ -143,12 +143,16 @@ const CampervansPage = () => {
       {/* <FilterCard /> */}
 
       <Marginer direction="vertical" margin="5em" />
-      <Title title={"Looking for a van ?"} size={"large"} />
-      <Text
-        text={
-          "Here's some of our favourites for Melbourne, Tasmania, and Sydney. If you can’t find something below go to view all vans and find the perfect caravan or motorhome for your holiday."
-        }
-      />
+
+      <div className="max-w-screen-2xl px-10 text-center">
+        <Title title={"Looking for a van ?"} size={"large"} />
+        <Text
+          text={
+            "Here's some of our favourites for Melbourne, Tasmania, and Sydney. If you can’t find something below go to view all vans and find the perfect caravan or motorhome for your holiday."
+          }
+        />
+      </div>
+
       <VansContainer>
         {loading
           ? "Loading please wait"

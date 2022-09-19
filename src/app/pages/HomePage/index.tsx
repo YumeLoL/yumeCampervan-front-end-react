@@ -19,7 +19,7 @@ function HomePage() {
       <HeroSession />
       <ImageSeperator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
-      <SearchCard />
+      {/* <SearchCard /> */}
       <Marginer direction="vertical" margin="8em" />
       <BookingStep />
       <Marginer direction="vertical" margin="8em" />

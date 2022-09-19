@@ -55,12 +55,6 @@ const LineSeperator = styled.span`
   `};
 `;
 
-// export interface IDate {
-//   startDate: any;
-//   endDate: any;
-//   key: string;
-// }
-
 const SearchCard = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("melbourne");

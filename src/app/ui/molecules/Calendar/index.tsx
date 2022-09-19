@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import Button from "../../atoms/Button";

@@ -1,15 +1,14 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./app/pages/HomePage";
-import AdminLoginPage from "./app/pages/AdminLoginPage";
-import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
-import BlogPage from "./app/pages/GetInspiredPage/Blog";
-import ContactPage from "./app/pages/CantactPage";
-import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
-import VanDetailPage from "./app/pages/CampervansPage/VanDetailPage";
 import CampervansPage from "./app/pages/CampervansPage";
+import VanDetailPage from "./app/pages/CampervansPage/VanDetailPage";
+import ContactPage from "./app/pages/CantactPage";
+import BlogPage from "./app/pages/GetInspiredPage/Blog";
+import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
 import PostDetailPage from "./app/pages/GetInspiredPage/PopularRoutesPage/PostDetailPage";
+import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
+import HomePage from "./app/pages/HomePage";
 import "./index.css";
 
 const container = document.getElementById("root")!;
@@ -19,7 +18,7 @@ root.render(
   <React.StrictMode>
     <Router>
       <Routes>
-        <Route path="/home" element={<HomePage />} />
+        <Route path="/" element={<HomePage />} />
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>
@@ -38,10 +37,14 @@ root.render(
         </Route>
 
         <Route path="/get-inspired/recipes" element={<RecipesPage />} />
-        
+
         <Route path="/contact" element={<ContactPage />} />
         
-        <Route path="/admin" element={<AdminLoginPage />} />
+
+        {/* <Route path="/signup" element={<ClientSignUpPage />} />
+        <Route path="/signin" element={<ClientSignInPage />} />
+        
+        <Route path="/admin" element={<AdminLoginPage />} /> */}
       </Routes>
     </Router>
   </React.StrictMode>
