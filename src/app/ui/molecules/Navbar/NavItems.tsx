@@ -9,7 +9,7 @@ import { push as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../../libs/responsive";
 import "./index.css";
-import useMenuRef from "../../../hooks/useMenuRef";
+import useClickClose from "../../../hooks/useClickClose";
 
 const ListContainer = styled.div`
   ${tw` 
@@ -74,7 +74,7 @@ const NavItems = () => {
   const menu = useMenu();
   const navigate = useNavigate();
   const goToRoute = (route: string) => navigate(route);
-  const {isOpen, setIsOpen, menuRef}= useMenuRef()
+  const {isOpen, setIsOpen, menuRef}= useClickClose()
 
   // handle burger-menu
   if (isMobile)

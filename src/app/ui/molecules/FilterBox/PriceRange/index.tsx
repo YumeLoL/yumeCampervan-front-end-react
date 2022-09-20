@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useMenuRef from "../../../../hooks/useMenuRef";
+import useClickClose from "../../../../hooks/useClickClose";
 import Button from "../../../atoms/Button";
 
 interface Ix {
@@ -57,7 +57,7 @@ const StyledInput = styled.input`
 `;
 
 const PriceRange = ({ price, setPrice }: Ix) => {
-  const { isOpen, setIsOpen, menuRef } = useMenuRef();
+  const { isOpen, setIsOpen, menuRef } = useClickClose();
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(500);
 

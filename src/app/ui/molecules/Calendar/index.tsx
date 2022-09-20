@@ -6,7 +6,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import Button from "../../atoms/Button";
-import useMenuRef from "../../../hooks/useMenuRef";
+import useClickClose from "../../../hooks/useClickClose";
 
 const ItemContainer = styled.div`
   ${tw`
@@ -18,7 +18,7 @@ const ItemContainer = styled.div`
 `;
 
 const Calendar = ({date, setDate}: any) => {
-  const {menuRef, isOpen, setIsOpen} = useMenuRef()
+  const {menuRef, isOpen, setIsOpen} = useClickClose()
 
   return (
     <ItemContainer ref={menuRef} className="duration">

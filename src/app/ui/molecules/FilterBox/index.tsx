@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useMenuRef from "../../../hooks/useMenuRef";
+import useClickClose from "../../../hooks/useClickClose";
 import Button from "../../atoms/Button";
 
 interface IFilterBox {
@@ -52,7 +52,7 @@ const FilterBox = ({
   selectedValue,
   setSelectedValue,
 }: IFilterBox) => {
-  const {isOpen, setIsOpen, menuRef}= useMenuRef()
+  const {isOpen, setIsOpen, menuRef}= useClickClose()
 
   return (
     <ItemContainer ref={menuRef} className={className}>

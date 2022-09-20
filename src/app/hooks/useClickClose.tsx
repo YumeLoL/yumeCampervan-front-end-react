@@ -1,12 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-export interface Ix {
-  isFilterOpen: boolean;
-  setIsFilterOpen: any;
-  menuRef: React.RefObject<HTMLDivElement>
-}
-
-const useMenuRef = () => {
+const useClickClose = () => {
     const [isOpen, setIsOpen] = useState(false);
     const menuRef = useRef<HTMLDivElement>(null);
   
@@ -25,4 +19,4 @@ const useMenuRef = () => {
     return {menuRef, isOpen, setIsOpen}
 }
 
-export default useMenuRef
+export default useClickClose
