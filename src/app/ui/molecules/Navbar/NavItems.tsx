@@ -9,6 +9,7 @@ import { push as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
 import { SCREENS } from "../../../libs/responsive";
 import "./index.css";
+import useMenuRef from "../../../hooks/useMenuRef";
 
 const ListContainer = styled.div`
   ${tw` 
@@ -25,6 +26,7 @@ const NavItem = styled.div`
     font-bold
     text-base
     self-center
+    z-50
     `}
   span {
     padding-bottom: 5px;
@@ -42,6 +44,7 @@ const DropdownNavItem = styled(NavItem)`
   ${tw`  
   relative
   cursor-pointer
+  z-50
   `}
   span:focus {
     padding-bottom: 5px;
@@ -59,10 +62,11 @@ const SubNavContainer = styled.div`
     bg-white
     absolute
     top-10
+    z-50
   `}
 `;
 const SubNavItem = styled.div`
-  ${tw`py-3`}
+  ${tw`py-3 z-50`}
 `;
 
 const NavItems = () => {
@@ -70,21 +74,7 @@ const NavItems = () => {
   const menu = useMenu();
   const navigate = useNavigate();
   const goToRoute = (route: string) => navigate(route);
-  const [open, setOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  // handle close box when clicked outside of the menu
-  useEffect(() => {
-    let handle = (e: any) => {
-      if (!menuRef.current?.contains(e.target)) {
-        setOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handle);
-
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
+  const {isOpen, setIsOpen, menuRef}= useMenuRef()
 
   // handle burger-menu
   if (isMobile)
@@ -129,18 +119,18 @@ const NavItems = () => {
             <span
               key={i}
               onClick={() => {
-                setOpen(!open);
+                setIsOpen(!isOpen);
               }}
             >
               {menu.label}
-              {open ? (
+              {isOpen ? (
                 <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
               ) : (
                 <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
               )}
             </span>
 
-            {open ? (
+            {isOpen ? (
               <SubNavContainer>
                 {menu.submenu.map((submenu) => (
                   <SubNavItem>

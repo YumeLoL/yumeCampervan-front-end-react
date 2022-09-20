@@ -48,3 +48,7 @@ Plugins documentation: https://brainhubeu.github.io/react-carousel/docs/examples
 - Burger Memu
   <code>yarn add react-burger-menu</code>
 - install json.server 
+
+### Start project
+- json-server 
+  <code>yarn json-server --watch src/data/db.json --port 4000

@@ -32,6 +32,7 @@ const BaseButton = styled.button`
     transition-all
     duration-200
     ease-in-out
+    z-40
     `};
 `;
 const OutlinedButton = styled(BaseButton)`
@@ -45,7 +46,6 @@ const OutlinedButton = styled(BaseButton)`
   mr-2
   sm:mr-8
   mb-4
-  z-50
 `};
 `;
 
@@ -58,7 +58,6 @@ const FilledButton = styled(BaseButton)`
     mr-2
     sm:mr-8
     mb-4
-    z-50
   `};
 `;
 

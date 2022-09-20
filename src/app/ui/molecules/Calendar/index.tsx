@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import 'react-date-range/dist/styles.css'; // main style file
@@ -6,6 +6,7 @@ import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
 import { format } from "date-fns";
 import Button from "../../atoms/Button";
+import useMenuRef from "../../../hooks/useMenuRef";
 
 const ItemContainer = styled.div`
   ${tw`
@@ -17,26 +18,13 @@ const ItemContainer = styled.div`
 `;
 
 const Calendar = ({date, setDate}: any) => {
-  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let handle = (e: any) => {
-      if (!menuRef.current?.contains(e.target)) {
-        setIsCalendarOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handle);
-
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
+  const {menuRef, isOpen, setIsOpen} = useMenuRef()
 
   return (
     <ItemContainer ref={menuRef} className="duration">
       <Button
         onClick={() => {
-          setIsCalendarOpen(!isCalendarOpen);
+          setIsOpen(!isOpen);
         }}
         theme="filter"
         text={""}
@@ -47,7 +35,7 @@ const Calendar = ({date, setDate}: any) => {
         )}`}
       </Button>
 
-      {isCalendarOpen && (
+      {isOpen && (
         <DateRange
           editableDateInputs={true}
           onChange={(item: any) => {

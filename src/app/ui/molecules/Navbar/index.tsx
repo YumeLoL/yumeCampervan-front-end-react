@@ -10,6 +10,7 @@ const MainNavContainer = styled.div`
     flex
     justify-center
     bg-white
+    z-50
     `}
 `;
 const NavbarContainer = styled.div`
@@ -23,6 +24,7 @@ const NavbarContainer = styled.div`
     flex
     justify-between
     bg-white
+    z-50
     `}
 `;
 const LogoContainer = styled.div`

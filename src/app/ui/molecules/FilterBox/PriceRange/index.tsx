@@ -1,8 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useMenuRef, { Ix } from "../../../hooks/useMenuRef";
-import Button from "../../atoms/Button";
+import Button from "../../../atoms/Button";
 
 interface IFilterBox {
   text: string | number;
@@ -46,30 +45,40 @@ const StyleOption = styled.option`
   `}
 `;
 
-const FilterBox = ({
-  text,
-  optionCollection,
-  className,
-  selectedValue,
-  setSelectedValue,
-}: IFilterBox) => {
-  const {isOpen, setIsOpen, menuRef}= useMenuRef()
+const PriceRange = () => {
+  const [isFilterOpen, setIsFilterOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    let handle = (e: any) => {
+      if (!menuRef.current?.contains(e.target)) {
+        setIsFilterOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handle);
+
+    return () => document.removeEventListener("mousedown", handle);
+  }, []);
 
   return (
-    <ItemContainer ref={menuRef} className={className}>
+    <ItemContainer 
+    ref={menuRef} 
+    // className={className}
+    >
       <Button
         onClick={() => {
-          setIsOpen(!isOpen);
+          setIsFilterOpen(!isFilterOpen);
         }}
         theme="filter"
         text={""}
       >
-        {selectedValue ? selectedValue : text}
+        {/* {selectedValue ? selectedValue : text} */}
       </Button>
 
-      {isOpen && (
+      {isFilterOpen && (
         <DropdownBox>
-          {optionCollection.map((option: string, index: number) => (
+          {/* {optionCollection.map((option: string, index: number) => (
             <StyleOption
               onClick={(e: any) => {
                 setSelectedValue(e.target.value);
@@ -78,11 +87,11 @@ const FilterBox = ({
             >
               {option}
             </StyleOption>
-          ))}
+          ))} */}
         </DropdownBox>
       )}
     </ItemContainer>
   );
 };
 
-export default FilterBox;
+export default PriceRange;

@@ -40,6 +40,7 @@ const FilterContainer = styled.div`
     border-t-[1px]
     border-b-[1px]
     border-gray-300
+    z-40
   `}
 `;
 const FilterItems = styled.div`
@@ -62,25 +63,34 @@ const CampervansPage = () => {
 
   const navigate = useNavigate();
   const [location, setLocation] = useState("");
-  const [sleep, setSleep] = useState();
+  const [sleep, setSleep] = useState("");
   const [vanType, setVanType] = useState("");
+  const [price, setPrice] = useState({
+    min: 0, 
+    max: 500
+  })
+
+  const [params, setParams] = useState("");
 
   const onClick = () => {
     console.log(
-      "location: " + location,
-      "sleep: " + sleep,
+      "location: " + location.toLowerCase(),
+      "sleep: " + sleep.slice(7, 8),
       "vanType: " + vanType,
       "date:" + date
     );
-
-    if (location)
-      setUrl(
-        `http://localhost:4000/vanProfile?location=${location}&sleep_lte=${
-          sleep || 6
-        }`
-      );
-    else if (sleep)
-      setUrl(`http://localhost:4000/vanProfile?sleep_lte=${sleep || 6}`);
+    switch (params) {
+      case "location":
+        return setUrl(
+          `http://localhost:4000/vanProfile?location=${location}&sleep_lte=${
+            sleep || 6
+          }`
+        );
+      case "sleep":
+        return setUrl(
+          `http://localhost:4000/vanProfile?sleep_lte=${sleep || 6}`
+        );
+    }
 
     console.log("url:", url);
 
@@ -101,8 +111,8 @@ const CampervansPage = () => {
         <FilterItems>
           <FilterBox
             className="location"
-            text={"location"}
-            optionCollection={["melbourne", "adelaide", "sydney"]}
+            text={"Location"}
+            optionCollection={["All", "Melbourne", "Adelaide", "Sydney"]}
             selectedValue={location}
             setSelectedValue={setLocation}
           />
@@ -112,12 +122,22 @@ const CampervansPage = () => {
           <FilterBox
             className="sleep"
             text={sleep ? `${sleep}` : `Guests`}
-            optionCollection={[`1`, "2", "3", "4", "5", "6"]}
+            optionCollection={[
+              `Guest 1`,
+              "Guests 2",
+              "Guests 3",
+              "Guests 4",
+              "Guests 5",
+              "Guests 6",
+            ]}
             selectedValue={sleep}
             setSelectedValue={setSleep}
           />
 
-          <FilterBox
+          
+
+
+          {/* <FilterBox
             className="type"
             text={"Van Type"}
             optionCollection={[
@@ -129,7 +149,7 @@ const CampervansPage = () => {
             ]}
             selectedValue={vanType}
             setSelectedValue={setVanType}
-          />
+          /> */}
 
           <StyledButton
             className=""
