@@ -1,7 +1,7 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useMenuRef, { Ix } from "../../../hooks/useMenuRef";
+import useMenuRef from "../../../hooks/useMenuRef";
 import Button from "../../atoms/Button";
 
 interface IFilterBox {
@@ -42,7 +42,6 @@ const StyleOption = styled.option`
   md:text-base
   lg:text-lg
   mx-4 my-4
-  
   `}
 `;
 

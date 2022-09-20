@@ -12,6 +12,7 @@ import Banner from "../../ui/molecules/Banner";
 import Calendar from "../../ui/molecules/Calendar";
 import CarCard from "../../ui/molecules/Card/CarCard";
 import FilterBox from "../../ui/molecules/FilterBox";
+import PriceRange from "../../ui/molecules/FilterBox/PriceRange";
 import MainLayout from "../../ui/organisms/MainLayout";
 
 const VansContainer = styled.div`
@@ -35,6 +36,7 @@ const FilterContainer = styled.div`
     w-full
     h-auto
     flex
+    flex-wrap
     justify-start
     px-2 py-2
     border-t-[1px]
@@ -65,10 +67,7 @@ const CampervansPage = () => {
   const [location, setLocation] = useState("");
   const [sleep, setSleep] = useState("");
   const [vanType, setVanType] = useState("");
-  const [price, setPrice] = useState({
-    min: 0, 
-    max: 500
-  })
+  const [price, setPrice] = useState({ min: 1, max: 500 });
 
   const [params, setParams] = useState("");
 
@@ -77,7 +76,8 @@ const CampervansPage = () => {
       "location: " + location.toLowerCase(),
       "sleep: " + sleep.slice(7, 8),
       "vanType: " + vanType,
-      "date:" + date
+      "date:" + date, 
+      `Min ${price.min} - Max ${price.max}`
     );
     switch (params) {
       case "location":
@@ -134,7 +134,7 @@ const CampervansPage = () => {
             setSelectedValue={setSleep}
           />
 
-          
+          <PriceRange price={price} setPrice={setPrice} />
 
 
           {/* <FilterBox

@@ -1,14 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+import useMenuRef from "../../../../hooks/useMenuRef";
 import Button from "../../../atoms/Button";
 
-interface IFilterBox {
-  text: string | number;
-  optionCollection: string[];
-  className?: string;
-  selectedValue?: string;
-  setSelectedValue?: any;
+interface Ix {
+  price: { min: number; max: number };
+  setPrice: any;
 }
 
 const ItemContainer = styled.div`
@@ -34,7 +32,7 @@ const DropdownBox = styled.div`
   z-10
   `}
 `;
-const StyleOption = styled.option`
+const PriceContainer = styled.div`
   ${tw` 
   font-semibold
   text-sm
@@ -44,50 +42,82 @@ const StyleOption = styled.option`
   
   `}
 `;
+const RangeContainer = styled.div`
+  ${tw` 
+    flex
+    border-[1px] border-solid border-gray-300 rounded-md
+    
+    `}
+`;
+const StyledInput = styled.input`
+  ${tw` 
+    focus:outline-none
+    pl-2
+    `}
+`;
 
-const PriceRange = () => {
-  const [isFilterOpen, setIsFilterOpen] = useState(false);
-  const menuRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    let handle = (e: any) => {
-      if (!menuRef.current?.contains(e.target)) {
-        setIsFilterOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", handle);
-
-    return () => document.removeEventListener("mousedown", handle);
-  }, []);
+const PriceRange = ({ price, setPrice }: Ix) => {
+  const { isOpen, setIsOpen, menuRef } = useMenuRef();
+  const [min, setMin] = useState(1);
+  const [max, setMax] = useState(500);
 
   return (
-    <ItemContainer 
-    ref={menuRef} 
-    // className={className}
-    >
+    <ItemContainer ref={menuRef}>
       <Button
         onClick={() => {
-          setIsFilterOpen(!isFilterOpen);
+          setIsOpen(!isOpen);
         }}
         theme="filter"
         text={""}
       >
-        {/* {selectedValue ? selectedValue : text} */}
+        {price ? `Min ${price.min} - Max ${price.max}` : "Price Range"}
       </Button>
 
-      {isFilterOpen && (
+      {isOpen && (
         <DropdownBox>
-          {/* {optionCollection.map((option: string, index: number) => (
-            <StyleOption
-              onClick={(e: any) => {
-                setSelectedValue(e.target.value);
-              }}
-              key={index}
-            >
-              {option}
-            </StyleOption>
-          ))} */}
+          <PriceContainer>
+            <div>
+              <label htmlFor="minimum">
+                <div>Minimum</div>
+              </label>
+            </div>
+
+            <RangeContainer>
+              <div>$</div>
+              <StyledInput
+                type="number"
+                min="1"
+                max="500"
+                defaultValue={1}
+                onChange={(e: any) => setMin(e.target.value)}
+              />
+            </RangeContainer>
+          </PriceContainer>
+          <PriceContainer>
+            <div>
+              <label htmlFor="minimum">
+                <div>Maximum</div>
+              </label>
+            </div>
+            <RangeContainer>
+              <div>$</div>
+              <StyledInput
+                type="number"
+                min="1"
+                max="500"
+                defaultValue={500}
+                onChange={(e: any) => setMax(e.target.value)}
+              />
+            </RangeContainer>
+          </PriceContainer>
+
+          <Button
+            text={"Apply"}
+            theme={"text"}
+            onClick={(e: any) => {
+              setPrice({ min, max });
+            }}
+          />
         </DropdownBox>
       )}
     </ItemContainer>
