@@ -4,9 +4,9 @@ import tw from "twin.macro";
 import useClickClose from "../../../../hooks/useClickClose";
 import Button from "../../../atoms/Button";
 
-interface Ix {
+interface IPriceRange {
   price: { min: number; max: number };
-  setPrice: any;
+  setPrice: React.Dispatch<React.SetStateAction<{min: number, max: number }>>;
 }
 
 const ItemContainer = styled.div`
@@ -56,7 +56,7 @@ const StyledInput = styled.input`
     `}
 `;
 
-const PriceRange = ({ price, setPrice }: Ix) => {
+const PriceRange = ({ price, setPrice }: IPriceRange) => {
   const { isOpen, setIsOpen, menuRef } = useClickClose();
   const [min, setMin] = useState(1);
   const [max, setMax] = useState(500);
@@ -114,7 +114,7 @@ const PriceRange = ({ price, setPrice }: Ix) => {
           <Button
             text={"Apply"}
             theme={"text"}
-            onClick={(e: any) => {
+            onClick={() => {
               setPrice({ min, max });
             }}
           />

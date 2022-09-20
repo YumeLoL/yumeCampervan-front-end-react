@@ -8,8 +8,8 @@ interface IFilterBox {
   text: string | number;
   optionCollection: string[];
   className?: string;
-  selectedValue?: string;
-  setSelectedValue?: any;
+  selectedValue: string;
+  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
 }
 
 const ItemContainer = styled.div`
@@ -53,7 +53,7 @@ const FilterBox = ({
   setSelectedValue,
 }: IFilterBox) => {
   const {isOpen, setIsOpen, menuRef}= useClickClose()
-
+  
   return (
     <ItemContainer ref={menuRef} className={className}>
       <Button

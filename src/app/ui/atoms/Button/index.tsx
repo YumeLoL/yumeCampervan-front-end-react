@@ -3,13 +3,12 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export interface ButtonType {
+  theme: "filled" | "outlined" | "text" | "base" | "filter";
   className?: string;
   text: string;
-  style?: React.CSSProperties;
-  theme: "filled" | "outlined" | "text" | "base" | "filter";
-  onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
-  children?: React.ReactNode;
   value?: string;
+  children?: React.ReactNode;
+  onClick?: (e: React.MouseEventHandler<HTMLButtonElement>) => void;
 }
 
 const BaseButton = styled.button`
@@ -79,28 +78,32 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
     case "outlined":
       return (
-        <OutlinedButton className={className} onClick={onClick}>
+        <OutlinedButton className={className} onClick={() => onClick}>
           {text}
         </OutlinedButton>
       );
 
     case "filled":
       return (
-        <FilledButton className={className} onClick={onClick}>
+        <FilledButton className={className} onClick={() => onClick}>
           {text}
         </FilledButton>
       );
 
     case "text":
       return (
-        <TextButton className={className} onClick={onClick}>
+        <TextButton className={className} onClick={() => onClick}>
           {text}
         </TextButton>
       );
 
     case "filter":
       return (
-        <FilterButton className={className} onClick={onClick} value={text}>
+        <FilterButton
+          className={className}
+          onClick={() => onClick}
+          value={text}
+        >
           {text}
           {children}
         </FilterButton>
@@ -108,7 +111,7 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
 
     default:
       return (
-        <BaseButton className={className} onClick={onClick}>
+        <BaseButton className={className} onClick={() => onClick}>
           {text}
         </BaseButton>
       );

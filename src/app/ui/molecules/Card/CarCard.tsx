@@ -1,4 +1,6 @@
 import React, { useState } from "react";
+import styled from "styled-components";
+import tw from "twin.macro";
 import Carousel, { arrowsPlugin } from "@brainhubeu/react-carousel";
 import {
   faCircleChevronRight,
@@ -6,8 +8,6 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@brainhubeu/react-carousel/lib/style.css";
-import styled from "styled-components";
-import tw from "twin.macro";
 import Button from "../../atoms/Button";
 import { IVan } from "../../../libs/interface";
 
@@ -81,7 +81,7 @@ const ArrowLeftButton = styled.button`
   text-3xl
   z-10
   `}
-`
+`;
 const ArrowRightButton = styled.button`
   ${tw`
   absolute 
@@ -92,7 +92,7 @@ const ArrowRightButton = styled.button`
   hover:(text-gray-200 transition ease-in-out duration-150)
   z-10
   `}
-`
+`;
 
 const CarCard = ({
   thumbnailSrc,
@@ -147,7 +147,7 @@ const CarCard = ({
         />
       </CarThumbnail>
 
-      <LinkButton text={name} theme={"text"} onClick={onClick} />
+      <LinkButton text={name} theme={"text"} onClick={() => onClick} />
 
       <CarDetailsContainer>
         <p>{vanType}</p>

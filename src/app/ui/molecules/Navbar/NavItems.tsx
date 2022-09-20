@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from "react";
-import useMenu from "../../../hooks/useMenu";
-import { useNavigate } from "react-router-dom";
+import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { push as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
+import { useNavigate } from "react-router-dom";
+import useClickClose from "../../../hooks/useClickClose";
+import useMenu from "../../../hooks/useMenu";
 import { SCREENS } from "../../../libs/responsive";
 import "./index.css";
-import useClickClose from "../../../hooks/useClickClose";
 
 const ListContainer = styled.div`
   ${tw` 

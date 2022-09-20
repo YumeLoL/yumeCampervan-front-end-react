@@ -1,10 +1,10 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 import { useParams } from "react-router-dom";
-import { IPost } from "..";
 import Text from "../../../../ui/atoms/Text";
 import Title from "../../../../ui/atoms/Title";
 import MainLayout from "../../../../ui/organisms/MainLayout";
+import { IPost } from "../../../../libs/interface";
 
 const PostDetailPage = () => {
   const { postId } = useParams();

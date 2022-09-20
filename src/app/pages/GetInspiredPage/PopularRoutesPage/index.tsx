@@ -1,23 +1,16 @@
-import React, { useState } from "react";
+import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import MainLayout from "../../../ui/organisms/MainLayout";
 import bgVideo from "../../../../images/bgvideo.mp4";
-import Title from "../../../ui/atoms/Title";
-import Text from "../../../ui/atoms/Text";
-import Button from "../../../ui/atoms/Button";
-import { Link } from "react-router-dom";
 import useFetch from "../../../hooks/useFetch";
+import { IPost } from "../../../libs/interface";
+import Button from "../../../ui/atoms/Button";
+import Text from "../../../ui/atoms/Text";
+import Title from "../../../ui/atoms/Title";
 import Banner from "../../../ui/molecules/Banner";
+import MainLayout from "../../../ui/organisms/MainLayout";
 
-export interface IPost {
-  id: number;
-  title: string;
-  img: string;
-  durations: string;
-  highlights: string[];
-  content: string;
-}
 
 const HeroContainer = styled.div`
   ${tw`
