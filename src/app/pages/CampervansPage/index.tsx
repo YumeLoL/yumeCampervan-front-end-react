@@ -59,41 +59,29 @@ const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
 
-const CampervansPage = () => {
+const CampervansPage = () => {  
   const [url, setUrl] = useState(`http://localhost:4000/vanProfile`);
   const { data, loading, reFetch } = useFetch(url);
 
   const navigate = useNavigate();
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState('');
   const [sleep, setSleep] = useState("");
-  const [vanType, setVanType] = useState("");
   const [price, setPrice] = useState({ min: 1, max: 500 });
+  // const [vanType, setVanType] = useState("");
 
-  const [params, setParams] = useState("");
 
   const onClick = () => {
-    console.log(
-      "location: " + location.toLowerCase(),
-      "sleep: " + sleep.slice(7, 8),
-      "vanType: " + vanType,
-      "date:" + date, 
-      `Min ${price.min} - Max ${price.max}`
-    );
-    switch (params) {
-      case "location":
-        return setUrl(
-          `http://localhost:4000/vanProfile?location=${location}&sleep_lte=${
-            sleep || 6
-          }`
-        );
-      case "sleep":
-        return setUrl(
-          `http://localhost:4000/vanProfile?sleep_lte=${sleep || 6}`
-        );
+    let xsleep =`sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`
+    let xprice =`currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`
+
+    if(location === 'All Location'){
+      const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`
+      setUrl(params)
+    }else{
+      const params = `http://localhost:4000/vanProfile?location=${location.toLowerCase()}&${xsleep}&${xprice}`
+      setUrl(params)
     }
-
-    console.log("url:", url);
-
+    // console.log("url:", url);
     reFetch();
   };
 
@@ -111,8 +99,8 @@ const CampervansPage = () => {
         <FilterItems>
           <FilterBox
             className="location"
-            text={"Location"}
-            optionCollection={["All", "Melbourne", "Adelaide", "Sydney"]}
+            text={"All Location"}
+            optionCollection={["All Location", "Melbourne", "Adelaide", "Sydney"]}
             selectedValue={location}
             setSelectedValue={setLocation}
           />
@@ -135,7 +123,6 @@ const CampervansPage = () => {
           />
 
           <PriceRange price={price} setPrice={setPrice} />
-
 
           {/* <FilterBox
             className="type"

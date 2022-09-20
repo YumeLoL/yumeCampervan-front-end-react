@@ -13,7 +13,7 @@
       "vanType": "pop top",
       "sleep": 2,
       "location": "melbourne",
-      "currentPrice": 100,
+      "currentPrice": 99,
       "discount": true
     },
     {
@@ -28,7 +28,7 @@
       "vanType": "trailer",
       "sleep": 3,
       "location": "melbourne",
-      "currentPrice": 100,
+      "currentPrice": 120,
       "discount": false
     },
     {
@@ -42,7 +42,7 @@
       "vanType": "campervan",
       "sleep": 4,
       "location": "sydney",
-      "currentPrice": 100,
+      "currentPrice": 109,
       "discount": true
     },
     {
@@ -56,7 +56,7 @@
       "vanType": "motorhome",
       "sleep": 6,
       "location": "sydney",
-      "currentPrice": 100,
+      "currentPrice": 150,
       "discount": false
     },
     {
@@ -71,7 +71,7 @@
       "vanType": "motorhome",
       "sleep": 2,
       "location": "sydney",
-      "currentPrice": 100,
+      "currentPrice": 89,
       "discount": true
     },
     {
@@ -85,7 +85,7 @@
       "vanType": "caravan",
       "sleep": 6,
       "location": "adelaide",
-      "currentPrice": 100,
+      "currentPrice": 129,
       "discount": true
     },
     {
@@ -95,7 +95,7 @@
       "vanType": "caravan",
       "sleep": 3,
       "location": "adelaide",
-      "currentPrice": 100,
+      "currentPrice": 79,
       "discount": true
     },
     {
@@ -105,7 +105,7 @@
       "vanType": "caravan",
       "sleep": 3,
       "location": "adelaide",
-      "currentPrice": 100,
+      "currentPrice": 149,
       "discount": true
     },
     {
@@ -118,7 +118,7 @@
       "vanType": "caravan",
       "sleep": 3,
       "location": "melbourne",
-      "currentPrice": 100,
+      "currentPrice": 139,
       "discount": true
     },
     {
@@ -131,7 +131,7 @@
       "vanType": "caravan",
       "sleep": 3,
       "location": "sydney",
-      "currentPrice": 100,
+      "currentPrice": 129,
       "discount": true
     }
   ],

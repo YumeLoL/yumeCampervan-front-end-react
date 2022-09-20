@@ -70,7 +70,7 @@ const PriceRange = ({ price, setPrice }: Ix) => {
         theme="filter"
         text={""}
       >
-        {price ? `Min ${price.min} - Max ${price.max}` : "Price Range"}
+        { `Min ${price.min} - Max ${price.max}`}
       </Button>
 
       {isOpen && (
