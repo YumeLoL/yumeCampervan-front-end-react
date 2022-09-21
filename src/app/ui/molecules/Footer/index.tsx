@@ -106,7 +106,7 @@ const ListItem = styled.li`
   & > a {
     ${tw`
       text-sm
-    text-white
+      text-white
       transition-all
       hover:text-gray-200
     `};

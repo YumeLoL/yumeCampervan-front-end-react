@@ -154,8 +154,8 @@ const PopularRoutesPage = () => {
                       <BriefInfoContainer>
                         <div className=" grid grid-cols-2 gap-4">
                           {highlight.highlights.map(
-                            (obj: any, index: number) => (
-                              <span key={obj.index}>{obj}</span>
+                            (obj: string, i:number) => (
+                              <span key={i}>{obj}</span>
                             )
                           )}
                         </div>

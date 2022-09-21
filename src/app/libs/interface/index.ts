@@ -1,4 +1,3 @@
-
 export interface IVan {
     id?: number;
     thumbnailSrc?: any[];
@@ -9,14 +8,16 @@ export interface IVan {
     originalPrice?: number;
     currentPrice: number;
     discount?: boolean;
-    onClick?: (e: React.MouseEventHandler<HTMLButtonElement>) => void;
+    onClick?: React.MouseEventHandler<HTMLButtonElement>;
   }
 
-  export interface IPost {
-    id: number;
-    title: string;
-    img: string;
-    durations: string;
-    highlights: string[];
-    content: string;
-  }
+export interface IPost {
+  id: number;
+  title: string;
+  img: string;
+  durations: string;
+  highlights: string[];
+  content: string;
+}
+
+

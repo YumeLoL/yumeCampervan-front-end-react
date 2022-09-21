@@ -29,7 +29,7 @@ const Banner = ({ text, theme, title, onClick, className, size }: IBanner) => {
     <BannerContainer className={className}>
       <BannerContent>
         <Title title={title} size={size} />
-        <Button text={text} theme={theme} onClick={() => onClick} />
+        <Button text={text} theme={theme} onClick={onClick} />
       </BannerContent>
     </BannerContainer>
   );

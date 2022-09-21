@@ -1,11 +1,12 @@
-### How to use useNavigate() to pass parameters 
+### Knowledge Points
+#### TypeScript in React
+-
+#### How to use useNavigate() to pass parameters 
 - <code>const navigate = useNavigate()</code>
   <code>onClick={() => navigate("/campervans", { state:{ location, date, sleep}})}</code>
 - <code> const location = useLocation()</code>
   <code> console.log(location.state)</code> // params passed from 'navigate' stored in 'location.state'
-
-
-### Styling Hint
+#### Styling Hint
 
 - <strong>overflow-hidden</strong>
   If you are trying to hide absolute positioned elements make sure the container of those absolute positioned elements is relatively positioned.
@@ -14,9 +15,7 @@
 
 - tw style stock components must has "className", otherwise it wont be able to overwrite to the actual components.
 
-### Knowledge Points
 
-- Redux Toolkit
 
 ### Toolkits
 

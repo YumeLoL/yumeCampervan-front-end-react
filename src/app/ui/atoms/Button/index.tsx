@@ -8,7 +8,8 @@ export interface ButtonType {
   text: string;
   value?: string;
   children?: React.ReactNode;
-  onClick?: (e: React.MouseEventHandler<HTMLButtonElement>) => void;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  // onClick?: any;
 }
 
 const BaseButton = styled.button`
@@ -78,21 +79,21 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
     case "outlined":
       return (
-        <OutlinedButton className={className} onClick={() => onClick}>
+        <OutlinedButton className={className} onClick={onClick}>
           {text}
         </OutlinedButton>
       );
 
     case "filled":
       return (
-        <FilledButton className={className} onClick={() => onClick}>
+        <FilledButton className={className} onClick={onClick}>
           {text}
         </FilledButton>
       );
 
     case "text":
       return (
-        <TextButton className={className} onClick={() => onClick}>
+        <TextButton className={className} onClick={onClick}>
           {text}
         </TextButton>
       );
@@ -101,7 +102,7 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
       return (
         <FilterButton
           className={className}
-          onClick={() => onClick}
+          onClick={onClick}
           value={text}
         >
           {text}
@@ -111,7 +112,7 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
 
     default:
       return (
-        <BaseButton className={className} onClick={() => onClick}>
+        <BaseButton className={className} onClick={onClick}>
           {text}
         </BaseButton>
       );

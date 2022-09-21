@@ -147,7 +147,7 @@ const CarCard = ({
         />
       </CarThumbnail>
 
-      <LinkButton text={name} theme={"text"} onClick={() => onClick} />
+      <LinkButton text={name} theme={"text"} onClick={onClick} />
 
       <CarDetailsContainer>
         <p>{vanType}</p>
