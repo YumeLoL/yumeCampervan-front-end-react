@@ -1,12 +1,12 @@
 import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { SCREENS } from "../../../libs/responsive";
-import Button from "../../../ui/atoms/Button";
-import Text from "../../../ui/atoms/Text";
 import BlobImg from "../../../../images/blob.svg";
 import BlueCampervan from "../../../../images/blue-camper-van.png";
+import { SCREENS } from "../../../libs/responsive";
+import Text from "../../../ui/atoms/Text";
 import Title from "../../../ui/atoms/Title";
+import SearchCard from "./SearchCard";
 
 const HeroContainer = styled.div`
   min-height: 400px;
@@ -152,9 +152,11 @@ const HeroSession = () => {
       </RightContainer>
       </TopMain>
       <SearchContainer>
-        <input type="text" placeholder="My adventure starts in..." autoComplete="off"/>
-        <Button text={"Find a van"} theme={"filled"} />
+        {/* <input type="text" placeholder="My adventure starts in..." autoComplete="off"/>
+        <Button text={"Find a van"} theme={"filled"} /> */}
+        <SearchCard />
       </SearchContainer>
+      
     </HeroContainer>
   );
 };

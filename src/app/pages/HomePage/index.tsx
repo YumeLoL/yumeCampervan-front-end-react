@@ -6,7 +6,6 @@ import BookingStep from "./BookingStep";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
 import Banner from "../../ui/molecules/Banner";
-import SearchCard from "./SearchCard";
 import ImageSeperator from "../../ui/atoms/ImageSeperator";
 import { Marginer } from "../../ui/atoms/Marginer";
 import driveVan from "../../../images/drive-all-van.svg";
@@ -19,7 +18,6 @@ function HomePage() {
       <HeroSession />
       <ImageSeperator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
-      {/* <SearchCard /> */}
       <Marginer direction="vertical" margin="8em" />
       <BookingStep />
       <Marginer direction="vertical" margin="8em" />

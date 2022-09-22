@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import useFetch from "../../hooks/useFetch";
@@ -58,28 +58,42 @@ const FilterItems = styled.div`
 const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
-
-const CampervansPage = () => {  
-  const [url, setUrl] = useState(`http://localhost:4000/vanProfile`);
+const CampervansPage = () => {
+  const [url, setUrl] = useState("");
   const { data, loading, reFetch } = useFetch(url);
 
   const navigate = useNavigate();
-  const [location, setLocation] = useState('');
+  const locationStore = useLocation();
+
+  const [location, setLocation] = useState("");
   const [sleep, setSleep] = useState("");
   const [price, setPrice] = useState({ min: 1, max: 500 });
   // const [vanType, setVanType] = useState("");
 
+  useEffect(() => {
+    const { location }: any = locationStore.state;
+
+    if (location) {
+      setLocation(location);
+      setUrl(`http://localhost:4000/vanProfile?location=${location.toLowerCase()}`);
+    } else {
+      setUrl(`http://localhost:4000/vanProfile`);
+    }
+
+    reFetch();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onClick = () => {
-    let xsleep =`sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`
-    let xprice =`currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`
+    let xsleep = `sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`;
+    let xprice = `currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`;
 
-    if(location === 'All Location'){
-      const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`
-      setUrl(params)
-    }else{
-      const params = `http://localhost:4000/vanProfile?location=${location.toLowerCase()}&${xsleep}&${xprice}`
-      setUrl(params)
+    if (location === "All Location") {
+      const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`;
+      setUrl(params);
+    } else {
+      const params = `http://localhost:4000/vanProfile?location=${location.toLowerCase()}&${xsleep}&${xprice}`;
+      setUrl(params);
     }
     // console.log("url:", url);
     reFetch();
@@ -100,7 +114,12 @@ const CampervansPage = () => {
           <FilterBox
             className="location"
             text={"All Location"}
-            optionCollection={["All Location", "Melbourne", "Adelaide", "Sydney"]}
+            optionCollection={[
+              "All Location",
+              "Melbourne",
+              "Adelaide",
+              "Sydney",
+            ]}
             selectedValue={location}
             setSelectedValue={setLocation}
           />
