@@ -5,7 +5,7 @@ import tw from "twin.macro";
 export interface TitleType {
   title: string;
   className?: string;
-  size: 'large' | 'medium';
+  size: 'large' | 'medium' | 'small';
 }
 
 const LargeHeading = styled.h1`
@@ -27,6 +27,15 @@ const MediumHeading = styled.span`
   mb-4
   `}
 `;
+const SmallHeading = styled.span`
+  ${tw`
+  text-lg
+  md:text-2xl
+  font-medium
+  md:leading-normal
+  mb-4
+  `}
+`;
 
 const Title = ({ title, className, size }: TitleType) => {
   switch (size) {
@@ -34,6 +43,8 @@ const Title = ({ title, className, size }: TitleType) => {
       return <LargeHeading className={className}>{title}</LargeHeading>;
     case 'medium':
       return <MediumHeading className={className}>{title}</MediumHeading>;
+    case 'small':
+      return <SmallHeading className={className}>{title}</SmallHeading>;
   }
 };
 

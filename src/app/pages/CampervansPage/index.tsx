@@ -63,7 +63,8 @@ const CampervansPage = () => {
   const { data, loading, reFetch } = useFetch(url);
 
   const navigate = useNavigate();
-  const locationStore = useLocation();
+  // const locationStore = useLocation();
+  const { state }: { state: any } = useLocation();
 
   const [location, setLocation] = useState("");
   const [sleep, setSleep] = useState("");
@@ -71,16 +72,15 @@ const CampervansPage = () => {
   // const [vanType, setVanType] = useState("");
 
   useEffect(() => {
-    const { location }: any = locationStore.state;
+    const { location } = state;
 
-    if (location) {
+    if (location === null) {
+      setUrl(`http://localhost:4000/vanProfile`);
+    } else {
       setLocation(location);
       setUrl(`http://localhost:4000/vanProfile?location=${location.toLowerCase()}`);
-    } else {
-      setUrl(`http://localhost:4000/vanProfile`);
     }
 
-    reFetch();
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
@@ -91,12 +91,11 @@ const CampervansPage = () => {
     if (location === "All Location") {
       const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`;
       setUrl(params);
-    } else {
+    } else{
       const params = `http://localhost:4000/vanProfile?location=${location.toLowerCase()}&${xsleep}&${xprice}`;
       setUrl(params);
     }
     // console.log("url:", url);
-    reFetch();
   };
 
   const [date, setDate] = useState([

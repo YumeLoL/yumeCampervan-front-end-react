@@ -83,7 +83,7 @@ const SearchCard = () => {
         text="Find a van"
         theme={"base"}
         onClick={
-          () => navigate("/campervans", { state: { location:location } })
+          () => navigate("/campervans", { state: { location:location }, replace:true })
         }
       />
     </CardContainer>

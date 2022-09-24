@@ -18,7 +18,6 @@ function HomePage() {
       <HeroSession />
       <ImageSeperator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
-      <Marginer direction="vertical" margin="8em" />
       <BookingStep />
       <Marginer direction="vertical" margin="8em" />
       <ImageSeperator src={deliverBush} direction={"right"} />

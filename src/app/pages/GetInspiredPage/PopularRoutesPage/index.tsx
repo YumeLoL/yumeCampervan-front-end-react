@@ -26,6 +26,7 @@ const HeroContainer = styled.div`
   justify-center
   items-center
   relative
+  mb-7
   `}
 `;
 const Video = styled.video`
@@ -58,15 +59,20 @@ const BriefContent = styled(Text)`
 const CardContainer = styled.div`
   ${tw` 
   max-w-screen-2xl
-  grid grid-cols-3 gap-4
-  my-8
+  flex
+  flex-row
+  flex-wrap
+  flex-grow-[1]
+  justify-center
+  overflow-hidden
+  gap-8 lg:gap-4
   `}
 `;
 const Content = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
-    max-w-[26em]
-    max-h-full
+    max-w-[20em]
+    h-[480px]
     w-full
     flex
     flex-col
@@ -82,20 +88,27 @@ const Content = styled.div`
 const ImgContainer = styled.div`
   ${tw`
   w-full  
+  h-[200px]
+  mb-6
   `}
 `;
-const LinkButton = styled(Button)`
+const Image = styled.img`
+  ${tw` 
+  w-full
+  h-full
+  `}
+`
+const BrefDetailContainer = styled.div`
   ${tw`
-    w-full
-    text-2xl
-    font-bold
-    text-white
-    bg-secondary
-    hover:( text-secondary border-secondary)
-    p-3
-    m-0
-  `};
-`;
+  w-full
+  h-[60%]
+  relative
+  px-5
+  `}
+`
+const StyledTitle = styled(Title)`
+  ${tw`break-normal  `}
+`
 const BriefInfoContainer = styled.div`
   ${tw`
     flex
@@ -139,15 +152,15 @@ const PopularRoutesPage = () => {
                 <Content key={highlight.id}>
                   <Link to={`/get-inspired/popular-routes/${highlight.id}`}>
                     <ImgContainer>
-                      <img className="w-full" src={highlight.img} alt="pic" />
+                      <Image src={highlight.img} alt="pic" />
                     </ImgContainer>
 
-                    <div className="p-5">
-                      <Title title={highlight.title} size={"medium"} />
+                    <BrefDetailContainer >
+                      <StyledTitle title={highlight.title} size={"small"} />
 
                       <Title
                         title={highlight.durations}
-                        size={"medium"}
+                        size={"small"}
                         className="text-red-700 mt-4 block"
                       />
 
@@ -160,11 +173,7 @@ const PopularRoutesPage = () => {
                           )}
                         </div>
                       </BriefInfoContainer>
-
-                      <hr className="w-full h-[1.1px] bg-gray-300 my-4" />
-
-                      <LinkButton text={"View Details"} theme={"outlined"} />
-                    </div>
+                    </BrefDetailContainer>
                   </Link>
                 </Content>
               );
