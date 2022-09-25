@@ -1,16 +1,13 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import bgVideo from "../../../../images/bgvideo.mp4";
 import useFetch from "../../../hooks/useFetch";
-import { IPost } from "../../../libs/interface";
-import Button from "../../../ui/atoms/Button";
 import Text from "../../../ui/atoms/Text";
 import Title from "../../../ui/atoms/Title";
 import Banner from "../../../ui/molecules/Banner";
+import PostCard from "../../../ui/molecules/Card/PostCard";
 import MainLayout from "../../../ui/organisms/MainLayout";
-
 
 const HeroContainer = styled.div`
   ${tw`
@@ -56,71 +53,9 @@ const BriefContent = styled(Text)`
   font-light
   `}
 `;
-const CardContainer = styled.div`
-  ${tw` 
-  max-w-screen-2xl
-  flex
-  flex-row
-  flex-wrap
-  flex-grow-[1]
-  justify-center
-  overflow-hidden
-  gap-8 lg:gap-4
-  `}
-`;
-const Content = styled.div`
-  box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
-  ${tw`
-    max-w-[20em]
-    h-[480px]
-    w-full
-    flex
-    flex-col
-    rounded-md
-    m-2
-    md:m-4
-  `};
-
-  p {
-    padding-right: 15px;
-  }
-`;
-const ImgContainer = styled.div`
-  ${tw`
-  w-full  
-  h-[200px]
-  mb-6
-  `}
-`;
-const Image = styled.img`
-  ${tw` 
-  w-full
-  h-full
-  `}
-`
-const BrefDetailContainer = styled.div`
-  ${tw`
-  w-full
-  h-[60%]
-  relative
-  px-5
-  `}
-`
-const StyledTitle = styled(Title)`
-  ${tw`break-normal  `}
-`
-const BriefInfoContainer = styled.div`
-  ${tw`
-    flex
-    flex-col
-    w-full
-    justify-start
-    my-2
-  `};
-`;
 
 const PopularRoutesPage = () => {
-  const url = `http://localhost:4000/highlights`
+  const url = `http://localhost:4000/highlights`;
   const { data, loading } = useFetch(url);
 
   return (
@@ -143,42 +78,7 @@ const PopularRoutesPage = () => {
           />
         </HeroContent>
       </HeroContainer>
-
-      <CardContainer>
-        {loading
-          ? "loading ........"
-          : data?.map((highlight: IPost) => {
-              return (
-                <Content key={highlight.id}>
-                  <Link to={`/get-inspired/popular-routes/${highlight.id}`}>
-                    <ImgContainer>
-                      <Image src={highlight.img} alt="pic" />
-                    </ImgContainer>
-
-                    <BrefDetailContainer >
-                      <StyledTitle title={highlight.title} size={"small"} />
-
-                      <Title
-                        title={highlight.durations}
-                        size={"small"}
-                        className="text-red-700 mt-4 block"
-                      />
-
-                      <BriefInfoContainer>
-                        <div className=" grid grid-cols-2 gap-4">
-                          {highlight.highlights.map(
-                            (obj: string, i:number) => (
-                              <span key={i}>{obj}</span>
-                            )
-                          )}
-                        </div>
-                      </BriefInfoContainer>
-                    </BrefDetailContainer>
-                  </Link>
-                </Content>
-              );
-            })}
-      </CardContainer>
+      <PostCard loading={loading} data={data} />
       <Banner
         text={"Contact Us"}
         theme={"outlined"}

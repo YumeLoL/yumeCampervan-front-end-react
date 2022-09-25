@@ -7,8 +7,8 @@ import "@brainhubeu/react-carousel/lib/style.css";
 import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
 import { IVan } from "../../../libs/interface";
-import CarCard from "../../../ui/molecules/Card/CarCard";
 import { useNavigate } from "react-router-dom";
+import CarCard from "../../../ui/molecules/Card/CarCard";
 
 const CarouselContainer = styled.div`
   ${tw`

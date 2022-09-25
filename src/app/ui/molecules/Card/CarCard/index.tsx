@@ -8,8 +8,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@brainhubeu/react-carousel/lib/style.css";
-import Button from "../../atoms/Button";
-import { IVan } from "../../../libs/interface";
+import Button from "../../../atoms/Button";
+import { IVan } from "../../../../libs/interface";
 
 const CarContainer = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
