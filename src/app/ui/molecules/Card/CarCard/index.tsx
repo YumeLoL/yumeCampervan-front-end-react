@@ -10,11 +10,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "@brainhubeu/react-carousel/lib/style.css";
 import Button from "../../../atoms/Button";
 import { IVan } from "../../../../libs/interface";
+import { Link } from "react-router-dom";
 
 const CarContainer = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
-    max-w-[22em]
+    max-w-[18em]
     max-h-full
     w-full
     flex
@@ -30,11 +31,18 @@ const CarContainer = styled.div`
     padding-right: 15px;
   }
 `;
-
+const StyledLink = styled(Link)`
+  ${tw`
+  transition-opacity 
+  `}
+  :hover {
+    opacity: .5;
+  }
+`
 const CarThumbnail = styled.div`
   ${tw`
   w-full
-  h-[246px]
+  h-[200px]
   relative
   `}
 `;
@@ -44,7 +52,7 @@ const LinkButton = styled(Button)`
     text-2xl
     font-bold
     text-primary
-    my-3
+    mx-0 my-3
   `};
 `;
 
@@ -102,7 +110,7 @@ const CarCard = ({
   location,
   originalPrice,
   currentPrice,
-  onClick,
+  toRoute,
 }: IVan) => {
   const [current, setCurrent] = useState(0);
   const onChange = (curent: number) => {
@@ -110,61 +118,68 @@ const CarCard = ({
   };
 
   return (
-    <CarContainer>
-      <CarThumbnail>
-        <Carousel
-          value={current}
-          onChange={onChange}
-          slides={thumbnailSrc}
-          plugins={[
-            {
-              resolve: arrowsPlugin,
-              options: {
-                arrowLeft: (
-                  <ArrowLeftButton>
-                    <FontAwesomeIcon icon={faCircleChevronLeft} />
-                  </ArrowLeftButton>
-                ),
-                arrowLeftDisabled: (
-                  <ArrowLeftButton>
-                    <FontAwesomeIcon icon={faCircleChevronLeft} />
-                  </ArrowLeftButton>
-                ),
-                arrowRight: (
-                  <ArrowRightButton>
-                    <FontAwesomeIcon icon={faCircleChevronRight} />
-                  </ArrowRightButton>
-                ),
-                arrowRightDisabled: (
-                  <ArrowRightButton>
-                    <FontAwesomeIcon icon={faCircleChevronRight} />
-                  </ArrowRightButton>
-                ),
-                addArrowClickHandler: true,
+    <StyledLink to={toRoute as string}>
+      <CarContainer>
+        <CarThumbnail>
+          <Carousel
+            value={current}
+            onChange={onChange}
+            slides={thumbnailSrc}
+            plugins={[
+              {
+                resolve: arrowsPlugin,
+                options: {
+                  arrowLeft: (
+                    <ArrowLeftButton>
+                      <FontAwesomeIcon icon={faCircleChevronLeft} />
+                    </ArrowLeftButton>
+                  ),
+                  arrowLeftDisabled: (
+                    <ArrowLeftButton>
+                      <FontAwesomeIcon icon={faCircleChevronLeft} />
+                    </ArrowLeftButton>
+                  ),
+                  arrowRight: (
+                    <ArrowRightButton>
+                      <FontAwesomeIcon icon={faCircleChevronRight} />
+                    </ArrowRightButton>
+                  ),
+                  arrowRightDisabled: (
+                    <ArrowRightButton>
+                      <FontAwesomeIcon icon={faCircleChevronRight} />
+                    </ArrowRightButton>
+                  ),
+                  addArrowClickHandler: true,
+                },
               },
-            },
-          ]}
+            ]}
+          />
+        </CarThumbnail>
+
+        <LinkButton
+          text={name}
+          theme={"text"}
+          // onClick={onClick}
         />
-      </CarThumbnail>
 
-      <LinkButton text={name} theme={"text"} onClick={onClick} />
+        <CarDetailsContainer>
+          <p>{vanType}</p>
+          <p>Sleeps {sleep}</p>
+        </CarDetailsContainer>
 
-      <CarDetailsContainer>
-        <p>{vanType}</p>
-        <p>Sleeps {sleep}</p>
-      </CarDetailsContainer>
+        <CarDetailsContainer>
+          <BoldText>{location}</BoldText>
+        </CarDetailsContainer>
 
-      <CarDetailsContainer>
-        <BoldText>{location}</BoldText>
-      </CarDetailsContainer>
-
-      <CarDetailsContainer>
-        <p>
-          <LineThroughText>${originalPrice}</LineThroughText> From{" "}
-          <BoldText className="text-red-700">${currentPrice}</BoldText> AUD/day
-        </p>
-      </CarDetailsContainer>
-    </CarContainer>
+        <CarDetailsContainer>
+          <p>
+            <LineThroughText>${originalPrice}</LineThroughText> From{" "}
+            <BoldText className="text-red-700">${currentPrice}</BoldText>{" "}
+            AUD/day
+          </p>
+        </CarDetailsContainer>
+      </CarContainer>
+    </StyledLink>
   );
 };
 

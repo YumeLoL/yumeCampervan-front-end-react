@@ -29,11 +29,11 @@ const MediumHeading = styled.span`
 `;
 const SmallHeading = styled.span`
   ${tw`
-  text-lg
-  md:text-2xl
+  text-base
+  md:text-xl
   font-medium
   md:leading-normal
-  mb-4
+  mb-2
   `}
 `;
 

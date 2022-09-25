@@ -66,14 +66,44 @@ const SearchCard = () => {
         <StyledSelect
           id="location"
           name="location"
-          onChange={(e) => setLocation(e.target.value)}
+          onChange={(e) =>
+            //  setLocation(e.target.value)
+            console.log(e)
+            }
         >
-          <option value="" disabled selected>My adventure starts in...</option>
+          <option value="" disabled selected>
+            My adventure starts in...
+          </option>
           <option value="Melbourne">Melbourne</option>
           <option value="Adelaide">Adelaide</option>
           <option value="Sydney">Sydney</option>
         </StyledSelect>
+
       </ItemContainer>
+
+      
+      {/* 
+      // datalist example
+      <ItemContainer>
+        <Icon>
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </Icon>
+        <input
+          className="w-full"
+          type="text"
+          name="location"
+          list="location-list"
+          placeholder="My adventure starts in..."
+          onChange={(e) => {
+            setLocation(e.target.value);
+          }}
+        />
+        <datalist id="location-list">
+          <option value="Melbourne">Melbourne</option>
+          <option value="Adelaide">Adelaide</option>
+          <option value="Sydney">Sydney</option>
+        </datalist>
+      </ItemContainer> */}
 
       <Button
         className="bg-secondary
@@ -82,8 +112,11 @@ const SearchCard = () => {
         hover:border-secondary"
         text="Find a van"
         theme={"base"}
-        onClick={
-          () => navigate("/campervans", { state: { location:location }, replace:true })
+        onClick={() =>
+          navigate("/campervans", {
+            state: { location: location },
+            replace: true,
+          })
         }
       />
     </CardContainer>

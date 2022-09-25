@@ -24,14 +24,14 @@ const Card = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
   ${tw`
     relative
-    max-w-[20em]
-    h-[480px]
+    max-w-[17em]
+    h-[430px]
     w-full
     flex
     flex-col
     rounded-md
-    m-2
-    md:m-4
+    m-1
+    md:m-2
     cursor-pointer
     overflow-hidden
     transition-transform
@@ -51,7 +51,7 @@ const Card = styled.div`
 const ImgContainer = styled.div`
   ${tw`
   w-full  
-  h-[200px]
+  h-[160px]
   object-cover
   `}
 `;
@@ -77,8 +77,8 @@ const StyledTitle = styled(Title)`
 const StyledSpan = styled.span`
   ${tw`
   text-red-600
-  text-lg
-  md:text-2xl
+  text-base
+  md:text-xl
   font-bold
   `}
 `;
@@ -93,7 +93,7 @@ const HighlightsWrapper = styled.div`
 const StyledButton = styled(Button)`
   ${tw`
   m-0
-  w-[90%]
+  w-[88%]
   absolute
   bottom-2
   `}
@@ -120,7 +120,7 @@ const PostCard = ({ loading, data }: Props) => {
                     <HighlightsWrapper>
                       <div className=" grid grid-cols-2 gap-2">
                         {highlight.highlights.map((obj: string, i: number) => (
-                          <span key={i}>{obj}</span>
+                          <span className="text-sm" key={i}>{obj}</span>
                         ))}
                       </div>
                     </HighlightsWrapper>

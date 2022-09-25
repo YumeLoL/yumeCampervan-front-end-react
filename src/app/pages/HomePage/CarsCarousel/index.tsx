@@ -13,15 +13,15 @@ import CarCard from "../../../ui/molecules/Card/CarCard";
 const CarouselContainer = styled.div`
   ${tw`
   // set 1024px screen width and make it full width
-  max-w-screen-2xl
+  max-w-screen-xl
   w-full
   // 
   flex
   flex-wrap
   items-center
-  justify-evenly
-  pr-4
-  pl-4
+  justify-center
+  pr-2
+  pl-2
   md:pl-0
   md:pr-0
   my-10
@@ -80,13 +80,14 @@ const CarsCarousel = () => {
       sleep={van.sleep}
       location={van.location}
       currentPrice={van.currentPrice}
-      onClick={() => navigate(`/campervans/${van.id}`)}
+      toRoute={`/campervans/${van.id}`}
       thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
-        <img 
-        key={i} 
-        className="w-full h-[246px] object-cover" 
-        src={imgUrl} 
-        alt="" />
+        <img
+          key={i}
+          className="w-full h-[200px] object-cover"
+          src={imgUrl}
+          alt="img"
+        />
       ))}
     />
   ));
@@ -101,62 +102,74 @@ const CarsCarousel = () => {
           }
         />
       </CarouselDescription>
-      {loading ? (
-        "on loading ......"
-      ) : (
-        <>
-          <Carousel
-            value={current}
-            onChange={onChange}
-            slides={vans}
-            plugins={[
-              "infinite",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 4,
+
+        {loading ? (
+          "on loading ......"
+        ) : (
+          <>
+            <Carousel
+              value={current}
+              onChange={onChange}
+              slides={vans}
+              plugins={[
+                "infinite",
+                {
+                  resolve: slidesToShowPlugin,
+                  options: {
+                    numberOfSlides: 4,
+                  },
                 },
-              },
-            ]}
-            breakpoints={{
-              640: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 1,
+              ]}
+              breakpoints={{
+                640: {
+                  plugins: [
+                    "infinite",
+                    {
+                      resolve: slidesToShowPlugin,
+                      options: {
+                        numberOfSlides: 1,
+                      },
                     },
-                  },
-                ],
-              },
-              1024: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 2,
+                  ],
+                },
+                768: {
+                  plugins: [
+                    "infinite",
+                    {
+                      resolve: slidesToShowPlugin,
+                      options: {
+                        numberOfSlides: 2,
+                      },
                     },
-                  },
-                ],
-              },
-              1280: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 3,
+                  ],
+                },
+                1024: {
+                  plugins: [
+                    "infinite",
+                    {
+                      resolve: slidesToShowPlugin,
+                      options: {
+                        numberOfSlides: 3,
+                      },
                     },
-                  },
-                ],
-              },
-            }}
-          />
-          <Dots value={current} onChange={onChange} number={data?.length} />
-        </>
-      )}
+                  ],
+                },
+                1280: {
+                  plugins: [
+                    "infinite",
+                    {
+                      resolve: slidesToShowPlugin,
+                      options: {
+                        numberOfSlides: 4,
+                      },
+                    },
+                  ],
+                },
+              }}
+            />
+            <Dots value={current} onChange={onChange} number={data?.length} />
+          </>
+        )}
     </CarouselContainer>
   );
 };

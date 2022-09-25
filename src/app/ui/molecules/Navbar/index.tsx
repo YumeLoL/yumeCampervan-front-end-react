@@ -9,7 +9,6 @@ const MainNavContainer = styled.div`
     w-full
     flex
     justify-center
-    bg-white
     z-50
     `}
 `;
@@ -23,7 +22,6 @@ const NavbarContainer = styled.div`
     lg:px-8
     flex
     justify-between
-    bg-white
     z-50
     `}
 `;

@@ -9,6 +9,7 @@ export interface IVan {
     currentPrice: number;
     discount?: boolean;
     onClick?: React.MouseEventHandler<HTMLButtonElement>;
+    toRoute?:string;
   }
 
 export interface IPost {
