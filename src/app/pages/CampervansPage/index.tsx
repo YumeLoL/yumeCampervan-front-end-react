@@ -1,8 +1,8 @@
+import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useFetch from "../../hooks/useFetch";
 import { IVan } from "../../libs/interface";
 import Button from "../../ui/atoms/Button";
 import { Marginer } from "../../ui/atoms/Marginer";
@@ -30,7 +30,7 @@ const StyledBanner = styled(Banner)`
     bg-transparent 
   `}
 `;
-
+ 
 const FilterContainer = styled.div`
   ${tw`
     w-full
@@ -59,58 +59,69 @@ const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
 const CampervansPage = () => {
-  const [url, setUrl] = useState("");
-  const { data, loading, reFetch } = useFetch(url);
+  const { location } = useParams();
+  console.log("location?:",location)
 
-  const navigate = useNavigate();
-  // const locationStore = useLocation();
-  const { state }: { state: any } = useLocation();
+  // const [url, setUrl] = useState(
+  //   `http://localhost:4000/vanProfile?location=${location}`
+  // );
+  // console.log(url)
 
-  const [location, setLocation] = useState("");
-  const [sleep, setSleep] = useState("");
-  const [price, setPrice] = useState({ min: 1, max: 500 });
-  // const [vanType, setVanType] = useState("");
+  const [data, setData] = useState<IVan[]>();
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<any>("");
 
   useEffect(() => {
-    const { location } = state;
+    const fetchData = async () => {
+      setLoading(true);
 
-    if (location === null) {
-      setUrl(`http://localhost:4000/vanProfile`);
-    } else {
-      setLocation(location);
-      setUrl(`http://localhost:4000/vanProfile?location=${location.toLowerCase()}`);
-    }
+      try {
+        const res = await axios.get( `http://localhost:4000/vanProfile?location=${location}`);
+        console.log(res.data)
+        setData(res?.data);
+      } catch (error) {
+        setError(error);
+      }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+      setLoading(false);
+    };
+
+    fetchData();
   }, []);
 
-  const onClick = () => {
-    let xsleep = `sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`;
-    let xprice = `currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`;
 
-    if (location === "All Location") {
-      const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`;
-      setUrl(params);
-    } else{
-      const params = `http://localhost:4000/vanProfile?location=${location.toLowerCase()}&${xsleep}&${xprice}`;
-      setUrl(params);
-    }
-    // console.log("url:", url);
-  };
+  // const [sleep, setSleep] = useState("");
+  // const [price, setPrice] = useState({ min: 1, max: 500 });
 
-  const [date, setDate] = useState([
-    {
-      startDate: new Date(),
-      endDate: new Date(),
-      key: "selection",
-    },
-  ]);
+  // const navigate = useNavigate();
+
+  // const onClick = () => {
+  //   let xsleep = `sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`;
+  //   let xprice = `currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`;
+
+  //   if (location === "All Location") {
+  //     const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`;
+  //     setUrl(params);
+  //   } else {
+  //     const params = `http://localhost:4000/vanProfile?location=${location?.toLowerCase()}&${xsleep}&${xprice}`;
+  //     setUrl(params);
+  //   }
+  //   // console.log("url:", url);
+  // };
+
+  // const [date, setDate] = useState([
+  //   {
+  //     startDate: new Date(),
+  //     endDate: new Date(),
+  //     key: "selection",
+  //   },
+  // ]);
 
   return (
     <MainLayout>
       <FilterContainer>
         <FilterItems>
-          <FilterBox
+          {/* <FilterBox
             className="location"
             text={"All Location"}
             optionCollection={[
@@ -121,9 +132,9 @@ const CampervansPage = () => {
             ]}
             selectedValue={location}
             setSelectedValue={setLocation}
-          />
+          /> */}
 
-          <Calendar date={date} setDate={setDate} />
+          {/* <Calendar date={date} setDate={setDate} />
 
           <FilterBox
             className="sleep"
@@ -140,32 +151,16 @@ const CampervansPage = () => {
             setSelectedValue={setSleep}
           />
 
-          <PriceRange price={price} setPrice={setPrice} />
-
-          {/* <FilterBox
-            className="type"
-            text={"Van Type"}
-            optionCollection={[
-              "Pop top",
-              "Trailer",
-              "Campervan",
-              "Motorhome",
-              "Caravan",
-            ]}
-            selectedValue={vanType}
-            setSelectedValue={setVanType}
-          /> */}
+          <PriceRange price={price} setPrice={setPrice} /> */}
 
           <StyledButton
             className=""
             text={"Search vans"}
             theme={"outlined"}
-            onClick={onClick}
+            // onClick={onClick}
           />
         </FilterItems>
       </FilterContainer>
-
-      {/* <FilterCard /> */}
 
       <Marginer direction="vertical" margin="5em" />
 
@@ -191,15 +186,15 @@ const CampervansPage = () => {
                   location={van.location}
                   originalPrice={van.originalPrice}
                   currentPrice={van.currentPrice}
-                  onClick={() => navigate(`/campervans/${van.id}`)}
-                  thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
-                    <img
-                      key={i}
-                      className="w-full h-[246px] object-cover"
-                      src={imgUrl}
-                      alt=""
-                    />
-                  ))}
+                  // onClick={() => navigate(`/campervans/${van.id}`)}
+                  // thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
+                  //   <img
+                  //     key={i}
+                  //     className="w-full h-[246px] object-cover"
+                  //     src={imgUrl}
+                  //     alt=""
+                  //   />
+                  // ))}
                 />
               );
             })}

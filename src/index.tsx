@@ -22,7 +22,12 @@ root.render(
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>
-          <Route path=":vanId" element={<VanDetailPage />} />
+          <Route path=":location" element={<CampervansPage />}/>
+        </Route>
+
+        <Route path="/campervans/van">
+          <Route index element={<CampervansPage />}/>
+          <Route path=":id" element={<VanDetailPage />}/>
         </Route>
         
     

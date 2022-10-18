@@ -6,7 +6,7 @@ import BookingStep from "./BookingStep";
 import AboutUs from "./AboutUs";
 import CarsCarousel from "./CarsCarousel";
 import Banner from "../../ui/molecules/Banner";
-import ImageSeperator from "../../ui/atoms/ImageSeperator";
+import ImageSeparator from "../../ui/atoms/ImageSeparator";
 import { Marginer } from "../../ui/atoms/Marginer";
 import driveVan from "../../../images/drive-all-van.svg";
 import deliverBush from "../../../images/deliver-caravan-bush.svg";
@@ -16,11 +16,11 @@ function HomePage() {
   return (
     <MainLayout>
       <HeroSession />
-      <ImageSeperator src={driveVan} direction={"left"} />
+      <ImageSeparator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
       <BookingStep />
       <Marginer direction="vertical" margin="8em" />
-      <ImageSeperator src={deliverBush} direction={"right"} />
+      <ImageSeparator src={deliverBush} direction={"right"} />
       <AboutUs />
       <Marginer direction="vertical" margin="10em" />
       <CarsCarousel />

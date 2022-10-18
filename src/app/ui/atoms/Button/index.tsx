@@ -3,12 +3,12 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export interface ButtonType {
-  theme: "filled" | "outlined" | "text" | "base" | "filter";
+  theme?: "filled" | "outlined" | "text" | "base" | "filter";
   className?: string;
-  text: string;
+  text?: string;
   value?: string;
   children?: React.ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>
+  onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
   // onClick?: any;
 }
 

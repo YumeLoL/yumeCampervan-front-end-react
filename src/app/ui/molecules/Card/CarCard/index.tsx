@@ -36,9 +36,9 @@ const StyledLink = styled(Link)`
   transition-opacity 
   `}
   :hover {
-    opacity: .5;
+    opacity: 0.5;
   }
-`
+`;
 const CarThumbnail = styled.div`
   ${tw`
   w-full
@@ -110,76 +110,70 @@ const CarCard = ({
   location,
   originalPrice,
   currentPrice,
-  toRoute,
+  onClick,
 }: IVan) => {
-  const [current, setCurrent] = useState(0);
-  const onChange = (curent: number) => {
-    setCurrent(curent);
-  };
-
   return (
-    <StyledLink to={toRoute as string}>
-      <CarContainer>
-        <CarThumbnail>
-          <Carousel
-            value={current}
-            onChange={onChange}
-            slides={thumbnailSrc}
-            plugins={[
-              {
-                resolve: arrowsPlugin,
-                options: {
-                  arrowLeft: (
-                    <ArrowLeftButton>
-                      <FontAwesomeIcon icon={faCircleChevronLeft} />
-                    </ArrowLeftButton>
-                  ),
-                  arrowLeftDisabled: (
-                    <ArrowLeftButton>
-                      <FontAwesomeIcon icon={faCircleChevronLeft} />
-                    </ArrowLeftButton>
-                  ),
-                  arrowRight: (
-                    <ArrowRightButton>
-                      <FontAwesomeIcon icon={faCircleChevronRight} />
-                    </ArrowRightButton>
-                  ),
-                  arrowRightDisabled: (
-                    <ArrowRightButton>
-                      <FontAwesomeIcon icon={faCircleChevronRight} />
-                    </ArrowRightButton>
-                  ),
-                  addArrowClickHandler: true,
-                },
+    <CarContainer>
+      <CarThumbnail>
+        <Carousel
+          plugins={[
+            {
+              resolve: arrowsPlugin,
+              options: {
+                arrowLeft: (
+                  <ArrowLeftButton>
+                    <FontAwesomeIcon icon={faCircleChevronLeft} />
+                  </ArrowLeftButton>
+                ),
+                arrowLeftDisabled: (
+                  <ArrowLeftButton>
+                    <FontAwesomeIcon icon={faCircleChevronLeft} />
+                  </ArrowLeftButton>
+                ),
+                arrowRight: (
+                  <ArrowRightButton>
+                    <FontAwesomeIcon icon={faCircleChevronRight} />
+                  </ArrowRightButton>
+                ),
+                arrowRightDisabled: (
+                  <ArrowRightButton>
+                    <FontAwesomeIcon icon={faCircleChevronRight} />
+                  </ArrowRightButton>
+                ),
+                addArrowClickHandler: true,
               },
-            ]}
-          />
-        </CarThumbnail>
+            },
+            "infinite",
+          ]}
+        >
+          {thumbnailSrc?.map((imgUrl, i) => (
+            <img
+              key={i}
+              className="w-full h-[200px] object-cover"
+              src={imgUrl}
+              alt="img"
+            />
+          ))}
+        </Carousel>
+      </CarThumbnail>
+      <LinkButton text={name} theme={"text"} onClick={onClick} />
 
-        <LinkButton
-          text={name}
-          theme={"text"}
-          // onClick={onClick}
-        />
+      <CarDetailsContainer>
+        <p>{vanType}</p>
+        <p>Sleeps {sleep}</p>
+      </CarDetailsContainer>
 
-        <CarDetailsContainer>
-          <p>{vanType}</p>
-          <p>Sleeps {sleep}</p>
-        </CarDetailsContainer>
+      <CarDetailsContainer>
+        <BoldText>{location}</BoldText>
+      </CarDetailsContainer>
 
-        <CarDetailsContainer>
-          <BoldText>{location}</BoldText>
-        </CarDetailsContainer>
-
-        <CarDetailsContainer>
-          <p>
-            <LineThroughText>${originalPrice}</LineThroughText> From{" "}
-            <BoldText className="text-red-700">${currentPrice}</BoldText>{" "}
-            AUD/day
-          </p>
-        </CarDetailsContainer>
-      </CarContainer>
-    </StyledLink>
+      <CarDetailsContainer>
+        <p>
+          <LineThroughText>${originalPrice}</LineThroughText> From{" "}
+          <BoldText className="text-red-700">${currentPrice}</BoldText> AUD/day
+        </p>
+      </CarDetailsContainer>
+    </CarContainer>
   );
 };
 

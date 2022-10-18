@@ -5,7 +5,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Button from "../../../../ui/atoms/Button";
 
 const CardContainer = styled.div`
@@ -66,10 +66,10 @@ const SearchCard = () => {
         <StyledSelect
           id="location"
           name="location"
-          onChange={(e) =>
-            //  setLocation(e.target.value)
-            console.log(e)
-            }
+          onChange={(e) => {
+            e.preventDefault();
+            setLocation(e.target.value.toLowerCase());
+          }}
         >
           <option value="" disabled selected>
             My adventure starts in...
@@ -78,10 +78,8 @@ const SearchCard = () => {
           <option value="Adelaide">Adelaide</option>
           <option value="Sydney">Sydney</option>
         </StyledSelect>
-
       </ItemContainer>
 
-      
       {/* 
       // datalist example
       <ItemContainer>
@@ -104,7 +102,7 @@ const SearchCard = () => {
           <option value="Sydney">Sydney</option>
         </datalist>
       </ItemContainer> */}
-
+      {/* <Link to={"/campervans"}></Link> */}
       <Button
         className="bg-secondary
         hover:bg-transparent
@@ -113,10 +111,13 @@ const SearchCard = () => {
         text="Find a van"
         theme={"base"}
         onClick={() =>
-          navigate("/campervans", {
-            state: { location: location },
-            replace: true,
-          })
+          navigate(
+            `/campervans/${location}`
+            // navigate("/campervans", {
+            //   state: { location: location },
+            //   replace: true,
+            // }
+          )
         }
       />
     </CardContainer>

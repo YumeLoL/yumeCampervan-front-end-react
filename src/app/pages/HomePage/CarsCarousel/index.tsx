@@ -10,6 +10,8 @@ import { IVan } from "../../../libs/interface";
 import { useNavigate } from "react-router-dom";
 import CarCard from "../../../ui/molecules/Card/CarCard";
 
+const baseUrl = process.env.REACT_APP_BASE_API_URL;
+
 const CarouselContainer = styled.div`
   ${tw`
   // set 1024px screen width and make it full width
@@ -44,15 +46,10 @@ const ShortText = styled(Text)`
 const CarsCarousel = () => {
   const navigate = useNavigate();
 
-  const url = `http://localhost:4000/vanProfile`;
+  const url = `${baseUrl}/vanProfile`;
+
   const [data, setData] = useState<IVan[]>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<any>("");
-
-  const [current, setCurrent] = useState(0);
-  const onChange = (curent: number) => {
-    setCurrent(curent);
-  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,35 +59,38 @@ const CarsCarousel = () => {
         const res = await axios.get(url);
         const promoteVans = res.data.filter((vanObj: IVan) => vanObj.discount);
         setData(promoteVans);
+        // console.log(data)
       } catch (err) {
-        setError(err);
+        console.log(err);
       }
 
       setLoading(false);
     };
 
     fetchData();
-  }, [url]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const vans = data?.map((van: IVan) => (
-    <CarCard
-      key={van.id}
-      name={van.name}
-      vanType={van.vanType}
-      sleep={van.sleep}
-      location={van.location}
-      currentPrice={van.currentPrice}
-      toRoute={`/campervans/${van.id}`}
-      thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
-        <img
-          key={i}
-          className="w-full h-[200px] object-cover"
-          src={imgUrl}
-          alt="img"
-        />
-      ))}
-    />
-  ));
+  // const vans = data?.map((van: IVan) => (
+  //   <CarCard
+  //     key={van.id}
+  //     name={van.name}
+  //     vanType={van.vanType}
+  //     sleep={van.sleep}
+  //     location={van.location}
+  //     currentPrice={van.currentPrice}
+  //     // thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
+  //     //   <img
+  //     //     key={i}
+  //     //     className="w-full h-[200px] object-cover"
+  //     //     src={imgUrl}
+  //     //     alt="img"
+  //     //   />
+  //     // ))}
+  //     toRoute={`/campervans/van/${van.id}`}
+  //   />
+  // ));
+  // console.log("vans:", vans);
 
   return (
     <CarouselContainer>
@@ -103,73 +103,88 @@ const CarsCarousel = () => {
         />
       </CarouselDescription>
 
-        {loading ? (
-          "on loading ......"
-        ) : (
-          <>
-            <Carousel
-              value={current}
-              onChange={onChange}
-              slides={vans}
-              plugins={[
-                "infinite",
-                {
-                  resolve: slidesToShowPlugin,
-                  options: {
-                    numberOfSlides: 4,
+      {loading ? (
+        "on loading ......"
+      ) : (
+        <>
+          {/* <CarouselSlide 
+           vans={vans} length={data?.length}
+           /> */}
+          <Carousel
+            plugins={[
+              "infinite",
+              "arrows",
+              {
+                resolve: slidesToShowPlugin,
+                options: {
+                  numberOfSlides: 2,
+                },
+              },
+            ]}
+            breakpoints={{
+              640: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 1,
+                    },
                   },
-                },
-              ]}
-              breakpoints={{
-                640: {
-                  plugins: [
-                    "infinite",
-                    {
-                      resolve: slidesToShowPlugin,
-                      options: {
-                        numberOfSlides: 1,
-                      },
+                ],
+              },
+              768: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 2,
                     },
-                  ],
-                },
-                768: {
-                  plugins: [
-                    "infinite",
-                    {
-                      resolve: slidesToShowPlugin,
-                      options: {
-                        numberOfSlides: 2,
-                      },
+                  },
+                ],
+              },
+              1024: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 3,
                     },
-                  ],
-                },
-                1024: {
-                  plugins: [
-                    "infinite",
-                    {
-                      resolve: slidesToShowPlugin,
-                      options: {
-                        numberOfSlides: 3,
-                      },
+                  },
+                ],
+              },
+              1280: {
+                plugins: [
+                  "infinite",
+                  {
+                    resolve: slidesToShowPlugin,
+                    options: {
+                      numberOfSlides: 4,
                     },
-                  ],
-                },
-                1280: {
-                  plugins: [
-                    "infinite",
-                    {
-                      resolve: slidesToShowPlugin,
-                      options: {
-                        numberOfSlides: 4,
-                      },
-                    },
-                  ],
-                },
-              }}
-            />
-            <Dots value={current} onChange={onChange} number={data?.length} />
-          </>
-        )}
+                  },
+                ],
+              },
+            }}
+          >
+            {data?.map((van: IVan) => {
+              return (
+                <CarCard
+                  key={van.id}
+                  name={van.name}
+                  vanType={van.vanType}
+                  sleep={van.sleep}
+                  location={van.location}
+                  currentPrice={van.currentPrice}
+                  thumbnailSrc={van.thumbnailSrc}
+                  onClick={() => navigate(`/campervans/van/${van.id}`)}
+                />
+              );
+            })}
+          </Carousel>
+        </>
+      )}
     </CarouselContainer>
   );
 };
