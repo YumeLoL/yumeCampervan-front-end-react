@@ -8,8 +8,10 @@ interface IFilterBox {
   text: string | number;
   optionCollection: string[];
   className?: string;
-  selectedValue: string;
-  setSelectedValue: React.Dispatch<React.SetStateAction<string>>;
+  selectedValue: string | number;
+  setSelectedValue:
+    | React.Dispatch<React.SetStateAction<string>>
+    | React.Dispatch<React.SetStateAction<number>>;
 }
 
 const ItemContainer = styled.div`
@@ -52,8 +54,8 @@ const FilterBox = ({
   selectedValue,
   setSelectedValue,
 }: IFilterBox) => {
-  const {isOpen, setIsOpen, menuRef}= useClickClose()
-  
+  const { isOpen, setIsOpen, menuRef } = useClickClose();
+
   return (
     <ItemContainer ref={menuRef} className={className}>
       <Button
@@ -68,10 +70,14 @@ const FilterBox = ({
 
       {isOpen && (
         <DropdownBox>
-          {optionCollection.map((option: string, index: number) => (
+          {
+          optionCollection
+          .map((option: string, index: number) => (
             <StyleOption
               onClick={(e: any) => {
+                e.preventDefault();
                 setSelectedValue(e.target.value);
+                // console.log("onclick, sleep:", e.target.value);
               }}
               key={index}
             >

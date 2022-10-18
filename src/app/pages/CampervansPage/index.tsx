@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
+import useFetch from "../../hooks/useFetch";
 import { baseUrl } from "../../libs/baseUrl";
 import { IVan } from "../../libs/interface";
 import Button from "../../ui/atoms/Button";
@@ -59,6 +60,7 @@ const FilterItems = styled.div`
 const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
+
 const CampervansPage = () => {
   const navigate = useNavigate();
   const { location } = useParams();
@@ -72,59 +74,25 @@ const CampervansPage = () => {
     }
   }, [location]);
 
-  const [data, setData] = useState<IVan[]>();
-  const [loading, setLoading] = useState(false);
+  const { data, loading } = useFetch(url);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-
-      try {
-        const res = await axios.get(url);
-        console.log(res.data);
-        setData(res?.data);
-      } catch (error) {
-        console.log(error);
-      }
-
-      setLoading(false);
-    };
-
-    fetchData();
-  }, []);
-
-  // const [sleep, setSleep] = useState("");
-  // const [price, setPrice] = useState({ min: 1, max: 500 });
-
-  // const navigate = useNavigate();
-
-  // const onClick = () => {
-  //   let xsleep = `sleep_gte=1&sleep_lte=${sleep.slice(7, 8) || 6}`;
-  //   let xprice = `currentPrice_gte=${price.min}&currentPrice_lte=${price.max}`;
-
-  //   if (location === "All Location") {
-  //     const params = `http://localhost:4000/vanProfile?${xsleep}&${xprice}`;
-  //     setUrl(params);
-  //   } else {
-  //     const params = `http://localhost:4000/vanProfile?location=${location?.toLowerCase()}&${xsleep}&${xprice}`;
-  //     setUrl(params);
-  //   }
-  //   // console.log("url:", url);
-  // };
-
-  // const [date, setDate] = useState([
-  //   {
-  //     startDate: new Date(),
-  //     endDate: new Date(),
-  //     key: "selection",
-  //   },
-  // ]);
+  const [selectedLocation, setSelectedLocation] = useState("");
+  const [sleep, setSleep] = useState("");
+  const [price, setPrice] = useState({ min: 1, max: 500 });
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+ 
 
   return (
     <MainLayout>
       <FilterContainer>
         <FilterItems>
-          {/* <FilterBox
+          <FilterBox
             className="location"
             text={"All Location"}
             optionCollection={[
@@ -133,11 +101,11 @@ const CampervansPage = () => {
               "Adelaide",
               "Sydney",
             ]}
-            selectedValue={location}
-            setSelectedValue={setLocation}
-          /> */}
+            selectedValue={selectedLocation}
+            setSelectedValue={setSelectedLocation}
+          />
 
-          {/* <Calendar date={date} setDate={setDate} />
+          <Calendar date={date} setDate={setDate} />
 
           <FilterBox
             className="sleep"
@@ -154,7 +122,7 @@ const CampervansPage = () => {
             setSelectedValue={setSleep}
           />
 
-          <PriceRange price={price} setPrice={setPrice} /> */}
+          <PriceRange price={price} setPrice={setPrice} />
 
           <StyledButton
             className=""
