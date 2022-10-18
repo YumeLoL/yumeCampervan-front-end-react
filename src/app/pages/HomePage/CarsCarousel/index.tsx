@@ -12,8 +12,6 @@ import CarCard from "../../../ui/molecules/Card/CarCard";
 import { baseUrl } from "../../../libs/baseUrl";
 import { Dots } from "@brainhubeu/react-carousel";
 
-
-
 const CarouselContainer = styled.div`
   ${tw`
   // set 1024px screen width and make it full width
@@ -46,8 +44,6 @@ const ShortText = styled(Text)`
 `;
 
 const CarsCarousel = () => {
- 
-
   const navigate = useNavigate();
   const url = `${baseUrl}/vanProfile`;
 
@@ -75,10 +71,10 @@ const CarsCarousel = () => {
   }, []);
 
   // handle dots in slider
-  const [value, setValue] = useState(0)
-  const onChange = (value:number) => {
-    setValue( value );
-  }
+  const [value, setValue] = useState(0);
+  const onChange = (value: number) => {
+    setValue(value);
+  };
 
   return (
     <CarouselContainer>
@@ -100,7 +96,12 @@ const CarsCarousel = () => {
             onChange={onChange}
             plugins={[
               "infinite",
-              "arrows",
+              {
+                resolve: slidesToShowPlugin,
+                options: {
+                 numberOfSlides: 4
+                }
+              },
             ]}
             breakpoints={{
               640: {
@@ -149,22 +150,22 @@ const CarsCarousel = () => {
               },
             }}
           >
-           {loading
-          ? "Loading please wait"
-          : data?.map((van: IVan) => {
-              return (
-                <CarCard
-                  key={van.id}
-                  name={van.name}
-                  vanType={van.vanType}
-                  sleep={van.sleep}
-                  location={van.location}
-                  currentPrice={van.currentPrice}
-                  thumbnailSrc={van.thumbnailSrc}
-                  onClick={() => navigate(`/campervans/van/${van.id}`)}
-                />
-              );
-            })}
+            {loading
+              ? "Loading please wait"
+              : data?.map((van: IVan) => {
+                  return (
+                    <CarCard
+                      key={van.id}
+                      name={van.name}
+                      vanType={van.vanType}
+                      sleep={van.sleep}
+                      location={van.location}
+                      currentPrice={van.currentPrice}
+                      thumbnailSrc={van.thumbnailSrc}
+                      onClick={() => navigate(`/campervans/van/${van.id}`)}
+                    />
+                  );
+                })}
           </Carousel>
           <Dots value={value} onChange={onChange} number={data?.length} />
         </>

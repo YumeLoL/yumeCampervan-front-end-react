@@ -13,7 +13,7 @@ const AppContainer = styled.div`
   ${tw`
     flex
     flex-col
-    w-full
+    w-screen
     h-full
   `}
 `;
@@ -22,7 +22,7 @@ const PageContainer = styled.div`
   ${tw` 
     flex
     flex-col
-    w-full
+    w-screen
     h-auto
     items-center
     `}

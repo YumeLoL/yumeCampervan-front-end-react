@@ -1,3 +1,26 @@
+<p align="center">
+<img src="public/showcase/1.png" width="300" height="580"/>
+
+# A Campervan Retail Website 
+
+#### Tech Stack: 
+- React / TypeScript
+- TailwindCSS / Styled-Components
+- Restful API / Axios
+- Json-server
+
+#### Campervans List and Detail Page
+<p align="center" >
+<img src="public/showcase/2.png" width="220" height="300"/>
+<img src="public/showcase/2-1.png" width="220" height="180"/>
+
+#### Posts Page
+<p align="center" >
+<img src="public/showcase/3.png" width="220" height="280"/>
+
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app), using the [Redux](https://redux.js.org/) and [Redux Toolkit](https://redux-toolkit.js.org/) TS template.
