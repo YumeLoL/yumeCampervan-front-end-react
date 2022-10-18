@@ -10,6 +10,7 @@ import { IVan } from "../../../libs/interface";
 import { useNavigate } from "react-router-dom";
 import CarCard from "../../../ui/molecules/Card/CarCard";
 import { baseUrl } from "../../../libs/baseUrl";
+import { Dots } from "@brainhubeu/react-carousel";
 
 
 
@@ -45,8 +46,9 @@ const ShortText = styled(Text)`
 `;
 
 const CarsCarousel = () => {
-  const navigate = useNavigate();
+ 
 
+  const navigate = useNavigate();
   const url = `${baseUrl}/vanProfile`;
 
   const [data, setData] = useState<IVan[]>();
@@ -72,6 +74,12 @@ const CarsCarousel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // handle dots in slider
+  const [value, setValue] = useState(0)
+  const onChange = (value:number) => {
+    setValue( value );
+  }
+
   return (
     <CarouselContainer>
       <CarouselDescription>
@@ -88,15 +96,11 @@ const CarsCarousel = () => {
       ) : (
         <>
           <Carousel
+            value={value}
+            onChange={onChange}
             plugins={[
               "infinite",
               "arrows",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                  numberOfSlides: 2,
-                },
-              },
             ]}
             breakpoints={{
               640: {
@@ -162,6 +166,7 @@ const CarsCarousel = () => {
               );
             })}
           </Carousel>
+          <Dots value={value} onChange={onChange} number={data?.length} />
         </>
       )}
     </CarouselContainer>
