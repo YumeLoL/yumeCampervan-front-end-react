@@ -1,8 +1,9 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { baseUrl } from "../../libs/baseUrl";
 import { IVan } from "../../libs/interface";
 import Button from "../../ui/atoms/Button";
 import { Marginer } from "../../ui/atoms/Marginer";
@@ -30,7 +31,7 @@ const StyledBanner = styled(Banner)`
     bg-transparent 
   `}
 `;
- 
+
 const FilterContainer = styled.div`
   ${tw`
     w-full
@@ -59,28 +60,31 @@ const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
 const CampervansPage = () => {
+  const navigate = useNavigate();
   const { location } = useParams();
-  console.log("location?:",location)
 
-  // const [url, setUrl] = useState(
-  //   `http://localhost:4000/vanProfile?location=${location}`
-  // );
-  // console.log(url)
+  // if there is passed location value then navigate to :location, otherwise showing whole list of campervan data
+  const url = useMemo(() => {
+    if (location) {
+      return `${baseUrl}/vanProfile?location=${location}`;
+    } else {
+      return `${baseUrl}/vanProfile`;
+    }
+  }, [location]);
 
   const [data, setData] = useState<IVan[]>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<any>("");
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
 
       try {
-        const res = await axios.get( `http://localhost:4000/vanProfile?location=${location}`);
-        console.log(res.data)
+        const res = await axios.get(url);
+        console.log(res.data);
         setData(res?.data);
       } catch (error) {
-        setError(error);
+        console.log(error);
       }
 
       setLoading(false);
@@ -88,7 +92,6 @@ const CampervansPage = () => {
 
     fetchData();
   }, []);
-
 
   // const [sleep, setSleep] = useState("");
   // const [price, setPrice] = useState({ min: 1, max: 500 });
@@ -184,17 +187,9 @@ const CampervansPage = () => {
                   vanType={van.vanType}
                   sleep={van.sleep}
                   location={van.location}
-                  originalPrice={van.originalPrice}
                   currentPrice={van.currentPrice}
-                  // onClick={() => navigate(`/campervans/${van.id}`)}
-                  // thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
-                  //   <img
-                  //     key={i}
-                  //     className="w-full h-[246px] object-cover"
-                  //     src={imgUrl}
-                  //     alt=""
-                  //   />
-                  // ))}
+                  thumbnailSrc={van.thumbnailSrc}
+                  onClick={() => navigate(`/campervans/van/${van.id}`)}
                 />
               );
             })}

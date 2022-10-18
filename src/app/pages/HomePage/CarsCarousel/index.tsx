@@ -2,15 +2,16 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import axios from "axios";
-import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import Title from "../../../ui/atoms/Title";
 import Text from "../../../ui/atoms/Text";
 import { IVan } from "../../../libs/interface";
 import { useNavigate } from "react-router-dom";
 import CarCard from "../../../ui/molecules/Card/CarCard";
+import { baseUrl } from "../../../libs/baseUrl";
 
-const baseUrl = process.env.REACT_APP_BASE_API_URL;
+
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -71,27 +72,6 @@ const CarsCarousel = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // const vans = data?.map((van: IVan) => (
-  //   <CarCard
-  //     key={van.id}
-  //     name={van.name}
-  //     vanType={van.vanType}
-  //     sleep={van.sleep}
-  //     location={van.location}
-  //     currentPrice={van.currentPrice}
-  //     // thumbnailSrc={van.thumbnailSrc?.map((imgUrl, i) => (
-  //     //   <img
-  //     //     key={i}
-  //     //     className="w-full h-[200px] object-cover"
-  //     //     src={imgUrl}
-  //     //     alt="img"
-  //     //   />
-  //     // ))}
-  //     toRoute={`/campervans/van/${van.id}`}
-  //   />
-  // ));
-  // console.log("vans:", vans);
-
   return (
     <CarouselContainer>
       <CarouselDescription>
@@ -107,9 +87,6 @@ const CarsCarousel = () => {
         "on loading ......"
       ) : (
         <>
-          {/* <CarouselSlide 
-           vans={vans} length={data?.length}
-           /> */}
           <Carousel
             plugins={[
               "infinite",
@@ -168,7 +145,9 @@ const CarsCarousel = () => {
               },
             }}
           >
-            {data?.map((van: IVan) => {
+           {loading
+          ? "Loading please wait"
+          : data?.map((van: IVan) => {
               return (
                 <CarCard
                   key={van.id}

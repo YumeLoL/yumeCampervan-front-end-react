@@ -11,6 +11,7 @@ import { IVan } from "../../../libs/interface";
 import Text from "../../../ui/atoms/Text";
 import Title from "../../../ui/atoms/Title";
 import MainLayout from "../../../ui/organisms/MainLayout";
+import { baseUrl } from "../../../libs/baseUrl";
 
 
 const CarouselContainer = styled.div`
@@ -84,17 +85,12 @@ const VanBookingContainer = styled.div`
 `;
 
 const VanDetailPage = () => {
-  const { vanId } = useParams();
+  const { id } = useParams();
 
-  const url = `http://localhost:4000/vanProfile/${vanId}`;
+  const url = `${baseUrl}/vanProfile/${id}`;
+
   const [data, setData] = useState<IVan>();
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<any>("");
-  
-  const [current, setCurrent] = useState(0);
-  const onChange = (curent: number) => {
-    setCurrent(curent);
-  };
   
   useEffect(() => {
     const fetchData = async () => {
@@ -104,7 +100,7 @@ const VanDetailPage = () => {
         const res = await axios.get(url);
         setData(res.data);
       } catch (err) {
-        setError(err);
+        console.log(err)
       }
 
       setLoading(false);
@@ -123,18 +119,9 @@ const VanDetailPage = () => {
         <>
           <CarouselContainer>
             <Carousel
-              value={current}
-              onChange={onChange}
-              slides={data?.thumbnailSrc?.map((imgUrl: string, i: number) => (
-                <img
-                  key={i}
-                  className="w-full h-[246px] object-cover"
-                  src={imgUrl}
-                  alt=""
-                />
-              ))}
               offset={10}
               plugins={[
+                "infinite",
                 "arrows",
                 {
                   resolve: slidesToShowPlugin,
@@ -167,8 +154,18 @@ const VanDetailPage = () => {
                   ],
                 },
               }}
-            />
+            >
+              {data?.thumbnailSrc?.map((imgUrl: string, i: number) => (
+                <img
+                  key={i}
+                  className="w-full h-[246px] object-cover"
+                  src={imgUrl}
+                  alt=""
+                />
+              ))}
+              </Carousel>
           </CarouselContainer>
+          
           <VanProfileContainer>
             <VanDetailContainer>
               <VanTitleAvatar>
