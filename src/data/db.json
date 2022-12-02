@@ -1,4 +1,23 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "name": "hostYume",
+      "roles": 1001,
+      "pwd": "111111"
+    },
+    {
+      "id": 2,
+      "name": "visitor",
+      "roles": 1002,
+      "pwd": "222222"
+    },
+    {
+      "user": "visitor",
+      "pwd": "222222",
+      "id": 3
+    }
+  ],
   "vanProfile": [
     {
       "id": 1,
@@ -90,7 +109,9 @@
     },
     {
       "id": 7,
-      "thumbnailSrc": ["/assets/campervan/5/motorhome-2.jpg"],
+      "thumbnailSrc": [
+        "/assets/campervan/5/motorhome-2.jpg"
+      ],
       "name": "xxxx",
       "vanType": "caravan",
       "sleep": 3,
@@ -100,7 +121,9 @@
     },
     {
       "id": 8,
-      "thumbnailSrc": ["/assets/campervan/4/motorhome-1.jpg"],
+      "thumbnailSrc": [
+        "/assets/campervan/4/motorhome-1.jpg"
+      ],
       "name": "sdfst",
       "vanType": "caravan",
       "sleep": 3,
@@ -135,7 +158,6 @@
       "discount": true
     }
   ],
-
   "highlights": [
     {
       "id": 1,
@@ -155,13 +177,17 @@
       "title": "Perth to Shark Bay",
       "img": "https://thl.widen.net/content/nbe3koqf5e/jpeg/Britzpicture13.jpg?crop=true&keep=c&q=80&color=ffffffff&u=gvvvh2&w=360&h=193",
       "durations": "5 days",
-      "highlights": ["Red Bluff", "Turquoise Bay", "Nambung National Park"],
+      "highlights": [
+        "Red Bluff",
+        "Turquoise Bay",
+        "Nambung National Park"
+      ],
       "content": "We loved our visit to The Pinnacles. It was a ‘desert meets sea’ experience. The Pinnacles are limestone formations within Nambung National Park. There are many theories of how they formed but some say they came from seashells.We took the 9km loop drive through the majestic pinnacles. There are many places to pull up the van and soak up the views where the desert meets the sea. We were surrounded by thousands of these rock formations rising from the yellow sand of the Pinnacles Desert."
     },
     {
       "id": 3,
       "title": "sydney to Brisbane",
-      "img":"https://thl.widen.net/content/hu4e3etcuf/jpeg/122567-56.jpg?crop=true&keep=c&q=80&color=ffffffff&u=phbid6&w=360&h=193",
+      "img": "https://thl.widen.net/content/hu4e3etcuf/jpeg/122567-56.jpg?crop=true&keep=c&q=80&color=ffffffff&u=phbid6&w=360&h=193",
       "durations": "7 days",
       "highlights": [
         "Take a surf lesson",
@@ -174,15 +200,19 @@
     {
       "id": 4,
       "title": "New South Wales",
-      "img":"https://thl.widen.net/content/jbzxhq7gpg/jpeg/Brisbane%20-%20Tourism%20and%20Events%20Queensland.jpg?crop=true&keep=c&q=80&color=ffffffff&u=mg5qnl&w=360&h=193",
+      "img": "https://thl.widen.net/content/jbzxhq7gpg/jpeg/Brisbane%20-%20Tourism%20and%20Events%20Queensland.jpg?crop=true&keep=c&q=80&color=ffffffff&u=mg5qnl&w=360&h=193",
       "durations": "8 days",
-      "highlights": ["Red Bluff", "Turquoise Bay", "Nambung National Park"],
+      "highlights": [
+        "Red Bluff",
+        "Turquoise Bay",
+        "Nambung National Park"
+      ],
       "content": "We loved our visit to The Pinnacles. It was a ‘desert meets sea’ experience. The Pinnacles are limestone formations within Nambung National Park. There are many theories of how they formed but some say they came from seashells.We took the 9km loop drive through the majestic pinnacles. There are many places to pull up the van and soak up the views where the desert meets the sea. We were surrounded by thousands of these rock formations rising from the yellow sand of the Pinnacles Desert."
     },
     {
       "id": 5,
       "title": "Road Trip Through Victoria",
-      "img":"https://thl.widen.net/content/ndy4nj3at8/jpeg/174737-56%20copy.jpg?crop=true&keep=c&q=80&color=ffffffff&u=mg5qnl&w=360&h=193",
+      "img": "https://thl.widen.net/content/ndy4nj3at8/jpeg/174737-56%20copy.jpg?crop=true&keep=c&q=80&color=ffffffff&u=mg5qnl&w=360&h=193",
       "durations": "10 days",
       "highlights": [
         "Take a surf lesson",
@@ -193,5 +223,4 @@
       "content": "We loved our visit to The Pinnacles. It was a ‘desert meets sea’ experience. The Pinnacles are limestone formations within Nambung National Park. There are many theories of how they formed but some say they came from seashells.We took the 9km loop drive through the majestic pinnacles. There are many places to pull up the van and soak up the views where the desert meets the sea. We were surrounded by thousands of these rock formations rising from the yellow sand of the Pinnacles Desert."
     }
   ]
-  
 }

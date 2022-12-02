@@ -1,10 +1,28 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Logo from "../../atoms/Logo";
 import NavItems from "./NavItems";
 
-const MainNavContainer = styled.div`
+
+const Navbar = () => {
+  return (
+    <Container>
+      <NavbarContainer>
+        <Logo />
+        <div className="flex">
+          <NavItems />
+          <Link className="flex items-center text-primary font-bold text-xl ml-4" to="/login" >Login</Link>
+        </div>
+      </NavbarContainer>
+    </Container>
+  );
+};
+
+export default Navbar;
+
+const Container = styled.div`
   ${tw`
     w-full
     flex
@@ -25,21 +43,3 @@ const NavbarContainer = styled.div`
     z-50
     `}
 `;
-const LogoContainer = styled.div`
-  ${tw` flex items-center`}
-`;
-
-const Navbar = () => {
-  return (
-    <MainNavContainer>
-      <NavbarContainer>
-        <LogoContainer>
-          <Logo />
-        </LogoContainer>
-        <NavItems />
-      </NavbarContainer>
-    </MainNavContainer>
-  );
-};
-
-export default Navbar;

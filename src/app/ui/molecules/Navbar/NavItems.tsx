@@ -138,7 +138,7 @@ const NavItems = () => {
                       key={submenu.route}
                       className={`block ${submenu.active ? "active" : ""}`}
                       onClick={() => goToRoute(submenu.route)}
-                    >
+                      >
                       {submenu.label}
                     </span>
                   </SubNavItem>
@@ -160,7 +160,9 @@ const NavItems = () => {
           </NavItem>
         )
       )}
+
     </ListContainer>
+      
   );
 };
 

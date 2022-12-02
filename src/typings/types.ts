@@ -1,0 +1,1 @@
+export type SubmitFormEvent = React.FormEvent<HTMLFormElement>
