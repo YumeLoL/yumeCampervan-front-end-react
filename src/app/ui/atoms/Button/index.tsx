@@ -43,8 +43,6 @@ const OutlinedButton = styled(BaseButton)`
   hover:bg-primary
   hover:text-white
   hover:border-transparent
-  mr-2
-  sm:mr-8
   mb-4
 `};
 `;
@@ -55,8 +53,6 @@ const FilledButton = styled(BaseButton)`
     hover:bg-transparent
     hover:text-secondary
     hover:border-secondary
-    mr-2
-    sm:mr-8
     mb-4
   `};
 `;
