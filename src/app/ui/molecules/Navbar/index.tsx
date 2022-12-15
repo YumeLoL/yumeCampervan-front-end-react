@@ -1,5 +1,3 @@
-import React from "react";
-import { Link } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Logo from "../../atoms/Logo";
@@ -11,10 +9,7 @@ const Navbar = () => {
     <Container>
       <NavbarContainer>
         <Logo />
-        <div className="flex">
           <NavItems />
-          <Link className="flex items-center text-primary font-bold text-xl ml-4" to="/login" >Login</Link>
-        </div>
       </NavbarContainer>
     </Container>
   );

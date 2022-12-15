@@ -9,7 +9,6 @@ import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
 import PostDetailPage from "./app/pages/GetInspiredPage/PopularRoutesPage/PostDetailPage";
 import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
 import HomePage from "./app/pages/HomePage";
-import LoginPage from "./app/pages/LoginPage";
 import "./index.css";
 
 const container = document.getElementById("root")!;
@@ -20,7 +19,6 @@ root.render(
     <Router>
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/login" element={<LoginPage />} />
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>

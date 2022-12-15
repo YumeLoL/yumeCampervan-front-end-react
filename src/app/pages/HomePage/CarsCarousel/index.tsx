@@ -1,16 +1,14 @@
-import React, { useEffect, useState } from "react";
+import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
+import "@brainhubeu/react-carousel/lib/style.css";
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import axios from "axios";
-import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
-import "@brainhubeu/react-carousel/lib/style.css";
-import Title from "../../../ui/atoms/Title";
-import Text from "../../../ui/atoms/Text";
+import { data } from "../../../../data/data";
 import { IVan } from "../../../libs/interface";
-import { useNavigate } from "react-router-dom";
+import Text from "../../../ui/atoms/Text";
+import Title from "../../../ui/atoms/Title";
 import CarCard from "../../../ui/molecules/Card/CarCard";
-import { baseUrl } from "../../../libs/baseUrl";
-import { Dots } from "@brainhubeu/react-carousel";
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -45,29 +43,23 @@ const ShortText = styled(Text)`
 
 const CarsCarousel = () => {
   const navigate = useNavigate();
-  const url = `${baseUrl}/vanProfile`;
 
-  const [data, setData] = useState<IVan[]>();
+  const [promoteVans, setPromoteVans] = useState<IVan[]>();
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
       setLoading(true);
 
       try {
-        const res = await axios.get(url);
-        const promoteVans = res.data.filter((vanObj: IVan) => vanObj.discount);
-        setData(promoteVans);
+        const promoteVans = data.vanProfile.filter((vanObj: IVan) => vanObj.discount);
+        setPromoteVans(promoteVans);
         // console.log(data)
       } catch (err) {
         console.log(err);
       }
 
       setLoading(false);
-    };
 
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // handle dots in slider
@@ -152,7 +144,7 @@ const CarsCarousel = () => {
           >
             {loading
               ? "Loading please wait"
-              : data?.map((van: IVan) => {
+              : promoteVans?.map((van: IVan) => {
                   return (
                     <CarCard
                       key={van.id}
@@ -167,7 +159,7 @@ const CarsCarousel = () => {
                   );
                 })}
           </Carousel>
-          <Dots value={value} onChange={onChange} number={data?.length} />
+          <Dots value={value} onChange={onChange} number={promoteVans?.length} />
         </>
       )}
     </CarouselContainer>

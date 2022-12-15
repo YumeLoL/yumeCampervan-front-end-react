@@ -3,6 +3,7 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { data } from "../../../data/data";
 import useFetch from "../../hooks/useFetch";
 import { baseUrl } from "../../libs/baseUrl";
 import { IVan } from "../../libs/interface";
@@ -65,16 +66,8 @@ const CampervansPage = () => {
   const navigate = useNavigate();
   const { location } = useParams();
 
-  // if there is passed location value then navigate to :location, otherwise showing whole list of campervan data
-  const url = useMemo(() => {
-    if (location) {
-      return `${baseUrl}/vanProfile?location=${location}`;
-    } else {
-      return `${baseUrl}/vanProfile`;
-    }
-  }, [location]);
-
-  const { data, loading } = useFetch(url);
+  const [loading, setLoading] = useState(false);
+  const [vanProfile, setVanProfile] = useState<IVan[]>()
 
   const [selectedLocation, setSelectedLocation] = useState("");
   const [sleep, setSleep] = useState("");
@@ -86,7 +79,23 @@ const CampervansPage = () => {
       key: "selection",
     },
   ]);
- 
+
+
+  useEffect(() => {
+    setLoading(true)
+
+    try {
+      const { vanProfile } = data
+      setVanProfile(vanProfile)
+      
+    } catch (err) {
+      console.log(err);
+    }
+
+    setLoading(false)
+  }, [])
+
+
 
   return (
     <MainLayout>
@@ -128,7 +137,7 @@ const CampervansPage = () => {
             className=""
             text={"Search vans"}
             theme={"outlined"}
-            // onClick={onClick}
+          // onClick={onClick}
           />
         </FilterItems>
       </FilterContainer>
@@ -145,22 +154,21 @@ const CampervansPage = () => {
       </div>
 
       <VansContainer>
-        {loading
-          ? "Loading please wait"
-          : data?.map((van: IVan) => {
-              return (
-                <CarCard
-                  key={van.id}
-                  name={van.name}
-                  vanType={van.vanType}
-                  sleep={van.sleep}
-                  location={van.location}
-                  currentPrice={van.currentPrice}
-                  thumbnailSrc={van.thumbnailSrc}
-                  onClick={() => navigate(`/campervans/van/${van.id}`)}
-                />
-              );
-            })}
+        {loading ? 'loading....' :
+          vanProfile?.map((van: IVan) => {
+            return (
+              <CarCard
+                key={van.id}
+                name={van.name}
+                vanType={van.vanType}
+                sleep={van.sleep}
+                location={van.location}
+                currentPrice={van.currentPrice}
+                thumbnailSrc={van.thumbnailSrc}
+                onClick={() => navigate(`/campervans/van/${van.id}`)}
+              />
+            );
+          })}
       </VansContainer>
       <Button text={"Show more"} theme={"filled"} />
       <StyledBanner
