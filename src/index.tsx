@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import HomePage from "./app/pages/HomePage";
+import { HomePage } from "./app/pages/Homepage";
 import "./index.css";
 
 const container = document.getElementById("root")!;
