@@ -55,8 +55,8 @@ const BriefContent = styled(Text)`
 `;
 
 const PopularRoutesPage = () => {
-  const url = `http://localhost:4000/highlights`;
-  const { data, loading } = useFetch(url);
+  // const url = `http://localhost:4000/highlights`;
+  // const { data, loading } = useFetch(url);
 
   return (
     <MainLayout>
@@ -78,7 +78,7 @@ const PopularRoutesPage = () => {
           />
         </HeroContent>
       </HeroContainer>
-      <PostCard loading={loading} data={data} />
+      {/* <PostCard loading={loading} data={data} /> */}
       <Banner
         text={"Contact Us"}
         theme={"outlined"}

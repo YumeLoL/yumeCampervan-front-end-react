@@ -9,7 +9,7 @@ import { IPost } from "../../../../libs/interface";
 const PostDetailPage = () => {
   const { postId } = useParams();
 
-  const url =`http://localhost:4000/highlights?id=${postId}`
+  // const url =`http://localhost:4000/highlights?id=${postId}`
   const [data,setDate] = useState<IPost>()
   const [loading,setLoading] = useState(false)
   const [error,setError] = useState<any>('')
