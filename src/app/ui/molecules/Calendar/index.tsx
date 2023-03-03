@@ -1,12 +1,11 @@
-import React from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
+import { format } from "date-fns";
+import { DateRange } from "react-date-range";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
-import { DateRange } from "react-date-range";
-import { format } from "date-fns";
-import Button from "../../atoms/Button";
+import styled from "styled-components";
+import tw from "twin.macro";
 import useClickClose from "../../../hooks/useClickClose";
+import Button from "../../atoms/Button";
 
 const ItemContainer = styled.div`
   ${tw`

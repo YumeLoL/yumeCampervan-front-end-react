@@ -2,12 +2,6 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import CampervansPage from "./app/pages/CampervansPage";
-import VanDetailPage from "./app/pages/CampervansPage/VanDetailPage";
-import ContactPage from "./app/pages/CantactPage";
-import BlogPage from "./app/pages/GetInspiredPage/Blog";
-import PopularRoutesPage from "./app/pages/GetInspiredPage/PopularRoutesPage";
-import PostDetailPage from "./app/pages/GetInspiredPage/PopularRoutesPage/PostDetailPage";
-import RecipesPage from "./app/pages/GetInspiredPage/Recipes";
 import HomePage from "./app/pages/HomePage";
 import "./index.css";
 

@@ -1,15 +1,14 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import MainLayout from "../../ui/organisms/MainLayout";
-import HeroSession from "./HeroSession";
-import BookingStep from "./BookingStep";
-import AboutUs from "./AboutUs";
-import CarsCarousel from "./CarsCarousel";
-import Banner from "../../ui/molecules/Banner";
+import deliverBush from "../../../images/deliver-caravan-bush.svg";
+import driveVan from "../../../images/drive-all-van.svg";
 import ImageSeparator from "../../ui/atoms/ImageSeparator";
 import { Marginer } from "../../ui/atoms/Marginer";
-import driveVan from "../../../images/drive-all-van.svg";
-import deliverBush from "../../../images/deliver-caravan-bush.svg";
+import Banner from "../../ui/molecules/Banner";
+import MainLayout from "../../ui/organisms/MainLayout";
+import AboutUs from "./AboutUs";
+import BookingStep from "./BookingStep";
+import CarsCarousel from "./CarsCarousel";
+import HeroSession from "./HeroSession";
 
 function HomePage() {
   const navigate = useNavigate();

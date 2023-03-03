@@ -1,4 +1,3 @@
-
 const isRouteActive = (route: string) => {
   //   return true if the route is active
   const isActive =

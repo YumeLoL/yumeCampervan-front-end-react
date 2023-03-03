@@ -1,11 +1,10 @@
-import React from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { push as Menu } from "react-burger-menu";
 import { useMediaQuery } from "react-responsive";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
 import useClickClose from "../../../hooks/useClickClose";
 import useMenu from "../../../hooks/useMenu";
 import { SCREENS } from "../../../libs/responsive";
@@ -81,12 +80,12 @@ const NavItems = () => {
     return (
       <ListContainer>
         <Menu right>
-          {menu.map((menu, i) =>
+          {menu.map((menu:any, i:number) =>
             menu.submenu ? (
               <div key={i} className="m-2 font-bold text-base self-center">
                 <span>{menu.label}</span>
                 <div className={"pl-4"}>
-                  {menu.submenu.map((submenu) => (
+                  {menu.submenu.map((submenu:any) => (
                     <span
                       key={submenu.route}
                       className="block"
@@ -113,7 +112,7 @@ const NavItems = () => {
 
   return (
     <ListContainer>
-      {menu.map((menu, i) =>
+      {menu.map((menu:any, i:number) =>
         menu.submenu ? (
           <DropdownNavItem ref={menuRef}>
             <span
@@ -132,7 +131,7 @@ const NavItems = () => {
 
             {isOpen ? (
               <SubNavContainer>
-                {menu.submenu.map((submenu) => (
+                {menu.submenu.map((submenu:any) => (
                   <SubNavItem>
                     <span
                       key={submenu.route}
@@ -166,4 +165,5 @@ const NavItems = () => {
   );
 };
 
-export default NavItems;
+
+export default NavItems

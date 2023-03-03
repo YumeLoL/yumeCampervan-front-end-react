@@ -1,5 +1,7 @@
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
+import { Calendar } from "react-date-range";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -7,8 +9,6 @@ import { IVan } from "../../../libs/interface";
 import Text from "../../../ui/atoms/Text";
 import Title from "../../../ui/atoms/Title";
 import MainLayout from "../../../ui/organisms/MainLayout";
-import { Calendar } from "react-date-range";
-import { useState } from "react";
 
 
 const CarouselContainer = styled.div`

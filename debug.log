@@ -1,5 +1,0 @@
-[0926/200126.427:ERROR:registration_protocol_win.cc(106)] CreateFile: The system cannot find the file specified. (0x2)
-[0926/200126.944:ERROR:crashpad_client_win.cc(814)] not connected
-[0926/200158.188:ERROR:registration_protocol_win.cc(106)] CreateFile: The system cannot find the file specified. (0x2)
-[0926/200158.827:ERROR:registration_protocol_win.cc(106)] CreateFile: The system cannot find the file specified. (0x2)
-[0926/200230.040:ERROR:registration_protocol_win.cc(106)] CreateFile: The system cannot find the file specified. (0x2)

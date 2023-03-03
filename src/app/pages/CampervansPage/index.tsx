@@ -1,10 +1,7 @@
-import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import useFetch from "../../hooks/useFetch";
-import { baseUrl } from "../../libs/baseUrl";
 import { IVan } from "../../libs/interface";
 import Button from "../../ui/atoms/Button";
 import { Marginer } from "../../ui/atoms/Marginer";

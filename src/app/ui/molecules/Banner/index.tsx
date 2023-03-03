@@ -1,8 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Button from "../../atoms/Button";
-import { ButtonType } from "../../atoms/Button";
+import Button, { ButtonType } from "../../atoms/Button";
 import Title, { TitleType } from "../../atoms/Title";
 
 export interface IBanner extends ButtonType, TitleType {
