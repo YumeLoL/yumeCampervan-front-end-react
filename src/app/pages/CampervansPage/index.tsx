@@ -3,7 +3,6 @@ import React, { useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { data } from "../../../data/data";
 import useFetch from "../../hooks/useFetch";
 import { baseUrl } from "../../libs/baseUrl";
 import { IVan } from "../../libs/interface";

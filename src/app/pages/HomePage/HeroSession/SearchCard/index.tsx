@@ -66,7 +66,7 @@ const SearchCard = () => {
         <StyledSelect
           id="location"
           name="location"
-          onChange={(e) => {
+          onChange={(e:any) => {
             e.preventDefault();
             setLocation(e.target.value.toLowerCase());
           }}

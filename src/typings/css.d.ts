@@ -20,3 +20,5 @@ declare module "*.mp4" {
   const mp4: any;
   export default mp4;
 }
+
+declare module 'styled-components';
