@@ -22,10 +22,10 @@ root.render(
 
         <Route path="/campervans">
           <Route index element={<CampervansPage />}/>
-          <Route path=":location" element={<CampervansPage />}/>
+          {/* <Route path=":location" element={<CampervansPage />}/> */}
         </Route>
 
-        <Route path="/campervans/van">
+        {/* <Route path="/campervans/van">
           <Route index element={<CampervansPage />}/>
           <Route path=":id" element={<VanDetailPage />}/>
         </Route>
@@ -43,7 +43,7 @@ root.render(
 
         <Route path="/get-inspired/recipes" element={<RecipesPage />} />
 
-        <Route path="/contact" element={<ContactPage />} />
+        <Route path="/contact" element={<ContactPage />} /> */}
         
 
         {/* <Route path="/signup" element={<ClientSignUpPage />} />
