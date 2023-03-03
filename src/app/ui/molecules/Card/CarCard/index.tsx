@@ -1,13 +1,11 @@
 import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Carousel, { arrowsPlugin } from "@brainhubeu/react-carousel";
 import {
   faCircleChevronRight,
   faCircleChevronLeft,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@brainhubeu/react-carousel/lib/style.css";
 import Button from "../../../atoms/Button";
 import { IVan } from "../../../../libs/interface";
 import { Link } from "react-router-dom";
@@ -115,7 +113,7 @@ const CarCard = ({
   return (
     <CarContainer>
       <CarThumbnail>
-        <Carousel
+        {/* <Carousel
           plugins={[
             {
               resolve: arrowsPlugin,
@@ -154,7 +152,7 @@ const CarCard = ({
               alt="img"
             />
           ))}
-        </Carousel>
+        </Carousel> */}
       </CarThumbnail>
       <LinkButton text={name} theme={"text"} onClick={onClick} />
 

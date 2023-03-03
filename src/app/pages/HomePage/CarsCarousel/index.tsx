@@ -1,14 +1,9 @@
-import Carousel, { Dots, slidesToShowPlugin } from "@brainhubeu/react-carousel";
-import "@brainhubeu/react-carousel/lib/style.css";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { data } from "../../../../data/data";
 import { IVan } from "../../../libs/interface";
 import Text from "../../../ui/atoms/Text";
-import Title from "../../../ui/atoms/Title";
-import CarCard from "../../../ui/molecules/Card/CarCard";
 
 const CarouselContainer = styled.div`
   ${tw`
