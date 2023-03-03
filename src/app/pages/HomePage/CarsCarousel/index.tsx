@@ -47,20 +47,20 @@ const CarsCarousel = () => {
   const [promoteVans, setPromoteVans] = useState<IVan[]>();
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-      setLoading(true);
+  // useEffect(() => {
+  //     setLoading(true);
 
-      try {
-        const promoteVans = data.vanProfile.filter((vanObj: IVan) => vanObj.discount);
-        setPromoteVans(promoteVans);
-        // console.log(data)
-      } catch (err) {
-        console.log(err);
-      }
+  //     try {
+  //       const promoteVans = data.vanProfile.filter((vanObj: IVan) => vanObj.discount);
+  //       setPromoteVans(promoteVans);
+  //       // console.log(data)
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
 
-      setLoading(false);
+  //     setLoading(false);
 
-  }, []);
+  // }, []);
 
   // handle dots in slider
   const [value, setValue] = useState(0);
@@ -69,100 +69,101 @@ const CarsCarousel = () => {
   };
 
   return (
-    <CarouselContainer>
-      <CarouselDescription>
-        <Title title={"Find Your Perfect Van"} size={"large"} />
-        <ShortText
-          text={
-            "Camplify is proud to be Australia’s largest and fastest-growing campervan, motorhome and caravan sharing community. We’re safely connecting holidaymakers with thousands of unique neighbourhood vans that are available to hire for their next outdoor adventure. Explore some of our featured campervans, motorhomes and caravans available for hire below."
-          }
-        />
-      </CarouselDescription>
+    <></>
+    // <CarouselContainer>
+    //   <CarouselDescription>
+    //     <Title title={"Find Your Perfect Van"} size={"large"} />
+    //     <ShortText
+    //       text={
+    //         "Camplify is proud to be Australia’s largest and fastest-growing campervan, motorhome and caravan sharing community. We’re safely connecting holidaymakers with thousands of unique neighbourhood vans that are available to hire for their next outdoor adventure. Explore some of our featured campervans, motorhomes and caravans available for hire below."
+    //       }
+    //     />
+    //   </CarouselDescription>
 
-      {loading ? (
-        "on loading ......"
-      ) : (
-        <>
-          <Carousel
-            value={value}
-            onChange={onChange}
-            plugins={[
-              "infinite",
-              {
-                resolve: slidesToShowPlugin,
-                options: {
-                 numberOfSlides: 4
-                }
-              },
-            ]}
-            breakpoints={{
-              640: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 1,
-                    },
-                  },
-                ],
-              },
-              768: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 2,
-                    },
-                  },
-                ],
-              },
-              1024: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 3,
-                    },
-                  },
-                ],
-              },
-              1280: {
-                plugins: [
-                  "infinite",
-                  {
-                    resolve: slidesToShowPlugin,
-                    options: {
-                      numberOfSlides: 4,
-                    },
-                  },
-                ],
-              },
-            }}
-          >
-            {loading
-              ? "Loading please wait"
-              : promoteVans?.map((van: IVan) => {
-                  return (
-                    <CarCard
-                      key={van.id}
-                      name={van.name}
-                      vanType={van.vanType}
-                      sleep={van.sleep}
-                      location={van.location}
-                      currentPrice={van.currentPrice}
-                      thumbnailSrc={van.thumbnailSrc}
-                      onClick={() => navigate(`/campervans/van/${van.id}`)}
-                    />
-                  );
-                })}
-          </Carousel>
-          <Dots value={value} onChange={onChange} number={promoteVans?.length} />
-        </>
-      )}
-    </CarouselContainer>
+    //   {loading ? (
+    //     "on loading ......"
+    //   ) : (
+    //     <>
+    //       <Carousel
+    //         value={value}
+    //         onChange={onChange}
+    //         plugins={[
+    //           "infinite",
+    //           {
+    //             resolve: slidesToShowPlugin,
+    //             options: {
+    //              numberOfSlides: 4
+    //             }
+    //           },
+    //         ]}
+    //         breakpoints={{
+    //           640: {
+    //             plugins: [
+    //               "infinite",
+    //               {
+    //                 resolve: slidesToShowPlugin,
+    //                 options: {
+    //                   numberOfSlides: 1,
+    //                 },
+    //               },
+    //             ],
+    //           },
+    //           768: {
+    //             plugins: [
+    //               "infinite",
+    //               {
+    //                 resolve: slidesToShowPlugin,
+    //                 options: {
+    //                   numberOfSlides: 2,
+    //                 },
+    //               },
+    //             ],
+    //           },
+    //           1024: {
+    //             plugins: [
+    //               "infinite",
+    //               {
+    //                 resolve: slidesToShowPlugin,
+    //                 options: {
+    //                   numberOfSlides: 3,
+    //                 },
+    //               },
+    //             ],
+    //           },
+    //           1280: {
+    //             plugins: [
+    //               "infinite",
+    //               {
+    //                 resolve: slidesToShowPlugin,
+    //                 options: {
+    //                   numberOfSlides: 4,
+    //                 },
+    //               },
+    //             ],
+    //           },
+    //         }}
+    //       >
+    //         {loading
+    //           ? "Loading please wait"
+    //           : promoteVans?.map((van: IVan) => {
+    //               return (
+    //                 <CarCard
+    //                   key={van.id}
+    //                   name={van.name}
+    //                   vanType={van.vanType}
+    //                   sleep={van.sleep}
+    //                   location={van.location}
+    //                   currentPrice={van.currentPrice}
+    //                   thumbnailSrc={van.thumbnailSrc}
+    //                   onClick={() => navigate(`/campervans/van/${van.id}`)}
+    //                 />
+    //               );
+    //             })}
+    //       </Carousel>
+    //       <Dots value={value} onChange={onChange} number={promoteVans?.length} />
+    //     </>
+    //   )}
+    // </CarouselContainer>
   );
 };
 

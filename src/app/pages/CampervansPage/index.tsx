@@ -82,26 +82,26 @@ const CampervansPage = () => {
 
   const [query, setQuery] = useState({})
 
-  useEffect(() => {
-    setLoading(true)
+  // useEffect(() => {
+  //   setLoading(true)
 
-    try {
-      const { vanProfile } = data
+  //   try {
+  //     const { vanProfile } = data
 
-      // if location param exists, set selected location van, otherwise shows all location vans
-      if (location) {
-        const selectedLocation = vanProfile.filter((van) => van.location === location)
-        setVanProfile(selectedLocation)
-      } else {
-        setVanProfile(vanProfile)
-      }
+  //     // if location param exists, set selected location van, otherwise shows all location vans
+  //     if (location) {
+  //       const selectedLocation = vanProfile.filter((van) => van.location === location)
+  //       setVanProfile(selectedLocation)
+  //     } else {
+  //       setVanProfile(vanProfile)
+  //     }
 
-    } catch (err) {
-      console.log(err);
-    }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
 
-    setLoading(false)
-  },[])
+  //   setLoading(false)
+  // },[])
 
 
   return (

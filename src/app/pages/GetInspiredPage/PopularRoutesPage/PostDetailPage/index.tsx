@@ -14,24 +14,24 @@ const PostDetailPage = () => {
   const [loading,setLoading] = useState(false)
   const [error,setError] = useState<any>('')
   
-  useEffect(() => {
-    const fetchData = async () => {
-          setLoading(true)
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //         setLoading(true)
           
-          try {
-            const res = await axios.get(url)
-            setDate(res.data[0])
-          } catch (error) {
-            setError(error)
-          }
+  //         try {
+  //           const res = await axios.get(url)
+  //           setDate(res.data[0])
+  //         } catch (error) {
+  //           setError(error)
+  //         }
           
-          setLoading(false)
-        }
+  //         setLoading(false)
+  //       }
         
-        fetchData()
-      },[url])
+  //       fetchData()
+  //     },[url])
       
-  console.log(data)
+  // console.log(data)
   
   return (
     <MainLayout>

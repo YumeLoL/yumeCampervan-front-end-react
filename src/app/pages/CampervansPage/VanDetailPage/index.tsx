@@ -101,22 +101,22 @@ const VanDetailPage = () => {
     },
   ]);
 
-  useEffect(() => {
-    setLoading(true)
+  // useEffect(() => {
+  //   setLoading(true)
 
-    try {
-      const { vanProfile } = data
+  //   try {
+  //     const { vanProfile } = data
 
-      const vanDetail = vanProfile.filter(van => van.id.toString() === id)
+  //     const vanDetail = vanProfile.filter(van => van.id.toString() === id)
 
-      setVanProfile(vanDetail[0])
+  //     setVanProfile(vanDetail[0])
 
-    } catch (err) {
-      console.log(err)
-    }
+  //   } catch (err) {
+  //     console.log(err)
+  //   }
 
-    setLoading(false);
-  }, []);
+  //   setLoading(false);
+  // }, []);
 
 
   return (
@@ -126,7 +126,7 @@ const VanDetailPage = () => {
       ) : (
         <>
           <CarouselContainer>
-            <Carousel
+            {/* <Carousel
               offset={10}
               plugins={[
                 "infinite",
@@ -171,7 +171,7 @@ const VanDetailPage = () => {
                   alt=""
                 />
               ))}
-            </Carousel>
+            </Carousel> */}
           </CarouselContainer>
 
           <VanProfileContainer>
