@@ -1,42 +1,40 @@
-import React, { useEffect, useState } from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
-import axios from "axios";
 import Carousel, { slidesToShowPlugin } from "@brainhubeu/react-carousel";
 import "@brainhubeu/react-carousel/lib/style.css";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
+import { DateRange } from 'react-date-range';
+import { data } from "../../../../data/data";
 import { IVan } from "../../../libs/interface";
 import Text from "../../../ui/atoms/Text";
 import Title from "../../../ui/atoms/Title";
 import MainLayout from "../../../ui/organisms/MainLayout";
-import { baseUrl } from "../../../libs/baseUrl";
+import { Calendar } from "react-date-range";
 
 
 const CarouselContainer = styled.div`
   ${tw`
     w-full
-    h-[500px]
-    my-8
     `}
 `;
 const VanProfileContainer = styled.div`
   ${tw`
-    max-w-screen-2xl
+    max-w-[1200px]
+    m-10
     flex
-    flex-wrap
-    my-16
+    gap-20
     `}
 `;
 const VanDetailContainer = styled.div`
   ${tw`
-    w-2/3
+    
     `}
 `;
 const VanTitleAvatar = styled.div`
   ${tw`
-    w-full
     flex
     justify-between
     `}
@@ -51,10 +49,10 @@ const Avatar = styled.div`
 `;
 const AvatarIcon = styled.div`
   ${tw` 
-    w-24
-    h-24
+    w-10
+    h-10
     text-secondary
-    text-6xl
+    text-2xl
     text-center
     flex
     items-center
@@ -80,36 +78,46 @@ const FeaturedList = styled.div`
 `;
 const VanBookingContainer = styled.div`
   ${tw`
-    w-1/3
+
     `}
 `;
+const DatePicker = styled.div`
+  ${tw`
+  
+  `}
+`
 
 const VanDetailPage = () => {
   const { id } = useParams();
-
-  const url = `${baseUrl}/vanProfile/${id}`;
-
-  const [data, setData] = useState<IVan>();
+  const [vanProfile, setVanProfile] = useState<IVan>()
   const [loading, setLoading] = useState(false);
-  
+
+  // date range picker
+  const [date, setDate] = useState([
+    {
+      startDate: new Date(),
+      endDate: new Date(),
+      key: "selection",
+    },
+  ]);
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
+    setLoading(true)
 
-      try {
-        const res = await axios.get(url);
-        setData(res.data);
-      } catch (err) {
-        console.log(err)
-      }
+    try {
+      const { vanProfile } = data
 
-      setLoading(false);
-    };
+      const vanDetail = vanProfile.filter(van => van.id.toString() === id)
 
-    fetchData();
-  }, [url]);
+      setVanProfile(vanDetail[0])
 
-  console.log(data);
+    } catch (err) {
+      console.log(err)
+    }
+
+    setLoading(false);
+  }, []);
+
 
   return (
     <MainLayout>
@@ -155,7 +163,7 @@ const VanDetailPage = () => {
                 },
               }}
             >
-              {data?.thumbnailSrc?.map((imgUrl: string, i: number) => (
+              {vanProfile?.thumbnailSrc?.map((imgUrl: string, i: number) => (
                 <img
                   key={i}
                   className="w-full h-[246px] object-cover"
@@ -163,37 +171,37 @@ const VanDetailPage = () => {
                   alt=""
                 />
               ))}
-              </Carousel>
+            </Carousel>
           </CarouselContainer>
-          
+
           <VanProfileContainer>
             <VanDetailContainer>
               <VanTitleAvatar>
                 <Title
                   className="text-secondary flex items-center"
-                  size={"large"}
-                  title={data?.name as string}
+                  size={"medium"}
+                  title={vanProfile?.name as string}
                 />
                 <Avatar>
                   <AvatarIcon>
                     <FontAwesomeIcon icon={faUser} />
                   </AvatarIcon>
-                  <span className="text-center font-bold text-2xl">Ban</span>
+                  <span className="text-center font-bold text-lg">Ban</span>
                 </Avatar>
               </VanTitleAvatar>
 
-              <strong className="text-3xl inline-block my-4">
-                {data?.location}
+              <strong className="text-xl inline-block my-4">
+                Location: {vanProfile?.location}
               </strong>
 
               <InfoSession>
-                <strong>sleep: {data?.sleep}</strong>
+                <strong>Guests: {vanProfile?.sleep}</strong>
                 <strong>Tow</strong>
                 <strong>Deliver</strong>
               </InfoSession>
 
               <Text
-                text={`Description: Pop-Top Trailer 17.56-1. Will comfortably sleep a
+                text={`Pop-Top Trailer 17.56-1. Will comfortably sleep a
               family of up to 6, Quick and easy set-up with a pop-top roof, 2
             slide out beds (queen and double) and a roll out awning. Comforts of
             air-conditioning/heating and microwave (only with 240 volt power), 4
@@ -203,7 +211,19 @@ const VanDetailPage = () => {
 
               <FeaturedList></FeaturedList>
             </VanDetailContainer>
-            <VanBookingContainer>sdfsdfs</VanBookingContainer>
+
+            <VanBookingContainer>
+              <form>
+                <div>
+                  <span>From ${vanProfile?.currentPrice} AUD per day</span>
+                  <DatePicker>
+                    <input type="text" name="begin" placeholder="From date" value=""/>
+                    <input type="text" name="end" placeholder="To date" value=""/>
+                    <Calendar date={date} setDate={setDate}/>
+                  </DatePicker>
+                </div>
+              </form>
+            </VanBookingContainer>
           </VanProfileContainer>{" "}
         </>
       )}

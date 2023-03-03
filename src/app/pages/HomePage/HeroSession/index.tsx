@@ -152,8 +152,6 @@ const HeroSession = () => {
       </RightContainer>
       </TopMain>
       <SearchContainer>
-        {/* <input type="text" placeholder="My adventure starts in..." autoComplete="off"/>
-        <Button text={"Find a van"} theme={"filled"} /> */}
         <SearchCard />
       </SearchContainer>
       

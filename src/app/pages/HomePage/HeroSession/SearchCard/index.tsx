@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
 import Button from "../../../../ui/atoms/Button";
 
 const CardContainer = styled.div`
@@ -80,29 +80,6 @@ const SearchCard = () => {
         </StyledSelect>
       </ItemContainer>
 
-      {/* 
-      // datalist example
-      <ItemContainer>
-        <Icon>
-          <FontAwesomeIcon icon={faMagnifyingGlass} />
-        </Icon>
-        <input
-          className="w-full"
-          type="text"
-          name="location"
-          list="location-list"
-          placeholder="My adventure starts in..."
-          onChange={(e) => {
-            setLocation(e.target.value);
-          }}
-        />
-        <datalist id="location-list">
-          <option value="Melbourne">Melbourne</option>
-          <option value="Adelaide">Adelaide</option>
-          <option value="Sydney">Sydney</option>
-        </datalist>
-      </ItemContainer> */}
-      {/* <Link to={"/campervans"}></Link> */}
       <Button
         className="bg-secondary
         hover:bg-transparent
@@ -110,15 +87,7 @@ const SearchCard = () => {
         hover:border-secondary"
         text="Find a van"
         theme={"base"}
-        onClick={() =>
-          navigate(
-            `/campervans/${location}`
-            // navigate("/campervans", {
-            //   state: { location: location },
-            //   replace: true,
-            // }
-          )
-        }
+        onClick={() => navigate(`/campervans/${location}`)}
       />
     </CardContainer>
   );

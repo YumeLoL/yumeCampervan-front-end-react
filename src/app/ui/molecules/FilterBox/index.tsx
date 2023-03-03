@@ -75,15 +75,14 @@ const FilterBox = ({
           .map((option: string, index: number) => (
             <StyleOption
               onClick={(e: any) => {
-                e.preventDefault();
+                e.stopPropagation();
                 setSelectedValue(e.target.value);
-                // console.log("onclick, sleep:", e.target.value);
               }}
               key={index}
             >
               {option}
             </StyleOption>
-          ))}
+          ))} 
         </DropdownBox>
       )}
     </ItemContainer>
