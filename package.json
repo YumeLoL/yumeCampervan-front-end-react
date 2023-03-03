@@ -30,6 +30,19 @@
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "@types/react-dom": "^18.0.11"
+    "@types/react-dom": "^18.0.11",
+    "eslint-plugin-jsx-a11y": "^6.7.1"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
