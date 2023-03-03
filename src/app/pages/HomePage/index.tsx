@@ -7,7 +7,6 @@ import Banner from "../../ui/molecules/Banner";
 import MainLayout from "../../ui/organisms/MainLayout";
 import AboutUs from "./AboutUs";
 import BookingStep from "./BookingStep";
-import CarsCarousel from "./CarsCarousel";
 import HeroSession from "./HeroSession";
 
 function HomePage() {
@@ -22,7 +21,6 @@ function HomePage() {
       <ImageSeparator src={deliverBush} direction={"right"} />
       <AboutUs />
       <Marginer direction="vertical" margin="10em" />
-      <CarsCarousel />
       <Marginer direction="vertical" margin="10em" />
       <Banner
         title={"Can't find what you're looking for?"}
