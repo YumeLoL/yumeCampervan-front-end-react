@@ -11,6 +11,8 @@ import Text from "../ui/atoms/Text";
 import Layout from "../ui/organisms/Layout";
 import Button from "../ui/atoms/Button";
 import Banner from "../ui/molecules/Banner";
+import { getCampervanPage } from "../httpService/api/vanApi";
+import {Response} from "../libs/interface/res"
 
 
 
@@ -19,16 +21,6 @@ const CampervansPage = () => {
     const navigate = useNavigate();
     const { location } = useParams();
 
-    // if there is passed location value then navigate to :location, otherwise showing whole list of campervan data
-    //   const url = useMemo(() => {
-    //     if (location) {
-    //       return `${baseUrl}/vanProfile?location=${location}`;
-    //     } else {
-    //       return `${baseUrl}/vanProfile`;
-    //     }
-    //   }, [location]);
-
-    // const { data, loading } = useFetch(null);
 
     const [selectedLocation, setSelectedLocation] = useState("");
     const [sleep, setSleep] = useState("");
@@ -40,6 +32,22 @@ const CampervansPage = () => {
             key: "selection",
         },
     ]);
+
+    const [data, setData] = useState();
+    const [pagination, setPagination] = useState({
+        page:1,
+        pageSize:10
+    })
+    console.log("van data:",data)
+
+    useEffect(() => {
+        getCampervanPage(pagination).then((res: Response) => {
+            if(res.code === 1){
+                setData(res.data?.records)
+            }
+
+        }).catch((err) => err.message("Request error:", err) )
+    },[])
 
 
     return (
@@ -100,23 +108,10 @@ const CampervansPage = () => {
 
             <VansContainer>
                 
-                {/* {loading
-                    ? "Loading please wait"
-                    : data?.map((van: any) => { 
-                          return (
-                        <CarCard
-                          key={van.id}
-                          name={van.name}
-                          vanType={van.vanType}
-                          sleep={van.sleep}
-                          location={van.location}
-                          currentPrice={van.currentPrice}
-                          thumbnailSrc={van.thumbnailSrc}
-                          onClick={() => navigate(`/campervans/van/${van.id}`)}
-                        />
-                          );
-                    })} */}
+       
             </VansContainer>
+
+            
             <Button text={"Show more"} theme={"filled"} />
             <StyledBanner
                 text={"View all vans"}
