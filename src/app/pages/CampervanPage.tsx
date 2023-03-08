@@ -18,19 +18,24 @@ import { IVan } from "../libs/interface/van";
 
 
 const CampervansPage = () => {
-    const location = useLocation();
-    const vanLocation = location.state.location;
-    console.log("location from homepage:",vanLocation)
+    // const [price, setPrice] = useState({ min: 1, max: 500 });
+    // const [date, setDate] = useState([
+    //     {
+    //         startDate: new Date(),
+    //         endDate: new Date(),
+    //         key: "selection",
+    //     },
+    // ]);
 
-    const [selectedLocation, setSelectedLocation] = useState("");
-    const [price, setPrice] = useState({ min: 1, max: 500 });
-    const [date, setDate] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: "selection",
-        },
-    ]);
+    // get vanLocation value from homepage SearchBar
+    const [loading, setLoading] = useState(false);
+    const location = useLocation();
+    let vanLocation: string
+    // to make sure location.state is not null
+    if (location.state) {
+        vanLocation = location.state.location;
+    }
+
 
     const [pagination, setPagination] = useState({
         page: 1,
@@ -38,25 +43,30 @@ const CampervansPage = () => {
     })
     const [vans, setVans] = useState<IVan[]>();
     const [berths, setBerths] = useState<number | undefined>();
-    const [loading, setLoading] = useState(false);
+    const [selectedLocation, setSelectedLocation] = useState("");
 
 
-
+    // fetch data
     useEffect(() => {
         setLoading(true);
 
-        getCampervanPage({ ...pagination, vanLocation, berths })
+        getCampervanPage({
+            ...pagination,
+            vanLocation,
+            berths
+        })
             .then((res) => {
                 if (res.data.code === 1) {
                     //console.log(res.data.data.records)
                     setVans(res.data.data.records)
-                }            
+                }
             })
             .catch((err) => err.message("Request error:", err))
             .finally(() => setLoading(false));
 
     }, [])
 
+    
     // render van list
     const renderedVanList = vans?.map((van) => {
         return <VanCard key={van.vanId} {...van} />
@@ -64,6 +74,7 @@ const CampervansPage = () => {
 
     return (
         <Layout>
+
             <FilterContainer>
                 <FilterItems>
                     <FilterBox

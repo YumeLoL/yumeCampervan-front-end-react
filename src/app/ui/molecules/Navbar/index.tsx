@@ -30,7 +30,7 @@ const Navbar = () => {
                 <ListContainer>
                     {menu.map((menu, i) =>
                         menu.submenu ? (
-                            <DropdownNavItem ref={menuRef}>
+                            <DropdownNavItem key={i} ref={menuRef}>
                                 <span
                                     key={i}
                                     onClick={() => {
@@ -46,9 +46,9 @@ const Navbar = () => {
                                 </span>
 
                                 {isOpen ? (
-                                    <SubNavContainer>
+                                    <SubNavContainer key={i}>
                                         {menu.submenu.map((submenu) => (
-                                            <SubNavItem>
+                                            <SubNavItem key={i}>
                                                 <span
                                                     key={submenu.route}
                                                     className={`block ${submenu.active ? "active" : ""}`}
@@ -64,7 +64,7 @@ const Navbar = () => {
                                 )}
                             </DropdownNavItem>
                         ) : (
-                            <NavItem>
+                            <NavItem key={i}>
                                 <span
                                     key={i}
                                     className={`${menu.active ? "active" : ""}`}

@@ -9,10 +9,7 @@ interface IFilterBox {
   optionCollection: string[];
   className?: string;
   selectedValue: string | number | null;
-  setSelectedValue:
-    | React.Dispatch<React.SetStateAction<string>>
-    | React.Dispatch<React.SetStateAction<number>>
-    | any
+  setSelectedValue: any
 }
 
 
@@ -41,19 +38,19 @@ const FilterBox = ({
       {isOpen && (
         <DropdownBox>
           {
-          optionCollection
-          .map((option: string, index: number) => (
-            <StyleOption
-              onClick={(e: any) => {
-                e.preventDefault();
-                setSelectedValue(e.target.value);
-                // console.log("onclick, sleep:", e.target.value);
-              }}
-              key={index}
-            >
-              {option}
-            </StyleOption>
-          ))}
+            optionCollection
+              .map((option: string, index: number) => (
+                <StyleOption
+                  onClick={(e: any) => {
+                    e.preventDefault();
+                    setSelectedValue(e.target.value);
+                    // console.log("onclick, sleep:", e.target.value);
+                  }}
+                  key={index}
+                >
+                  {option}
+                </StyleOption>
+              ))}
         </DropdownBox>
       )}
     </ItemContainer>

@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import CampervanPage from "./app/pages/CampervanPage";
 import HomePage from "./app/pages/HomePage";
 import "./index.css";
@@ -10,12 +10,12 @@ const root = createRoot(container);
 
 root.render(
   <React.StrictMode>
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/campervans" element={<CampervanPage />} />
       </Routes>
-    </Router>
+    </BrowserRouter>
   </React.StrictMode>
 );
 
