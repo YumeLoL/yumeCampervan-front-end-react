@@ -8,44 +8,14 @@ interface IFilterBox {
   text: string | number;
   optionCollection: string[];
   className?: string;
-  selectedValue: string | number;
+  selectedValue: string | number | null;
   setSelectedValue:
     | React.Dispatch<React.SetStateAction<string>>
-    | React.Dispatch<React.SetStateAction<number>>;
+    | React.Dispatch<React.SetStateAction<number>>
+    | any
 }
 
-const ItemContainer = styled.div`
-  ${tw`
-  flex 
-  relative 
-  items-baseline
-  mr-5
-  `}
-`;
-const DropdownBox = styled.div`
-  ${tw`
-  w-auto
-  absolute 
-  top-16
-  left-0
-  text-gray-700
-  border-gray-300 
-  bg-white
-  border-2
-  rounded-md
-  text-xl
-  z-10
-  `}
-`;
-const StyleOption = styled.option`
-  ${tw` 
-  font-semibold
-  text-sm
-  md:text-base
-  lg:text-lg
-  mx-4 my-4
-  `}
-`;
+
 
 const FilterBox = ({
   text,
@@ -91,3 +61,37 @@ const FilterBox = ({
 };
 
 export default FilterBox;
+
+
+const ItemContainer = styled.div`
+  ${tw`
+  flex 
+  relative 
+  items-baseline
+  mr-5
+  `}
+`;
+const DropdownBox = styled.div`
+  ${tw`
+  w-auto
+  absolute 
+  top-16
+  left-0
+  text-gray-700
+  border-gray-300 
+  bg-white
+  border-2
+  rounded-md
+  text-xl
+  z-10
+  `}
+`;
+const StyleOption = styled.option`
+  ${tw` 
+  font-semibold
+  text-sm
+  md:text-base
+  lg:text-lg
+  mx-4 my-4
+  `}
+`;

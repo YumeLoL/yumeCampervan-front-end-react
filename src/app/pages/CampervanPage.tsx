@@ -1,8 +1,8 @@
-import axios from "axios";
-import React, { useEffect, useMemo, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
+import { getCampervanPage, IQueryVan } from "../httpService/api/vanApi";
 
 import FilterBox from "../components/FilterBox";
 import { Marginer } from "../ui/atoms/Margin";
@@ -11,19 +11,16 @@ import Text from "../ui/atoms/Text";
 import Layout from "../ui/organisms/Layout";
 import Button from "../ui/atoms/Button";
 import Banner from "../ui/molecules/Banner";
-import { getCampervanPage } from "../httpService/api/vanApi";
-import {Response} from "../libs/interface/res"
+import VanCard from "../ui/molecules/Card/VanCard";
+import { IVan } from "../libs/interface/van";
 
 
 
 
 const CampervansPage = () => {
     const navigate = useNavigate();
-    const { location } = useParams();
-
-
+    const { vanLocation } = useParams();
     const [selectedLocation, setSelectedLocation] = useState("");
-    const [sleep, setSleep] = useState("");
     const [price, setPrice] = useState({ min: 1, max: 500 });
     const [date, setDate] = useState([
         {
@@ -33,22 +30,33 @@ const CampervansPage = () => {
         },
     ]);
 
-    const [data, setData] = useState();
     const [pagination, setPagination] = useState({
-        page:1,
-        pageSize:10
+        page: 1,
+        pageSize: 10,
     })
-    console.log("van data:",data)
+    const [vans, setVans] = useState<IVan[]>();
+    const [berths, setBerths] = useState<number | undefined>();
+    const [loading, setLoading] = useState(false);
+
+  
 
     useEffect(() => {
-        getCampervanPage(pagination).then((res: Response) => {
-            if(res.code === 1){
-                setData(res.data?.records)
-            }
+        setLoading(true);
 
-        }).catch((err) => err.message("Request error:", err) )
-    },[])
+        getCampervanPage({ ...pagination, vanLocation, berths })
+            .then((res) => {
+                if (res.data.code === 1) {
+                    setVans(res.data.data.records)
+                }
+            })
+            .catch((err) => err.message("Request error:", err))
+            .finally(() => setLoading(false));
+    }, [])
 
+    // render van list
+    const renderedVanList = vans?.map((van) => {
+        return <VanCard key={van.vanId} {...van} />
+    })
 
     return (
         <Layout>
@@ -70,8 +78,8 @@ const CampervansPage = () => {
                     {/* <Calendar date={date} setDate={setDate} /> */}
 
                     <FilterBox
-                        className="sleep"
-                        text={sleep ? `${sleep}` : `Guests`}
+                        className="berths"
+                        text={berths ? `${berths}` : `Guests`}
                         optionCollection={[
                             `Guest 1`,
                             "Guests 2",
@@ -80,8 +88,8 @@ const CampervansPage = () => {
                             "Guests 5",
                             "Guests 6",
                         ]}
-                        selectedValue={sleep}
-                        setSelectedValue={setSleep}
+                        selectedValue={berths || null}
+                        setSelectedValue={setBerths}
                     />
 
                     {/* <PriceRange price={price} setPrice={setPrice} /> */}
@@ -106,12 +114,13 @@ const CampervansPage = () => {
                 />
             </div>
 
-            <VansContainer>
-                
-       
-            </VansContainer>
+            {/* render van list here */}
+            {
+                loading
+                    ? <h1>Loading.....</h1>
+                    : <VansContainer>{renderedVanList}</VansContainer>
+            }
 
-            
             <Button text={"Show more"} theme={"filled"} />
             <StyledBanner
                 text={"View all vans"}
