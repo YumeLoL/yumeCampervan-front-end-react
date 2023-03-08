@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { getCampervanPage, IQueryVan } from "../httpService/api/vanApi";
+import { getCampervanPage, getVanType, IQueryVan } from "../httpService/api/vanApi";
 
 import FilterBox from "../components/FilterBox";
 import { Marginer } from "../ui/atoms/Margin";
@@ -38,7 +38,7 @@ const CampervansPage = () => {
     const [berths, setBerths] = useState<number | undefined>();
     const [loading, setLoading] = useState(false);
 
-  
+
 
     useEffect(() => {
         setLoading(true);
@@ -46,11 +46,13 @@ const CampervansPage = () => {
         getCampervanPage({ ...pagination, vanLocation, berths })
             .then((res) => {
                 if (res.data.code === 1) {
+                    //console.log(res.data.data.records)
                     setVans(res.data.data.records)
-                }
+                }            
             })
             .catch((err) => err.message("Request error:", err))
             .finally(() => setLoading(false));
+
     }, [])
 
     // render van list
@@ -137,12 +139,12 @@ export default CampervansPage;
 
 const VansContainer = styled.div`
   ${tw` 
-  max-w-screen-2xl
+  max-w-screen-xl
   flex 
   flex-wrap 
   align-middle 
   justify-center
-  my-8
+  my-8 mx-8
   `}
 `;
 const StyledBanner = styled(Banner)`

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import {
@@ -9,11 +9,20 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Button from "../../atoms/Button";
 import { Link } from "react-router-dom";
 import { IVan } from "../../../libs/interface/van";
+import { getVanType } from "../../../httpService/api/vanApi";
 
 
 
 const CarCard = (props:IVan) => {
   const {berths, vanImageUrl, vanLocation, vanName, vanPricePerDay, vanTypeId} = props;  
+  const [typeName, setTypeName] = useState("");
+
+  useEffect(() => {
+    // get vanType by vanTypeId
+    getVanType(vanTypeId).then((res) => {
+        setTypeName(res.data.data.vanTypeName)
+    })
+  },[])
 
   return (
     <CarContainer>
@@ -63,8 +72,8 @@ const CarCard = (props:IVan) => {
       <LinkButton text={vanName} theme={"text"} />
 
       <CarDetailsContainer>
-        <p>{vanTypeId}</p>
         <p>Sleeps: {berths}</p>
+        <p>{typeName}</p>
       </CarDetailsContainer>
 
       <CarDetailsContainer>

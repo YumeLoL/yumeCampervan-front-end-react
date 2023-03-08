@@ -7,6 +7,7 @@ export interface IQueryVan {
   berths?:number;
 }
 
+// van api
 export const getCampervanPage = (params:IQueryVan) => {
     return axiosInstance({
       url: '/campervan/page',
@@ -14,3 +15,12 @@ export const getCampervanPage = (params:IQueryVan) => {
       params
     })
   }
+
+
+// vanType api
+export const getVanType = (vanTypeId:number) => {
+  return axiosInstance({
+    url: `/vanType/${vanTypeId}`,
+    method: 'get'
+    })
+}
