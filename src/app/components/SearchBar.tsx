@@ -43,7 +43,7 @@ const SearchCard = () => {
         hover:border-secondary"
         text="Find a van"
         theme={"base"}
-        // onClick={() => navigate( `/campervans/${location}`)}
+        onClick={() => navigate( `/campervans`, { state: { location } })}
       />
     </CardContainer>
   );

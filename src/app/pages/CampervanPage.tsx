@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { getCampervanPage, getVanType, IQueryVan } from "../httpService/api/vanApi";
@@ -18,8 +18,10 @@ import { IVan } from "../libs/interface/van";
 
 
 const CampervansPage = () => {
-    const navigate = useNavigate();
-    const { vanLocation } = useParams();
+    const location = useLocation();
+    const vanLocation = location.state.location;
+    console.log("location from homepage:",vanLocation)
+
     const [selectedLocation, setSelectedLocation] = useState("");
     const [price, setPrice] = useState({ min: 1, max: 500 });
     const [date, setDate] = useState([
