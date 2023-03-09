@@ -13,6 +13,7 @@ import Banner from "../ui/molecules/Banner";
 import VanCard from "../ui/molecules/Card/VanCard";
 import { IVan, IVanType } from "../libs/interface/van";
 import useClickClose from "../hooks/useClickClose";
+import { locationList } from "../libs/constant";
 
 
 const CampervansPage = () => {
@@ -31,11 +32,11 @@ const CampervansPage = () => {
     })
     const [berths, setBerths] = useState<number>(6);
     const [vanTypeList, setVanTypeList] = useState<IVanType[]>();
-    const [vanType, setVanType] = useState<IVanType>({vanTypeId:undefined, vanTypeName:undefined});
+    const [vanType, setVanType] = useState<IVanType>({ vanTypeId: undefined, vanTypeName: undefined });
     const [selectedLocation, setSelectedLocation] = useState("All Location");
     const [queryParams, setQueryParams] = useState({
         berths,
-        vanTypeId:vanType.vanTypeId,
+        vanTypeId: vanType.vanTypeId,
         ...(selectedLocation && { selectedLocation })
     });
 
@@ -53,7 +54,7 @@ const CampervansPage = () => {
             vanLocation = queryParams.selectedLocation;
         }
 
-        getCampervanPage({ ...pagination, vanLocation, berths, vanTypeId:vanType.vanTypeId })
+        getCampervanPage({ ...pagination, vanLocation, berths, vanTypeId: vanType.vanTypeId })
             .then((res) => {
                 if (res.data.code === 1) {
                     setVans(res.data.data.records);
@@ -65,12 +66,12 @@ const CampervansPage = () => {
 
         // fetch van Type list
         getAllType()
-        .then((res)=>{
-            if (res.data.code === 1) {
-                setVanTypeList(res.data.data);
-            }
-        })
-        .catch((err) => console.error("Request error:", err))    
+            .then((res) => {
+                if (res.data.code === 1) {
+                    setVanTypeList(res.data.data);
+                }
+            })
+            .catch((err) => console.error("Request error:", err))
 
 
     }, [queryParams.selectedLocation, queryParams.berths, queryParams.vanTypeId])
@@ -78,12 +79,6 @@ const CampervansPage = () => {
 
 
     // render location list
-    const locationList = [
-        "All Location",
-        "Melbourne",
-        "Adelaide",
-        "Sydney",
-    ]
     const renderLocationList = locationList
         .map((option: string, index: number) => (
             <StyleOption
@@ -97,14 +92,14 @@ const CampervansPage = () => {
 
     // render van type list   
     const renderVanTypeList = vanTypeList?.map((type) => (
-            <StyleOption
-                onClick={(e: any) => setVanType({vanTypeName: type.vanTypeName, vanTypeId: e.target.value})}
-                key={type.vanTypeId}
-                value={type.vanTypeId}
-            >
-                {type.vanTypeName}
-            </StyleOption>
-        ))
+        <StyleOption
+            onClick={(e: any) => setVanType({ vanTypeName: type.vanTypeName, vanTypeId: e.target.value })}
+            key={type.vanTypeId}
+            value={type.vanTypeId}
+        >
+            {type.vanTypeName}
+        </StyleOption>
+    ))
 
     // render van list
     const renderedVanList = vans?.map((van) => {
@@ -157,7 +152,7 @@ const CampervansPage = () => {
                         theme={"outlined"}
                         onClick={() => {
                             //console.log(selectedLocation, berths, vanType.vanTypeId)
-                            setQueryParams({ selectedLocation, berths, vanTypeId:vanType.vanTypeId })
+                            setQueryParams({ selectedLocation, berths, vanTypeId: vanType.vanTypeId })
                         }}
                     />
                 </FilterItems>
@@ -176,9 +171,7 @@ const CampervansPage = () => {
 
             {/* render van list here */}
             {
-                loading
-                    ? <h1>Loading.....</h1>
-                    : <VansContainer>{renderedVanList}</VansContainer>
+                loading ? <h1>Loading.....</h1> : vans?.length ? <VansContainer>{renderedVanList}</VansContainer> : <h1 style={{ "color": "red" }}>Got Nothing...... Try other options......</h1>
             }
 
             <Button text={"Show more"} theme={"filled"} />

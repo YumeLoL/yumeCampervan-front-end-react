@@ -1,13 +1,9 @@
 import React, { useEffect, useState } from "react";
+import { Link, useNavigate, useParams  } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import {
-  faCircleChevronRight,
-  faCircleChevronLeft,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import Button from "../../atoms/Button";
-import { Link } from "react-router-dom";
 import { IVan } from "../../../libs/interface/van";
 import { getVanType } from "../../../httpService/api/vanApi";
 
@@ -16,6 +12,8 @@ import { getVanType } from "../../../httpService/api/vanApi";
 const CarCard = (props:IVan) => {
   const {berths, vanImageUrl, vanLocation, vanName, vanPricePerDay, vanTypeId} = props;  
   const [typeName, setTypeName] = useState("");
+  const navigate = useNavigate();
+  const vanId = useParams();
 
   useEffect(() => {
     // get vanType by vanTypeId
@@ -69,7 +67,7 @@ const CarCard = (props:IVan) => {
         </Carousel> */}
         <img src={vanImageUrl} alt=""/>
       </CarThumbnail>
-      <LinkButton text={vanName} theme={"text"} />
+      <LinkButton text={vanName} theme={"text"} onClick={()=> {navigate(`/campervans/${vanId}`)}} />
 
       <CarDetailsContainer>
         <p>Sleeps: {berths}</p>
@@ -181,3 +179,4 @@ const ArrowRightButton = styled.button`
   z-10
   `}
 `;
+
