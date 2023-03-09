@@ -1,5 +1,3 @@
-
-
 export interface IVan {
   berths: number;
   createdAt: string;
@@ -13,4 +11,11 @@ export interface IVan {
   vanPricePerDay: number;
   vanStatus: string;
   vanTypeId: number;
+}
+
+export interface IVanType {
+  vanTypeId?: number,
+  vanTypeName?: string,
+  updatedAt?: string,
+  createdAt?: string
 }

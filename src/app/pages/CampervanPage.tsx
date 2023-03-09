@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { getCampervanPage} from "../httpService/api/vanApi";
+import { getAllType, getCampervanPage, getVanType } from "../httpService/api/vanApi";
 
 import { Marginer } from "../ui/atoms/Margin";
 import Title from "../ui/atoms/Title";
@@ -11,14 +11,17 @@ import Layout from "../ui/organisms/Layout";
 import Button from "../ui/atoms/Button";
 import Banner from "../ui/molecules/Banner";
 import VanCard from "../ui/molecules/Card/VanCard";
-import { IVan } from "../libs/interface/van";
+import { IVan, IVanType } from "../libs/interface/van";
 import useClickClose from "../hooks/useClickClose";
 
 
 const CampervansPage = () => {
     const location = useLocation();
-    const { isOpen, setIsOpen, menuRef } = useClickClose();
     const [loading, setLoading] = useState(false);
+
+    // Usage of the hooks for the two ItemContainer components
+    const { isOpen: locationIsOpen, setIsOpen: setLocationIsOpen, menuRef: locationRef } = useClickClose();
+    const { isOpen: typeIsOpen, setIsOpen: setTypeIsOpen, menuRef: typeRef } = useClickClose();
 
     // query value setting
     const [vans, setVans] = useState<IVan[]>();
@@ -27,17 +30,20 @@ const CampervansPage = () => {
         pageSize: 10,
     })
     const [berths, setBerths] = useState<number>(6);
+    const [vanTypeList, setVanTypeList] = useState<IVanType[]>();
+    const [vanType, setVanType] = useState<IVanType>({vanTypeId:undefined, vanTypeName:undefined});
     const [selectedLocation, setSelectedLocation] = useState("All Location");
     const [queryParams, setQueryParams] = useState({
         berths,
+        vanTypeId:vanType.vanTypeId,
         ...(selectedLocation && { selectedLocation })
     });
 
 
     // fetch data
     useEffect(() => {
+        // fetch van list
         setLoading(true);
-
         let vanLocation;
         if (location.state && location.state.location !== "all") {
             // if queried location value passed from homepage search bar
@@ -47,7 +53,7 @@ const CampervansPage = () => {
             vanLocation = queryParams.selectedLocation;
         }
 
-        getCampervanPage({...pagination, vanLocation, berths})
+        getCampervanPage({ ...pagination, vanLocation, berths, vanTypeId:vanType.vanTypeId })
             .then((res) => {
                 if (res.data.code === 1) {
                     setVans(res.data.data.records);
@@ -56,16 +62,28 @@ const CampervansPage = () => {
             .catch((err) => console.error("Request error:", err))
             .finally(() => setLoading(false));
 
-    }, [queryParams.selectedLocation, queryParams.berths])
+
+        // fetch van Type list
+        getAllType()
+        .then((res)=>{
+            if (res.data.code === 1) {
+                setVanTypeList(res.data.data);
+            }
+        })
+        .catch((err) => console.error("Request error:", err))    
 
 
+    }, [queryParams.selectedLocation, queryParams.berths, queryParams.vanTypeId])
+
+
+
+    // render location list
     const locationList = [
         "All Location",
         "Melbourne",
         "Adelaide",
         "Sydney",
     ]
-    // render location list
     const renderLocationList = locationList
         .map((option: string, index: number) => (
             <StyleOption
@@ -77,26 +95,38 @@ const CampervansPage = () => {
             </StyleOption>
         ))
 
+    // render van type list   
+    const renderVanTypeList = vanTypeList?.map((type) => (
+            <StyleOption
+                onClick={(e: any) => setVanType({vanTypeName: type.vanTypeName, vanTypeId: e.target.value})}
+                key={type.vanTypeId}
+                value={type.vanTypeId}
+            >
+                {type.vanTypeName}
+            </StyleOption>
+        ))
+
     // render van list
     const renderedVanList = vans?.map((van) => {
         return <VanCard key={van.vanId} {...van} />
     })
 
+
+
     return (
         <Layout>
-
             <FilterContainer>
                 <FilterItems>
                     {/* location selector */}
-                    <ItemContainer ref={menuRef} className={"vanLocation"}>
+                    <ItemContainer ref={locationRef} className={"vanLocation"}>
                         <Button
-                            onClick={() => setIsOpen(!isOpen)}
+                            onClick={() => setLocationIsOpen(!locationIsOpen)}
                             theme="filter"
                             text={""}
                         >
                             {selectedLocation}
                         </Button>
-                        {isOpen && <DropdownBox>{renderLocationList}</DropdownBox>}
+                        {locationIsOpen && <DropdownBox>{renderLocationList}</DropdownBox>}
                     </ItemContainer>
 
                     {/* guests(berths) number selector */}
@@ -108,13 +138,26 @@ const CampervansPage = () => {
                         </Button>
                     </ItemContainer>
 
+                    {/* vanType selector */}
+                    <ItemContainer ref={typeRef} className={"vanType"}>
+                        <Button
+                            onClick={() => setTypeIsOpen(!typeIsOpen)}
+                            theme="filter"
+                            text={""}
+                        >
+                            {vanType.vanTypeName ? vanType.vanTypeName : "Van Type"}
+                        </Button>
+                        {typeIsOpen && <DropdownBox>{renderVanTypeList}</DropdownBox>}
+                    </ItemContainer>
+
                     {/* query button */}
                     <StyledButton
                         className=""
                         text={"Search vans"}
                         theme={"outlined"}
                         onClick={() => {
-                            setQueryParams({ selectedLocation, berths })
+                            //console.log(selectedLocation, berths, vanType.vanTypeId)
+                            setQueryParams({ selectedLocation, berths, vanTypeId:vanType.vanTypeId })
                         }}
                     />
                 </FilterItems>

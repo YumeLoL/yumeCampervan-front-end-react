@@ -5,6 +5,7 @@ export interface IQueryVan {
   pageSize:number;
   vanLocation?:string;
   berths?:number;
+  vanTypeId?:number;
 }
 
 // van api
@@ -16,6 +17,14 @@ export const getCampervanPage = (params:IQueryVan) => {
     })
   }
 
+
+// get all van type api
+export const getAllType= () => {
+  return axiosInstance({
+    url: `/vanType`,
+    method: 'get'
+    })
+}
 
 // vanType api
 export const getVanType = (vanTypeId:number) => {
