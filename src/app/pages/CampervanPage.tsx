@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { getCampervanPage, getVanType, IQueryVan } from "../httpService/api/vanApi";
+import { getCampervanPage} from "../httpService/api/vanApi";
 
-import FilterBox from "../components/FilterBox";
 import { Marginer } from "../ui/atoms/Margin";
 import Title from "../ui/atoms/Title";
 import Text from "../ui/atoms/Text";
@@ -14,8 +13,6 @@ import Banner from "../ui/molecules/Banner";
 import VanCard from "../ui/molecules/Card/VanCard";
 import { IVan } from "../libs/interface/van";
 import useClickClose from "../hooks/useClickClose";
-
-
 
 
 const CampervansPage = () => {
@@ -31,11 +28,9 @@ const CampervansPage = () => {
     })
     const [berths, setBerths] = useState<number>(6);
     const [selectedLocation, setSelectedLocation] = useState("All Location");
-
-
     const [queryParams, setQueryParams] = useState({
         berths,
-        selectedLocation
+        ...(selectedLocation && { selectedLocation })
     });
 
 
