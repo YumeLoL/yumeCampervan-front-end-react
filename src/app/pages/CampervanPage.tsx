@@ -13,60 +13,75 @@ import Button from "../ui/atoms/Button";
 import Banner from "../ui/molecules/Banner";
 import VanCard from "../ui/molecules/Card/VanCard";
 import { IVan } from "../libs/interface/van";
+import useClickClose from "../hooks/useClickClose";
 
 
 
 
 const CampervansPage = () => {
-    // const [price, setPrice] = useState({ min: 1, max: 500 });
-    // const [date, setDate] = useState([
-    //     {
-    //         startDate: new Date(),
-    //         endDate: new Date(),
-    //         key: "selection",
-    //     },
-    // ]);
-
-    // get vanLocation value from homepage SearchBar
-    const [loading, setLoading] = useState(false);
     const location = useLocation();
-    let vanLocation: string
-    // to make sure location.state is not null
-    if (location.state) {
-        vanLocation = location.state.location;
-    }
+    const { isOpen, setIsOpen, menuRef } = useClickClose();
+    const [loading, setLoading] = useState(false);
 
-
+    // query value setting
+    const [vans, setVans] = useState<IVan[]>();
     const [pagination, setPagination] = useState({
         page: 1,
         pageSize: 10,
     })
-    const [vans, setVans] = useState<IVan[]>();
-    const [berths, setBerths] = useState<number | undefined>();
-    const [selectedLocation, setSelectedLocation] = useState("");
+    const [berths, setBerths] = useState<number>(6);
+    const [selectedLocation, setSelectedLocation] = useState("All Location");
+
+
+    const [queryParams, setQueryParams] = useState({
+        berths,
+        selectedLocation
+    });
 
 
     // fetch data
     useEffect(() => {
         setLoading(true);
 
-        getCampervanPage({
-            ...pagination,
-            vanLocation,
-            berths
-        })
+        let vanLocation;
+        if (location.state && location.state.location !== "all") {
+            // if queried location value passed from homepage search bar
+            vanLocation = location.state.location;
+        } else if (queryParams && queryParams.selectedLocation !== "All Location") {
+            // if location value be selected from filter box on campervan page
+            vanLocation = queryParams.selectedLocation;
+        }
+
+        getCampervanPage({...pagination, vanLocation, berths})
             .then((res) => {
                 if (res.data.code === 1) {
-                    //console.log(res.data.data.records)
-                    setVans(res.data.data.records)
+                    setVans(res.data.data.records);
                 }
             })
-            .catch((err) => err.message("Request error:", err))
+            .catch((err) => console.error("Request error:", err))
             .finally(() => setLoading(false));
 
-    }, [])
+    }, [queryParams.selectedLocation, queryParams.berths])
 
-    
+
+    const locationList = [
+        "All Location",
+        "Melbourne",
+        "Adelaide",
+        "Sydney",
+    ]
+    // render location list
+    const renderLocationList = locationList
+        .map((option: string, index: number) => (
+            <StyleOption
+                onClick={(e: any) => setSelectedLocation(e.target.value)}
+                key={index}
+                value={option}
+            >
+                {option}
+            </StyleOption>
+        ))
+
     // render van list
     const renderedVanList = vans?.map((van) => {
         return <VanCard key={van.vanId} {...van} />
@@ -77,43 +92,35 @@ const CampervansPage = () => {
 
             <FilterContainer>
                 <FilterItems>
-                    <FilterBox
-                        className="location"
-                        text={"All Location"}
-                        optionCollection={[
-                            "All Location",
-                            "Melbourne",
-                            "Adelaide",
-                            "Sydney",
-                        ]}
-                        selectedValue={selectedLocation}
-                        setSelectedValue={setSelectedLocation}
-                    />
+                    {/* location selector */}
+                    <ItemContainer ref={menuRef} className={"vanLocation"}>
+                        <Button
+                            onClick={() => setIsOpen(!isOpen)}
+                            theme="filter"
+                            text={""}
+                        >
+                            {selectedLocation}
+                        </Button>
+                        {isOpen && <DropdownBox>{renderLocationList}</DropdownBox>}
+                    </ItemContainer>
 
-                    {/* <Calendar date={date} setDate={setDate} /> */}
+                    {/* guests(berths) number selector */}
+                    <ItemContainer>
+                        <Button theme="filter" text="">
+                            <span onClick={() => setBerths(berths > 1 ? berths - 1 : 1)} style={{ "paddingRight": 7, "paddingLeft": 5 }} >-</span>
+                            {` ${berths} Guests `}
+                            <span onClick={() => setBerths(berths < 6 ? berths + 1 : 6)} style={{ "paddingRight": 5, "paddingLeft": 7 }}>+</span>
+                        </Button>
+                    </ItemContainer>
 
-                    <FilterBox
-                        className="berths"
-                        text={berths ? `${berths}` : `Guests`}
-                        optionCollection={[
-                            `Guest 1`,
-                            "Guests 2",
-                            "Guests 3",
-                            "Guests 4",
-                            "Guests 5",
-                            "Guests 6",
-                        ]}
-                        selectedValue={berths || null}
-                        setSelectedValue={setBerths}
-                    />
-
-                    {/* <PriceRange price={price} setPrice={setPrice} /> */}
-
+                    {/* query button */}
                     <StyledButton
                         className=""
                         text={"Search vans"}
                         theme={"outlined"}
-                    // onClick={onClick}
+                        onClick={() => {
+                            setQueryParams({ selectedLocation, berths })
+                        }}
                     />
                 </FilterItems>
             </FilterContainer>
@@ -194,6 +201,38 @@ const StyledButton = styled(Button)`
   ${tw`mb-0`}
 `;
 
-function useFetch(url: any): { data: any; loading: any; } {
-    throw new Error("Function not implemented.");
-}
+
+
+
+const ItemContainer = styled.div`
+  ${tw`
+  flex 
+  relative 
+  items-baseline
+  mr-5
+  `}
+`;
+const DropdownBox = styled.div`
+  ${tw`
+  w-auto
+  absolute 
+  top-16
+  left-0
+  text-gray-700
+  border-gray-300 
+  bg-white
+  border-2
+  rounded-md
+  text-xl
+  z-10
+  `}
+`;
+const StyleOption = styled.option`
+  ${tw` 
+  font-semibold
+  text-sm
+  md:text-base
+  lg:text-lg
+  mx-4 my-4
+  `}
+`;

@@ -30,9 +30,10 @@ const SearchCard = () => {
           <option value="" disabled selected>
             My adventure starts in...
           </option>
-          <option value="Melbourne">Melbourne</option>
-          <option value="Adelaide">Adelaide</option>
-          <option value="Sydney">Sydney</option>
+          <option value="all">All Location</option>
+          <option value="melbourne">Melbourne</option>
+          <option value="adelaide">Adelaide</option>
+          <option value="sydney">Sydney</option>
         </StyledSelect>
       </ItemContainer>
 

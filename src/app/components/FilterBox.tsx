@@ -47,6 +47,7 @@ const FilterBox = ({
                     // console.log("onclick, sleep:", e.target.value);
                   }}
                   key={index}
+                  value={option}
                 >
                   {option}
                 </StyleOption>
