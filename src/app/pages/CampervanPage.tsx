@@ -14,6 +14,7 @@ import VanCard from "../ui/molecules/Card/VanCard";
 import { IVan, IVanType } from "../libs/interface/van";
 import useClickClose from "../hooks/useClickClose";
 import { locationList } from "../libs/constant";
+import { capitalizedSentence } from "../utils/capitalizeUtil";
 
 
 const CampervansPage = () => {
@@ -33,7 +34,7 @@ const CampervansPage = () => {
     const [berths, setBerths] = useState<number>(6);
     const [vanTypeList, setVanTypeList] = useState<IVanType[]>();
     const [vanType, setVanType] = useState<IVanType>({ vanTypeId: undefined, vanTypeName: undefined });
-    const [selectedLocation, setSelectedLocation] = useState("All Location");
+    const [selectedLocation, setSelectedLocation] = useState("");
     const [queryParams, setQueryParams] = useState({
         berths,
         vanTypeId: vanType.vanTypeId,
@@ -80,8 +81,6 @@ const CampervansPage = () => {
     }, [queryParams])
 
 
-    console.log(location.state)
-
     // render location list
     const renderLocationList = locationList
         .map((option: string, index: number) => (
@@ -90,7 +89,7 @@ const CampervansPage = () => {
                 key={index}
                 value={option}
             >
-                {option}
+                {capitalizedSentence(option)}
             </StyleOption>
         ))
 
@@ -123,7 +122,7 @@ const CampervansPage = () => {
                             theme="filter"
                             text={""}
                         >
-                            {selectedLocation}
+                            {selectedLocation ? capitalizedSentence(selectedLocation) : "All Location"}
                         </Button>
                         {locationIsOpen && <DropdownBox>{renderLocationList}</DropdownBox>}
                     </ItemContainer>
