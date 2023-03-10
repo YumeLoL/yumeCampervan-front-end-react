@@ -37,7 +37,7 @@ const CampervansPage = () => {
     const [queryParams, setQueryParams] = useState({
         berths,
         vanTypeId: vanType.vanTypeId,
-        ...(selectedLocation && { selectedLocation })
+        ...(selectedLocation && {selectedLocation})
     });
 
 
@@ -46,13 +46,13 @@ const CampervansPage = () => {
         // fetch van list
         setLoading(true);
         let vanLocation;
-        if (location.state && location.state.location !== "all") {
+        if (location.state) {
             // if queried location value passed from homepage search bar
             vanLocation = location.state.location;
-        } else if (queryParams && queryParams.selectedLocation !== "All Location") {
+        } else if (queryParams && queryParams.selectedLocation !== "all location") {
             // if location value be selected from filter box on campervan page
             vanLocation = queryParams.selectedLocation;
-        }
+        } 
 
         getCampervanPage({ ...pagination, vanLocation, berths, vanTypeId: vanType.vanTypeId })
             .then((res) => {
@@ -61,7 +61,10 @@ const CampervansPage = () => {
                 }
             })
             .catch((err) => console.error("Request error:", err))
-            .finally(() => setLoading(false));
+            .finally(() => {
+                setLoading(false)
+                location.state = undefined // to clear the value of vanLocation passed from location.state
+            });
 
 
         // fetch van Type list
@@ -74,15 +77,16 @@ const CampervansPage = () => {
             .catch((err) => console.error("Request error:", err))
 
 
-    }, [queryParams.selectedLocation, queryParams.berths, queryParams.vanTypeId])
+    }, [queryParams])
 
 
+    console.log(location.state)
 
     // render location list
     const renderLocationList = locationList
         .map((option: string, index: number) => (
             <StyleOption
-                onClick={(e: any) => setSelectedLocation(e.target.value)}
+                onClick={(e: any) => setSelectedLocation(e.target.value.toLowerCase())}
                 key={index}
                 value={option}
             >
@@ -151,7 +155,7 @@ const CampervansPage = () => {
                         text={"Search vans"}
                         theme={"outlined"}
                         onClick={() => {
-                            //console.log(selectedLocation, berths, vanType.vanTypeId)
+                            console.log(selectedLocation, berths, vanType.vanTypeId)
                             setQueryParams({ selectedLocation, berths, vanTypeId: vanType.vanTypeId })
                         }}
                     />

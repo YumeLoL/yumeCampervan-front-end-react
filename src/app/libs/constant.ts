@@ -1,6 +1,6 @@
 export const locationList = [
-    "All Location",
-    "Melbourne",
-    "Adelaide",
-    "Sydney",
+    "all location",
+    "melbourne",
+    "adelaide",
+    "sydney",
 ]
