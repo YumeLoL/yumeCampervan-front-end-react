@@ -5,73 +5,26 @@ import tw from "twin.macro";
 
 import Button from "../../atoms/Button";
 import { IVan } from "../../../libs/interface/van";
-import { getVanType } from "../../../httpService/api/vanApi";
-
+import {ImgCarousel} from "../../../components/ImgCarousel";
 
 
 const CarCard = (props:IVan) => {
-  const {berths, vanImageUrl, vanLocation, vanName, vanPricePerDay, vanTypeId} = props;  
-  const [typeName, setTypeName] = useState("");
+  const {berths, vanImg, vanLocation, vanName, vanPricePerDay, vanTypeId, vanTypeName} = props;  
   const navigate = useNavigate();
   const vanId = useParams();
 
-  useEffect(() => {
-    // get vanType by vanTypeId
-    getVanType(vanTypeId).then((res) => {
-        setTypeName(res.data.data.vanTypeName)
-    })
-  },[])
 
   return (
     <CarContainer>
       <CarThumbnail>
-        {/* <Carousel
-          plugins={[
-            {
-              resolve: arrowsPlugin,
-              options: {
-                arrowLeft: (
-                  <ArrowLeftButton>
-                    <FontAwesomeIcon icon={faCircleChevronLeft} />
-                  </ArrowLeftButton>
-                ),
-                arrowLeftDisabled: (
-                  <ArrowLeftButton>
-                    <FontAwesomeIcon icon={faCircleChevronLeft} />
-                  </ArrowLeftButton>
-                ),
-                arrowRight: (
-                  <ArrowRightButton>
-                    <FontAwesomeIcon icon={faCircleChevronRight} />
-                  </ArrowRightButton>
-                ),
-                arrowRightDisabled: (
-                  <ArrowRightButton>
-                    <FontAwesomeIcon icon={faCircleChevronRight} />
-                  </ArrowRightButton>
-                ),
-                addArrowClickHandler: true,
-              },
-            },
-            "infinite",
-          ]}
-        >
-          {thumbnailSrc?.map((imgUrl, i) => (
-            <img
-              key={i}
-              className="w-full h-[200px] object-cover"
-              src={imgUrl}
-              alt="img"
-            />
-          ))}
-        </Carousel> */}
-        <img src={vanImageUrl} alt=""/>
+        <ImgCarousel imgUrl={vanImg}/>
+        {/* <img src={vanImageUrl} alt=""/> */}
       </CarThumbnail>
       <LinkButton text={vanName} theme={"text"} onClick={()=> {navigate(`/campervans/${vanId}`)}} />
 
       <CarDetailsContainer>
         <p>Sleeps: {berths}</p>
-        <p>{typeName}</p>
+        <p>{vanTypeName}</p>
       </CarDetailsContainer>
 
       <CarDetailsContainer>

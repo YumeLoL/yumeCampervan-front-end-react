@@ -5,12 +5,13 @@ export interface IVan {
   updatedAt: string;
   vanDescription: string;
   vanId: number;
-  vanImageUrl: string;
+  vanImg: string[];
   vanLocation: string;
   vanName: string;
   vanPricePerDay: number;
   vanStatus: string;
   vanTypeId: number;
+  vanTypeName: string;
 }
 
 export interface IVanType {
