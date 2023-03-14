@@ -22,15 +22,15 @@ const isRouteActive = (route: string) => {
       {
         label: "Get Inspired",
         submenu: [
-          {
-            label: "Popular Routes",
-            route: "/get-inspired/popular-routes",
-            active: isRouteActive("/get-inspired/popular-routes"),
-          },
+          // {
+          //   label: "Popular Routes",
+          //   route: "/get-inspired/popular-routes",
+          //   active: isRouteActive("/get-inspired/popular-routes"),
+          // },
           {
             label: "Blog & News",
-            route: "/get-inspired/blog",
-            active: isRouteActive("/get-inspired/blog"),
+            route: "/get-inspired/blogNews",
+            active: isRouteActive("/get-inspired/blogNews"),
           },
           {
             label: "Recipes On The Road",
@@ -39,11 +39,11 @@ const isRouteActive = (route: string) => {
           },
         ],
       },
-      {
-        label: "Contact",
-        route: "/contact",
-        active: isRouteActive("/contact"),
-      },
+      // {
+      //   label: "Contact",
+      //   route: "/contact",
+      //   active: isRouteActive("/contact"),
+      // },
     ];
     return menu;
   };

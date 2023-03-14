@@ -5,7 +5,7 @@ export const BaseURL = "http://localhost:8081";
 // axios instance
 export const axiosInstance = axios.create({
   baseURL: BaseURL,
-  timeout: 5000,
+  timeout: 10000,
 });
 
 // Add a request interceptor

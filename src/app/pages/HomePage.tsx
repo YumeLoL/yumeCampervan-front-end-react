@@ -20,7 +20,6 @@ import blueVan from "../libs/img/blue-camper-van.png";
 import blob from "../libs/img/blob.svg";
 import driveVan from "../libs/img/drive-all-van.svg";
 import deliverBush from "../libs/img/deliver-caravan-bush.svg";
-import CarsCarousel from "../components/CarsCarousel";
 import Layout from "../ui/organisms/Layout";
 
 

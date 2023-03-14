@@ -8,83 +8,114 @@ import useClickClose from "../../../hooks/useClickClose";
 import useMenu from "../../../hooks/useMenu";
 import logo from "../../../libs/img/logo.png";
 import "./index.css";
+import Button from "../../atoms/Button";
 
 const Navbar = () => {
-    const menu = useMenu();
-    const navigate = useNavigate();
-    const goToRoute = (route: string) => navigate(route);
-    const { isOpen, setIsOpen, menuRef } = useClickClose()
+  const menu = useMenu();
+  const navigate = useNavigate();
+  const goToRoute = (route: string) => navigate(route);
+  const { isOpen, setIsOpen, menuRef } = useClickClose()
 
-    return (
-        <MainNavContainer>
-            <NavbarContainer>
-                <LogoContainer>
-                    <LogoContainer>
-                        <Image>
-                            <img src={logo} alt="logo" />
-                        </Image>
-                        <TextLogo>YUME.Camp</TextLogo>
-                    </LogoContainer>
-                </LogoContainer>
-                
-                <ListContainer>
-                    {menu.map((menu, i) =>
-                        menu.submenu ? (
-                            <DropdownNavItem key={i} ref={menuRef}>
-                                <span
-                                    key={i}
-                                    onClick={() => {
-                                        setIsOpen(!isOpen);
-                                    }}
-                                >
-                                    {menu.label}
-                                    {isOpen ? (
-                                        <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
-                                    ) : (
-                                        <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
-                                    )}
-                                </span>
+  return (
+    <MainNavContainer>
+      <NavbarContainer>
+        <LogoContainer>
+          <LogoContainer>
+            <Image>
+              <img src={logo} alt="logo" />
+            </Image>
+            <TextLogo>YUME.Camp</TextLogo>
+          </LogoContainer>
+        </LogoContainer>
 
-                                {isOpen ? (
-                                    <SubNavContainer key={i}>
-                                        {menu.submenu.map((submenu) => (
-                                            <SubNavItem key={i}>
-                                                <span
-                                                    key={submenu.route}
-                                                    className={`block ${submenu.active ? "active" : ""}`}
-                                                    onClick={() => goToRoute(submenu.route)}
-                                                >
-                                                    {submenu.label}
-                                                </span>
-                                            </SubNavItem>
-                                        ))}
-                                    </SubNavContainer>
-                                ) : (
-                                    ""
-                                )}
-                            </DropdownNavItem>
-                        ) : (
-                            <NavItem key={i}>
-                                <span
-                                    key={i}
-                                    className={`${menu.active ? "active" : ""}`}
-                                    onClick={() => goToRoute(menu.route)}
-                                >
-                                    {menu.label}
-                                </span>
-                            </NavItem>
-                        )
-                    )}
-                </ListContainer>
-            </NavbarContainer>
-        </MainNavContainer>
-    );
+        <ListContainer>
+          {menu.map((menu, i) =>
+            menu.submenu ? (
+              <DropdownNavItem key={i} ref={menuRef}>
+                <span
+                  key={i}
+                  onClick={() => {
+                    setIsOpen(!isOpen);
+                  }}
+                >
+                  {menu.label}
+                  {isOpen ? (
+                    <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
+                  ) : (
+                    <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
+                  )}
+                </span>
+
+                {isOpen ? (
+                  <SubNavContainer key={i}>
+                    {menu.submenu.map((submenu) => (
+                      <SubNavItem key={i}>
+                        <span
+                          key={submenu.route}
+                          className={`block ${submenu.active ? "active" : ""}`}
+                          onClick={() => goToRoute(submenu.route)}
+                        >
+                          {submenu.label}
+                        </span>
+                      </SubNavItem>
+                    ))}
+                  </SubNavContainer>
+                ) : (
+                  ""
+                )}
+              </DropdownNavItem>
+            ) : (
+              <NavItem key={i}>
+                <span
+                  key={i}
+                  className={`${menu.active ? "active" : ""}`}
+                  onClick={() => goToRoute(menu.route)}
+                >
+                  {menu.label}
+                </span>
+              </NavItem>
+            )
+          )}
+
+          <SignButton theme="outlined" text="Sign Up" onClick={()=> navigate("/signUp")}/>
+          <LoginButton theme="filled" text="Login" onClick={()=> navigate("/login")}/>
+
+        </ListContainer>
+      </NavbarContainer>
+    </MainNavContainer>
+  );
 };
 
 export default Navbar;
 
 
 
+const SignButton = styled(Button)`
+  ${tw`
+  h-8
+  w-24
+  rounded-full
+  ml-12
+  mr-0
+  mb-0
+  p-0
+  font-light
+  border
+  `}
+`;
+const LoginButton = styled(Button)`
+  ${tw`
+  h-8
+  w-16
+  rounded-full
+  ml-4
+  mr-0
+  mb-0
+  p-0
+  font-light
+  border
+  `}
+`;
 const MainNavContainer = styled.div`
   ${tw`
     w-full
@@ -129,6 +160,7 @@ const ListContainer = styled.div`
   flex
   flex-row
   z-50
+  items-center
   `}
 `;
 const NavItem = styled.div`
