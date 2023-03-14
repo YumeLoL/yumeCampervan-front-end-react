@@ -1,4 +1,5 @@
 declare module 'styled-components';
+declare module 'react-date-range';
 
 
 // image type module

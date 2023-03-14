@@ -3,7 +3,7 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 export interface TitleType {
-  title: string;
+  title: string | undefined;
   className?: string;
   size: 'large' | 'medium' | 'small';
 }

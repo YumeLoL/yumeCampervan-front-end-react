@@ -17,6 +17,13 @@ export const getCampervanPage = (params:IQueryVan) => {
     })
   }
 
+// get van details by id
+export const getVanById = (vanId:string)=>{
+  return axiosInstance({
+    url: `/campervan/${vanId}`,
+    method: 'get',
+  })
+}
 
 // get all van type api
 export const getAllType= () => {

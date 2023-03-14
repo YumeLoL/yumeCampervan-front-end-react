@@ -9,14 +9,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 
 interface IProps {
-    imgUrl: string[];
+    imgUrl: string[] | undefined;
+    //flag: boolean;
 }
 
 export const ImgCarousel = ({ imgUrl }: IProps) => {
     const carousel = useRef<AliceCarousel>(null);
-    const items = imgUrl.map((url, index) => {
-        return <img key={index} src={url} alt="" />
-    });
+  
+
+    let items; 
+    if (typeof imgUrl === 'undefined' || imgUrl === null) {
+        return <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />
+    }else{
+        items = imgUrl.map((url, index) => {
+        return <img key={index} src={url} alt="" style={{ maxWidth: "100%", height:"auto"}}/>
+    })}
+
+  
 
 
     return (

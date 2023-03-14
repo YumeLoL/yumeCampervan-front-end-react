@@ -5,7 +5,7 @@ export interface IVan {
   updatedAt: string;
   vanDescription: string;
   vanId: number;
-  vanImg: string[];
+  vanImg: string[] | undefined;
   vanLocation: string;
   vanName: string;
   vanPricePerDay: number;

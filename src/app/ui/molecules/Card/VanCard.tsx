@@ -9,9 +9,9 @@ import {ImgCarousel} from "../../../components/ImgCarousel";
 
 
 const CarCard = (props:IVan) => {
-  const {berths, vanImg, vanLocation, vanName, vanPricePerDay, vanTypeId, vanTypeName} = props;  
+  const {vanId,berths, vanImg, vanLocation, vanName, vanPricePerDay, vanTypeId, vanTypeName} = props;  
   const navigate = useNavigate();
-  const vanId = useParams();
+  // const vanId = useParams();
 
 
   return (

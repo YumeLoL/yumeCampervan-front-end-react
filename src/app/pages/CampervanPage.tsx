@@ -60,10 +60,10 @@ const CampervansPage = () => {
                 if (res.data.code === 1) {
                     setVans(res.data.data.records);
                 }
+                setLoading(false)
             })
             .catch((err) => console.error("Request error:", err))
             .finally(() => {
-                setLoading(false)
                 location.state = undefined // to clear the value of vanLocation passed from location.state
             });
 
