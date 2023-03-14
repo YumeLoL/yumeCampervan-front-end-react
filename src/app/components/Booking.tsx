@@ -32,14 +32,13 @@ export const Booking = ({ price }: any) => {
 
 const BookingWrapper = styled.div`
   ${tw`
-  top-0
    w-[380px]
   `}
 `;
 
 const StyledForm = styled.div`
 ${tw`
-   w-[380px]
+   w-full
    border-solid
    border
    border-gray-300

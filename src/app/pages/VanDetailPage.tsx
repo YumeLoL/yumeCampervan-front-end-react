@@ -2,17 +2,14 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import axios from "axios";
+import { getVanById } from "../httpService/api/vanApi";
 
-import { faUser } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import Layout from "../ui/organisms/Layout";
 import Title from "../ui/atoms/Title";
 import Text from "../ui/atoms/Text";
-import { getVanById } from "../httpService/api/vanApi";
 import { IVan } from "../libs/interface/van";
-import { ImgCarousel } from "../components/ImgCarousel";
 import { Booking } from "../components/Booking";
+import { PictureList } from "../components/PictureList";
 
 
 const VanDetailPage = () => {
@@ -49,7 +46,7 @@ const VanDetailPage = () => {
         <>
           <CarouselContainer>
             {
-              van?.vanImg ? <img src={van.vanImg[0]} style={{width: '100%'}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />
+              van?.vanImg ? <img src={van.vanImg[0]} style={{width: '100%', objectFit: "cover"}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />
             }
            
             {/* <ImgCarousel imgUrl={van?.vanImg}/> */}
@@ -63,12 +60,6 @@ const VanDetailPage = () => {
                   size={"large"}
                   title={van?.vanName}
                 />
-                {/* <Avatar>
-                  <AvatarIcon>
-                    <FontAwesomeIcon icon={faUser} />
-                  </AvatarIcon>
-                  <span className="text-center font-bold text-2xl">{}</span>
-                </Avatar> */}
               </VanTitleAvatar>
 
               <strong className="text-3xl inline-block my-4">
@@ -86,6 +77,9 @@ const VanDetailPage = () => {
               />
 
               <FeaturedList></FeaturedList>
+
+              <hr />
+              <PictureList imgUrl={van?.vanImg}/>
             </VanDetailContainer>
 
             <VanBookingContainer>
@@ -112,19 +106,28 @@ const CarouselContainer = styled.div`
 `;
 const VanProfileContainer = styled.div`
   ${tw`
-    h-[2000px]
+    h-auto
     w-full
+    p-24
     flex
-    flex-wrap
-    my-16
-    px-16
+    justify-between
     `}
 `;
+
 const VanDetailContainer = styled.div`
   ${tw`
-    w-2/3
+  w-2/3
   `}
 `;
+
+const VanBookingContainer = styled.div`
+  ${tw`
+    w-[300px]
+    flex
+    justify-end
+  `}
+`;
+
 const VanTitleAvatar = styled.div`
   ${tw`
     w-full
@@ -169,10 +172,5 @@ const InfoSession = styled.div`
 const FeaturedList = styled.div`
   ${tw` `}
 `;
-const VanBookingContainer = styled.div`
-  ${tw`
-    w-1/3
-    flex
-    justify-center
-  `}
-`;
+
+
