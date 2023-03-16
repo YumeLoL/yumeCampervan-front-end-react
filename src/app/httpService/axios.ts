@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const BaseURL = "http://localhost:8081";
 
+axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
+
 // axios instance
 export const axiosInstance = axios.create({
   baseURL: BaseURL,
@@ -37,3 +39,6 @@ axiosInstance.interceptors.request.use(config => {
     console.log(error)
     Promise.reject(error)
 });
+
+
+// request interceptor for login check

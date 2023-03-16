@@ -2,6 +2,7 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { BlogPage } from "./app/pages/BlogPage";
+import { BookingPage } from "./app/pages/BookingPage";
 import CampervanPage from "./app/pages/CampervanPage";
 import HomePage from "./app/pages/HomePage";
 import { Login } from "./app/pages/Login";
@@ -30,6 +31,11 @@ root.render(
         
         <Route path="/signUp" element={<SignUp />} />
         <Route path="/login" element={<Login />} />
+
+        <Route path="/member">
+          <Route path="/member/bookings" element={<BookingPage />} />
+          
+        </Route>
        
       </Routes>
     </BrowserRouter>

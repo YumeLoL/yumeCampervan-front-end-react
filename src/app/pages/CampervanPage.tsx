@@ -80,6 +80,22 @@ const CampervansPage = () => {
 
     }, [queryParams])
 
+    // fetch vanType list
+    // useEffect(()=>{
+    //     const fetchData =async () => {
+    //         try {
+    //             const res = await getAllType();
+    //             if (res.data.code === 1) {
+    //                 setVanTypeList(res.data.data);
+    //             }
+    //         } catch (error) {
+    //             console.error("Request error:", error)
+    //         }
+    //     }
+
+    //     fetchData();
+    // },[])
+
 
     // render location list
     const renderLocationList = locationList

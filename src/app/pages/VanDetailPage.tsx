@@ -25,15 +25,19 @@ const VanDetailPage = () => {
   
   
   useEffect(() => {
-    setLoading(true)
+    setLoading(true);
 
-    getVanById(vanId).then((res) => {
-      setVan(res.data.data);
-      setLoading(false);
-    }).catch((err) => {
-      console.error("Request error:", err)
-    })
-    
+    const fetchData = async () => {
+      try {
+        const res = await getVanById(vanId);
+        setVan(res.data.data);
+        setLoading(false);
+      } catch (err) {
+        console.error("Request error:", err);
+      }
+    };
+  
+    fetchData();
   }, []);
 
   console.log(van)
