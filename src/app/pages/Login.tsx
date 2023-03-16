@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { FormEvent, useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
+import Cookies from 'js-cookie';
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -37,8 +38,9 @@ export const Login = () => {
         try {
             const res = await login({ memberEmail, memberPassword })
             if (res.data.code === 1) {
-                localStorage.setItem('YumeCamp_member', JSON.stringify(res.data.data))
-                navigate("/member/bookings")
+                localStorage.setItem('YumeCamp_member', JSON.stringify(res.data.data.memberId))
+                //navigate("/member/bookings")
+                window.location.href = '/member/bookings';
 
                 setMemberEmail("")
                 setMemberPassword("")

@@ -1,14 +1,17 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useNavigate } from "react-router-dom";
 import useClickClose from "../../../hooks/useClickClose";
 import useMenu from "../../../hooks/useMenu";
+
 import logo from "../../../libs/img/logo.png";
-import "./index.css";
 import Button from "../../atoms/Button";
+import "./index.css"; 
+
+
 
 const Navbar = () => {
   const menu = useMenu();
@@ -28,6 +31,7 @@ const Navbar = () => {
           </LogoContainer>
         </LogoContainer>
 
+        {/* visitor menu list*/}
         <ListContainer>
           {menu.map((menu, i) =>
             menu.submenu ? (
@@ -79,6 +83,9 @@ const Navbar = () => {
 
           <SignButton theme="outlined" text="Sign Up" onClick={()=> navigate("/signUp")}/>
           <LoginButton theme="filled" text="Login" onClick={()=> navigate("/login")}/>
+
+          {/* member menu list */}
+          
 
         </ListContainer>
       </NavbarContainer>

@@ -6,10 +6,10 @@ const isRouteActive = (route: string) => {
       window.location.pathname.includes(route);
     return isActive;
   };
-  const homeRouteActive = (route: string) => {
-    const isActive = route === window.location.pathname;
-    return isActive;
-  };
+const homeRouteActive = (route: string) => {
+  const isActive = route === window.location.pathname;
+  return isActive;
+};
   
   const useMenu = () => {
     const menu = [

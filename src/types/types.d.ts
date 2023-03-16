@@ -1,5 +1,6 @@
 declare module 'styled-components';
 declare module 'react-date-range';
+declare module 'js-cookie';
 
 
 // image type module

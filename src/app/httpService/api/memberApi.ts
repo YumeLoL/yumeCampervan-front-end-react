@@ -8,7 +8,7 @@ type ILogin = {
 // login
 export const login =  (data:ILogin)=>{
     return axiosInstance({
-      url: `/member/login`,
+      url: `/login`,
       method: 'post',
       data
     })
@@ -17,7 +17,7 @@ export const login =  (data:ILogin)=>{
 // signup
 export const signup = (data:any)=>{
     return axiosInstance({
-      url: `/member/signup`,
+      url: `/signup`,
       method: 'post',
       data
     })
