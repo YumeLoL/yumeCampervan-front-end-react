@@ -5,22 +5,16 @@ import Footer from "../molecules/Footer";
 import Navbar from "../molecules/Navbar";
 
 
-interface ILayout {
-  children: React.ReactNode;
-}
-
-
-const MainLayout: React.FC<ILayout> = ({ children }) => {
+const MainLayout= ({ children }:{children: React.ReactNode;}) => {
   return (
-    <>
-    <AppContainer>
-      <PageContainer>
-      <Navbar />
-      {children}
-      <Footer />
-      </PageContainer>
-     </AppContainer>
-    </>
+      <AppContainer>
+        <PageContainer>
+          <Navbar />
+          {children}
+          <Footer />
+        </PageContainer>
+      </AppContainer>
+
   );
 };
 

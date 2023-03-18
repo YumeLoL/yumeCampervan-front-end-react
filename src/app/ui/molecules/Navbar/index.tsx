@@ -1,23 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { faChevronDown, faChevronUp } from "@fortawesome/free-solid-svg-icons";
+import { faChevronDown, faChevronUp, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import useClickClose from "../../../hooks/useClickClose";
 import useMenu from "../../../hooks/useMenu";
 
 import logo from "../../../libs/img/logo.png";
 import Button from "../../atoms/Button";
-import "./index.css"; 
+import "./index.css";
 
 
 
 const Navbar = () => {
-  const menu = useMenu();
+  const isLoggedIn = Boolean(JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null"));
+  const { menu, memberMenu } = useMenu();
   const navigate = useNavigate();
   const goToRoute = (route: string) => navigate(route);
-  const { isOpen, setIsOpen, menuRef } = useClickClose()
+  const { isOpen: isBlogOpen, setIsOpen: setIsBlogOpen, menuRef: blogMenuRef } = useClickClose()
+  const { isOpen: isMemberOpen, setIsOpen: setIsMemberOpen, menuRef: memberRef } = useClickClose()
+
+
+  const HandleLogout = () => {
+
+  }
+
 
   return (
     <MainNavContainer>
@@ -33,59 +41,90 @@ const Navbar = () => {
 
         {/* visitor menu list*/}
         <ListContainer>
-          {menu.map((menu, i) =>
-            menu.submenu ? (
-              <DropdownNavItem key={i} ref={menuRef}>
-                <span
-                  key={i}
-                  onClick={() => {
-                    setIsOpen(!isOpen);
-                  }}
-                >
-                  {menu.label}
-                  {isOpen ? (
-                    <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
-                  ) : (
-                    <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
-                  )}
-                </span>
+          <div className="flex">
+            {
+              menu.map((menu, i) =>
+                menu.submenu ? (
+                  <DropdownNavItem key={i} ref={blogMenuRef}>
+                    <span
+                      key={i}
+                      onClick={() => {
+                        setIsBlogOpen(!isBlogOpen);
+                      }}
+                    >
+                      {menu.label}
+                      {isBlogOpen ? (
+                        <FontAwesomeIcon className={"pl-2"} icon={faChevronDown} />
+                      ) : (
+                        <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
+                      )}
+                    </span>
 
-                {isOpen ? (
-                  <SubNavContainer key={i}>
-                    {menu.submenu.map((submenu) => (
-                      <SubNavItem key={i}>
-                        <span
-                          key={submenu.route}
-                          className={`block ${submenu.active ? "active" : ""}`}
-                          onClick={() => goToRoute(submenu.route)}
-                        >
-                          {submenu.label}
-                        </span>
-                      </SubNavItem>
-                    ))}
-                  </SubNavContainer>
+                    {isBlogOpen ? (
+                      <SubNavContainer key={i}>
+                        {menu.submenu.map((submenu) => (
+                          <SubNavItem key={i}>
+                            <span
+                              key={submenu.route}
+                              className={`block ${submenu.active ? "active" : ""}`}
+                              onClick={() => goToRoute(submenu.route)}
+                            >
+                              {submenu.label}
+                            </span>
+                          </SubNavItem>
+                        ))}
+                      </SubNavContainer>
+                    ) : (
+                      ""
+                    )}
+                  </DropdownNavItem>
                 ) : (
-                  ""
-                )}
-              </DropdownNavItem>
-            ) : (
-              <NavItem key={i}>
-                <span
-                  key={i}
-                  className={`${menu.active ? "active" : ""}`}
-                  onClick={() => goToRoute(menu.route)}
-                >
-                  {menu.label}
-                </span>
-              </NavItem>
-            )
-          )}
-
-          <SignButton theme="outlined" text="Sign Up" onClick={()=> navigate("/signUp")}/>
-          <LoginButton theme="filled" text="Login" onClick={()=> navigate("/login")}/>
+                  <NavItem key={i}>
+                    <span
+                      key={i}
+                      className={`${menu.active ? "active" : ""}`}
+                      onClick={() => goToRoute(menu.route)}
+                    >
+                      {menu.label}
+                    </span>
+                  </NavItem>
+                )
+              )
+            }
+          </div>
 
           {/* member menu list */}
-          
+          {
+            isLoggedIn ?
+              (
+                <div style={{ position: 'relative' }}>
+                  <FontAwesomeIcon icon={faUserCircle} size="2x" onClick={() => setIsMemberOpen(!isMemberOpen)} className={'cursor-pointer text-primary'} />
+
+                  {isMemberOpen ? (
+                    <MemberMenuContainer ref={memberRef}>
+                      {memberMenu.map((submenu, i) => (
+                        <SubNavItem key={i}>
+                          <span
+                            key={submenu.route}
+                            className={`block text-center cursor-pointer ${submenu.active ? "active" : ""}`}
+                            onClick={submenu.label === "Logout" ? HandleLogout : () => goToRoute(submenu.route)}
+                          >
+                            {submenu.label}
+                          </span>
+                        </SubNavItem>
+                      ))}
+                    </MemberMenuContainer>
+                  ) : (
+                    ""
+                  )}
+                </div>
+              )
+              :
+              <div>
+                {/* <SignButton theme="outlined" text="Sign Up" onClick={() => navigate("/signUp")} /> */}
+                <LoginButton theme="filled" text="Login" onClick={() => navigate("/login")} />
+              </div>
+          }
 
         </ListContainer>
       </NavbarContainer>
@@ -102,7 +141,7 @@ const SignButton = styled(Button)`
   h-8
   w-24
   rounded-full
-  ml-12
+  ml-0
   mr-0
   mb-0
   p-0
@@ -115,8 +154,8 @@ const LoginButton = styled(Button)`
   h-8
   w-16
   rounded-full
-  ml-4
-  mr-0
+  ml-2
+  mr-2
   mb-0
   p-0
   font-light
@@ -164,8 +203,10 @@ const TextLogo = styled.div`
 
 const ListContainer = styled.div`
   ${tw` 
+  w-[520px]
   flex
   flex-row
+  justify-between
   z-50
   items-center
   `}
@@ -217,5 +258,21 @@ const SubNavContainer = styled.div`
   `}
 `;
 const SubNavItem = styled.div`
-  ${tw`py-3 z-50`}
+  ${tw`py-2 z-50`}
+`;
+
+
+const MemberMenuContainer = styled.div`
+  border-radius: 3px;
+  box-shadow: 0 1.3px 12px -3px rgba(0, 0, 0, 0.4);
+  ${tw` 
+    w-max
+    py-2
+    px-2
+    bg-white
+    absolute
+    top-10
+    right-0
+    z-50
+  `}
 `;

@@ -1,7 +1,6 @@
 import axios from 'axios';
-import React, { FormEvent, useEffect, useRef, useState } from 'react'
+import React, { FormEvent, useContext, useEffect, useRef, useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom';
-import Cookies from 'js-cookie';
 import styled from "styled-components";
 import tw from "twin.macro";
 
@@ -9,7 +8,6 @@ import { login } from '../httpService/api/memberApi';
 import Button from '../ui/atoms/Button';
 import Title from '../ui/atoms/Title';
 import Layout from '../ui/organisms/Layout'
-
 
 
 export const Login = () => {
@@ -38,9 +36,14 @@ export const Login = () => {
         try {
             const res = await login({ memberEmail, memberPassword })
             if (res.data.code === 1) {
-                localStorage.setItem('YumeCamp_member', JSON.stringify(res.data.data.memberId))
-                //navigate("/member/bookings")
-                window.location.href = '/member/bookings';
+                const memberData = {
+                    memberId: res.data.data.memberId,
+                    memberName: res.data.data.memberName
+                }
+                localStorage.setItem('yumeCamp_member', JSON.stringify(memberData))
+
+                navigate("/member/bookings")
+                //window.location.href = '/member/bookings';
 
                 setMemberEmail("")
                 setMemberPassword("")
