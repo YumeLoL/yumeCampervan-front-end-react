@@ -10,6 +10,7 @@ import useMenu from "../../../hooks/useMenu";
 import logo from "../../../libs/img/logo.png";
 import Button from "../../atoms/Button";
 import "./index.css";
+import { logout } from "../../../httpService/api/memberApi";
 
 
 
@@ -22,8 +23,16 @@ const Navbar = () => {
   const { isOpen: isMemberOpen, setIsOpen: setIsMemberOpen, menuRef: memberRef } = useClickClose()
 
 
-  const HandleLogout = () => {
-
+  const HandleLogout = async () => {
+    try {
+      const res = await logout();
+      if(res.data.code === 1){
+        localStorage.removeItem('yumeCamp_member')
+        navigate('/')
+      }
+    } catch (error) {
+      console.log("request error:", error)
+    }
   }
 
 

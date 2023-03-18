@@ -14,6 +14,14 @@ export const login =  (data:ILogin)=>{
     })
   }
 
+// logout
+export const logout =  ()=>{
+    return axiosInstance({
+      url: `/logout`,
+      method: 'post',
+    })
+  }
+
 // signup
 export const signup = (data:any)=>{
     return axiosInstance({
