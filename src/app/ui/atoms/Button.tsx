@@ -115,6 +115,7 @@ const TextButton = styled(BaseButton)`
   text-secondary
   p-0
   m-4
+  border-none
   `}
 `;
 const FilterButton = styled(BaseButton)`

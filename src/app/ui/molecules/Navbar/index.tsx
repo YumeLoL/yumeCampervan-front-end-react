@@ -107,7 +107,7 @@ const Navbar = () => {
             isLoggedIn ?
               (
                 <div style={{ position: 'relative' }}>
-                  <FontAwesomeIcon icon={faUserCircle} size="2x" onClick={() => setIsMemberOpen(!isMemberOpen)} className={'cursor-pointer text-primary'} />
+                  <FontAwesomeIcon icon={faUserCircle} size="2x" onClick={() => setIsMemberOpen(!isMemberOpen)} className={'cursor-pointer text-secondary'} />
 
                   {isMemberOpen ? (
                     <MemberMenuContainer ref={memberRef}>

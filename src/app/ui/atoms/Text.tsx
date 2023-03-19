@@ -5,6 +5,7 @@ import tw from "twin.macro";
 interface TextType {
   text: string;
   className?: string;
+  onClick?: (event: MouseEvent) => void;
 }
 
 
