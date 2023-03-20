@@ -9,7 +9,7 @@ import DatePicker from '../ui/molecules/DatePicker';
 
 export const Booking = ({ price }: any) => {
     // To retrieve the memberId:
-    
+    const [daysSelected, setDaysSelected] = useState(0);
 
     return (
         <BookingWrapper>
@@ -20,10 +20,32 @@ export const Booking = ({ price }: any) => {
                     <span>AUD per day</span>
                 </div>
                 <div style={{ width: '100%' }}>
-                    <DatePicker />
+                    <DatePicker setDaysSelected={setDaysSelected}/>
                     <StyledButton theme='outlined' text="Request to book" />
                 </div>
                 <strong style={{ width: '100%', textAlign: "center" }}>You won't be charged yet.</strong>
+
+                <BookingQuote>
+                    <div className="PriceBreakdown">
+                        <PriceBreakdown>
+                            <div className="Text Text--inline">${price} x {daysSelected} days</div>
+                            <div className="Text Text--inline">${price*daysSelected}</div>
+                        </PriceBreakdown>
+                        <PriceBreakdown>
+                            <div className="Text Text--inline">Service fee (fixed)</div>
+                            <div className="Text Text--inline">$30.00</div>
+                        </PriceBreakdown>
+                        <PriceBreakdown>
+                            <div className="Text Text--inline">Insurance (fixed)</div>
+                            <div className="Text Text--inline">$60.00</div>
+                        </PriceBreakdown>
+                        <hr className={'my-4'}/>
+                        <PriceBreakdown>
+                            <div className="Text Text--inline">Total in AUD</div>
+                            <div className="Text Text--inline">${price*daysSelected + 30 + 60}</div>
+                        </PriceBreakdown>
+                    </div>
+                </BookingQuote>
             </StyledForm>
         </BookingWrapper>
     )
@@ -54,5 +76,21 @@ const StyledButton = styled(Button)`
   ${tw`
   w-full
   h-[50px]
+  `}
+`;
+
+
+const BookingQuote = styled.div`
+  ${tw`
+    w-full
+    mt-4
+    p-2
+  `}
+`;
+const PriceBreakdown = styled.div`
+  ${tw`
+    w-full
+    flex
+    justify-between
   `}
 `;
