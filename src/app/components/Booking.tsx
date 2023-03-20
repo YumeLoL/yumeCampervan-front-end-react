@@ -8,8 +8,8 @@ import DatePicker from '../ui/molecules/DatePicker';
 
 
 export const Booking = ({ price }: any) => {
+    // To retrieve the memberId:
     
-
 
     return (
         <BookingWrapper>

@@ -33,10 +33,12 @@ export const getAllType= () => {
     })
 }
 
-// vanType api
+// get all vanType 
 export const getVanType = (vanTypeId:number) => {
   return axiosInstance({
     url: `/vanType/${vanTypeId}`,
     method: 'get'
     })
 }
+
+

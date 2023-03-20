@@ -1,26 +1,46 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
-import { format } from "date-fns";
+import { format, parseISO } from "date-fns";
 import useClickClose from "../../hooks/useClickClose";
 import Button from "../atoms/Button";
-
-
+import { getBookedDates } from "../../httpService/api/bookingApi";
+import { useParams } from "react-router-dom";
 
 
 const DatePicker = () => {
+    const vanId = Number(useParams().vanId);
     const { menuRef, isOpen, setIsOpen } = useClickClose()
+
+    const [bookedDates, setBookedDates] = useState([]);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
             endDate: new Date(),
-            key: "selection",
-        },
+            key: "selection"
+        }
     ]);
 
+
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await getBookedDates(vanId);
+                if (res.data.code === 1) {
+                    const bookedDates = res.data.data.map((date:Date) => new Date(date)) 
+                    setBookedDates(bookedDates)
+                }
+            } catch (error) {
+                console.error("Request error:", error);
+            }
+        }
+        fetchData();
+    }, [])
+
+    
     return (
         <ItemContainer ref={menuRef} className="duration">
             <StyledDatePicker
@@ -50,7 +70,12 @@ const DatePicker = () => {
                         setDate([item.selection]);
                     }}
                     moveRangeOnFirstSelection={false}
+                    disabledDates={bookedDates}
+                    dateDisplayFormat="dd MMM yyyy"
+
                     ranges={date}
+                    minDate={new Date()}
+
                     className="absolute top-12 left-0"
                 />
             )}

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../ui/atoms/Button";
@@ -6,7 +7,6 @@ import Button from "../ui/atoms/Button";
 import Title from '../ui/atoms/Title';
 import Text from '../ui/atoms/Text';
 import Layout from '../ui/organisms/Layout'
-import { Navigate, useNavigate, useNavigation } from "react-router-dom";
 
 export const BookingPage = () => {
   // To retrieve the memberId:
