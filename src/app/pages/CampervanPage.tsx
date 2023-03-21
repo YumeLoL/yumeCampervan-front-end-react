@@ -80,22 +80,6 @@ const CampervansPage = () => {
 
     }, [queryParams])
 
-    // fetch vanType list
-    // useEffect(()=>{
-    //     const fetchData =async () => {
-    //         try {
-    //             const res = await getAllType();
-    //             if (res.data.code === 1) {
-    //                 setVanTypeList(res.data.data);
-    //             }
-    //         } catch (error) {
-    //             console.error("Request error:", error)
-    //         }
-    //     }
-
-    //     fetchData();
-    // },[])
-
 
     // render location list
     const renderLocationList = locationList
@@ -104,6 +88,7 @@ const CampervansPage = () => {
                 onClick={(e: any) => setSelectedLocation(e.target.value.toLowerCase())}
                 key={index}
                 value={option}
+                defaultValue={option}
             >
                 {capitalizedSentence(option)}
             </StyleOption>
@@ -115,6 +100,7 @@ const CampervansPage = () => {
             onClick={(e: any) => setVanType({ vanTypeName: type.vanTypeName, vanTypeId: e.target.value })}
             key={type.vanTypeId}
             value={type.vanTypeId}
+            defaultValue={type.vanTypeName}
         >
             {type.vanTypeName}
         </StyleOption>

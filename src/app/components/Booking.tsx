@@ -8,10 +8,14 @@ import DatePicker from '../ui/molecules/DatePicker';
 
 
 export const Booking = ({ price, vanId }: any) => {
-    const navigate = useNavigate()  
-    const [bookedDates, setBookedDates] = useState([]);
+    const navigate = useNavigate()
     const [daysSelected, setDaysSelected] = useState(0);
-    const requestData = { bookedDates,daysSelected, price }
+    const requestData = { daysSelected, price }
+
+    const handleDaysSelectedChange = (daysSelected: number) => {
+        setDaysSelected(daysSelected);
+    }
+    //differenceInDays(date[0].endDate, date[0].startDate) + 1
 
 
     return (
@@ -23,7 +27,7 @@ export const Booking = ({ price, vanId }: any) => {
                     <span>AUD per day</span>
                 </div>
                 <div style={{ width: '100%' }}>
-                    <DatePicker setDaysSelected={setDaysSelected} bookedDates={bookedDates} setBookedDates={setBookedDates} />
+                    <DatePicker  />
                     <StyledButton
                         theme='outlined'
                         text={'Request to book'}

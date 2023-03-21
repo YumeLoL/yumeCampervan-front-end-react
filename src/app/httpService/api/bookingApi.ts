@@ -1,9 +1,16 @@
 import { axiosInstance } from "../axios"
 
 // get available date by vanId
-export const getBookedDates = (vanId:number) =>{
+export const getDisabledDates = (vanId:number) =>{
     return axiosInstance({
-      url: `/bookings/available-dates/${vanId}`,
+      url: `/bookings/disabledDates/${vanId}`,
+      method: 'get'
+      })
+  }
+
+export const getAllBookings = () =>{
+    return axiosInstance({
+      url: `/bookings`,
       method: 'get'
       })
   }

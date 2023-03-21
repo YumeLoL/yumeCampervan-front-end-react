@@ -20,8 +20,8 @@ export const PictureList: React.FC<Props> = ({ imgUrl }) => {
         setSelectedImage(null);
     };
 
-    const renderedImgs = imgUrl?.map((url) => {
-        return <div className='relative' onClick={() => openModal(url)}><Image src={url} /></div>
+    const renderedImgs = imgUrl?.map((url,i) => {
+        return <div key={i} className='relative' onClick={() => openModal(url)}><Image src={url} /></div>
 
     })
 

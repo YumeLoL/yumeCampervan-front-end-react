@@ -39,7 +39,6 @@ const VanDetailPage = () => {
     fetchData();
   }, []);
 
-  console.log(van)
 
   return (
     <Layout>

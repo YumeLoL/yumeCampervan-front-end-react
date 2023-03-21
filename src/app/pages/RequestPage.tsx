@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -11,17 +11,17 @@ import DatePicker from '../ui/molecules/DatePicker';
 
 
 export const RequestPage = () => {
+    const vanId = Number(useParams().vanId);
     const location = useLocation()
     if (!location.state || !location.state.requestData) {
         return null // Or return a fallback component
     }
-    let requestData = location.state.requestData;
-    console.log(requestData)
+    const requestData = location.state.requestData;
 
-    const [daysSelected, setDaysSelected] = useState(requestData.daysSelected);
     const [berths, setBerths] = useState<number>(0);
-
-
+    const [daysSelected, setDaysSelected] = useState(0);
+   
+    
     return (
         <AppContainer>
             <PageContainer>
@@ -44,7 +44,7 @@ export const RequestPage = () => {
 
                         {/* <Booking /> */}
                         <Title title={'When are you going?'} size={'small'} />
-                        <DatePicker setDaysSelected={setDaysSelected} />
+                        {/* <DatePicker setDaysSelected={setDaysSelected} /> */}
 
                         {/* guests(berths) number selector */}
                         <Title title={'How many you going?'} size={'small'} />
@@ -79,8 +79,8 @@ export const RequestPage = () => {
                         <BookingQuote>
                             <div className="PriceBreakdown">
                                 <PriceBreakdown>
-                                    <div className="Text Text--inline">${requestData.price} x {daysSelected} days</div>
-                                    <div className="Text Text--inline">${requestData.price * daysSelected}</div>
+                                    <div className="Text Text--inline">${requestData.price} x {requestData.daysSelected} days</div>
+                                    <div className="Text Text--inline">${requestData.price * requestData.daysSelected}</div>
                                 </PriceBreakdown>
                                 <PriceBreakdown>
                                     <div className="Text Text--inline">Service fee (fixed)</div>
@@ -93,7 +93,7 @@ export const RequestPage = () => {
                                 <hr className={'my-4'} />
                                 <PriceBreakdown>
                                     <div className="Text Text--inline">Total in AUD</div>
-                                    <div className="Text Text--inline">${requestData.price * daysSelected + 30 + 60}</div>
+                                    <div className="Text Text--inline">${requestData.price * requestData.daysSelected + 30 + 60}</div>
                                 </PriceBreakdown>
                             </div>
                         </BookingQuote>

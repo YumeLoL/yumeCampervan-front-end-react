@@ -53,7 +53,7 @@ export const ImgCarousel = ({ imgUrl }: IProps) => {
 };
 
 
-const BtnL = styled.button`
+const BtnL = styled.div`
 ${tw`
 absolute
 top-[42%] 
@@ -63,7 +63,7 @@ hover:(text-gray-200 transition ease-in-out duration-150)
 text-3xl
 `}`
 
-const BtnR = styled.button`
+const BtnR = styled.div`
 ${tw`
 absolute 
 top-[42%] 

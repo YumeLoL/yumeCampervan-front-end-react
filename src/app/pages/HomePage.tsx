@@ -24,7 +24,7 @@ import Layout from "../ui/organisms/Layout";
 
 
 
-const AboutUs = () => {
+const HomePage = () => {
   return (
     <Layout>
       {/* hero session */}
@@ -131,7 +131,7 @@ const AboutUs = () => {
   );
 };
 
-export default AboutUs;
+export default HomePage;
 
 
 // aboutUs session

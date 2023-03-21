@@ -7,15 +7,17 @@ import { DateRange } from "react-date-range";
 import { format, differenceInDays } from "date-fns";
 import useClickClose from "../../hooks/useClickClose";
 import Button from "../atoms/Button";
-import { getBookedDates } from "../../httpService/api/bookingApi";
 import { useParams } from "react-router-dom";
+import { getAllBookings, getDisabledDates } from "../../httpService/api/bookingApi";
+import { getAllType, getVanType } from "../../httpService/api/vanApi";
 
 
-const DatePicker = ({ setDaysSelected, bookedDates,setBookedDates }: any) => {
+
+const DatePicker = () => {
     const vanId = Number(useParams().vanId);
     const { menuRef, isOpen, setIsOpen } = useClickClose()
 
-    //const [bookedDates, setBookedDates] = useState([]);
+    const [disabledDates, setDisabledDates] = useState([]);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -24,24 +26,32 @@ const DatePicker = ({ setDaysSelected, bookedDates,setBookedDates }: any) => {
         }
     ]);
 
-    // Calculate the number of days selected
-    setDaysSelected(differenceInDays(date[0].endDate, date[0].startDate) + 1)
+    // get disabled dates
+   // useEffect(() => {
+        // getAllBookings().then(res => {
+        //     console.log("disabled dates:",res)
+        // })
+        // const fetchData = async () => {
+        //     try {
+        //         const res = await getDisabledDates(vanId);
+        //         console.log("disabled dates:",res)
+
+        //         if (res.data.code === 1) {
+        //             const disabledDates = res.data.data.map((date: Date) => new Date(date))
+        //             //setBookedDates(bookedDates)
+        //         }
+        //     } catch (error) {
+        //         console.error("Request error:", error);
+        //     }
+        // }
+        // fetchData();
+   // }, [])
 
     useEffect(() => {
-        const fetchData = async () => {
-            try {
-                const res = await getBookedDates(vanId);
-                if (res.data.code === 1) {
-                    const bookedDates = res.data.data.map((date: Date) => new Date(date))
-                    setBookedDates(bookedDates)
-                }
-            } catch (error) {
-                console.error("Request error:", error);
-            }
-        }
-        fetchData();
-    }, [])
-
+        getAllType().then(res => {
+            console.log("disabled dates:",res)
+        })
+    }, []);
 
     return (
         <ItemContainer ref={menuRef} className="duration">
@@ -70,9 +80,10 @@ const DatePicker = ({ setDaysSelected, bookedDates,setBookedDates }: any) => {
                     editableDateInputs={true}
                     onChange={(item: any) => {
                         setDate([item.selection]);
+                        
                     }}
                     moveRangeOnFirstSelection={false}
-                    disabledDates={bookedDates}
+                    disabledDates={disabledDates}
                     dateDisplayFormat="dd MMM yyyy"
 
                     ranges={date}
