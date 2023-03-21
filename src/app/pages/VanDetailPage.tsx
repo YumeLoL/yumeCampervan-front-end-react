@@ -23,7 +23,6 @@ const VanDetailPage = () => {
   const [van, setVan] = useState<IVan>();
 
   
-  
   useEffect(() => {
     setLoading(true);
 
@@ -80,14 +79,12 @@ const VanDetailPage = () => {
                 text={van?.vanDescription as string}
               />
 
-              <FeaturedList></FeaturedList>
-
               <hr />
               <PictureList imgUrl={van?.vanImg}/>
             </VanDetailContainer>
 
             <VanBookingContainer>
-              <Booking price={van?.vanPricePerDay}/>
+              <Booking price={van?.vanPricePerDay} vanId={vanId}/>
             </VanBookingContainer>
           </VanProfileContainer>{" "}
         </>

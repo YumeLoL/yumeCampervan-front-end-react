@@ -11,11 +11,11 @@ import { getBookedDates } from "../../httpService/api/bookingApi";
 import { useParams } from "react-router-dom";
 
 
-const DatePicker = ({ setDaysSelected }: { setDaysSelected: any }) => {
+const DatePicker = ({ setDaysSelected, bookedDates,setBookedDates }: any) => {
     const vanId = Number(useParams().vanId);
     const { menuRef, isOpen, setIsOpen } = useClickClose()
 
-    const [bookedDates, setBookedDates] = useState([]);
+    //const [bookedDates, setBookedDates] = useState([]);
     const [date, setDate] = useState([
         {
             startDate: new Date(),

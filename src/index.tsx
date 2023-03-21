@@ -8,6 +8,7 @@ import CampervanPage from "./app/pages/CampervanPage";
 import HomePage from "./app/pages/HomePage";
 import { Login } from "./app/pages/Login";
 import { RecipesPage } from "./app/pages/RecipesPage";
+import { RequestPage } from "./app/pages/RequestPage";
 import { SignUp } from "./app/pages/SignUp";
 import VanDetailPage from "./app/pages/VanDetailPage";
 import "./index.css";
@@ -37,6 +38,7 @@ root.render(
 
           <Route path="/member">
             <Route path="/member/bookings" element={<BookingPage />} />
+            <Route path="/member/:vanId/request" element={<RequestPage />} />
             <Route path="/member/account" element={<AccountPage />} />
           </Route>
         </Routes>
