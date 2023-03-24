@@ -8,6 +8,7 @@ axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 export const axiosInstance = axios.create({
   baseURL: BaseURL,
   timeout: 10000,
+  withCredentials: true,
 });
 
 // Add a request interceptor
@@ -42,3 +43,32 @@ axiosInstance.interceptors.request.use(config => {
 
 
 // request interceptor for login check
+// axiosInstance.interceptors.response.use(res => {
+//   if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// back to login page
+//     console.log("axios interceptors", res.data)
+//     localStorage.removeItem('yumeCamp_member')
+//     window.location.href = '/login'
+//   } else {
+//     return res.data
+//   }
+// })
+// error => {
+//   console.log('err' + error)
+//   let { message } = error;
+//   if (message === "Network Error") {
+//     message = "Backend api Error";
+//   }
+//   else if (message.includes("timeout")) {
+//     message = "The system api request timed out";
+//   }
+//   else if (message.includes("Request failed with status code")) {
+//     message = "The system api" + message.substr(message.length - 3) + "issue";
+//   }
+//   // window.ELEMENT.Message({
+//   //   message: message,
+//   //   type: 'error',
+//   //   duration: 5 * 1000
+//   // })
+//   return Promise.reject(error)
+// }
+// )

@@ -7,6 +7,8 @@ import Button from "../ui/atoms/Button";
 import Title from '../ui/atoms/Title';
 import Text from '../ui/atoms/Text';
 import Layout from '../ui/organisms/Layout'
+import { getAllBookings, getDisabledDates } from "../httpService/api/bookingApi";
+import { getAllMembers } from "../httpService/api/memberApi";
 
 export const BookingPage = () => {
   // To retrieve the memberId:
@@ -21,6 +23,13 @@ export const BookingPage = () => {
 
   return (
     <Layout>
+      
+      <button onClick={()=>{
+        getDisabledDates(15).then(res => {
+          console.log("check all bookings",res)
+        })
+      }}>check</button>
+
       <BookingContainer>
         <Title title={"Bookings"} size={'large'} className={'block text-left'} />
 

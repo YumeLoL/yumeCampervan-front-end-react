@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { getVanById } from "../httpService/api/vanApi";
 
 import Layout from "../ui/organisms/Layout";
 import Title from "../ui/atoms/Title";
@@ -10,6 +9,7 @@ import Text from "../ui/atoms/Text";
 import { IVan } from "../libs/interface/van";
 import { Booking } from "../components/Booking";
 import { PictureList } from "../components/PictureList";
+import { getVanById } from "../httpService/api/vanApi";
 
 
 const VanDetailPage = () => {
@@ -42,6 +42,8 @@ const VanDetailPage = () => {
 
   return (
     <Layout>
+
+
       {loading ? (
         "on loading ......"
       ) : (

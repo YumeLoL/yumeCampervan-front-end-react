@@ -30,3 +30,10 @@ export const signup = (data:any)=>{
       data
     })
   }
+
+  export const getAllMembers = () =>{
+    return axiosInstance({
+      url: `/member/all`,
+      method: 'get'
+      })
+  }

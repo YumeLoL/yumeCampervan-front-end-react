@@ -8,8 +8,7 @@ import { format, differenceInDays } from "date-fns";
 import useClickClose from "../../hooks/useClickClose";
 import Button from "../atoms/Button";
 import { useParams } from "react-router-dom";
-import { getAllBookings, getDisabledDates } from "../../httpService/api/bookingApi";
-import { getAllType, getVanType } from "../../httpService/api/vanApi";
+import { getDisabledDates } from "../../httpService/api/bookingApi";
 
 
 
@@ -27,31 +26,22 @@ const DatePicker = () => {
     ]);
 
     // get disabled dates
-   // useEffect(() => {
-        // getAllBookings().then(res => {
-        //     console.log("disabled dates:",res)
-        // })
-        // const fetchData = async () => {
-        //     try {
-        //         const res = await getDisabledDates(vanId);
-        //         console.log("disabled dates:",res)
+   useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await getDisabledDates(vanId);
+                console.log("disabled dates:",res)
 
-        //         if (res.data.code === 1) {
-        //             const disabledDates = res.data.data.map((date: Date) => new Date(date))
-        //             //setBookedDates(bookedDates)
-        //         }
-        //     } catch (error) {
-        //         console.error("Request error:", error);
-        //     }
-        // }
-        // fetchData();
-   // }, [])
+                if (res.data.code === 1) {
+                    setDisabledDates(disabledDates)
+                }
+            } catch (error) {
+                console.error("Request error:", error);
+            }
+        }
+        fetchData();
+   }, [])
 
-    useEffect(() => {
-        getAllType().then(res => {
-            console.log("disabled dates:",res)
-        })
-    }, []);
 
     return (
         <ItemContainer ref={menuRef} className="duration">

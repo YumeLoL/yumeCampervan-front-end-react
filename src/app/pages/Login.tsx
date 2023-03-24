@@ -32,10 +32,13 @@ export const Login = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        console.log( memberEmail, memberPassword )
 
         try {
             const res = await login({ memberEmail, memberPassword })
             if (res.data.code === 1) {
+                console.log(res.data)
+
                 const memberData = {
                     memberId: res.data.data.memberId,
                     memberName: res.data.data.memberName
