@@ -3,7 +3,7 @@ import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { AccountPage } from "./app/pages/AccountPage";
 import { BlogPage } from "./app/pages/BlogPage";
-import { BookingPage } from "./app/pages/BookingPage";
+import { BookingsPage } from "./app/pages/BookingsPage";
 import CampervanPage from "./app/pages/CampervanPage";
 import HomePage from "./app/pages/HomePage";
 import { Login } from "./app/pages/Login";
@@ -37,7 +37,7 @@ root.render(
           <Route path="/login" element={<Login />} />
 
           <Route path="/member">
-            <Route path="/member/bookings" element={<BookingPage />} />
+            <Route path="/member/bookings" element={<BookingsPage />} />
             <Route path="/member/:vanId/request" element={<RequestPage />} />
             <Route path="/member/account" element={<AccountPage />} />
           </Route>

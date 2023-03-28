@@ -1,37 +1,28 @@
-import React, { useEffect, useState } from "react";
+import { addDays, format } from 'date-fns';
+import React, { useEffect, useState } from 'react'
 import styled from "styled-components";
 import tw from "twin.macro";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
-import { format, differenceInDays, parseISO, addDays } from "date-fns";
-import useClickClose from "../../hooks/useClickClose";
-import Button from "../atoms/Button";
-import { useParams } from "react-router-dom";
-import { getDisabledDates } from "../../httpService/api/bookingApi";
+import { getDisabledDates } from '../../httpService/api/bookingApi';
+import useClickClose from '../../hooks/useClickClose';
+import Button from '../../ui/atoms/Button';
+import { DateRangeType } from '../../libs/interface/common';
 
+interface DatePickerProps { vanId: string, date: DateRangeType[], setDate: (date: DateRangeType[]) => void }
 
-
-const DatePicker = () => {
-    const vanId = Number(useParams().vanId);
+export const DatePicker = ({ vanId, date, setDate }: DatePickerProps) => {
     const { menuRef, isOpen, setIsOpen } = useClickClose()
-
     const [disabledDates, setDisabledDates] = useState<Date[]>([]);
-    const [date, setDate] = useState([
-        {
-            startDate: new Date(),
-            endDate: new Date(),
-            key: "selection"
-        }
-    ]);
 
     // get disabled dates
-   useEffect(() => {
+    useEffect(() => {
         const fetchData = async () => {
             try {
                 const res = await getDisabledDates(vanId);
                 if (res.data.code === 1) {
-                    const dateArray = res.data.data.map((date:string) => new Date(date));
+                    const dateArray = res.data.data.map((date: string) => new Date(date));
                     setDisabledDates(dateArray)
                 }
             } catch (error) {
@@ -39,11 +30,11 @@ const DatePicker = () => {
             }
         }
         fetchData();
-   }, [])
+    }, [])
 
 
     return (
-        <ItemContainer ref={menuRef} className="duration">
+        <DatePickerContainer ref={menuRef} className="duration">
             <StyledDatePicker
                 onClick={() => {
                     setIsOpen(!isOpen);
@@ -79,13 +70,13 @@ const DatePicker = () => {
                     className="absolute top-12 left-0"
                 />
             )}
-        </ItemContainer>
-    );
-};
+        </DatePickerContainer>
+    )
+}
 
-export default DatePicker;
 
-const ItemContainer = styled.div`
+
+const DatePickerContainer = styled.div`
   ${tw`
   w-full
   flex 

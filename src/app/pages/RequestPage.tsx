@@ -6,11 +6,10 @@ import tw from "twin.macro";
 import logo from "../libs/img/logo.png";
 import Button from '../ui/atoms/Button';
 import Title from '../ui/atoms/Title';
-import DatePicker from '../ui/molecules/DatePicker';
 
 
 export const RequestPage = () => {
-    const vanId = Number(useParams().vanId);
+    const {vanId} = useParams();
     const location = useLocation()
     if (!location.state || !location.state.requestData) {
         return null // Or return a fallback component
@@ -43,7 +42,8 @@ export const RequestPage = () => {
 
                         {/* <Booking /> */}
                         <Title title={'When are you going?'} size={'small'} />
-                        {/* <DatePicker setDaysSelected={setDaysSelected} /> */}
+                        
+                        {/* <RequestBox /> */}
 
                         {/* guests(berths) number selector */}
                         <Title title={'How many you going?'} size={'small'} />

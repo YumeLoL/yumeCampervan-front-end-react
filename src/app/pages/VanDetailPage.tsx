@@ -49,7 +49,7 @@ const VanDetailPage = () => {
       {loading ? (
         "on loading ......"
       ) : (
-        <>
+       van && <>
           <CarouselContainer>
             {
               van?.vanImg ? <img src={van.vanImg[0]} style={{width: '100%', objectFit: "cover"}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />
@@ -64,30 +64,30 @@ const VanDetailPage = () => {
                 <Title
                   className="text-secondary flex items-center"
                   size={"large"}
-                  title={van?.vanName}
+                  title={van.vanName}
                 />
               </VanTitleAvatar>
 
               <strong className="text-3xl inline-block my-4">
-                location: {van?.vanLocation}
+                location: {van.vanLocation}
               </strong>
 
               <InfoSession>
-                <strong>sleep: {van?.berths}</strong>
-                <strong>Van Type: {van?.vanTypeName}</strong>
+                <strong>sleep: {van.berths}</strong>
+                <strong>Van Type: {van.vanTypeName}</strong>
                 
               </InfoSession>
 
               <Text
-                text={van?.vanDescription as string}
+                text={van.vanDescription as string}
               />
 
               <hr />
-              <PictureList imgUrl={van?.vanImg}/>
+              <PictureList imgUrl={van.vanImg}/>
             </VanDetailContainer>
 
             <VanBookingContainer>
-              <RequestBox price={van?.vanPricePerDay} vanId={vanId}/>
+              <RequestBox price={van.vanPricePerDay} vanId={vanId}/>
             </VanBookingContainer>
           </VanProfileContainer>{" "}
         </>

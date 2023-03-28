@@ -10,7 +10,7 @@ import Layout from '../ui/organisms/Layout'
 import { getAllBookings, getDisabledDates } from "../httpService/api/bookingApi";
 import { getAllMembers } from "../httpService/api/memberApi";
 
-export const BookingPage = () => {
+export const BookingsPage = () => {
   // To retrieve the memberId:
   const memberData = JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null");
   const navigate = useNavigate();
@@ -23,13 +23,6 @@ export const BookingPage = () => {
 
   return (
     <Layout>
-      
-      <button onClick={()=>{
-        getDisabledDates(15).then(res => {
-          console.log("check all bookings",res)
-        })
-      }}>check</button>
-
       <BookingContainer>
         <Title title={"Bookings"} size={'large'} className={'block text-left'} />
 
