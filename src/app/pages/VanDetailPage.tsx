@@ -29,7 +29,9 @@ const VanDetailPage = () => {
     const fetchData = async () => {
       try {
         const res = await getVanById(vanId);
-        setVan(res.data.data);
+        if(res.data.code === 1){
+          setVan(res.data.data);
+        }
         setLoading(false);
       } catch (err) {
         console.error("Request error:", err);

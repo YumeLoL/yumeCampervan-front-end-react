@@ -1,11 +1,11 @@
-import axios from "axios";
+import axios, { AxiosInstance, AxiosResponse } from "axios";
 
 export const BaseURL = "http://localhost:8081";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
 // axios instance
-export const axiosInstance = axios.create({
+export const axiosInstance: AxiosInstance = axios.create({
   baseURL: BaseURL,
   timeout: 10000,
   withCredentials: true,
@@ -41,34 +41,22 @@ axiosInstance.interceptors.request.use(config => {
     Promise.reject(error)
 });
 
-
+interface ResponseData {
+    code?: number;
+    msg?: string;
+    data?: any;
+}
 // request interceptor for login check
-// axiosInstance.interceptors.response.use(res => {
-//   if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// back to login page
-//     console.log("axios interceptors", res.data)
-//     localStorage.removeItem('yumeCamp_member')
-//     window.location.href = '/login'
-//   } else {
-//     return res.data
-//   }
-// })
-// error => {
-//   console.log('err' + error)
-//   let { message } = error;
-//   if (message === "Network Error") {
-//     message = "Backend api Error";
-//   }
-//   else if (message.includes("timeout")) {
-//     message = "The system api request timed out";
-//   }
-//   else if (message.includes("Request failed with status code")) {
-//     message = "The system api" + message.substr(message.length - 3) + "issue";
-//   }
-//   // window.ELEMENT.Message({
-//   //   message: message,
-//   //   type: 'error',
-//   //   duration: 5 * 1000
-//   // })
-//   return Promise.reject(error)
-// }
-// )
+axiosInstance.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
+  if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// back to login page
+    console.log("axios interceptors", res.data)
+    localStorage.removeItem('yumeCamp_member')
+    window.location.href = '/login'
+  } 
+  return res
+},
+(error) => {
+  // Handle errors here
+  console.error(error);
+  return Promise.reject(error);
+})
