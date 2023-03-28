@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import { useLocation, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
-import { Booking } from '../components/Booking';
 
 import logo from "../libs/img/logo.png";
 import Button from '../ui/atoms/Button';

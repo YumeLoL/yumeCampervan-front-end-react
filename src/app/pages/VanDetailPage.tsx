@@ -7,7 +7,7 @@ import Layout from "../ui/organisms/Layout";
 import Title from "../ui/atoms/Title";
 import Text from "../ui/atoms/Text";
 import { IVan } from "../libs/interface/van";
-import { Booking } from "../components/Booking";
+import { RequestBox } from "../components/RequestBox";
 import { PictureList } from "../components/PictureList";
 import { getVanById } from "../httpService/api/vanApi";
 
@@ -87,7 +87,7 @@ const VanDetailPage = () => {
             </VanDetailContainer>
 
             <VanBookingContainer>
-              <Booking price={van?.vanPricePerDay} vanId={vanId}/>
+              <RequestBox price={van?.vanPricePerDay} vanId={vanId}/>
             </VanBookingContainer>
           </VanProfileContainer>{" "}
         </>
