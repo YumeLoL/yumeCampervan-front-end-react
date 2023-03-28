@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
+import { ResponseData } from "../libs/interface/res";
 
 export const BaseURL = "http://localhost:8081";
 
@@ -41,11 +42,7 @@ axiosInstance.interceptors.request.use(config => {
     Promise.reject(error)
 });
 
-interface ResponseData {
-    code?: number;
-    msg?: string;
-    data?: any;
-}
+
 // request interceptor for login check
 axiosInstance.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
   if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// back to login page

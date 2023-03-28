@@ -4,7 +4,7 @@ import tw from "twin.macro";
 import 'react-date-range/dist/styles.css'; // main style file
 import 'react-date-range/dist/theme/default.css'; // theme css file
 import { DateRange } from "react-date-range";
-import { format, differenceInDays } from "date-fns";
+import { format, differenceInDays, parseISO } from "date-fns";
 import useClickClose from "../../hooks/useClickClose";
 import Button from "../atoms/Button";
 import { useParams } from "react-router-dom";
@@ -16,7 +16,7 @@ const DatePicker = () => {
     const vanId = Number(useParams().vanId);
     const { menuRef, isOpen, setIsOpen } = useClickClose()
 
-    const [disabledDates, setDisabledDates] = useState([]);
+    const [disabledDates, setDisabledDates] = useState<Date[]>([]);
     const [date, setDate] = useState([
         {
             startDate: new Date(),
@@ -30,10 +30,9 @@ const DatePicker = () => {
         const fetchData = async () => {
             try {
                 const res = await getDisabledDates(vanId);
-                console.log("disabled dates:",res)
-
                 if (res.data.code === 1) {
-                    setDisabledDates(disabledDates)
+                    const dateArray = res.data.data.map((date:string) => new Date(date));
+                    setDisabledDates(dateArray)
                 }
             } catch (error) {
                 console.error("Request error:", error);
@@ -70,15 +69,12 @@ const DatePicker = () => {
                     editableDateInputs={true}
                     onChange={(item: any) => {
                         setDate([item.selection]);
-                        
                     }}
                     moveRangeOnFirstSelection={false}
                     disabledDates={disabledDates}
                     dateDisplayFormat="dd MMM yyyy"
-
                     ranges={date}
                     minDate={new Date()}
-
                     className="absolute top-12 left-0"
                 />
             )}

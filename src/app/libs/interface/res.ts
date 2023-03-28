@@ -1,7 +1,5 @@
-export interface Response {
+export interface ResponseData {
     code?: number;
-    data?: {
-        records?: any
-    };
     msg?: string;
+    data?: any;
 }
