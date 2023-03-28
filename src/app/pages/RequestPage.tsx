@@ -1,6 +1,6 @@
 import { differenceInDays } from 'date-fns';
 import React, { useEffect, useState } from 'react'
-import { useLocation, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
 import { BookingQuote } from '../components/RequestBox/BookingQuote';
@@ -13,6 +13,7 @@ import Title from '../ui/atoms/Title';
 
 
 export const RequestPage = () => {
+  const navigate = useNavigate()
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
     return null // Or return a fallback component
@@ -48,35 +49,34 @@ export const RequestPage = () => {
           </NavbarContainer>
         </MainNavContainer>
 
-        <div className={`w-full flex my-8 p-8`}>
-          <div className={`w-[350px]`}>
-            <Title title={'Request to book'} size={'large'} />
+        <RequestDetailContainer>
+          <div className={'w-[600px] flex flex-col'} >
+            <div className={`w-[350px]`}>
+              <Title title={'Request to book'} size={'large'} />
 
-            {/* <Booking /> */}
-            <Title title={'When are you going?'} size={'small'} />
+              {/* DatePicker if require to change dates */}
+              <Title title={'When are you going?'} size={'small'} />
+              <DatePicker vanId={vanId} date={resetDate} setDate={setResetDate} />
 
-            {/* DatePicker if require to change dates */}
-            <DatePicker vanId={vanId} date={resetDate} setDate={setResetDate} />
-
-            {/* guests(berths) number selector */}
-            <Title title={'How many you going?'} size={'small'} />
-            <ItemContainer>
-              <Button theme="filter" text="" className={`w-full flex justify-between items-center my-7`}>
-                                {`Guests `}
-                                <div className={`flex items-center `}>
-                                    <span
-                                        onClick={() => setBerths(berths > 1 ? berths - 1 : 1)}
-                                        className={`px-2 mx-2 text-3xl`}
-                                    >-</span>
-                                    {` ${berths} `}
-                                    <span
-                                        onClick={() => setBerths(berths < 6 ? berths + 1 : 6)}
-                                        className={`px-2 mx-2 text-3xl`}
-                                    >+</span>
-                                </div>
-                            </Button>
-            </ItemContainer>
-
+              {/* Guests(berths) button selector */}
+              <Title title={'How many you going?'} size={'small'} />
+              <ItemContainer>
+                <Button theme="filter" text="" className={`w-full flex justify-between items-center my-7`}>
+                  {`Guests `}
+                  <div className={`flex items-center `}>
+                    <span
+                      onClick={() => setBerths(berths > 1 ? berths - 1 : 1)}
+                      className={`px-2 mx-2 text-3xl`}
+                    >-</span>
+                    {` ${berths} `}
+                    <span
+                      onClick={() => setBerths(berths < 6 ? berths + 1 : 6)}
+                      className={`px-2 mx-2 text-3xl`}
+                    >+</span>
+                  </div>
+                </Button>
+              </ItemContainer>
+            </div>
             <hr className={`mb-8`} />
 
             <Title title={'Cancellations'} size={'medium'} />
@@ -84,13 +84,23 @@ export const RequestPage = () => {
             <p>Cancel earlier than 10 days before the start of the booking and receive a full credit. Refunds available upon request (less any admin fees) and may take up to 30 days to process.</p>
             <p>Cancel earlier than 10 days before the start of the booking and receive a full credit. Refunds available upon request (less any admin fees) and may take up to 30 days to process.</p>
 
-            <hr />
+            <hr className={`mb-16`} />
+
+            <StyledButton
+              theme='filled'
+              text={'Request to book'}
+              onClick={() => {
+                navigate(`/member/${vanId}/request`)
+              }}
+            />
           </div>
 
-          <div className={`w-auto`}>
-          <BookingQuote price={price} diffDays={diffDays}/>
+          <div className={`w-[350px] border-solid border border-gray-300 rounded-[3px] p-4`}>
+            <BookingQuote price={price} diffDays={diffDays} />
           </div>
-        </div>
+
+
+        </RequestDetailContainer>
 
       </PageContainer>
     </AppContainer>
@@ -164,3 +174,15 @@ const ItemContainer = styled.div`
   `}
 `;
 
+const RequestDetailContainer = styled.div`
+  ${tw`
+  w-full flex justify-between my-8 p-8 
+  `}
+`;
+
+const StyledButton = styled(Button)`
+  ${tw`
+  w-48
+  h-[50px]
+  `}
+`;
