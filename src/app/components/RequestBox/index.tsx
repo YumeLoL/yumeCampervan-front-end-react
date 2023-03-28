@@ -12,7 +12,7 @@ import { DateRangeType } from '../../libs/interface/common';
 
 
 
-export const RequestBox = ({ price, vanId }: {price: number, vanId: string}) => {
+export const RequestBox = ({ price, vanId }: { price: number, vanId: string }) => {
     const navigate = useNavigate()
     const [date, setDate] = useState<DateRangeType[]>([
         {
@@ -22,7 +22,6 @@ export const RequestBox = ({ price, vanId }: {price: number, vanId: string}) => 
         }
     ]);
     const diffDays = differenceInDays(date[0].endDate, date[0].startDate) + 1
-    const requestData = { diffDays, price }
 
 
     return (
@@ -40,14 +39,17 @@ export const RequestBox = ({ price, vanId }: {price: number, vanId: string}) => 
                     <StyledButton
                         theme='outlined'
                         text={'Request to book'}
-                        onClick={() => navigate(`/member/${vanId}/request`, { state: { requestData } })}
+                        onClick={() => {
+                            const requestParams = { diffDays, price, vanId }
+                            navigate(`/member/${vanId}/request`, { state: { requestParams } })
+                        }}
                     />
                 </div>
 
                 <strong style={{ width: '100%', textAlign: "center" }}>You won't be charged yet.</strong>
 
                 {/* render if select dates, to show price detail */}
-                {diffDays > 1 && <BookingQuote price={price} diffDays={diffDays} /> }
+                {diffDays > 1 && <BookingQuote price={price} diffDays={diffDays} />}
 
             </StyledForm>
         </BookingWrapper>

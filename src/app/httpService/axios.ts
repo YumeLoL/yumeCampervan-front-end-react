@@ -46,8 +46,11 @@ axiosInstance.interceptors.request.use(config => {
 // request interceptor for login check
 axiosInstance.interceptors.response.use((res: AxiosResponse<ResponseData>) => {
   if (res.data.code === 0 && res.data.msg === 'NOTLOGIN') {// back to login page
-    console.log("axios interceptors", res.data)
     localStorage.removeItem('yumeCamp_member')
+
+    const loginRemandMsg = 'You must be logged in first'
+    localStorage.setItem('loginRemandMsg', loginRemandMsg)
+    
     window.location.href = '/login'
   } 
   return res

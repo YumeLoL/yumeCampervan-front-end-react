@@ -44,16 +44,12 @@ const VanDetailPage = () => {
 
   return (
     <Layout>
-
-
       {loading ? (
         "on loading ......"
       ) : (
        van && <>
           <CarouselContainer>
-            {
-              van?.vanImg ? <img src={van.vanImg[0]} style={{width: '100%', objectFit: "cover"}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />
-            }
+            {van.vanImg ? <img src={van.vanImg[0]} style={{width: '100%', objectFit: "cover"}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />}
            
             {/* <ImgCarousel imgUrl={van?.vanImg}/> */}
           </CarouselContainer>

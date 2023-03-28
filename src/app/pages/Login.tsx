@@ -15,6 +15,8 @@ export const Login = () => {
     // to set focus on the user input when component loads
     const userRef = useRef<HTMLInputElement>(null);
     const errRef = useRef<HTMLParagraphElement>(null);
+    // to get the error message from local storage if not logged in
+    const [loginRemandMsg, setLoginRemandMsg] = useState(localStorage.getItem('loginRemandMsg') || '')
 
     const [memberEmail, setMemberEmail] = useState('');
     const [memberPassword, setMemberPassword] = useState('');
@@ -24,7 +26,16 @@ export const Login = () => {
         if (userRef.current) {
             userRef.current.focus();
         }
-    }, [])
+
+        // check if there is an error message in local storage
+        if (loginRemandMsg) {
+            setTimeout(() => {
+                localStorage.removeItem('loginRemandMsg')
+                setLoginRemandMsg('')
+            }, 3000) // remove the error message after 3 seconds
+        }
+
+    }, [loginRemandMsg])
 
     useEffect(() => {
         setErrMsg('');
@@ -32,13 +43,10 @@ export const Login = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log( memberEmail, memberPassword )
 
         try {
             const res = await login({ memberEmail, memberPassword })
             if (res.data.code === 1) {
-                console.log(res.data)
-
                 const memberData = {
                     memberId: res.data.data.memberId,
                     memberName: res.data.data.memberName
@@ -46,7 +54,6 @@ export const Login = () => {
                 localStorage.setItem('yumeCamp_member', JSON.stringify(memberData))
 
                 navigate("/member/bookings")
-                //window.location.href = '/member/bookings';
 
                 setMemberEmail("")
                 setMemberPassword("")
@@ -61,6 +68,9 @@ export const Login = () => {
 
     return (
         <Layout>
+            {/* show msg if not logged in */}
+            {loginRemandMsg && <p className={'bg-pink-200 text-red-500 font-bold p-1 mb-1'} >{loginRemandMsg}</p>}
+
             <Formlayout>
                 <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
                 <Title title={"Log in"} size='large' className="text-center" />

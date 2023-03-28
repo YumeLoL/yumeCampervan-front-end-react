@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -20,6 +20,21 @@ export const BookingsPage = () => {
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getAllBookings();
+        if(res.data.code === 1){
+          console.log(res.data.data)
+        }
+      } catch (err) {
+        console.error("Request error:", err);
+      }
+    };
+
+    fetchData()
+  },[])
 
   return (
     <Layout>

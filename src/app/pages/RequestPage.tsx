@@ -4,20 +4,21 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import logo from "../libs/img/logo.png";
+import { DateRangeType } from '../libs/interface/common';
 import Button from '../ui/atoms/Button';
 import Title from '../ui/atoms/Title';
 
 
 export const RequestPage = () => {
-    const {vanId} = useParams();
     const location = useLocation()
-    if (!location.state || !location.state.requestData) {
+    if (!location.state || !location.state.requestParams) {
         return null // Or return a fallback component
     }
-    const requestData = location.state.requestData;
+    const { diffDays, price, vanId} = location.state.requestParams;
 
     const [berths, setBerths] = useState<number>(0);
     const [daysSelected, setDaysSelected] = useState(0);
+   
    
     
     return (
@@ -43,7 +44,8 @@ export const RequestPage = () => {
                         {/* <Booking /> */}
                         <Title title={'When are you going?'} size={'small'} />
                         
-                        {/* <RequestBox /> */}
+                        {/* DatePicker if require to change dates */}
+                        {/* <DatePicker vanId={vanId} date={[]} setDate={} /> */}
 
                         {/* guests(berths) number selector */}
                         <Title title={'How many you going?'} size={'small'} />
@@ -78,8 +80,8 @@ export const RequestPage = () => {
                         <BookingQuote>
                             <div className="PriceBreakdown">
                                 <PriceBreakdown>
-                                    <div className="Text Text--inline">${requestData.price} x {requestData.daysSelected} days</div>
-                                    <div className="Text Text--inline">${requestData.price * requestData.daysSelected}</div>
+                                    <div className="Text Text--inline">${price} x {daysSelected} days</div>
+                                    <div className="Text Text--inline">${price * daysSelected}</div>
                                 </PriceBreakdown>
                                 <PriceBreakdown>
                                     <div className="Text Text--inline">Service fee (fixed)</div>
@@ -92,7 +94,7 @@ export const RequestPage = () => {
                                 <hr className={'my-4'} />
                                 <PriceBreakdown>
                                     <div className="Text Text--inline">Total in AUD</div>
-                                    <div className="Text Text--inline">${requestData.price * requestData.daysSelected + 30 + 60}</div>
+                                    <div className="Text Text--inline">${price * daysSelected + 30 + 60}</div>
                                 </PriceBreakdown>
                             </div>
                         </BookingQuote>
