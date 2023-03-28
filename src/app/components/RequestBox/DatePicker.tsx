@@ -85,6 +85,7 @@ const DatePickerContainer = styled.div`
   mr-5
   my-6  
   justify-between
+  z-50
   `}
 `;
 

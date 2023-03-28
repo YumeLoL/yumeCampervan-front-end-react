@@ -40,7 +40,7 @@ export const RequestBox = ({ price, vanId }: { price: number, vanId: string }) =
                         theme='outlined'
                         text={'Request to book'}
                         onClick={() => {
-                            const requestParams = { diffDays, price, vanId }
+                            const requestParams = {price, vanId, date }
                             navigate(`/member/${vanId}/request`, { state: { requestParams } })
                         }}
                     />

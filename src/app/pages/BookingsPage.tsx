@@ -21,20 +21,7 @@ export const BookingsPage = () => {
     setActiveTab(tab);
   };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await getAllBookings();
-        if(res.data.code === 1){
-          console.log(res.data.data)
-        }
-      } catch (err) {
-        console.error("Request error:", err);
-      }
-    };
 
-    fetchData()
-  },[])
 
   return (
     <Layout>
