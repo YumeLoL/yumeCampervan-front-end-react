@@ -1,5 +1,6 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ResponseData } from "../libs/interface/res";
+import qs from 'qs';
 
 export const BaseURL = "http://localhost:8081";
 
@@ -14,6 +15,7 @@ export const axiosInstance: AxiosInstance = axios.create({
 
 // Add a request interceptor
 axiosInstance.interceptors.request.use(config => {
+
   // GET request with params
   if (config.method === 'get' && config.params) {
     let url = config.url + '?';

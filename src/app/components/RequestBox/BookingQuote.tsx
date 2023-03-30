@@ -1,8 +1,19 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from "styled-components";
 import tw from "twin.macro";
 
-export const BookingQuote = ({ price, diffDays }: { price: number, diffDays: number }) => {
+interface BookingQuoteProps { price: number, diffDays: number, onUpdateTotalFee: (newTotalFee: number) => void }
+
+export const BookingQuote = ({ price, diffDays, onUpdateTotalFee }: BookingQuoteProps) => {
+  const serviceFee = 30;
+  const insuranceFee = 60;
+  const totalFee = price * diffDays + serviceFee + insuranceFee;
+
+  useEffect(()=>{
+     // Call onUpdateTotalFee callback when the totalFee value change
+    onUpdateTotalFee(totalFee)
+  },[totalFee])
+
   return (
     <QuoteContainer>
       <div className="PriceBreakdown">
@@ -12,16 +23,16 @@ export const BookingQuote = ({ price, diffDays }: { price: number, diffDays: num
         </PriceBreakdown>
         <PriceBreakdown>
           <div className="Text Text--inline">Service fee (fixed)</div>
-          <div className="Text Text--inline">$30.00</div>
+          <div className="Text Text--inline">${serviceFee}</div>
         </PriceBreakdown>
         <PriceBreakdown>
           <div className="Text Text--inline">Insurance (fixed)</div>
-          <div className="Text Text--inline">$60.00</div>
+          <div className="Text Text--inline">${insuranceFee}</div>
         </PriceBreakdown>
         <hr className={'my-4'} />
         <PriceBreakdown>
           <div className="Text Text--inline">Total in AUD</div>
-          <div className="Text Text--inline">${price * diffDays + 30 + 60}</div>
+          <div className="Text Text--inline">${totalFee}</div>
         </PriceBreakdown>
       </div>
     </QuoteContainer>

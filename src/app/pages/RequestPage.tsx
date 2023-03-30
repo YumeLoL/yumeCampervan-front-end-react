@@ -1,11 +1,12 @@
-import { differenceInDays } from 'date-fns';
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
+import { differenceInDays, format } from 'date-fns';
+
 import { BookingQuote } from '../components/RequestBox/BookingQuote';
 import { DatePicker } from '../components/RequestBox/DatePicker';
-
+import { postBooking } from '../httpService/api/bookingApi';
 import logo from "../libs/img/logo.png";
 import { DateRangeType } from '../libs/interface/common';
 import Button from '../ui/atoms/Button';
@@ -13,12 +14,16 @@ import Title from '../ui/atoms/Title';
 
 
 export const RequestPage = () => {
+  const {memberId} = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
   const navigate = useNavigate()
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
     return null // Or return a fallback component
   }
+
   const { price, date, vanId } = location.state.requestParams;
+  const [berths, setBerths] = useState<number>(0);
+
   const [resetDate, setResetDate] = useState<DateRangeType[]>([
     {
       startDate: date[0].startDate,
@@ -28,8 +33,30 @@ export const RequestPage = () => {
   ]);
   const diffDays = differenceInDays(resetDate[0].endDate, resetDate[0].startDate) + 1
 
-  const [berths, setBerths] = useState<number>(0);
-  const [daysSelected, setDaysSelected] = useState(0);
+  const [totalFee, setTotalFee] = useState<number>(0);
+  const handleTotalFeeUpdate = (newTotalFee: number) => {
+    setTotalFee(newTotalFee);
+  }
+
+
+  const handleRequest = async() => {
+    const requestParams = {
+      vanId,
+      memberId,
+      startDate: format(resetDate[0].startDate, 'yyyy-MM-dd'),
+      endDate: format(resetDate[0].endDate, 'yyyy-MM-dd'),
+      price: totalFee,
+      guest: berths,
+      bookingStatus: 'pending'
+    }
+
+    try {
+      const res = await postBooking(requestParams);
+      console.log(res)
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 
 
@@ -90,13 +117,13 @@ export const RequestPage = () => {
               theme='filled'
               text={'Request to book'}
               onClick={() => {
-                navigate(`/member/${vanId}/request`)
+                handleRequest()
               }}
             />
           </div>
 
           <div className={`w-[350px] border-solid border border-gray-300 rounded-[3px] p-4`}>
-            <BookingQuote price={price} diffDays={diffDays} />
+            <BookingQuote price={price} diffDays={diffDays} onUpdateTotalFee={handleTotalFeeUpdate}  />
           </div>
 
 

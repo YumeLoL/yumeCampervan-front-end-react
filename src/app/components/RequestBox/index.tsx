@@ -49,7 +49,7 @@ export const RequestBox = ({ price, vanId }: { price: number, vanId: string }) =
                 <strong style={{ width: '100%', textAlign: "center" }}>You won't be charged yet.</strong>
 
                 {/* render if select dates, to show price detail */}
-                {diffDays > 1 && <BookingQuote price={price} diffDays={diffDays} />}
+                {diffDays > 1 && <BookingQuote price={price} diffDays={diffDays} onUpdateTotalFee={()=>{}} />}
 
             </StyledForm>
         </BookingWrapper>
