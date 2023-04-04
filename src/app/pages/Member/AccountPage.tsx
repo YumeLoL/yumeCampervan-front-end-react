@@ -1,5 +1,5 @@
 import React from 'react'
-import Layout from '../ui/organisms/Layout'
+import Layout from '../../ui/organisms/Layout'
 
 export const AccountPage = () => {
   return (

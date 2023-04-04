@@ -2,69 +2,82 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
-import Button from "../ui/atoms/Button";
+import Button from "../../ui/atoms/Button";
 
-import Title from '../ui/atoms/Title';
-import Text from '../ui/atoms/Text';
-import Layout from '../ui/organisms/Layout'
-import { getAllBookings, getDisabledDates } from "../httpService/api/bookingApi";
-import { getAllMembers } from "../httpService/api/memberApi";
+import Title from '../../ui/atoms/Title';
+import Text from '../../ui/atoms/Text';
+import Layout from '../../ui/organisms/Layout'
+import { getAllBookings, getAllBookingsByMemberId, getDisabledDates } from "../../httpService/api/bookingApi";
+import { getAllMembers } from "../../httpService/api/memberApi";
+import { BookingSections, BookingStatus } from "../../libs/constant";
 
 export const BookingsPage = () => {
   // To retrieve the memberId:
-  const memberData = JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null");
+  const memberId = JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null").memberId;
   const navigate = useNavigate();
-
-  const [activeTab, setActiveTab] = useState("requests");
+  const [activeTab, setActiveTab] = useState("Requests");
+  const [bookings, setBookings] = useState<any[]>([]);
 
   const handleTabClick = (tab: string) => {
     setActiveTab(tab);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await getAllBookingsByMemberId(memberId, { bookingStatus: BookingStatus.PENDING });
 
+        if (res.data.code === 1) {
+          setBookings(res.data.data)
+        }
+      } catch (error) {
+        console.log(error)
+      }
+    }
+    fetchData();
+  }, [])
+
+
+  const renderedBookingSection = Object.values(BookingSections).map((item) => {
+    return <Button theme={'text'} text={item} className={`py-2 px-4 focus:outline-none ${activeTab === item ? "bg-gray-200" : ""
+      }`} onClick={() => setActiveTab(item)} key={item} />
+  })
 
   return (
     <Layout>
       <BookingContainer>
         <Title title={"Bookings"} size={'large'} className={'block text-left'} />
 
-        <BookingItems>
-          <Button theme={'text'} text={'Requests'} className={`py-2 px-4 m-0 focus:outline-none ${activeTab === "requests" ? "bg-gray-200" : ""
-            }`} onClick={() => setActiveTab('requests')} />
-          <Button theme={'text'} text={'Upcoming'} className={`py-2 px-4 focus:outline-none ${activeTab === "upcoming" ? "bg-gray-200" : ""
-            }`} onClick={() => setActiveTab('upcoming')} />
-          <Button theme={'text'} text={'History'} className={`py-2 px-4 focus:outline-none ${activeTab === "history" ? "bg-gray-200" : ""
-            }`} onClick={() => setActiveTab('history')} />
-          <Button theme={'text'} text={'Cancelled'} className={`py-2 px-4 focus:outline-none ${activeTab === "cancelled" ? "bg-gray-200" : ""
-            }`} onClick={() => setActiveTab('cancelled')} />
-        </BookingItems>
+        <BookingItems>{renderedBookingSection}</BookingItems>
 
         <div>
-          {activeTab === "requests" && (
+          {activeTab === BookingSections.REQUEST && (
             <div className="min-h-[200px] mb-4 p-4 border border-gray-300 rounded-lg flex flex-col relative">
               {/* Put content for requests section here */}
-              requests
+              <div>
+
+              </div>
 
               <div className={'flex absolute bottom-0'}>
                 <Text text={"You have no holidays coming up. Why not "} />
-                <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`}/>
+                <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`} />
                 <Text text={" for a new one?"} />
               </div>
             </div>
           )}
-          {activeTab === "upcoming" && (
+          {activeTab === BookingSections.UPCOMING && (
             <div className="mb-4 p-4 border border-gray-300 rounded-lg">
               {/* Put content for upcoming section here */}
               upcoming
 
               <div className={'flex absolute bottom-0'}>
                 <Text text={"You have no holidays coming up. Why not "} />
-                <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`}/>
+                <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`} />
                 <Text text={" for a new one?"} />
               </div>
             </div>
           )}
-          {activeTab === "history" && (
+          {activeTab === BookingSections.HISTORY && (
             <div className="mb-4 p-4 border border-gray-300 rounded-lg">
               {/* Put content for history section here */}
               history
@@ -74,7 +87,7 @@ export const BookingsPage = () => {
               </div>
             </div>
           )}
-          {activeTab === "cancelled" && (
+          {activeTab === BookingSections.CANCELLED && (
             <div className="mb-4 p-4 border border-gray-300 rounded-lg">
               {/* Put content for cancelled section here */}
               cancelled

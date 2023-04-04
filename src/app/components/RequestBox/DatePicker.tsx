@@ -24,6 +24,7 @@ export const DatePicker = ({ vanId, date, setDate }: DatePickerProps) => {
                 if (res.data.code === 1) {
                     const dateArray = res.data.data.map((date: string) => new Date(date));
                     setDisabledDates(dateArray)
+                    console.log("disabledDates:", dateArray)
                 }
             } catch (error) {
                 console.error("Request error:", error);

@@ -4,13 +4,13 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import { differenceInDays, format } from 'date-fns';
 
-import { BookingQuote } from '../components/RequestBox/BookingQuote';
-import { DatePicker } from '../components/RequestBox/DatePicker';
-import { postBooking } from '../httpService/api/bookingApi';
-import logo from "../libs/img/logo.png";
-import { DateRangeType } from '../libs/interface/common';
-import Button from '../ui/atoms/Button';
-import Title from '../ui/atoms/Title';
+import { BookingQuote } from '../../components/RequestBox/BookingQuote';
+import { DatePicker } from '../../components/RequestBox/DatePicker';
+import { postBooking } from '../../httpService/api/bookingApi';
+import logo from "../../libs/img/logo.png";
+import { DateRangeType } from '../../libs/interface/common';
+import Button from '../../ui/atoms/Button';
+import Title from '../../ui/atoms/Title';
 
 
 export const RequestPage = () => {
@@ -118,6 +118,7 @@ export const RequestPage = () => {
               text={'Request to book'}
               onClick={() => {
                 handleRequest()
+                navigate('/request/confirm')
               }}
             />
           </div>
