@@ -9,6 +9,7 @@ import Text from '../../ui/atoms/Text';
 import Layout from '../../ui/organisms/Layout'
 import { getAllBookingsByMemberId } from "../../httpService/api/bookingApi";
 import { BookingSections, BookingStatus } from "../../libs/constant";
+import { Marginer } from "../../ui/atoms/Margin";
 
 
 export const BookingsPage = () => {
@@ -40,32 +41,53 @@ export const BookingsPage = () => {
 
   const renderedBookingDetails = bookings.map(booking => (
     <ContentWrap key={booking.bookingId}>
-      <div className="px-4 py-5 sm:p-6">
-        <div className="flex items-center justify-between">
-          <h3 className="text-lg leading-6 font-medium text-gray-900">Campervan: xxx</h3>
+      <div className="flex justify-between px-4 py-5 sm:p-6">
+        <div className={'w-2/3 flex flex-col justify-between'}>
+          <div className="w-full flex items-center justify-between">
+            <h3 className="text-lg leading-6 font-medium text-gray-900">Campervan: {booking.vanName}</h3>
+          </div>
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-500">Booking Request ID:</p>
+            <p className="text-sm text-gray-900">{booking.bookingId}</p>
+          </div>
+          <div>
+            <div className="mt-4">
+              <p className="text-sm font-medium text-gray-500">Booking Status:</p>
+              <p className="text-sm text-gray-900">{booking.bookingStatus}</p>
+            </div>
+            <div className="mt-4">
+              <p className="text-sm font-medium text-gray-500">Guests:</p>
+              <p className="text-sm text-gray-900">{booking.guest}</p>
+            </div>
+            <div className="mt-4">
+              <p className="text-sm font-medium text-gray-500">Booking Date:</p>
+              <p className="text-sm text-gray-900">{booking.startDate} to {booking.endDate}</p>
+            </div>
+            <div className="mt-4">
+              <p className="text-sm font-medium text-gray-500">Total Price:</p>
+              <p className="text-sm text-gray-900">${booking.price}</p>
+            </div>
+          </div>
         </div>
-        <div className="mt-4">
-          <p className="text-sm font-medium text-gray-500">Booking Request ID:</p>
-          <p className="text-sm text-gray-900">{booking.bookingId}</p>
-        </div>
-        <div className="mt-4">
-          <p className="text-sm font-medium text-gray-500">Booking Status:</p>
-          <p className="text-sm text-gray-900">{booking.bookingStatus}</p>
-        </div>
-        <div className="mt-4">
-          <p className="text-sm font-medium text-gray-500">Guests:</p>
-          <p className="text-sm text-gray-900">{booking.guest}</p>
-        </div>
-        <div className="mt-4">
-          <p className="text-sm font-medium text-gray-500">Booking Date:</p>
-          <p className="text-sm text-gray-900">{booking.startDate} to {booking.endDate}</p>
-        </div>
-        <div className="mt-4">
-          <p className="text-sm font-medium text-gray-500">Total Price:</p>
-          <p className="text-sm text-gray-900">${booking.price}</p>
+
+        <div className="w-1/3 ml-4">
+          <div className="w-34 h-44 bg-cover bg-center" style={{ backgroundImage: `url(${booking.imgUrl})` }}></div>
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-500">Van Type:</p>
+            <p className="text-sm text-gray-900">${booking.vanTypeName}</p>
+          </div>
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-500">Pickup Location:</p>
+            <p className="text-sm text-gray-900">${booking.vanLocation}</p>
+          </div>
+          <div className="mt-4">
+            <p className="text-sm font-medium text-gray-500">Price Per Day:</p>
+            <p className="text-sm text-gray-900">${booking.vanPricePerDay}</p>
+          </div>
         </div>
       </div>
     </ContentWrap>
+
   ))
 
   return (
@@ -83,6 +105,7 @@ export const BookingsPage = () => {
                   : <p className="text-center text-gray-500">You have no requests yet.</p>
               }
 
+              <Marginer direction="vertical" margin="5em"/>
               <div className={'flex absolute bottom-0'}>
                 <Text text={"You have no holidays coming up. Why not "} />
                 <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`} />
@@ -101,7 +124,7 @@ export const BookingsPage = () => {
 
 const BookingContainer = styled.section`
   ${tw`
-    w-full
+    w-[80%] mx-auto mt-8
     p-6
   `}
 `
