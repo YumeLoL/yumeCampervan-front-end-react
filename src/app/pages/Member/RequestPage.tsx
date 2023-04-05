@@ -17,7 +17,8 @@ export const RequestPage = () => {
   const navigate = useNavigate()
 
   const {memberId} = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  if(memberId && memberId === null) navigate('/login');
+  console.log("check memberId", memberId)
+  if(memberId === 'undefined') navigate('/login');
 
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
