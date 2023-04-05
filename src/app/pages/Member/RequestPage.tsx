@@ -17,13 +17,13 @@ export const RequestPage = () => {
   const navigate = useNavigate()
 
   //const memberId = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  const member = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  let memberId = '';
-  if(member && member.memberId) {
-    memberId = member.memberId;
-  }else{
-    navigate('/login')
-  }
+  // const member = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
+  // let memberId = '';
+  // if(member && member.memberId) {
+  //   memberId = member.memberId;
+  // }else{
+  //   navigate('/login')
+  // }
 
 
   const location = useLocation()
@@ -52,7 +52,7 @@ export const RequestPage = () => {
   const handleRequest = async() => {
     const requestParams = {
       vanId,
-      memberId,
+      memberId:'11',
       startDate: format(resetDate[0].startDate, 'yyyy-MM-dd'),
       endDate: format(resetDate[0].endDate, 'yyyy-MM-dd'),
       price: totalFee,
