@@ -8,7 +8,7 @@ import Title from '../../ui/atoms/Title';
 import Text from '../../ui/atoms/Text';
 import Layout from '../../ui/organisms/Layout'
 import { getAllBookingsByMemberId } from "../../httpService/api/bookingApi";
-import { BookingSections, BookingStatus } from "../../libs/constant";
+import { RequestStatus } from "../../libs/constant";
 import { Marginer } from "../../ui/atoms/Margin";
 
 
@@ -16,27 +16,38 @@ export const BookingsPage = () => {
   // To retrieve the memberId:
   const memberId = JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null").memberId;
   const navigate = useNavigate();
-  const [activeTab, setActiveTab] = useState(BookingSections.REQUEST);
   const [bookings, setBookings] = useState<any[]>([]);
+  const [activeTab, setActiveTab] = useState<string>(RequestStatus.PENDING);
+  const [bookingStatus, setBookingStatus] = useState<string>(RequestStatus.PENDING);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await getAllBookingsByMemberId(memberId, { bookingStatus: BookingStatus.PENDING });
+        const res = await getAllBookingsByMemberId(memberId, { bookingStatus: bookingStatus });
         if (res.data.code === 1) {
+          console.log(res.data.data);
           setBookings(res.data.data)
         }
       } catch (error) {
         console.log(error)
       }
     }
+
     fetchData();
-  }, [])
+  }, [activeTab])
 
 
-  const renderedBookingSection = Object.values(BookingSections).map((item) => {
-    return <Button theme={'text'} text={item} className={`py-2 px-4 focus:outline-none ${activeTab === item ? "bg-gray-200" : ""
-      }`} onClick={() => setActiveTab(item)} key={item} />
+  const renderedBookingSection = Object.values(RequestStatus).map((item) => {
+    return <Button
+      theme={'text'}
+      text={item.toUpperCase()}
+      className={`py-2 px-2 focus:outline-none ${activeTab === item ? "bg-gray-200" : ""
+        }`}
+      onClick={() => {
+        setActiveTab(item)
+        setBookingStatus(item.toLowerCase())
+      }}
+      key={item} />
   })
 
   const renderedBookingDetails = bookings.map(booking => (
@@ -90,6 +101,16 @@ export const BookingsPage = () => {
 
   ))
 
+  const renderBookingDetails = () => (
+    <>
+      {bookings.length > 0 ? (
+        <DetailCard>{renderedBookingDetails}</DetailCard>
+      ) : (
+        <p className="text-center text-gray-500">You have no requests yet.</p>
+      )}
+    </>
+  );
+
   return (
     <Layout>
       <BookingContainer>
@@ -98,19 +119,31 @@ export const BookingsPage = () => {
         <BookingItems>{renderedBookingSection}</BookingItems>
 
         <BookingDetails>
-          {activeTab === BookingSections.REQUEST && (
+          {activeTab === RequestStatus.PENDING && (
             <DetailBlock>
-              {
-                bookings.length > 0 ? <DetailCard> {renderedBookingDetails}</DetailCard>
-                  : <p className="text-center text-gray-500">You have no requests yet.</p>
-              }
-
-              <Marginer direction="vertical" margin="5em"/>
+              {renderBookingDetails()}
+              <Marginer direction="vertical" margin="5em" />
               <div className={'flex absolute bottom-0'}>
                 <Text text={"You have no holidays coming up. Why not "} />
                 <Text className={'cursor-pointer mx-2 font-bold'} onClick={() => navigate('/campervans')} text={`Search`} />
                 <Text text={" for a new one?"} />
               </div>
+            </DetailBlock>
+          )}
+
+          {activeTab === RequestStatus.CONFIRMED && (
+            <DetailBlock>
+              {renderBookingDetails()}
+            </DetailBlock>
+          )}
+          {activeTab === RequestStatus.COMPLETED && (
+            <DetailBlock>
+              {renderBookingDetails()}
+            </DetailBlock>
+          )}
+          {activeTab === RequestStatus.CANCELLED && (
+            <DetailBlock>
+              {renderBookingDetails()}
             </DetailBlock>
           )}
         </BookingDetails>

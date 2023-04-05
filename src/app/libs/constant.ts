@@ -5,17 +5,11 @@ export const locationList = [
     "sydney",
 ]
 
-export enum BookingStatus {
+
+export enum RequestStatus{
     PENDING = 'pending',
     CONFIRMED = 'confirmed',
-    COMPLETED = 'completed',    
+    COMPLETED = 'completed',
     CANCELLED = 'cancelled',
-}
-
-export enum BookingSections {
-    REQUEST = 'Request',
-    UPCOMING = 'Upcoming',
-    HISTORY = 'History',
-    CANCELLED = 'Cancelled',
 }
 

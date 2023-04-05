@@ -1,4 +1,4 @@
-import { BookingStatus } from "../../libs/constant"
+import { RequestStatus } from "../../libs/constant"
 import { IBooking } from "../../libs/interface/booking"
 import { axiosInstance } from "../axios"
 
@@ -29,7 +29,7 @@ export const postBooking = (params:any) =>{
 }
 
 // get bookings by memberId with bookingStatus
-export const getAllBookingsByMemberId = (memberId:string, params: {bookingStatus:BookingStatus}) =>{
+export const getAllBookingsByMemberId = (memberId:string, params: {bookingStatus:string}) =>{
   return axiosInstance({
     url: `/member/bookings/${memberId}`,
     method: 'get',
