@@ -16,9 +16,15 @@ import Title from '../../ui/atoms/Title';
 export const RequestPage = () => {
   const navigate = useNavigate()
 
-  const {memberId} = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  console.log("check memberId", memberId)
-  if(memberId === 'undefined') navigate('/login');
+  //const memberId = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
+  const member = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
+  let memberId = '';
+  if(member && member.memberId) {
+    memberId = member.memberId;
+  }else{
+    navigate('/login')
+  }
+
 
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
