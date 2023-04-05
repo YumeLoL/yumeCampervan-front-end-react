@@ -14,8 +14,11 @@ import Title from '../../ui/atoms/Title';
 
 
 export const RequestPage = () => {
-  const {memberId} = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
   const navigate = useNavigate()
+
+  const {memberId} = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
+  if(memberId && memberId === null) navigate('/login');
+
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
     return null // Or return a fallback component

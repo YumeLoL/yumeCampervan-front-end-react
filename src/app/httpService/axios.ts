@@ -3,6 +3,7 @@ import { ResponseData } from "../libs/interface/res";
 import qs from 'qs';
 
 export const BaseURL = "https://yumecampervan-backend-springboot-production.up.railway.app/";
+//export const DevURL = "http://localhost:3000";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
