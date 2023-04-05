@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ResponseData } from "../libs/interface/res";
 import qs from 'qs';
 
-export const BaseURL = "http://localhost:8081";
+export const BaseURL = "https://yumecampervan-backend-springboot-production.up.railway.app/";
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
