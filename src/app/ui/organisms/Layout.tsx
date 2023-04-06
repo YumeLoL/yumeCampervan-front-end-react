@@ -5,7 +5,7 @@ import Footer from "../molecules/Footer";
 import Navbar from "../molecules/Navbar";
 
 
-const MainLayout= ({ children }:{children: React.ReactNode;}) => {
+const Layout= ({ children }:{children: React.ReactNode;}) => {
   return (
       <AppContainer>
         <PageContainer>
@@ -18,7 +18,7 @@ const MainLayout= ({ children }:{children: React.ReactNode;}) => {
   );
 };
 
-export default MainLayout;
+export default Layout;
 
 
 const AppContainer = styled.div`
@@ -37,5 +37,6 @@ const PageContainer = styled.div`
     w-screen
     h-auto
     items-center
+    relative
     `}
 `;

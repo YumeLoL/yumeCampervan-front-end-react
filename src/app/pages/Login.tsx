@@ -67,7 +67,7 @@ export const Login = () => {
     }
 
     return (
-        <Layout>
+        <Layout >
             {/* show msg if not logged in */}
             {loginRemandMsg && <p className={'bg-pink-200 text-red-500 font-bold p-1 mb-1'} >{loginRemandMsg}</p>}
 
@@ -100,6 +100,13 @@ export const Login = () => {
                     <a href="/signup"><strong className='text-secondary'>Sign Up</strong></a>
                 </p>
             </Formlayout>
+
+            <div className={'text-red-500 absolute top-52 left-24'}>
+                <h1>Dummy Account</h1>
+                <p>Email account: test@gmail.com</p>
+                <p>password: 123456</p>
+            </div>
+
         </Layout>
     )
 }

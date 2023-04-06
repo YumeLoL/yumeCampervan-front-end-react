@@ -5,7 +5,6 @@ import styled from "styled-components";
 import tw from "twin.macro";
 
 import Button from '../../ui/atoms/Button';
-import { getDisabledDates } from '../../httpService/api/bookingApi';
 import { DatePicker } from './DatePicker';
 import { BookingQuote } from './BookingQuote';
 import { DateRangeType } from '../../libs/interface/common';
