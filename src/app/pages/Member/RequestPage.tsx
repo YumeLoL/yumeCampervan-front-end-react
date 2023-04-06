@@ -1,5 +1,5 @@
 import { differenceInDays, format } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -19,11 +19,13 @@ export const RequestPage = () => {
   const memberData = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
   const [memberId, setMemberId] = useState();
  
-  if(memberData && memberData.memberId) {
-    setMemberId(memberData.memberId)
-  }else{
-    navigate('/login')
-  }
+  useEffect(() => {
+    if(memberData && memberData.memberId) {
+      setMemberId(memberData.memberId)
+    } else {
+      navigate('/login')
+    }
+  }, [])
 
 
   const location = useLocation()
