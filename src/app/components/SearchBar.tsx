@@ -1,11 +1,11 @@
-import React, { useState } from "react";
-import styled from "styled-components";
-import tw from "twin.macro";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useState } from "react";
 import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import tw from "twin.macro";
 import Button from "../ui/atoms/Button";
 
 

@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react'
-import { useLocation, useNavigate, useParams } from 'react-router-dom';
+import { differenceInDays, format } from 'date-fns';
+import { useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
-import { differenceInDays, format } from 'date-fns';
 
 import { BookingQuote } from '../../components/RequestBox/BookingQuote';
 import { DatePicker } from '../../components/RequestBox/DatePicker';
@@ -18,8 +18,7 @@ export const RequestPage = () => {
 
   const memberData = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
   const [memberId, setMemberId] = useState();
-  // const member = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  // let memberId = '';
+ 
   if(memberData && memberData.memberId) {
     setMemberId(memberData.memberId)
   }else{

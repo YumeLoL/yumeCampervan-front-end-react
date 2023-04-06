@@ -1,5 +1,3 @@
-import { RequestStatus } from "../../libs/constant"
-import { IBooking } from "../../libs/interface/booking"
 import { axiosInstance } from "../axios"
 
 // get available date by vanId
