@@ -11,7 +11,7 @@ import Button from "../ui/atoms/Button";
 
 const SearchCard = () => {
   const navigate = useNavigate();
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState("melbourne");
 
   return (
     <CardContainer>
@@ -22,10 +22,7 @@ const SearchCard = () => {
         <StyledSelect
           id="location"
           name="location"
-          onChange={(e:any) => {
-            e.preventDefault();
-            setLocation(e.target.value.toLowerCase());
-          }}
+          onChange={(e:any) => setLocation(e.target.value.toLowerCase())}
           defaultValue="melbourne"
         >
           <option value="" disabled selected> My adventure starts in... </option>

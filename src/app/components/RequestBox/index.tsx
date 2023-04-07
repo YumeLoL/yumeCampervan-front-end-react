@@ -1,8 +1,9 @@
 import { differenceInDays } from 'date-fns';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from "styled-components";
 import tw from "twin.macro";
+import { loginCheck } from '../../httpService/api/memberApi';
 
 import { DateRangeType } from '../../libs/interface/common';
 import Button from '../../ui/atoms/Button';
@@ -22,6 +23,22 @@ export const RequestBox = ({ price, vanId }: { price: number, vanId: string }) =
     ]);
     const diffDays = differenceInDays(date[0].endDate, date[0].startDate) + 1
 
+    const handleRequestToBook = async ()=>{
+        try {
+            const res = await loginCheck()
+            if(res.data.code === 0) {
+                return navigate('/login')
+               
+            }  
+
+            const requestParams = {price, vanId, date }
+            navigate(`/member/${vanId}/request`, { state: { requestParams } })
+        } catch (error) {
+            
+        }
+
+       
+    }
 
     return (
         <BookingWrapper>
@@ -38,10 +55,7 @@ export const RequestBox = ({ price, vanId }: { price: number, vanId: string }) =
                     <StyledButton
                         theme='outlined'
                         text={'Request to book'}
-                        onClick={() => {
-                            const requestParams = {price, vanId, date }
-                            navigate(`/member/${vanId}/request`, { state: { requestParams } })
-                        }}
+                        onClick={ handleRequestToBook}
                     />
                 </div>
 

@@ -15,18 +15,7 @@ import Title from '../../ui/atoms/Title';
 
 export const RequestPage = () => {
   const navigate = useNavigate()
-
   const memberData = JSON.parse(localStorage.getItem('yumeCamp_member') as string)
-  const [memberId, setMemberId] = useState();
- 
-  useEffect(() => {
-    if(memberData && memberData.memberId) {
-      setMemberId(memberData.memberId)
-    } else {
-      navigate('/login')
-    }
-  }, [])
-
 
   const location = useLocation()
   if (!location.state || !location.state.requestParams) {
@@ -54,7 +43,7 @@ export const RequestPage = () => {
   const handleRequest = async() => {
     const requestParams = {
       vanId,
-      memberId,
+      memberId: memberData.memberId,
       startDate: format(resetDate[0].startDate, 'yyyy-MM-dd'),
       endDate: format(resetDate[0].endDate, 'yyyy-MM-dd'),
       price: totalFee,

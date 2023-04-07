@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useLocation } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
@@ -13,7 +13,7 @@ import Banner from "../ui/molecules/Banner";
 import VanCard from "../ui/molecules/Card/VanCard";
 import { IVan, IVanType } from "../libs/interface/van";
 import useClickClose from "../hooks/useClickClose";
-import { locationList } from "../libs/constant";
+import { LocationList } from "../libs/constant";
 import { capitalizedSentence } from "../utils/capitalizeUtil";
 
 
@@ -34,76 +34,71 @@ const CampervansPage = () => {
     const [berths, setBerths] = useState<number>(6);
     const [vanTypeList, setVanTypeList] = useState<IVanType[]>();
     const [vanType, setVanType] = useState<IVanType>({ vanTypeId: undefined, vanTypeName: undefined });
-    const [selectedLocation, setSelectedLocation] = useState("");
+    const [buttonValue, setButtonValue] = useState(location.state ? location.state.location : "All Location");
     const [queryParams, setQueryParams] = useState({
         berths,
         vanTypeId: vanType.vanTypeId,
-        ...(selectedLocation && {selectedLocation})
+        vanLocation: buttonValue,
     });
 
 
-    // fetch data
+    // fetch van list
     useEffect(() => {
-        // fetch van list
-        setLoading(true);
-        let vanLocation;
-        if (location.state) {
-            // if queried location value passed from homepage search bar
-            vanLocation = location.state.location;
-        } else if (queryParams && queryParams.selectedLocation !== "all location") {
-            // if location value be selected from filter box on campervan page
-            vanLocation = queryParams.selectedLocation;
-        } 
-
-        getCampervanPage({ ...pagination, vanLocation, berths, vanTypeId: vanType.vanTypeId })
-            .then((res) => {
+        const fetchData = async() => {  
+            try {
+                const res = await getCampervanPage({ 
+                    ...pagination, 
+                    vanLocation: buttonValue === "All Location" ? "" : buttonValue, 
+                    berths, 
+                    vanTypeId: vanType.vanTypeId 
+                });
                 if (res.data.code === 1) {
                     setVans(res.data.data.records);
                 }
-                setLoading(false)
-            })
-            .catch((err) => console.error("Request error:", err))
-            .finally(() => {
-                location.state = undefined // to clear the value of vanLocation passed from location.state
-            });
 
+            } catch (error) {
+                console.error("Request error:", error)
+            }
+        }
+        fetchData();
+    },[queryParams])
 
-        // fetch van Type list
-        getAllType()
-            .then((res) => {
+    // fetch van type 
+    useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const res = await getAllType();
                 if (res.data.code === 1) {
                     setVanTypeList(res.data.data);
                 }
-            })
-            .catch((err) => console.error("Request error:", err))
-
-
-    }, [queryParams])
+            } catch (error) {
+                console.error("Request error:", error)
+            }
+        }
+        fetchData();
+    }, [])
 
 
     // render location list
-    const renderLocationList = locationList
+    const renderLocationList = Object.values(LocationList)
         .map((option: string, index: number) => (
-            <StyleOption
-                onClick={(e: any) => setSelectedLocation(e.target.value.toLowerCase())}
+            <StyleInput
+                onClick={()=> setButtonValue(option)}
                 key={index}
-                value={option}
-                defaultValue={option}
-            >
-                {capitalizedSentence(option)}
-            </StyleOption>
-        ))
+                type="button"
+                value={capitalizedSentence(option)}
+            />
+    ))
 
     // render van type list   
     const renderVanTypeList = vanTypeList?.map((type) => (
-        <StyleOption
-            onClick={(e: any) => setVanType({ vanTypeName: type.vanTypeName, vanTypeId: e.target.value })}
+        <StyleInput
+            onClick={()=> setVanType({ vanTypeId: type.vanTypeId, vanTypeName: type.vanTypeName })}
             key={type.vanTypeId}
-            value={type.vanTypeId}
-            defaultValue={type.vanTypeName}
-        >
-            {type.vanTypeName}
-        </StyleOption>
+            value={type.vanTypeName}
+            type="button"
+        />
+    
     ))
 
     // render van list
@@ -111,8 +106,7 @@ const CampervansPage = () => {
         return <VanCard key={van.vanId} {...van} />
     })
 
-
-
+  
     return (
         <Layout>
             <FilterContainer>
@@ -120,11 +114,11 @@ const CampervansPage = () => {
                     {/* location selector */}
                     <ItemContainer ref={locationRef} className={"vanLocation"}>
                         <Button
-                            onClick={() => setLocationIsOpen(!locationIsOpen)}
+                            onClick={() => { setLocationIsOpen(!locationIsOpen)}}
                             theme="filter"
                             text={""}
                         >
-                            {selectedLocation ? capitalizedSentence(selectedLocation) : "All Location"}
+                            {capitalizedSentence(buttonValue)}
                         </Button>
                         {locationIsOpen && <DropdownBox>{renderLocationList}</DropdownBox>}
                     </ItemContainer>
@@ -155,10 +149,7 @@ const CampervansPage = () => {
                         className=""
                         text={"Search vans"}
                         theme={"outlined"}
-                        onClick={() => {
-                            console.log(selectedLocation, berths, vanType.vanTypeId)
-                            setQueryParams({ selectedLocation, berths, vanTypeId: vanType.vanTypeId })
-                        }}
+                        onClick={() => {setQueryParams({ vanLocation: buttonValue, berths, vanTypeId: vanType.vanTypeId })}}
                     />
                 </FilterItems>
             </FilterContainer>
@@ -263,7 +254,16 @@ const DropdownBox = styled.div`
   z-10
   `}
 `;
-const StyleOption = styled.option`
+const StyleOption = styled.input`
+  ${tw` 
+  font-semibold
+  text-sm
+  md:text-base
+  lg:text-lg
+  mx-4 my-4
+  `}
+`;
+const StyleInput = styled.input`
   ${tw` 
   font-semibold
   text-sm

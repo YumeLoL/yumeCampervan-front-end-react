@@ -31,6 +31,14 @@ export const signup = (data:any)=>{
     })
   }
 
+// loginCheck
+export const loginCheck = ()=>{
+    return axiosInstance({
+      url: `/loginCheck`,
+      method: 'get',
+    })
+  }
+
   export const getAllMembers = () =>{
     return axiosInstance({
       url: `/member/all`,

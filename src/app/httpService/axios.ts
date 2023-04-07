@@ -1,7 +1,7 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 import { ResponseData } from "../libs/interface/res";
 
-export const BaseURL = "https://yumecampervan-backend-springboot-production.up.railway.app";
+const BaseURL = process.env.REACT_APP_API_URL
 
 axios.defaults.headers['Content-Type'] = 'application/json;charset=utf-8'
 
@@ -42,6 +42,7 @@ axiosInstance.interceptors.request.use(config => {
     console.log(error)
     Promise.reject(error)
 });
+
 
 
 // request interceptor for login check
