@@ -21,6 +21,7 @@ export const Login = () => {
     const [memberPassword, setMemberPassword] = useState('');
     const [errMsg, setErrMsg] = useState('');
 
+
     useEffect(() => {
         if (userRef.current) {
             userRef.current.focus();
@@ -50,6 +51,9 @@ export const Login = () => {
                     memberId: res.data.data.memberId,
                     memberName: res.data.data.memberName
                 }
+
+  
+
                 localStorage.setItem('yumeCamp_member', JSON.stringify(memberData))
 
                 navigate("/member/bookings")

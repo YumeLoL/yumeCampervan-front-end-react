@@ -20,6 +20,7 @@ export const BookingsPage = () => {
   const [activeTab, setActiveTab] = useState<string>(RequestStatus.PENDING);
   const [bookingStatus, setBookingStatus] = useState<string>(RequestStatus.PENDING);
 
+
   useEffect(() => {
     const fetchData = async () => {
       try {

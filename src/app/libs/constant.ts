@@ -1,9 +1,9 @@
-export const locationList = [
-    "all location",
-    "melbourne",
-    "adelaide",
-    "sydney",
-]
+export enum LocationList {
+    ALL = "all location",
+    MELBOURNE = "melbourne",
+    ADELAIDE = "adelaide",
+    SYDNEY = "sydney",
+}
 
 
 export enum RequestStatus{
