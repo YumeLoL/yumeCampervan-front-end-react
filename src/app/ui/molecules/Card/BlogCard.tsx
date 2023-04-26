@@ -1,63 +1,28 @@
+import { BlogCardProps } from '../../../libs/interface/blog';
+import imageUrlBuilder from '@sanity/image-url';
 import { useState } from 'react';
+import { sanityClient } from '../../../..';
 
-interface BlogCardProps {
-  post: {
-    _createdAt: string;
-    _id: string;
-    _updatedAt: string;
-    body: {
-      _key: string;
-      _type: string;
-      children: {
-        _key: string;
-        _type: string;
-        marks: any[];
-        text: string;
-      }[];
-      markDefs: any[];
-      style: string;
-    }[];
-    excerpt: string;
-    mainImage: {
-      _type: string;
-      asset: {
-        _ref: string;
-        _type: string;
-      };
-    };
-    publishedAt: string;
-    slug: {
-      _type: string;
-      current: string;
-    };
-    tags: string[];
-    title: string;
-  };
-}
 
-export default function BlogCard({ post }: BlogCardProps) {
+export default function BlogCard(blog: BlogCardProps) {
+  const builder = imageUrlBuilder(sanityClient)
   const [isExpanded, setIsExpanded] = useState(false);
 
+  console.log(builder.image(blog.mainImage).url())
+
   return (
-    <div className="bg-white rounded-lg shadow-lg overflow-hidden">
-      {/* <img
-        className="w-full h-48 object-cover"
-        src={`https://cdn.sanity.io/images/${process.env.REACT_APP_SANITY_PROJECT_ID}/${process.env.REACT_APP_SANITY_DATASET}/${post.mainImage.asset._ref}`}
-        alt={post.title}
-      /> */}
+    <div className="max-w-lg bg-white rounded-lg shadow-lg overflow-hidden my-20">
+      <img
+        className="w-full h-[300px] object-cover"
+        src={builder.image(blog.mainImage).url()}
+        alt={blog.title}
+      />
       <div className="p-4">
-        <h2 className="text-lg font-bold mb-2">{post.title}</h2>
-        <p className="text-gray-700 text-base mb-4">{post.excerpt}</p>
+        <h2 className="text-lg font-bold mb-2">{blog.title}</h2>
+        <p className="text-gray-700 text-base mb-4">{blog.excerpt}</p>
         <div className="flex items-center">
-          <img
-            className="w-10 h-10 rounded-full mr-4"
-            src="https://picsum.photos/seed/picsum/200"
-            alt="Author"
-          />
-          <div>
-            {/* <p className="text-gray-900 font-medium">{post.tags.join(' ')}</p> */}
-            <p className="text-gray-600">{new Date(post.publishedAt).toLocaleDateString()}</p>
-          </div>
+          <p className="text-gray-900 font-medium">{blog.tags?.map(tag => <span className='mr-4'>{tag}</span>)}</p>
+          <p className="text-gray-600">{new Date(blog.publishedAt).toLocaleDateString()}</p>
         </div>
         <button
           className="text-blue-500 hover:text-blue-700 font-medium mt-4"
@@ -67,7 +32,7 @@ export default function BlogCard({ post }: BlogCardProps) {
         </button>
         {isExpanded && (
           <div className="mt-4">
-            {post.body.map((block) => (
+            {blog.body.map((block) => (
               <p key={block._key} className="text-gray-700 text-base mb-2">
                 {block.children.map((child) => child.text).join(' ')}
               </p>
@@ -78,3 +43,4 @@ export default function BlogCard({ post }: BlogCardProps) {
     </div>
   );
 }
+
