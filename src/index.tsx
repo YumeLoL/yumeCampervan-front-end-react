@@ -13,15 +13,29 @@ import { SignUp } from "./app/pages/SignUp";
 import VanDetailPage from "./app/pages/VanDetailPage";
 import "./index.css";
 import { ConfirmPage } from "./app/pages/Member/ConfirmPage";
+// sanity.js
+import { createClient, type ClientConfig } from '@sanity/client'
+import { SanityProvider } from "./app/contexts/SanityContext";
+
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
 
 
+const config: ClientConfig = {
+  projectId: process.env.REACT_APP_SANITY_PROJECT_ID,
+  dataset: 'production',
+  useCdn: false, // set to `true` to fetch from edge cache
+  apiVersion: '2023-04-26',// use current date (YYYY-MM-DD) to target the latest API version
+}
+export const sanityClient = createClient(config)
+
+
 root.render(
   <React.StrictMode>
     {/* <MemberIdProvider> */}
-    <BrowserRouter>
+    <SanityProvider client={sanityClient}>
+      <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/campervans" element={<CampervanPage />} />
@@ -46,7 +60,8 @@ root.render(
           <Route path="/request/confirm" element={<ConfirmPage />} />
 
         </Routes>
-    </BrowserRouter>
+      </BrowserRouter>
+    </SanityProvider>
     {/* </MemberIdProvider> */}
   </React.StrictMode>
 );
