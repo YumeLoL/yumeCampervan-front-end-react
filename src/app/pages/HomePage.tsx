@@ -18,11 +18,11 @@ import blob from "../libs/img/blob.svg";
 import driveVan from "../libs/img/drive-all-van.svg";
 import deliverBush from "../libs/img/deliver-caravan-bush.svg";
 import Layout from "../ui/organisms/Layout";
+import FAQs from "../components/FAQs";
 
 const HomePage = () => {
   return (
     <Layout>
-      {/* hero session */}
       <HeroContainer>
         <TopMain>
           <LeftContainer>
@@ -47,7 +47,6 @@ const HomePage = () => {
           </RightContainer>
         </TopMain>
 
-        {/* search by location */}
         <SearchContainer>
           <SearchCard />
         </SearchContainer>
@@ -56,11 +55,9 @@ const HomePage = () => {
       <Marginer direction="vertical" margin="10em" />
       {/* <CarsCarousel /> */}
 
-      {/* separator */}
       <ImageSeparator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
 
-      {/* aboutUs session */}
       <AboutUsContainer>
         <CarContainer>
           <img src={orangeVan} alt="" />
@@ -85,11 +82,9 @@ const HomePage = () => {
         </InfoContainer>
       </AboutUsContainer>
 
-      {/* separator */}
       <Marginer direction="vertical" margin="8em" />
       <ImageSeparator src={deliverBush} direction={"right"} />
 
-      {/* booking step session */}
       <BookStepContainer>
         <Title title="Our Booking Steps" size={"large"} />
         <StepsContainer>
@@ -122,6 +117,8 @@ const HomePage = () => {
           </StepContainer>
         </StepsContainer>
       </BookStepContainer>
+
+      <FAQs />
     </Layout>
   );
 };
