@@ -5,7 +5,6 @@ import tw from "twin.macro";
 import { faEnvelope, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-
 const Footer = () => {
   return (
     <FooterContainer>
@@ -13,7 +12,10 @@ const Footer = () => {
         <AboutContainer>
           {/* <Logo color="white" bgColor="dark" /> */}
           <AboutText>
-            Yourcar is proud to be Australia's largest and fastest-growing campervan, motorhome and caravan sharing community. Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque molestiae ipsam earum cum perferendis iste tenetur mollitia aut odit culpa.
+            Yourcar is proud to be Australia's largest and fastest-growing
+            campervan, motorhome and caravan sharing community. Lorem ipsum
+            dolor sit, amet consectetur adipisicing elit. Neque molestiae ipsam
+            earum cum perferendis iste tenetur mollitia aut odit culpa.
           </AboutText>
         </AboutContainer>
         <SectionContainer>
@@ -86,8 +88,6 @@ const Footer = () => {
 };
 
 export default Footer;
-
-
 
 const FooterContainer = styled.div`
   //min-height: 24em;

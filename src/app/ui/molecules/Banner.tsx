@@ -4,7 +4,6 @@ import tw from "twin.macro";
 import Button from "../atoms/Button";
 import Title from "../atoms/Title";
 
-
 // export interface IBanner extends ButtonType, TitleType {
 //   className?: string;
 // }

@@ -6,14 +6,12 @@ interface Image {
   direction: "left" | "right";
 }
 
-
 const ImageSeparator = ({ src, direction }: Image) => {
   if (direction === "left") return <img src={src} alt="" />;
   else return <ImageRight src={src} alt="" />;
 };
 
 export default ImageSeparator;
-
 
 const ImageRight = styled.img`
   transform: rotateY(180deg);

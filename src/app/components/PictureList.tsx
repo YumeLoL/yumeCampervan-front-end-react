@@ -1,63 +1,65 @@
-import React, { useState } from 'react'
+import React, { useState } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
-import { Marginer } from '../ui/atoms/Margin';
+import { Marginer } from "../ui/atoms/Margin";
 
-import Title from "../ui/atoms/Title"
+import Title from "../ui/atoms/Title";
 
 interface Props {
-    imgUrl: string[] | undefined;
+  imgUrl: string[] | undefined;
 }
 
 export const PictureList: React.FC<Props> = ({ imgUrl }) => {
-    const [selectedImage, setSelectedImage] = useState<string | null>(null);
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
-    const openModal = (image: string) => {
-        setSelectedImage(image);
-    };
+  const openModal = (image: string) => {
+    setSelectedImage(image);
+  };
 
-    const closeModal = () => {
-        setSelectedImage(null);
-    };
+  const closeModal = () => {
+    setSelectedImage(null);
+  };
 
-    const renderedImgs = imgUrl?.map((url,i) => {
-        return <div key={i} className='relative' onClick={() => openModal(url)}><Image src={url} /></div>
-
-    })
-
+  const renderedImgs = imgUrl?.map((url, i) => {
     return (
-        <PictureSession>
-            <Title title={"Photos"} size={'medium'} />
-            <Marginer direction='vertical' margin={'0.5em'} />
-            <ImageGrid>{renderedImgs}</ImageGrid>
+      <div key={i} className="relative" onClick={() => openModal(url)}>
+        <Image src={url} />
+      </div>
+    );
+  });
 
-            {selectedImage && (
-                <Modal>
-                    <ModalOverlay onClick={closeModal} />
-                    <ModalContent>
-                        <CloseButton onClick={closeModal}>X</CloseButton>
-                        <ModalImage src={selectedImage} />
-                    </ModalContent>
-                </Modal>
-            )}
+  return (
+    <PictureSession>
+      <Title title={"Photos"} size={"medium"} />
+      <Marginer direction="vertical" margin={"0.5em"} />
+      <ImageGrid>{renderedImgs}</ImageGrid>
 
-        </PictureSession>
-    )
-}
+      {selectedImage && (
+        <Modal>
+          <ModalOverlay onClick={closeModal} />
+          <ModalContent>
+            <CloseButton onClick={closeModal}>X</CloseButton>
+            <ModalImage src={selectedImage} />
+          </ModalContent>
+        </Modal>
+      )}
+    </PictureSession>
+  );
+};
 
 const PictureSession = styled.div`
-    ${tw`
+  ${tw`
         my-8
         flex
         flex-col
     `}
-`
+`;
 const ImageGrid = styled.div`
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
-    width: 100%;
-`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+  width: 100%;
+`;
 const Image = styled.img`
   width: 100%;
   height: 120px;

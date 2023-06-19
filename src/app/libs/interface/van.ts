@@ -15,8 +15,8 @@ export interface IVan {
 }
 
 export interface IVanType {
-  vanTypeId?: number,
-  vanTypeName?: string,
-  updatedAt?: string,
-  createdAt?: string
+  vanTypeId?: number;
+  vanTypeName?: string;
+  updatedAt?: string;
+  createdAt?: string;
 }

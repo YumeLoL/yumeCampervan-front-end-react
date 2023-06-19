@@ -8,13 +8,13 @@ export interface IMarginerProps {
 
 const HorizontalMargin = styled.span<IMarginerProps>`
   display: flex;
-  min-width: ${({ margin }:any) =>
+  min-width: ${({ margin }: any) =>
     typeof margin === "string" ? margin : `${margin}px`};
 `;
 
 const VerticalMargin = styled.span<IMarginerProps>`
   display: flex;
-  min-height: ${({ margin }:any) =>
+  min-height: ${({ margin }: any) =>
     typeof margin === "string" ? margin : `${margin}px`};
 `;
 
@@ -25,7 +25,7 @@ const Marginer = (props: IMarginerProps) => {
   else {
     return <VerticalMargin {...props} />;
   }
-}
+};
 
 Marginer.defaultProps = {
   direction: "horizontal",

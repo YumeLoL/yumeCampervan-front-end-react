@@ -1,4 +1,3 @@
-
 const isRouteActive = (route: string) => {
   //   return true if the route is active
   const isActive =
@@ -11,13 +10,12 @@ const homeRouteActive = (route: string) => {
   return isActive;
 };
 
-
 const useMenu = () => {
   const menu = [
     {
       label: "Home",
       route: "/",
-      active: homeRouteActive("/")
+      active: homeRouteActive("/"),
     },
     {
       label: "Campervans",
@@ -43,29 +41,24 @@ const useMenu = () => {
 
   // Render different menu when the member is logged in
   const memberMenu = [
-    
-        {
-          label: "Bookings",
-          route: "/member/bookings",
-          active: isRouteActive("/member/bookings"),
-        },
-        {
-          label: "Account",
-          route: "/member/account",
-          active: isRouteActive("/member/account"),
-        },
-        {
-          label: "Logout",
-          route: "/logout",
-          active: isRouteActive("/member/account"),
-        },
-   
+    {
+      label: "Bookings",
+      route: "/member/bookings",
+      active: isRouteActive("/member/bookings"),
+    },
+    {
+      label: "Account",
+      route: "/member/account",
+      active: isRouteActive("/member/account"),
+    },
+    {
+      label: "Logout",
+      route: "/logout",
+      active: isRouteActive("/member/account"),
+    },
+  ];
 
-  ]
-      
-
-  return {menu, memberMenu};
+  return { menu, memberMenu };
 };
-
 
 export default useMenu;

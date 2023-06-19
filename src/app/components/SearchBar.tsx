@@ -8,7 +8,6 @@ import styled from "styled-components";
 import tw from "twin.macro";
 import Button from "../ui/atoms/Button";
 
-
 const SearchCard = () => {
   const navigate = useNavigate();
   const [location, setLocation] = useState("melbourne");
@@ -22,10 +21,13 @@ const SearchCard = () => {
         <StyledSelect
           id="location"
           name="location"
-          onChange={(e:any) => setLocation(e.target.value.toLowerCase())}
+          onChange={(e: any) => setLocation(e.target.value.toLowerCase())}
           defaultValue="melbourne"
         >
-          <option value="" disabled selected> My adventure starts in... </option>
+          <option value="" disabled selected>
+            {" "}
+            My adventure starts in...{" "}
+          </option>
           <option value="melbourne">Melbourne</option>
           <option value="adelaide">Adelaide</option>
           <option value="sydney">Sydney</option>
@@ -39,14 +41,13 @@ const SearchCard = () => {
         hover:border-secondary"
         text="Find a van"
         theme={"base"}
-        onClick={() => navigate( `/campervans`, { state: { location } })}
+        onClick={() => navigate(`/campervans`, { state: { location } })}
       />
     </CardContainer>
   );
 };
 
 export default SearchCard;
-
 
 const CardContainer = styled.div`
   min-height: 4.3em;

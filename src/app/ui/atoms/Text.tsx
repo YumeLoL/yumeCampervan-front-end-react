@@ -8,14 +8,11 @@ interface TextType {
   onClick?: (event: MouseEvent) => void;
 }
 
-
 const Text = ({ text, className }: TextType) => {
   return <TextStyle className={className}>{text}</TextStyle>;
 };
 
 export default Text;
-
-
 
 const TextStyle = styled.p`
   ${tw`

@@ -1,26 +1,39 @@
 import React, { useEffect, useState } from "react";
-import { Link, useNavigate, useParams  } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styled from "styled-components";
 import tw from "twin.macro";
 
 import Button from "../../atoms/Button";
 import { IVan } from "../../../libs/interface/van";
-import {ImgCarousel} from "../../../components/ImgCarousel";
+import { ImgCarousel } from "../../../components/ImgCarousel";
 
-
-const CarCard = (props:IVan) => {
-  const {vanId,berths, vanImg, vanLocation, vanName, vanPricePerDay, vanTypeId, vanTypeName} = props;  
+const CarCard = (props: IVan) => {
+  const {
+    vanId,
+    berths,
+    vanImg,
+    vanLocation,
+    vanName,
+    vanPricePerDay,
+    vanTypeId,
+    vanTypeName,
+  } = props;
   const navigate = useNavigate();
   // const vanId = useParams();
-
 
   return (
     <CarContainer>
       <CarThumbnail>
-        <ImgCarousel imgUrl={vanImg}/>
+        <ImgCarousel imgUrl={vanImg} />
         {/* <img src={vanImageUrl} alt=""/> */}
       </CarThumbnail>
-      <LinkButton text={vanName} theme={"text"} onClick={()=> {navigate(`/campervans/${vanId}`)}} />
+      <LinkButton
+        text={vanName}
+        theme={"text"}
+        onClick={() => {
+          navigate(`/campervans/${vanId}`);
+        }}
+      />
 
       <CarDetailsContainer>
         <p>Sleeps: {berths}</p>
@@ -33,7 +46,8 @@ const CarCard = (props:IVan) => {
 
       <CarDetailsContainer>
         <p>
-          <BoldText className="text-red-700">${vanPricePerDay}</BoldText> AUD/day
+          <BoldText className="text-red-700">${vanPricePerDay}</BoldText>{" "}
+          AUD/day
         </p>
       </CarDetailsContainer>
     </CarContainer>
@@ -41,7 +55,6 @@ const CarCard = (props:IVan) => {
 };
 
 export default CarCard;
-
 
 const CarContainer = styled.div`
   box-shadow: 0 1.3px 17px -2px rgba(0, 0, 0, 0.4);
@@ -132,4 +145,3 @@ const ArrowRightButton = styled.button`
   z-10
   `}
 `;
-

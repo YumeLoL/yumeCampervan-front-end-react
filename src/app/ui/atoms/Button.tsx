@@ -2,7 +2,6 @@ import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-
 export interface ButtonType {
   theme?: "filled" | "outlined" | "text" | "base" | "filter";
   className?: string;
@@ -12,7 +11,6 @@ export interface ButtonType {
   onClick?: React.MouseEventHandler<HTMLButtonElement> | any;
   // onClick?: any;
 }
-
 
 const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
   switch (theme) {
@@ -39,11 +37,7 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
 
     case "filter":
       return (
-        <FilterButton
-          className={className}
-          onClick={onClick}
-          value={text}
-        >
+        <FilterButton className={className} onClick={onClick} value={text}>
           {text}
           {children}
         </FilterButton>
@@ -59,7 +53,6 @@ const Button = ({ theme, text, className, onClick, children }: ButtonType) => {
 };
 
 export default Button;
-
 
 const BaseButton = styled.button`
   ${tw`

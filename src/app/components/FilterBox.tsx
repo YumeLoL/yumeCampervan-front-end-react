@@ -9,10 +9,8 @@ interface IFilterBox {
   optionCollection: string[];
   className?: string;
   selectedValue: string | number | null;
-  setSelectedValue: any
+  setSelectedValue: any;
 }
-
-
 
 const FilterBox = ({
   text,
@@ -37,21 +35,19 @@ const FilterBox = ({
 
       {isOpen && (
         <DropdownBox>
-          {
-            optionCollection
-              .map((option: string, index: number) => (
-                <StyleOption
-                  onClick={(e: any) => {
-                    e.preventDefault();
-                    setSelectedValue(e.target.value);
-                    // console.log("onclick, sleep:", e.target.value);
-                  }}
-                  key={index}
-                  value={option}
-                >
-                  {option}
-                </StyleOption>
-              ))}
+          {optionCollection.map((option: string, index: number) => (
+            <StyleOption
+              onClick={(e: any) => {
+                e.preventDefault();
+                setSelectedValue(e.target.value);
+                // console.log("onclick, sleep:", e.target.value);
+              }}
+              key={index}
+              value={option}
+            >
+              {option}
+            </StyleOption>
+          ))}
         </DropdownBox>
       )}
     </ItemContainer>
@@ -59,7 +55,6 @@ const FilterBox = ({
 };
 
 export default FilterBox;
-
 
 const ItemContainer = styled.div`
   ${tw`

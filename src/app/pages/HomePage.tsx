@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 import {
@@ -7,10 +6,9 @@ import {
   faMapMarkedAlt,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
 import SearchCard from "../components/SearchBar";
 import Text from "../ui/atoms/Text";
-import Title from "../ui/atoms/Title"
+import Title from "../ui/atoms/Title";
 import ImageSeparator from "../ui/atoms/ImageSeparator";
 import { Marginer } from "../ui/atoms/Margin";
 import { SCREENS } from "../libs/responsive";
@@ -20,8 +18,6 @@ import blob from "../libs/img/blob.svg";
 import driveVan from "../libs/img/drive-all-van.svg";
 import deliverBush from "../libs/img/deliver-caravan-bush.svg";
 import Layout from "../ui/organisms/Layout";
-
-
 
 const HomePage = () => {
   return (
@@ -57,7 +53,6 @@ const HomePage = () => {
         </SearchContainer>
       </HeroContainer>
 
-
       <Marginer direction="vertical" margin="10em" />
       {/* <CarsCarousel /> */}
 
@@ -65,14 +60,16 @@ const HomePage = () => {
       <ImageSeparator src={driveVan} direction={"left"} />
       <Marginer direction="vertical" margin="8em" />
 
-
       {/* aboutUs session */}
       <AboutUsContainer>
         <CarContainer>
           <img src={orangeVan} alt="" />
         </CarContainer>
         <InfoContainer>
-          <Title title="Feel The Best Experience With Our Rental Deals" size={"large"} />
+          <Title
+            title="Feel The Best Experience With Our Rental Deals"
+            size={"large"}
+          />
           <Text
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -92,46 +89,44 @@ const HomePage = () => {
       <Marginer direction="vertical" margin="8em" />
       <ImageSeparator src={deliverBush} direction={"right"} />
 
-
       {/* booking step session */}
       <BookStepContainer>
-      <Title title="Our Booking Steps" size={"large"} />
-      <StepsContainer>
-        <StepContainer>
-          <Step>
-            <StepIcon>
-              <FontAwesomeIcon icon={faMapMarkedAlt} />
-            </StepIcon>
-          </Step>
-          <StepTitle>Choose Location</StepTitle>
-          <Text text=" Find the nearest Yourcar point and book your car. Lorem ipsum dolor sit amet." />
-        </StepContainer>
-        <StepContainer>
-          <Step>
-            <StepIcon>
-              <FontAwesomeIcon icon={faCalendarAlt} />
-            </StepIcon>
-          </Step>
-          <StepTitle>Pick-Up Date</StepTitle>
-          <Text text="Pickup the Best Date to rent a car for you. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid." />
-        </StepContainer>
-        <StepContainer>
-          <Step>
-            <StepIcon>
-              <FontAwesomeIcon icon={faCarSide} />
-            </StepIcon>
-          </Step>
-          <StepTitle>Book Your Car</StepTitle>
-          <Text text=" Book your nice car with ease in one single click. Lorem ipsum dolor sit amet." />
-        </StepContainer>
-      </StepsContainer>
-    </BookStepContainer>
+        <Title title="Our Booking Steps" size={"large"} />
+        <StepsContainer>
+          <StepContainer>
+            <Step>
+              <StepIcon>
+                <FontAwesomeIcon icon={faMapMarkedAlt} />
+              </StepIcon>
+            </Step>
+            <StepTitle>Choose Location</StepTitle>
+            <Text text=" Find the nearest Yourcar point and book your car. Lorem ipsum dolor sit amet." />
+          </StepContainer>
+          <StepContainer>
+            <Step>
+              <StepIcon>
+                <FontAwesomeIcon icon={faCalendarAlt} />
+              </StepIcon>
+            </Step>
+            <StepTitle>Pick-Up Date</StepTitle>
+            <Text text="Pickup the Best Date to rent a car for you. Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquid." />
+          </StepContainer>
+          <StepContainer>
+            <Step>
+              <StepIcon>
+                <FontAwesomeIcon icon={faCarSide} />
+              </StepIcon>
+            </Step>
+            <StepTitle>Book Your Car</StepTitle>
+            <Text text=" Book your nice car with ease in one single click. Lorem ipsum dolor sit amet." />
+          </StepContainer>
+        </StepsContainer>
+      </BookStepContainer>
     </Layout>
   );
 };
 
 export default HomePage;
-
 
 // aboutUs session
 const AboutUsContainer = styled.div`
@@ -197,7 +192,7 @@ const TopMain = styled.div`
     flex
     justify-between
   `}
-`
+`;
 const LeftContainer = styled.div`
   ${tw`
     w-1/2
@@ -292,7 +287,6 @@ const StandaloneCar = styled.div`
     top: -7em;
   }
 `;
-
 
 //booking steps session
 const BookStepContainer = styled.div`

@@ -1,44 +1,42 @@
-import { axiosInstance } from "../axios"
+import { axiosInstance } from "../axios";
 
 export interface IQueryVan {
-  page:number;
-  pageSize:number;
-  vanLocation?:string;
-  berths?:number;
-  vanTypeId?:number;
+  page: number;
+  pageSize: number;
+  vanLocation?: string;
+  berths?: number;
+  vanTypeId?: number;
 }
 
 // van api
-export const getCampervanPage = (params:IQueryVan) => {
-    return axiosInstance({
-      url: '/campervan/page',
-      method: 'get',
-      params
-    })
-  }
+export const getCampervanPage = (params: IQueryVan) => {
+  return axiosInstance({
+    url: "/campervan/page",
+    method: "get",
+    params,
+  });
+};
 
 // get van details by id
-export const getVanById = (vanId:string)=>{
+export const getVanById = (vanId: string) => {
   return axiosInstance({
     url: `/campervan/${vanId}`,
-    method: 'get',
-  })
-}
+    method: "get",
+  });
+};
 
 // get all van type api
-export const getAllType= () => {
+export const getAllType = () => {
   return axiosInstance({
     url: `/vanType`,
-    method: 'get'
-    })
-}
+    method: "get",
+  });
+};
 
-// get all vanType 
-export const getVanType = (vanTypeId:number) => {
+// get all vanType
+export const getVanType = (vanTypeId: number) => {
   return axiosInstance({
     url: `/vanType/${vanTypeId}`,
-    method: 'get'
-    })
-}
-
-
+    method: "get",
+  });
+};

@@ -1,24 +1,34 @@
-import React, { useEffect } from 'react'
+import React, { useEffect } from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
 
-interface BookingQuoteProps { price: number, diffDays: number, onUpdateTotalFee: (newTotalFee: number) => void }
+interface BookingQuoteProps {
+  price: number;
+  diffDays: number;
+  onUpdateTotalFee: (newTotalFee: number) => void;
+}
 
-export const BookingQuote = ({ price, diffDays, onUpdateTotalFee }: BookingQuoteProps) => {
+export const BookingQuote = ({
+  price,
+  diffDays,
+  onUpdateTotalFee,
+}: BookingQuoteProps) => {
   const serviceFee = 30;
   const insuranceFee = 60;
   const totalFee = price * diffDays + serviceFee + insuranceFee;
 
-  useEffect(()=>{
-     // Call onUpdateTotalFee callback when the totalFee value change
-    onUpdateTotalFee(totalFee)
-  },[totalFee])
+  useEffect(() => {
+    // Call onUpdateTotalFee callback when the totalFee value change
+    onUpdateTotalFee(totalFee);
+  }, [totalFee]);
 
   return (
     <QuoteContainer>
       <div className="PriceBreakdown">
         <PriceBreakdown>
-          <div className="Text Text--inline">${price} x {diffDays} days</div>
+          <div className="Text Text--inline">
+            ${price} x {diffDays} days
+          </div>
           <div className="Text Text--inline">${price * diffDays}</div>
         </PriceBreakdown>
         <PriceBreakdown>
@@ -29,15 +39,15 @@ export const BookingQuote = ({ price, diffDays, onUpdateTotalFee }: BookingQuote
           <div className="Text Text--inline">Insurance (fixed)</div>
           <div className="Text Text--inline">${insuranceFee}</div>
         </PriceBreakdown>
-        <hr className={'my-4'} />
+        <hr className={"my-4"} />
         <PriceBreakdown>
           <div className="Text Text--inline">Total in AUD</div>
           <div className="Text Text--inline">${totalFee}</div>
         </PriceBreakdown>
       </div>
     </QuoteContainer>
-  )
-}
+  );
+};
 
 const QuoteContainer = styled.div`
   ${tw`

@@ -4,22 +4,19 @@ import tw from "twin.macro";
 import Footer from "../molecules/Footer";
 import Navbar from "../molecules/Navbar";
 
-
-const Layout= ({ children }:{children: React.ReactNode;}) => {
+const Layout = ({ children }: { children: React.ReactNode }) => {
   return (
-      <AppContainer>
-        <PageContainer>
-          <Navbar />
-          {children}
-          <Footer />
-        </PageContainer>
-      </AppContainer>
-
+    <AppContainer>
+      <PageContainer>
+        <Navbar />
+        {children}
+        <Footer />
+      </PageContainer>
+    </AppContainer>
   );
 };
 
 export default Layout;
-
 
 const AppContainer = styled.div`
   ${tw`

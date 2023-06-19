@@ -5,24 +5,21 @@ import tw from "twin.macro";
 export interface TitleType {
   title: string | undefined;
   className?: string;
-  size: 'large' | 'medium' | 'small';
+  size: "large" | "medium" | "small";
 }
-
 
 const Title = ({ title, className, size }: TitleType) => {
   switch (size) {
-    case 'large':
+    case "large":
       return <LargeHeading className={className}>{title}</LargeHeading>;
-    case 'medium':
+    case "medium":
       return <MediumHeading className={className}>{title}</MediumHeading>;
-    case 'small':
+    case "small":
       return <SmallHeading className={className}>{title}</SmallHeading>;
   }
 };
 
 export default Title;
-
-
 
 const LargeHeading = styled.h1`
   ${tw`

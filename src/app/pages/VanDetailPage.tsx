@@ -11,25 +11,23 @@ import { RequestBox } from "../components/RequestBox";
 import { PictureList } from "../components/PictureList";
 import { getVanById } from "../httpService/api/vanApi";
 
-
 const VanDetailPage = () => {
   const { vanId } = useParams();
-  if(!vanId) {
+  if (!vanId) {
     // Render an error message or fallback UI if the van data is not available
-    return <div>Sorry, we couldn't find a van with ID {vanId}.</div>; 
+    return <div>Sorry, we couldn't find a van with ID {vanId}.</div>;
   }
 
   const [loading, setLoading] = useState(false);
   const [van, setVan] = useState<IVan>();
 
-  
   useEffect(() => {
     setLoading(true);
 
     const fetchData = async () => {
       try {
         const res = await getVanById(vanId);
-        if(res.data.code === 1){
+        if (res.data.code === 1) {
           setVan(res.data.data);
         }
         setLoading(false);
@@ -37,63 +35,69 @@ const VanDetailPage = () => {
         console.error("Request error:", err);
       }
     };
-  
+
     fetchData();
   }, []);
 
-
   return (
     <Layout>
-      {loading ? (
-        "on loading ......"
-      ) : (
-       van && <>
-          <CarouselContainer>
-            {van.vanImg ? <img src={van.vanImg[0]} style={{width: '100%', objectFit: "cover"}} /> : <img src={'https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg'} alt="Phone coming soon" />}
-           
-            {/* <ImgCarousel imgUrl={van?.vanImg}/> */}
-          </CarouselContainer>
-          
-          <VanProfileContainer>
-            <VanDetailContainer>
-              <VanTitleAvatar>
-                <Title
-                  className="text-secondary flex items-center"
-                  size={"large"}
-                  title={van.vanName}
-                />
-              </VanTitleAvatar>
+      {loading
+        ? "on loading ......"
+        : van && (
+            <>
+              <CarouselContainer>
+                {van.vanImg ? (
+                  <img
+                    src={van.vanImg[0]}
+                    style={{ width: "100%", objectFit: "cover" }}
+                  />
+                ) : (
+                  <img
+                    src={
+                      "https://d38b8me95wjkbc.cloudfront.net/assets/fallback/default-f339cd00658ef86db5dbd0afc674f221b70f6090c0971a0a0f930a16c1a91a45.jpg"
+                    }
+                    alt="Phone coming soon"
+                  />
+                )}
 
-              <strong className="text-3xl inline-block my-4">
-                location: {van.vanLocation}
-              </strong>
+                {/* <ImgCarousel imgUrl={van?.vanImg}/> */}
+              </CarouselContainer>
+              <VanProfileContainer>
+                <VanDetailContainer>
+                  <VanTitleAvatar>
+                    <Title
+                      className="text-secondary flex items-center"
+                      size={"large"}
+                      title={van.vanName}
+                    />
+                  </VanTitleAvatar>
 
-              <InfoSession>
-                <strong>sleep: {van.berths}</strong>
-                <strong>Van Type: {van.vanTypeName}</strong>
-                
-              </InfoSession>
+                  <strong className="text-3xl inline-block my-4">
+                    location: {van.vanLocation}
+                  </strong>
 
-              <Text
-                text={van.vanDescription as string}
-              />
+                  <InfoSession>
+                    <strong>sleep: {van.berths}</strong>
+                    <strong>Van Type: {van.vanTypeName}</strong>
+                  </InfoSession>
 
-              <hr />
-              <PictureList imgUrl={van.vanImg}/>
-            </VanDetailContainer>
+                  <Text text={van.vanDescription as string} />
 
-            <VanBookingContainer>
-              <RequestBox price={van.vanPricePerDay} vanId={vanId}/>
-            </VanBookingContainer>
-          </VanProfileContainer>{" "}
-        </>
-      )}
+                  <hr />
+                  <PictureList imgUrl={van.vanImg} />
+                </VanDetailContainer>
+
+                <VanBookingContainer>
+                  <RequestBox price={van.vanPricePerDay} vanId={vanId} />
+                </VanBookingContainer>
+              </VanProfileContainer>{" "}
+            </>
+          )}
     </Layout>
   );
 };
 
 export default VanDetailPage;
-
 
 const CarouselContainer = styled.div`
   ${tw`
@@ -172,5 +176,3 @@ const InfoSession = styled.div`
 const FeaturedList = styled.div`
   ${tw` `}
 `;
-
-
