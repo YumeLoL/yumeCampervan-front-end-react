@@ -1,5 +1,4 @@
 import useClickClose from '../../hooks/useClickClose';
-import useDebounce from '../../hooks/useDebounce';
 import { getAllType, getCampervanPage, getVanType } from '../../httpService/api/vanApi';
 import { LocationList } from '../../libs/constant';
 import { type IVan, type IVanType } from '../../libs/interface/van';
@@ -23,8 +22,9 @@ import {
   SearchBar,
   SearchBarInput,
 } from './campervanPage.styled';
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import useDebounce from '../../hooks/useDebounce';
 
 const CampervansPage = () => {
   const location = useLocation();
