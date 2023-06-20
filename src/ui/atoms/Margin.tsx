@@ -1,0 +1,35 @@
+import styled from "styled-components";
+
+import React from "react";
+
+export interface IMarginerProps {
+  margin: number | string;
+  direction?: "horizontal" | "vertical";
+}
+
+const HorizontalMargin = styled.span<IMarginerProps>`
+  display: flex;
+  min-width: ${({ margin }: any) =>
+    typeof margin === "string" ? margin : `${margin}px`};
+`;
+
+const VerticalMargin = styled.span<IMarginerProps>`
+  display: flex;
+  min-height: ${({ margin }: any) =>
+    typeof margin === "string" ? margin : `${margin}px`};
+`;
+
+const Marginer = (props: IMarginerProps) => {
+  const { direction } = props;
+
+  if (direction === "horizontal") return <HorizontalMargin {...props} />;
+  else {
+    return <VerticalMargin {...props} />;
+  }
+};
+
+Marginer.defaultProps = {
+  direction: "horizontal",
+};
+
+export { Marginer };

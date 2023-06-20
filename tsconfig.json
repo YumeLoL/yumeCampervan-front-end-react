@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"],
-  "types": ["scheduler"]
+  "types": ["scheduler"],
+  "extends": "./tsconfig.paths.json"
 }
