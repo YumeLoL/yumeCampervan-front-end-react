@@ -1,10 +1,9 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-import { faEnvelope, faPhoneAlt } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import tw from "twin.macro";
+import { faEnvelope, faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
-import React from "react";
+import React from 'react';
 
 const Footer = () => {
   return (
@@ -13,10 +12,9 @@ const Footer = () => {
         <AboutContainer>
           {/* <Logo color="white" bgColor="dark" /> */}
           <AboutText>
-            Yourcar is proud to be Australia's largest and fastest-growing
-            campervan, motorhome and caravan sharing community. Lorem ipsum
-            dolor sit, amet consectetur adipisicing elit. Neque molestiae ipsam
-            earum cum perferendis iste tenetur mollitia aut odit culpa.
+            Yourcar is proud to be Australia's largest and fastest-growing campervan, motorhome and
+            caravan sharing community. Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            Neque molestiae ipsam earum cum perferendis iste tenetur mollitia aut odit culpa.
           </AboutText>
         </AboutContainer>
         <SectionContainer>
@@ -80,8 +78,7 @@ const Footer = () => {
       </InnerContainer>
       <BottomContainer>
         <CopyrightText>
-          Copyright &copy; {new Date().getFullYear()} YumeCampervan. All rights
-          reserved.
+          Copyright &copy; {new Date().getFullYear()} YumeCampervan. All rights reserved.
         </CopyrightText>
       </BottomContainer>
     </FooterContainer>
