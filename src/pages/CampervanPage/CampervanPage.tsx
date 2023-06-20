@@ -1,6 +1,5 @@
-// eslint-disable-next-line parser-error
-import SearchByVanName from '../../components/SearchByVanName';
 import useClickClose from '../../hooks/useClickClose';
+import useDebounce from '../../hooks/useDebounce';
 import { getAllType, getCampervanPage, getVanType } from '../../httpService/api/vanApi';
 import { LocationList } from '../../libs/constant';
 import { type IVan, type IVanType } from '../../libs/interface/van';
@@ -21,15 +20,16 @@ import {
   StyledBanner,
   StyledButton,
   VansContainer,
+  SearchBar,
+  SearchBarInput,
 } from './campervanPage.styled';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 const CampervansPage = () => {
   const location = useLocation();
   const [loading, setLoading] = useState(false);
 
-  // Usage of the hooks for the two ItemContainer components
   const {
     isOpen: locationIsOpen,
     setIsOpen: setLocationIsOpen,
@@ -37,26 +37,30 @@ const CampervansPage = () => {
   } = useClickClose();
   const { isOpen: typeIsOpen, setIsOpen: setTypeIsOpen, menuRef: typeRef } = useClickClose();
 
-  // query value setting
-  const [vans, setVans] = useState<IVan[]>();
-  const [pagination, setPagination] = useState({
-    page: 1,
-    pageSize: 10,
-  });
-  const [berths, setBerths] = useState<number>(6);
   const [vanTypeList, setVanTypeList] = useState<IVanType[]>();
   const [vanType, setVanType] = useState<IVanType>({
     vanTypeId: undefined,
     vanTypeName: undefined,
   });
   const [buttonValue, setButtonValue] = useState(
-    location.state ? location.state.location : 'All Location',
+    location.state ? location.state.location : 'location',
   );
+
+  const [pagination, setPagination] = useState({
+    page: 1,
+    pageSize: 10,
+  });
+  const [vans, setVans] = useState<IVan[]>();
+  const [vanName, setVanName] = useState<string>('');
+  const [berths, setBerths] = useState<number>(6);
   const [queryParams, setQueryParams] = useState({
     berths,
     vanTypeId: vanType.vanTypeId,
     vanLocation: buttonValue,
+    vanName: '',
   });
+
+  const debouncedQuery = useDebounce(vanName, 2000);
 
   // fetch van list
   useEffect(() => {
@@ -64,9 +68,10 @@ const CampervansPage = () => {
       try {
         const res = await getCampervanPage({
           ...pagination,
-          vanLocation: buttonValue === 'All Location' ? '' : buttonValue,
+          vanLocation: buttonValue === 'location' ? '' : buttonValue,
           berths,
           vanTypeId: vanType.vanTypeId,
+          vanName: debouncedQuery ? debouncedQuery : '',
         });
         if (res.data.code === 1) {
           setVans(res.data.data.records);
@@ -75,8 +80,9 @@ const CampervansPage = () => {
         console.error('Request error:', error);
       }
     };
+
     fetchData();
-  }, [queryParams]);
+  }, [pagination, queryParams, debouncedQuery]);
 
   // fetch van type
   useEffect(() => {
@@ -93,37 +99,40 @@ const CampervansPage = () => {
     fetchData();
   }, []);
 
-  // render location list
-  const renderLocationList = Object.values(LocationList).map((option: string, index: number) => (
-    <StyleInput
-      onClick={() => {
-        setButtonValue(option);
-      }}
-      key={index}
-      type="button"
-      value={capitalizedSentence(option)}
-    />
-  ));
+  const renderLocationList = useMemo(() => {
+    return Object.values(LocationList).map((option: string, index: number) => (
+      <StyleInput
+        onClick={() => {
+          setButtonValue(option);
+        }}
+        key={index}
+        type="button"
+        value={capitalizedSentence(option)}
+      />
+    ));
+  }, []);
 
-  // render van type list
-  const renderVanTypeList = vanTypeList?.map((type) => (
-    <StyleInput
-      onClick={() => {
-        setVanType({
-          vanTypeId: type.vanTypeId,
-          vanTypeName: type.vanTypeName,
-        });
-      }}
-      key={type.vanTypeId}
-      value={type.vanTypeName}
-      type="button"
-    />
-  ));
+  const renderVanTypeList = useMemo(() => {
+    return vanTypeList?.map((type) => (
+      <StyleInput
+        onClick={() => {
+          setVanType({
+            vanTypeId: type.vanTypeId,
+            vanTypeName: type.vanTypeName,
+          });
+        }}
+        key={type.vanTypeId}
+        value={type.vanTypeName}
+        type="button"
+      />
+    ));
+  }, [vanTypeList]);
 
-  // render van list
-  const renderedVanList = vans?.map((van) => {
-    return <VanCard key={van.vanId} {...van} />;
-  });
+  const renderedVanList = useMemo(() => {
+    return vans?.map((van) => {
+      return <VanCard key={van.vanId} {...van} />;
+    });
+  }, [vans]);
 
   return (
     <Layout>
@@ -190,6 +199,7 @@ const CampervansPage = () => {
                 vanLocation: buttonValue,
                 berths,
                 vanTypeId: vanType.vanTypeId,
+                vanName: '',
               });
             }}
           />
@@ -200,7 +210,15 @@ const CampervansPage = () => {
 
       <div className="max-w-screen-2xl px-10 text-center">
         <Title title={'Looking for a van ?'} size={'large'} />
-        <SearchByVanName />
+        <SearchBar>
+          <SearchBarInput
+            type="text"
+            placeholder="Search for van"
+            onChange={(e: any) => {
+              setVanName(e.target.value);
+            }}
+          />
+        </SearchBar>
         <Text
           text={
             "Here's some of our favourites for Melbourne, Tasmania, and Sydney. If you can’t find something below go to view all vans and find the perfect caravan or motorhome for your holiday."
