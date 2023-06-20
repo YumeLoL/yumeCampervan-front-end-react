@@ -1,6 +1,8 @@
-import React from "react";
 import styled from "styled-components";
 import tw from "twin.macro";
+
+import React from "react";
+
 import useClickClose from "../hooks/useClickClose";
 import Button from "../ui/atoms/Button";
 
@@ -40,7 +42,6 @@ const FilterBox = ({
               onClick={(e: any) => {
                 e.preventDefault();
                 setSelectedValue(e.target.value);
-                // console.log("onclick, sleep:", e.target.value);
               }}
               key={index}
               value={option}

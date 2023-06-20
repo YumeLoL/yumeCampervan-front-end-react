@@ -1,21 +1,23 @@
+// sanity.js
+import { type ClientConfig, createClient } from "@sanity/client";
+
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { AccountPage } from "./app/pages/Member/AccountPage";
+
+import { SanityProvider } from "./app/contexts/SanityContext";
 import { BlogPage } from "./app/pages/BlogPage";
-import { BookingsPage } from "./app/pages/Member/BookingsPage";
 import CampervanPage from "./app/pages/CampervanPage";
-import HomePage from "./app/pages/HomePage";
+import HomePage from "./app/pages/HomePage/HomePage";
 import { Login } from "./app/pages/Login";
-import { RecipesPage } from "./app/pages/RecipesPage";
+import { AccountPage } from "./app/pages/Member/AccountPage";
+import { BookingsPage } from "./app/pages/Member/BookingsPage";
+import { ConfirmPage } from "./app/pages/Member/ConfirmPage";
 import { RequestPage } from "./app/pages/Member/RequestPage";
+import { RecipesPage } from "./app/pages/RecipesPage";
 import { SignUp } from "./app/pages/SignUp";
 import VanDetailPage from "./app/pages/VanDetailPage";
 import "./index.css";
-import { ConfirmPage } from "./app/pages/Member/ConfirmPage";
-// sanity.js
-import { createClient, type ClientConfig } from "@sanity/client";
-import { SanityProvider } from "./app/contexts/SanityContext";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);

@@ -1,41 +1,58 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+
+import { sanityClient } from "../../..";
 import Title from "../../ui/atoms/Title";
 import ResponsiveContainer from "../../ui/organisms/ResponsiveContainer";
 
-const FAQs = () => {
-  const [faqs, setFaqs] = useState([
-    { question: "Question 1", answer: "Answer 1", isOpen: true },
-    { question: "Question 2", answer: "Answer 2", isOpen: false },
-    { question: "Question 3", answer: "Answer 3", isOpen: false },
-  ]);
+interface IFaq {
+  [x: string]: any;
+  question: string;
+  answer: any[] | any;
+}
 
-  const toggleFAQ = (index: number) => {
-    setFaqs((prevFaqs) => {
-      const updatedFaqs = prevFaqs.map((faq, i) => {
-        if (i === index) {
-          return { ...faq, isOpen: !faq.isOpen };
-        }
-        return faq;
-      });
-      return updatedFaqs;
-    });
+const FAQs = () => {
+  const [isOpen, setIsOpen] = useState(false);
+  const [faqs, setFaqs] = useState<IFaq[]>();
+
+  const toggle = () => {
+    setIsOpen(!isOpen);
   };
+
+  useEffect(() => {
+    sanityClient
+      .fetch(`*[_type == "faqs"]`)
+      .then((data) => {
+        if (data) setFaqs(data);
+      })
+      .catch(console.error);
+  }, []);
+
+  if (!faqs) return <div>Loading...</div>;
+
+  // const faqA = faqs.map(answers => {
+  //     console.log(answers)
+  // })
+
+  const test = faqs.map((answers) =>
+    console.log(answers.answer.map((ans: any) => console.log(ans)))
+  );
+  console.log("faqs:", faqs);
 
   return (
     <ResponsiveContainer>
       <div className="w-full flex justify-evenly">
         <Title title={"FAQs"} size={"large"} />
         <div className="w-[960px]">
-          {faqs.map((faq, index) => (
-            <div key={index} className="border border-gray-300 rounded-md mb-4">
+          {faqs.map((faq, _id) => (
+            <div key={_id} className="border border-gray-300 rounded-md mb-4">
               <div
                 className="flex items-center justify-between p-4 cursor-pointer"
-                onClick={() => toggleFAQ(index)}
+                onClick={() => toggle()}
               >
                 <h3 className="text-lg font-medium">{faq.question}</h3>
                 <svg
                   className={`w-6 h-6 transition-transform ${
-                    faq.isOpen ? "transform rotate-180" : ""
+                    isOpen ? "transform rotate-180" : ""
                   }`}
                   fill="none"
                   viewBox="0 0 24 24"
@@ -49,9 +66,13 @@ const FAQs = () => {
                   />
                 </svg>
               </div>
-              {faq.isOpen && (
+              {isOpen && (
                 <div className="p-4 bg-gray-100">
-                  <p>{faq.answer}</p>
+                  <p>
+                    {faq.answer.map((answer: any, index: any) => {
+                      // return <p key={index}>{answer}</p>
+                    })}
+                  </p>
                 </div>
               )}
             </div>
