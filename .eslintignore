@@ -1,0 +1,10 @@
+.github
+node_modules
+**/__tests__/**
+src/serviceWorker.js
+**/*.svg
+**/*.ttf
+**/*.otf
+**/*.css
+**/e2e/**
+playwright.config.ts

@@ -1,49 +1,33 @@
-import {
-  faChevronDown,
-  faChevronUp,
-  faUserCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import tw from "twin.macro";
-
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
-import useClickClose from "../../../hooks/useClickClose";
-import useMenu from "../../../hooks/useMenu";
-import { logout } from "../../../httpService/api/memberApi";
-import logo from "../../../libs/img/logo.png";
-import Button from "../../atoms/Button";
-import "./index.css";
+import SearchByVanName from '../../../components/SearchByVanName';
+import useClickClose from '../../../hooks/useClickClose';
+import useMenu from '../../../hooks/useMenu';
+import { logout } from '../../../httpService/api/memberApi';
+import logo from '../../../libs/img/logo.png';
+import Button from '../../atoms/Button';
+import './index.css';
+import { faChevronDown, faChevronUp, faUserCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 const Navbar = () => {
-  const isLoggedIn = Boolean(
-    JSON.parse(localStorage.getItem("yumeCamp_member") ?? "null")
-  );
+  const isLoggedIn = Boolean(JSON.parse(localStorage.getItem('yumeCamp_member') ?? 'null'));
   const { menu, memberMenu } = useMenu();
   const navigate = useNavigate();
   const goToRoute = (route: string) => navigate(route);
-  const {
-    isOpen: isBlogOpen,
-    setIsOpen: setIsBlogOpen,
-    menuRef: blogMenuRef,
-  } = useClickClose();
-  const {
-    isOpen: isMemberOpen,
-    setIsOpen: setIsMemberOpen,
-    menuRef: memberRef,
-  } = useClickClose();
+  const { isOpen: isBlogOpen, setIsOpen: setIsBlogOpen, menuRef: blogMenuRef } = useClickClose();
+  const { isOpen: isMemberOpen, setIsOpen: setIsMemberOpen, menuRef: memberRef } = useClickClose();
 
   const HandleLogout = async () => {
     try {
       const res = await logout();
       if (res.data.code === 1) {
-        localStorage.removeItem("yumeCamp_member");
-        navigate("/");
+        localStorage.removeItem('yumeCamp_member');
+        navigate('/');
       }
     } catch (error) {
-      console.log("request error:", error);
+      console.log('request error:', error);
     }
   };
 
@@ -59,7 +43,6 @@ const Navbar = () => {
           </LogoContainer>
         </LogoContainer>
 
-        {/* visitor menu list*/}
         <ListContainer>
           <div className="flex">
             {menu.map((menu, i) =>
@@ -73,12 +56,9 @@ const Navbar = () => {
                   >
                     {menu.label}
                     {isBlogOpen ? (
-                      <FontAwesomeIcon
-                        className={"pl-2"}
-                        icon={faChevronDown}
-                      />
+                      <FontAwesomeIcon className={'pl-2'} icon={faChevronDown} />
                     ) : (
-                      <FontAwesomeIcon className={"pl-2"} icon={faChevronUp} />
+                      <FontAwesomeIcon className={'pl-2'} icon={faChevronUp} />
                     )}
                   </span>
 
@@ -88,9 +68,7 @@ const Navbar = () => {
                         <SubNavItem key={i}>
                           <span
                             key={submenu.route}
-                            className={`block ${
-                              submenu.active ? "active" : ""
-                            }`}
+                            className={`block ${submenu.active ? 'active' : ''}`}
                             onClick={() => goToRoute(submenu.route)}
                           >
                             {submenu.label}
@@ -99,31 +77,31 @@ const Navbar = () => {
                       ))}
                     </SubNavContainer>
                   ) : (
-                    ""
+                    ''
                   )}
                 </DropdownNavItem>
               ) : (
                 <NavItem key={i}>
                   <span
                     key={i}
-                    className={`${menu.active ? "active" : ""}`}
+                    className={`${menu.active ? 'active' : ''}`}
                     onClick={() => goToRoute(menu.route)}
                   >
                     {menu.label}
                   </span>
                 </NavItem>
-              )
+              ),
             )}
           </div>
 
           {/* member menu list */}
           {isLoggedIn ? (
-            <div style={{ position: "relative" }}>
+            <div style={{ position: 'relative' }}>
               <FontAwesomeIcon
                 icon={faUserCircle}
                 size="2x"
                 onClick={() => setIsMemberOpen(!isMemberOpen)}
-                className={"cursor-pointer text-secondary"}
+                className={'cursor-pointer text-secondary'}
               />
 
               {isMemberOpen ? (
@@ -133,12 +111,10 @@ const Navbar = () => {
                       <span
                         key={submenu.route}
                         className={`block text-center cursor-pointer ${
-                          submenu.active ? "active" : ""
+                          submenu.active ? 'active' : ''
                         }`}
                         onClick={
-                          submenu.label === "Logout"
-                            ? HandleLogout
-                            : () => goToRoute(submenu.route)
+                          submenu.label === 'Logout' ? HandleLogout : () => goToRoute(submenu.route)
                         }
                       >
                         {submenu.label}
@@ -147,17 +123,13 @@ const Navbar = () => {
                   ))}
                 </MemberMenuContainer>
               ) : (
-                ""
+                ''
               )}
             </div>
           ) : (
             <div>
               {/* <SignButton theme="outlined" text="Sign Up" onClick={() => navigate("/signUp")} /> */}
-              <LoginButton
-                theme="filled"
-                text="Login"
-                onClick={() => navigate("/login")}
-              />
+              <LoginButton theme="filled" text="Login" onClick={() => navigate('/login')} />
             </div>
           )}
         </ListContainer>

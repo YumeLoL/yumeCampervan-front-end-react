@@ -1,20 +1,18 @@
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-import tw from "twin.macro";
-
-import { useState } from "react";
-import "react-date-range/dist/styles.css";
+import Button from '../ui/atoms/Button';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useState } from 'react';
+import 'react-date-range/dist/styles.css';
 // main style file
-import "react-date-range/dist/theme/default.css";
+import 'react-date-range/dist/theme/default.css';
 // theme css file
-import { useNavigate } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
-import Button from "../ui/atoms/Button";
-
-const SearchCard = () => {
+const SearchByLocation = () => {
   const navigate = useNavigate();
-  const [location, setLocation] = useState("melbourne");
+  const [location, setLocation] = useState('melbourne');
 
   return (
     <CardContainer>
@@ -29,8 +27,8 @@ const SearchCard = () => {
           defaultValue="melbourne"
         >
           <option value="" disabled selected>
-            {" "}
-            My adventure starts in...{" "}
+            {' '}
+            My adventure starts in...{' '}
           </option>
           <option value="melbourne">Melbourne</option>
           <option value="adelaide">Adelaide</option>
@@ -44,14 +42,14 @@ const SearchCard = () => {
         hover:text-secondary
         hover:border-secondary"
         text="Find a van"
-        theme={"base"}
+        theme={'base'}
         onClick={() => navigate(`/campervans`, { state: { location } })}
       />
     </CardContainer>
   );
 };
 
-export default SearchCard;
+export default SearchByLocation;
 
 const CardContainer = styled.div`
   min-height: 4.3em;

@@ -1,22 +1,15 @@
-import {
-  faCalendarAlt,
-  faCarSide,
-  faMapMarkedAlt,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
-import FAQs from "../../components/FAQs";
-import SearchCard from "../../components/SearchBar";
-import blob from "../../libs/img/blob.svg";
-import blueVan from "../../libs/img/blue-camper-van.png";
-import deliverBush from "../../libs/img/deliver-caravan-bush.svg";
-import driveVan from "../../libs/img/drive-all-van.svg";
-import orangeVan from "../../libs/img/orange-camper-van.png";
-import ImageSeparator from "../../ui/atoms/ImageSeparator";
-import { Marginer } from "../../ui/atoms/Margin";
-import Text from "../../ui/atoms/Text";
-import Title from "../../ui/atoms/Title";
-import Layout from "../../ui/organisms/Layout";
+import FAQs from '../../components/FAQs';
+import SearchByLocation from '../../components/SearchByLocation';
+import blob from '../../libs/img/blob.svg';
+import blueVan from '../../libs/img/blue-camper-van.png';
+import deliverBush from '../../libs/img/deliver-caravan-bush.svg';
+import driveVan from '../../libs/img/drive-all-van.svg';
+import orangeVan from '../../libs/img/orange-camper-van.png';
+import ImageSeparator from '../../ui/atoms/ImageSeparator';
+import { Marginer } from '../../ui/atoms/Margin';
+import Text from '../../ui/atoms/Text';
+import Title from '../../ui/atoms/Title';
+import Layout from '../../ui/organisms/Layout';
 import {
   AboutUsContainer,
   BlobContainer,
@@ -34,7 +27,9 @@ import {
   StepTitle,
   StepsContainer,
   TopMain,
-} from "./home.styled";
+} from './home.styled';
+import { faCalendarAlt, faCarSide, faMapMarkedAlt } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const HomePage = () => {
   return (
@@ -42,13 +37,10 @@ const HomePage = () => {
       <HeroContainer>
         <TopMain>
           <LeftContainer>
-            <Title
-              title={"Rent The Best Car Lorem ipsum dolor sit amet."}
-              size={"large"}
-            />
+            <Title title={'Rent The Best Car Lorem ipsum dolor sit amet.'} size={'large'} />
             <Text
               text={
-                "Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem, sint dicta sequi ratione facere ipsum fugiat qui, impedit molestias, doloremque soluta at. Minus labore a aut hic nisi, autem laudantium voluptas ratione corporis ipsam."
+                'Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi quidem, sint dicta sequi ratione facere ipsum fugiat qui, impedit molestias, doloremque soluta at. Minus labore a aut hic nisi, autem laudantium voluptas ratione corporis ipsam.'
               }
             />
           </LeftContainer>
@@ -64,14 +56,14 @@ const HomePage = () => {
         </TopMain>
 
         <SearchContainer>
-          <SearchCard />
+          <SearchByLocation />
         </SearchContainer>
       </HeroContainer>
 
       <Marginer direction="vertical" margin="10em" />
       {/* <CarsCarousel /> */}
 
-      <ImageSeparator src={driveVan} direction={"left"} />
+      <ImageSeparator src={driveVan} direction={'left'} />
       <Marginer direction="vertical" margin="8em" />
 
       <AboutUsContainer>
@@ -79,10 +71,7 @@ const HomePage = () => {
           <img src={orangeVan} alt="" />
         </CarContainer>
         <InfoContainer>
-          <Title
-            title="Feel The Best Experience With Our Rental Deals"
-            size={"large"}
-          />
+          <Title title="Feel The Best Experience With Our Rental Deals" size={'large'} />
           <Text
             text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
@@ -99,10 +88,10 @@ const HomePage = () => {
       </AboutUsContainer>
 
       <Marginer direction="vertical" margin="8em" />
-      <ImageSeparator src={deliverBush} direction={"right"} />
+      <ImageSeparator src={deliverBush} direction={'right'} />
 
       <BookStepContainer>
-        <Title title="Our Booking Steps" size={"large"} />
+        <Title title="Our Booking Steps" size={'large'} />
         <StepsContainer>
           <StepContainer>
             <Step>

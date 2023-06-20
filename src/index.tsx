@@ -1,32 +1,29 @@
-// sanity.js
-import { type ClientConfig, createClient } from "@sanity/client";
+import { SanityProvider } from './contexts/SanityContext';
+import './index.css';
+import { Login } from './pages/Auth/Login';
+import { SignUp } from './pages/Auth/SignUp';
+import { BlogPage } from './pages/BlogPage/BlogPage';
+import CampervanPage from './pages/CampervanPage/CampervanPage';
+import HomePage from './pages/HomePage';
+import { AccountPage } from './pages/Member/AccountPage';
+import { BookingsPage } from './pages/Member/BookingsPage';
+import { ConfirmPage } from './pages/Member/ConfirmPage';
+import { RequestPage } from './pages/Member/RequestPage';
+import { RecipesPage } from './pages/RecipesPage/RecipesPage';
+import VanDetailPage from './pages/VanDetailPage/VanDetailPage';
+import { type ClientConfig, createClient } from '@sanity/client';
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
-import React from "react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-
-import { SanityProvider } from "./contexts/SanityContext";
-import "./index.css";
-import { Login } from "./pages/Auth/Login";
-import { SignUp } from "./pages/Auth/SignUp";
-import { BlogPage } from "./pages/BlogPage/BlogPage";
-import CampervanPage from "./pages/CampervanPage/CampervanPage";
-import HomePage from "./pages/HomePage";
-import { AccountPage } from "./pages/Member/AccountPage";
-import { BookingsPage } from "./pages/Member/BookingsPage";
-import { ConfirmPage } from "./pages/Member/ConfirmPage";
-import { RequestPage } from "./pages/Member/RequestPage";
-import { RecipesPage } from "./pages/RecipesPage/RecipesPage";
-import VanDetailPage from "./pages/VanDetailPage/VanDetailPage";
-
-const container = document.getElementById("root")!;
+const container = document.getElementById('root')!;
 const root = createRoot(container);
 
 const config: ClientConfig = {
   projectId: process.env.REACT_APP_SANITY_PROJECT_ID,
-  dataset: "production",
+  dataset: 'production',
   useCdn: false, // set to `true` to fetch from edge cache
-  apiVersion: "2023-04-26", // use current date (YYYY-MM-DD) to target the latest API version
+  apiVersion: '2023-04-26', // use current date (YYYY-MM-DD) to target the latest API version
 };
 export const sanityClient = createClient(config);
 
@@ -61,5 +58,5 @@ root.render(
       </BrowserRouter>
     </SanityProvider>
     {/* </MemberIdProvider> */}
-  </React.StrictMode>
+  </React.StrictMode>,
 );
