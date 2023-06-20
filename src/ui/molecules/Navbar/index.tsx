@@ -1,4 +1,3 @@
-import SearchByVanName from '../../../components/SearchByVanName';
 import useClickClose from '../../../hooks/useClickClose';
 import useMenu from '../../../hooks/useMenu';
 import { logout } from '../../../httpService/api/memberApi';

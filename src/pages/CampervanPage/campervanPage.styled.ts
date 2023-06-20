@@ -1,8 +1,7 @@
-import styled from "styled-components";
-import tw from "twin.macro";
-
-import Button from "../../ui/atoms/Button";
-import Banner from "../../ui/molecules/Banner";
+import Button from '../../ui/atoms/Button';
+import Banner from '../../ui/molecules/Banner';
+import styled from 'styled-components';
+import tw from 'twin.macro';
 
 const VansContainer = styled.div`
   ${tw` 
@@ -90,6 +89,17 @@ const StyleInput = styled.input`
   `}
 `;
 
+const SearchBar = styled.div`
+  ${tw` 
+  flex items-center justify-center
+  `}
+`;
+const SearchBarInput = styled.input`
+  ${tw` 
+  px-4 py-2 my-8 border border-gray-300 rounded-l-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent
+  `}
+`;
+
 export {
   VansContainer,
   StyledBanner,
@@ -100,4 +110,6 @@ export {
   DropdownBox,
   StyleOption,
   StyleInput,
+  SearchBar,
+  SearchBarInput,
 };
