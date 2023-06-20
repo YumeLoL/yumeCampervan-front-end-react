@@ -1,11 +1,7 @@
 {
   "compilerOptions": {
     "target": "es2017",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "esnext"
-    ],
+    "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -20,10 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/**/*.tsx", "src/**/*.ts"],
+  "include": ["src"],
   "exclude": ["node_modules"],
-  "types": ["scheduler"]
+  "types": ["scheduler"],
+  "extends": "./tsconfig.paths.json"
 }
-
-
-  
